@@ -9,9 +9,18 @@ import SwiftUI
 
 struct CatBookListView: View {
     var body: some View {
-        VStack{
-            Text("Hello, world!")
-                .transformEffect(CGAffineTransform(1.0, 0.18, 0, 1, 0, 0))
+        NavigationView {
+            VStack{
+                Text("Hello, world!")
+                    .transformEffect(CGAffineTransform(1.0, 0.18, 0, 1, 0, 0))
+                NavigationLink {
+                    NavigationLazyView(SearchView())
+                } label: {
+                    Text("이동")
+                }
+            }
+
+
         }
 //        .task {
 //            do {
@@ -21,14 +30,7 @@ struct CatBookListView: View {
 //                print("Error fetching data: \(error)")
 //            }
 //        }
-//                .task {
-//                    do {
-//                        let value = try await NetworkManager.shared.callRequest(api: .list(query: "해리포터"), model: Book.self)
-//                        print("Fetched data: \(value)")
-//                    } catch {
-//                        print("Error fetching data: \(error)")
-//                    }
-//                }
+
     }
 }
 

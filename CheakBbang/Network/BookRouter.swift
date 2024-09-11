@@ -32,32 +32,6 @@ extension BookRouter: TargetType {
         return .get
     }
     
-//    var task: Moya.Task {
-//        var parameters: [String: Any] = [:]
-//        switch self {
-//        case .list(let query):
-//            parameters = [
-//                "ttbkey": APIKey.key,
-//                "query": query,
-//                "QueryType": "Title",
-//                "MaxResults": "10",
-//                "start": 1,
-//                "SearchTarget": "Book",
-//                "output": "JS",
-//                "Version": "20131101",
-//            ]
-//        case .item(let id):
-//            parameters = [
-//                "ttbkey": APIKey.key,
-//                "itemIdType": "ISBN",
-//                "ItemId": id,
-//                "output": "JS",
-//                "Version": "20131101",
-//            ]
-//        }
-//        return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
-//    }
-    
     var queryItems: [URLQueryItem] {
         switch self {
         case .list(let query):

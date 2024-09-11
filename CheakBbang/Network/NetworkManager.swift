@@ -29,9 +29,11 @@ final class NetworkManager {
             AF.request(request).responseDecodable(of: model) { response in
                 switch response.result {
                 case let .success(data):
+                    print(response.response?.statusCode)
                     continuation.resume(returning: data)
                     
                 case let .failure(error):
+                    print(response.response?.statusCode)
                     continuation.resume(throwing: error)
                 }
             }

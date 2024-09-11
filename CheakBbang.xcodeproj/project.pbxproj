@@ -16,10 +16,13 @@
 		483DBBE32C903B3100C775BF /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBE22C903B3100C775BF /* APIKey.swift */; };
 		483DBBE62C903C9300C775BF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 483DBBE52C903C9300C775BF /* Alamofire */; };
 		483DBBE92C903D1200C775BF /* BookRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBE82C903D1200C775BF /* BookRouter.swift */; };
-		483DBBEC2C90401100C775BF /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 483DBBEB2C90401100C775BF /* Moya */; };
 		483DBBF72C9154C500C775BF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBF62C9154C500C775BF /* NetworkManager.swift */; };
 		483DBBFA2C915A9400C775BF /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBF92C915A9400C775BF /* Book.swift */; };
 		483DBBFE2C9160CF00C775BF /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBFD2C9160CF00C775BF /* TargetType.swift */; };
+		483DBC032C916CC200C775BF /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC022C916CC200C775BF /* SearchView.swift */; };
+		483DBC062C916EC400C775BF /* NavigationLazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC052C916EC400C775BF /* NavigationLazyView.swift */; };
+		483DBC082C9170F300C775BF /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC072C9170F300C775BF /* SearchViewModel.swift */; };
+		483DBC0A2C91723D00C775BF /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC092C91723D00C775BF /* ViewModelType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +38,10 @@
 		483DBBF62C9154C500C775BF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		483DBBF92C915A9400C775BF /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		483DBBFD2C9160CF00C775BF /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
+		483DBC022C916CC200C775BF /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		483DBC052C916EC400C775BF /* NavigationLazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLazyView.swift; sourceTree = "<group>"; };
+		483DBC072C9170F300C775BF /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		483DBC092C91723D00C775BF /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,7 +49,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				483DBBEC2C90401100C775BF /* Moya in Frameworks */,
 				483DBBE62C903C9300C775BF /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -69,9 +75,11 @@
 		483DBBC92C90376C00C775BF /* CheakBbang */ = {
 			isa = PBXGroup;
 			children = (
+				483DBC042C916EB000C775BF /* Helper */,
 				483DBBF82C915A7C00C775BF /* Model */,
 				483DBBE72C903CD100C775BF /* Network */,
 				483DBBDE2C903A9500C775BF /* CatBookList */,
+				483DBC012C916CB100C775BF /* Search */,
 				483DBBDB2C903A6000C775BF /* Localization */,
 				483DBBD82C90378800C775BF /* Resource */,
 				483DBBE12C903B0700C775BF /* App */,
@@ -140,6 +148,24 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		483DBC012C916CB100C775BF /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				483DBC022C916CC200C775BF /* SearchView.swift */,
+				483DBC072C9170F300C775BF /* SearchViewModel.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		483DBC042C916EB000C775BF /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				483DBC052C916EC400C775BF /* NavigationLazyView.swift */,
+				483DBC092C91723D00C775BF /* ViewModelType.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -158,7 +184,6 @@
 			name = CheakBbang;
 			packageProductDependencies = (
 				483DBBE52C903C9300C775BF /* Alamofire */,
-				483DBBEB2C90401100C775BF /* Moya */,
 			);
 			productName = CheakBbang;
 			productReference = 483DBBC72C90376C00C775BF /* CheakBbang.app */;
@@ -191,7 +216,6 @@
 			mainGroup = 483DBBBE2C90376C00C775BF;
 			packageReferences = (
 				483DBBE42C903C9300C775BF /* XCRemoteSwiftPackageReference "Alamofire" */,
-				483DBBEA2C90401100C775BF /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			productRefGroup = 483DBBC82C90376C00C775BF /* Products */;
 			projectDirPath = "";
@@ -221,10 +245,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				483DBC0A2C91723D00C775BF /* ViewModelType.swift in Sources */,
 				483DBBE02C903AD200C775BF /* CatBookListView.swift in Sources */,
 				483DBBE32C903B3100C775BF /* APIKey.swift in Sources */,
 				483DBBFA2C915A9400C775BF /* Book.swift in Sources */,
 				483DBBF72C9154C500C775BF /* NetworkManager.swift in Sources */,
+				483DBC032C916CC200C775BF /* SearchView.swift in Sources */,
+				483DBC062C916EC400C775BF /* NavigationLazyView.swift in Sources */,
+				483DBC082C9170F300C775BF /* SearchViewModel.swift in Sources */,
 				483DBBFE2C9160CF00C775BF /* TargetType.swift in Sources */,
 				483DBBCB2C90376C00C775BF /* CheakBbangApp.swift in Sources */,
 				483DBBE92C903D1200C775BF /* BookRouter.swift in Sources */,
@@ -453,14 +481,6 @@
 				minimumVersion = 5.9.1;
 			};
 		};
-		483DBBEA2C90401100C775BF /* XCRemoteSwiftPackageReference "Moya" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Moya/Moya.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 15.0.3;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -468,11 +488,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 483DBBE42C903C9300C775BF /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		483DBBEB2C90401100C775BF /* Moya */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 483DBBEA2C90401100C775BF /* XCRemoteSwiftPackageReference "Moya" */;
-			productName = Moya;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

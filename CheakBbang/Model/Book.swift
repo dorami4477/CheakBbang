@@ -40,7 +40,7 @@ struct Item: Decodable {
     let salesPoint: Int
     let adult, fixedPrice: Bool
     let customerReviewRank: Int
-    let subInfo: SubInfo?
+    let subInfo: SubInfo
 
     enum CodingKeys: String, CodingKey {
         case title, link, author, pubDate, description, isbn, isbn13
