@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Moya
+import Alamofire
 
 enum BookRouter {
     case list(query: String)
@@ -14,8 +14,9 @@ enum BookRouter {
 }
 
 extension BookRouter: TargetType {
-    var baseURL: URL {
-        return URL(string: APIKey.baseUrl)!
+
+    var baseURL: String {
+        return APIKey.baseUrl
     }
     
     var path: String {
@@ -27,34 +28,58 @@ extension BookRouter: TargetType {
         }
     }
     
-    var method: Moya.Method {
+    var method: Alamofire.HTTPMethod {
         return .get
     }
     
-    var task: Moya.Task {
-        var parameters: [String: Any] = [:]
+//    var task: Moya.Task {
+//        var parameters: [String: Any] = [:]
+//        switch self {
+//        case .list(let query):
+//            parameters = [
+//                "ttbkey": APIKey.key,
+//                "query": query,
+//                "QueryType": "Title",
+//                "MaxResults": "10",
+//                "start": 1,
+//                "SearchTarget": "Book",
+//                "output": "JS",
+//                "Version": "20131101",
+//            ]
+//        case .item(let id):
+//            parameters = [
+//                "ttbkey": APIKey.key,
+//                "itemIdType": "ISBN",
+//                "ItemId": id,
+//                "output": "JS",
+//                "Version": "20131101",
+//            ]
+//        }
+//        return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
+//    }
+    
+    var queryItems: [URLQueryItem] {
         switch self {
         case .list(let query):
-            parameters = [
-                "ttbkey": APIKey.key,
-                "query": query,
-                "QueryType": "Title",
-                "MaxResults": "10",
-                "start": 1,
-                "SearchTarget": "Book",
-                "output": "JS",
-                "Version": "20131101",
+            return [
+                URLQueryItem(name: "ttbkey", value: APIKey.key),
+                URLQueryItem(name: "query", value: query),
+                URLQueryItem(name: "QueryType", value: "Title"),
+                URLQueryItem(name: "MaxResults", value: "10"),
+                URLQueryItem(name: "start", value: "1"),
+                URLQueryItem(name: "SearchTarget", value: "Book"),
+                URLQueryItem(name: "output", value: "JS"),
+                URLQueryItem(name: "Version", value: "20131101")
             ]
         case .item(let id):
-            parameters = [
-                "ttbkey": APIKey.key,
-                "itemIdType": "ISBN",
-                "ItemId": id,
-                "output": "JS",
-                "Version": "20131101",
+            return [
+                URLQueryItem(name: "ttbkey", value: APIKey.key),
+                URLQueryItem(name: "itemIdType", value: "ISBN"),
+                URLQueryItem(name: "ItemId", value: "\(id)"),
+                URLQueryItem(name: "output", value: "JS"),
+                URLQueryItem(name: "Version", value: "20131101")
             ]
         }
-        return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
     }
     
     var headers: [String : String]? {

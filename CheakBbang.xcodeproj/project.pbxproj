@@ -18,6 +18,8 @@
 		483DBBE92C903D1200C775BF /* BookRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBE82C903D1200C775BF /* BookRouter.swift */; };
 		483DBBEC2C90401100C775BF /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 483DBBEB2C90401100C775BF /* Moya */; };
 		483DBBF72C9154C500C775BF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBF62C9154C500C775BF /* NetworkManager.swift */; };
+		483DBBFA2C915A9400C775BF /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBF92C915A9400C775BF /* Book.swift */; };
+		483DBBFE2C9160CF00C775BF /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBFD2C9160CF00C775BF /* TargetType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,8 @@
 		483DBBE22C903B3100C775BF /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		483DBBE82C903D1200C775BF /* BookRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRouter.swift; sourceTree = "<group>"; };
 		483DBBF62C9154C500C775BF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		483DBBF92C915A9400C775BF /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		483DBBFD2C9160CF00C775BF /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +69,7 @@
 		483DBBC92C90376C00C775BF /* CheakBbang */ = {
 			isa = PBXGroup;
 			children = (
+				483DBBF82C915A7C00C775BF /* Model */,
 				483DBBE72C903CD100C775BF /* Network */,
 				483DBBDE2C903A9500C775BF /* CatBookList */,
 				483DBBDB2C903A6000C775BF /* Localization */,
@@ -122,8 +127,17 @@
 			children = (
 				483DBBE82C903D1200C775BF /* BookRouter.swift */,
 				483DBBF62C9154C500C775BF /* NetworkManager.swift */,
+				483DBBFD2C9160CF00C775BF /* TargetType.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		483DBBF82C915A7C00C775BF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				483DBBF92C915A9400C775BF /* Book.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,7 +223,9 @@
 			files = (
 				483DBBE02C903AD200C775BF /* CatBookListView.swift in Sources */,
 				483DBBE32C903B3100C775BF /* APIKey.swift in Sources */,
+				483DBBFA2C915A9400C775BF /* Book.swift in Sources */,
 				483DBBF72C9154C500C775BF /* NetworkManager.swift in Sources */,
+				483DBBFE2C9160CF00C775BF /* TargetType.swift in Sources */,
 				483DBBCB2C90376C00C775BF /* CheakBbangApp.swift in Sources */,
 				483DBBE92C903D1200C775BF /* BookRouter.swift in Sources */,
 			);
