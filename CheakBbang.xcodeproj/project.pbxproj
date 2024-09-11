@@ -23,6 +23,8 @@
 		483DBC062C916EC400C775BF /* NavigationLazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC052C916EC400C775BF /* NavigationLazyView.swift */; };
 		483DBC082C9170F300C775BF /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC072C9170F300C775BF /* SearchViewModel.swift */; };
 		483DBC0A2C91723D00C775BF /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC092C91723D00C775BF /* ViewModelType.swift */; };
+		483DBC0D2C91789100C775BF /* AddBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC0C2C91789100C775BF /* AddBookView.swift */; };
+		483DBC0F2C917A0E00C775BF /* AddBookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC0E2C917A0E00C775BF /* AddBookViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		483DBC052C916EC400C775BF /* NavigationLazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLazyView.swift; sourceTree = "<group>"; };
 		483DBC072C9170F300C775BF /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		483DBC092C91723D00C775BF /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
+		483DBC0C2C91789100C775BF /* AddBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookView.swift; sourceTree = "<group>"; };
+		483DBC0E2C917A0E00C775BF /* AddBookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,7 @@
 				483DBC042C916EB000C775BF /* Helper */,
 				483DBBF82C915A7C00C775BF /* Model */,
 				483DBBE72C903CD100C775BF /* Network */,
+				483DBC0B2C91787D00C775BF /* AddBook */,
 				483DBBDE2C903A9500C775BF /* CatBookList */,
 				483DBC012C916CB100C775BF /* Search */,
 				483DBBDB2C903A6000C775BF /* Localization */,
@@ -166,6 +171,15 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		483DBC0B2C91787D00C775BF /* AddBook */ = {
+			isa = PBXGroup;
+			children = (
+				483DBC0C2C91789100C775BF /* AddBookView.swift */,
+				483DBC0E2C917A0E00C775BF /* AddBookViewModel.swift */,
+			);
+			path = AddBook;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -252,8 +266,10 @@
 				483DBBF72C9154C500C775BF /* NetworkManager.swift in Sources */,
 				483DBC032C916CC200C775BF /* SearchView.swift in Sources */,
 				483DBC062C916EC400C775BF /* NavigationLazyView.swift in Sources */,
+				483DBC0D2C91789100C775BF /* AddBookView.swift in Sources */,
 				483DBC082C9170F300C775BF /* SearchViewModel.swift in Sources */,
 				483DBBFE2C9160CF00C775BF /* TargetType.swift in Sources */,
+				483DBC0F2C917A0E00C775BF /* AddBookViewModel.swift in Sources */,
 				483DBBCB2C90376C00C775BF /* CheakBbangApp.swift in Sources */,
 				483DBBE92C903D1200C775BF /* BookRouter.swift in Sources */,
 			);

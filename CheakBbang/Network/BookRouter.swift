@@ -10,7 +10,7 @@ import Alamofire
 
 enum BookRouter {
     case list(query: String)
-    case item(id: Int)
+    case item(id: String)
 }
 
 extension BookRouter: TargetType {
@@ -49,7 +49,7 @@ extension BookRouter: TargetType {
             return [
                 URLQueryItem(name: "ttbkey", value: APIKey.key),
                 URLQueryItem(name: "itemIdType", value: "ISBN"),
-                URLQueryItem(name: "ItemId", value: "\(id)"),
+                URLQueryItem(name: "ItemId", value: id),
                 URLQueryItem(name: "output", value: "JS"),
                 URLQueryItem(name: "Version", value: "20131101")
             ]

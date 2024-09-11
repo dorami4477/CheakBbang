@@ -22,14 +22,7 @@ struct CatBookListView: View {
 
 
         }
-//        .task {
-//            do {
-//                let value = try await NetworkManager.shared.callRequest(api: .item(id: 9788965966463), model: Book.self)
-//                print("Fetched data: \(value)")
-//            } catch {
-//                print("Error fetching data: \(error)")
-//            }
-//        }
+
 
     }
 }

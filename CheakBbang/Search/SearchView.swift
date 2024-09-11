@@ -15,13 +15,30 @@ struct SearchView: View {
         ScrollView{
             LazyVStack {
                 ForEach(viewModel.output.bookList.item, id: \.itemID) { item in
-                    Text("\(item.title)")
+                    BookListRow(item: item)
                 }
             }
         }
         .searchable(text: $searchTerm, prompt: "책 제목을 검색해보세요!")
         .onSubmit(of: .search) {
             viewModel.action(.searchOnSubmit(search: searchTerm))
+        }
+    }
+}
+
+struct BookListRow: View {
+    let item: Item
+    
+    var body: some View {
+        HStack {
+            AsyncImage(url: URL(string:item.cover)!)
+            Text("\(item.title)")
+            NavigationLink {
+                NavigationLazyView(AddBookView(isbn13: item.isbn13))
+            } label: {
+                Text("추가하기")
+            }
+
         }
     }
 }
