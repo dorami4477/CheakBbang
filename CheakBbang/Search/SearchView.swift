@@ -34,7 +34,7 @@ struct BookListRow: View {
             AsyncImage(url: URL(string:item.cover)!)
             Text("\(item.title)")
             NavigationLink {
-                NavigationLazyView(AddBookView(isbn13: item.isbn13))
+                NavigationLazyView(AddBookView(isbn13: item.isbn13, viewModel: AddBookViewModel()))
             } label: {
                 Text("추가하기")
             }

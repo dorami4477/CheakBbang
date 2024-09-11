@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddBookView: View {
     var isbn13: String
-    @StateObject var viewModel = AddBookViewModel()
+    @StateObject var viewModel: AddBookViewModel
     
     var body: some View {
         Text(viewModel.output.bookItem.title)
@@ -20,5 +20,5 @@ struct AddBookView: View {
 }
 
 #Preview {
-    AddBookView(isbn13: "9788965966463")
+    AddBookView(isbn13: "9788965966463", viewModel: AddBookViewModel())
 }
