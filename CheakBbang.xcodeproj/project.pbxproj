@@ -8,17 +8,29 @@
 
 /* Begin PBXBuildFile section */
 		483DBBCB2C90376C00C775BF /* CheakBbangApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */; };
-		483DBBCD2C90376C00C775BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBCC2C90376C00C775BF /* ContentView.swift */; };
 		483DBBCF2C90376E00C775BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBCE2C90376E00C775BF /* Assets.xcassets */; };
 		483DBBD22C90376E00C775BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBD12C90376E00C775BF /* Preview Assets.xcassets */; };
+		483DBBDA2C90379500C775BF /* GitIgnoreSetting in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBD92C90379500C775BF /* GitIgnoreSetting */; };
+		483DBBDD2C903A7600C775BF /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBDC2C903A7600C775BF /* Localizable.xcstrings */; };
+		483DBBE02C903AD200C775BF /* CatBookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBDF2C903AD200C775BF /* CatBookListView.swift */; };
+		483DBBE32C903B3100C775BF /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBE22C903B3100C775BF /* APIKey.swift */; };
+		483DBBE62C903C9300C775BF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 483DBBE52C903C9300C775BF /* Alamofire */; };
+		483DBBE92C903D1200C775BF /* BookRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBE82C903D1200C775BF /* BookRouter.swift */; };
+		483DBBEC2C90401100C775BF /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 483DBBEB2C90401100C775BF /* Moya */; };
+		483DBBF72C9154C500C775BF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBF62C9154C500C775BF /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		483DBBC72C90376C00C775BF /* CheakBbang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheakBbang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheakBbangApp.swift; sourceTree = "<group>"; };
-		483DBBCC2C90376C00C775BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		483DBBCE2C90376E00C775BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		483DBBD12C90376E00C775BF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		483DBBD92C90379500C775BF /* GitIgnoreSetting */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GitIgnoreSetting; sourceTree = "<group>"; };
+		483DBBDC2C903A7600C775BF /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		483DBBDF2C903AD200C775BF /* CatBookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBookListView.swift; sourceTree = "<group>"; };
+		483DBBE22C903B3100C775BF /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		483DBBE82C903D1200C775BF /* BookRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRouter.swift; sourceTree = "<group>"; };
+		483DBBF62C9154C500C775BF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +38,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				483DBBEC2C90401100C775BF /* Moya in Frameworks */,
+				483DBBE62C903C9300C775BF /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,9 +65,11 @@
 		483DBBC92C90376C00C775BF /* CheakBbang */ = {
 			isa = PBXGroup;
 			children = (
-				483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */,
-				483DBBCC2C90376C00C775BF /* ContentView.swift */,
-				483DBBCE2C90376E00C775BF /* Assets.xcassets */,
+				483DBBE72C903CD100C775BF /* Network */,
+				483DBBDE2C903A9500C775BF /* CatBookList */,
+				483DBBDB2C903A6000C775BF /* Localization */,
+				483DBBD82C90378800C775BF /* Resource */,
+				483DBBE12C903B0700C775BF /* App */,
 				483DBBD02C90376E00C775BF /* Preview Content */,
 			);
 			path = CheakBbang;
@@ -65,6 +81,49 @@
 				483DBBD12C90376E00C775BF /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		483DBBD82C90378800C775BF /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				483DBBD92C90379500C775BF /* GitIgnoreSetting */,
+				483DBBCE2C90376E00C775BF /* Assets.xcassets */,
+				483DBBE22C903B3100C775BF /* APIKey.swift */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		483DBBDB2C903A6000C775BF /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				483DBBDC2C903A7600C775BF /* Localizable.xcstrings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		483DBBDE2C903A9500C775BF /* CatBookList */ = {
+			isa = PBXGroup;
+			children = (
+				483DBBDF2C903AD200C775BF /* CatBookListView.swift */,
+			);
+			path = CatBookList;
+			sourceTree = "<group>";
+		};
+		483DBBE12C903B0700C775BF /* App */ = {
+			isa = PBXGroup;
+			children = (
+				483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		483DBBE72C903CD100C775BF /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				483DBBE82C903D1200C775BF /* BookRouter.swift */,
+				483DBBF62C9154C500C775BF /* NetworkManager.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +142,10 @@
 			dependencies = (
 			);
 			name = CheakBbang;
+			packageProductDependencies = (
+				483DBBE52C903C9300C775BF /* Alamofire */,
+				483DBBEB2C90401100C775BF /* Moya */,
+			);
 			productName = CheakBbang;
 			productReference = 483DBBC72C90376C00C775BF /* CheakBbang.app */;
 			productType = "com.apple.product-type.application";
@@ -109,8 +172,13 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 483DBBBE2C90376C00C775BF;
+			packageReferences = (
+				483DBBE42C903C9300C775BF /* XCRemoteSwiftPackageReference "Alamofire" */,
+				483DBBEA2C90401100C775BF /* XCRemoteSwiftPackageReference "Moya" */,
+			);
 			productRefGroup = 483DBBC82C90376C00C775BF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -125,7 +193,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				483DBBDA2C90379500C775BF /* GitIgnoreSetting in Resources */,
 				483DBBD22C90376E00C775BF /* Preview Assets.xcassets in Resources */,
+				483DBBDD2C903A7600C775BF /* Localizable.xcstrings in Resources */,
 				483DBBCF2C90376E00C775BF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,8 +207,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				483DBBCD2C90376C00C775BF /* ContentView.swift in Sources */,
+				483DBBE02C903AD200C775BF /* CatBookListView.swift in Sources */,
+				483DBBE32C903B3100C775BF /* APIKey.swift in Sources */,
+				483DBBF72C9154C500C775BF /* NetworkManager.swift in Sources */,
 				483DBBCB2C90376C00C775BF /* CheakBbangApp.swift in Sources */,
+				483DBBE92C903D1200C775BF /* BookRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,8 +351,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -287,9 +361,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dahyun.CheakBbang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -307,8 +385,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -316,9 +395,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dahyun.CheakBbang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -344,6 +427,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		483DBBE42C903C9300C775BF /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+		483DBBEA2C90401100C775BF /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		483DBBE52C903C9300C775BF /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 483DBBE42C903C9300C775BF /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		483DBBEB2C90401100C775BF /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 483DBBEA2C90401100C775BF /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 483DBBBF2C90376C00C775BF /* Project object */;
 }

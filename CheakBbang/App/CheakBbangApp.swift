@@ -11,7 +11,7 @@ import SwiftUI
 struct CheakBbangApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CatBookListView()
         }
     }
 }
