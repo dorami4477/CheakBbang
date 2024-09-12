@@ -31,23 +31,31 @@ struct Item: Decodable {
     let link: String
     let author, pubDate, description, isbn: String
     let isbn13: String
-    let itemID, priceSales, priceStandard: Int
-    let mallType, stockStatus: String
-    let mileage: Int
+    let itemID: Int
     let cover: String
     let categoryID: Int
     let categoryName, publisher: String
-    let salesPoint: Int
-    let adult, fixedPrice: Bool
+    let adult: Bool
     let customerReviewRank: Int
     let subInfo: SubInfo
 
+
     enum CodingKeys: String, CodingKey {
-        case title, link, author, pubDate, description, isbn, isbn13
+        case title
+        case link
+        case author
+        case pubDate
+        case description
+        case isbn
+        case isbn13
         case itemID = "itemId"
-        case priceSales, priceStandard, mallType, stockStatus, mileage, cover
+        case cover
         case categoryID = "categoryId"
-        case categoryName, publisher, salesPoint, adult, fixedPrice, customerReviewRank, subInfo
+        case categoryName
+        case publisher
+        case adult
+        case customerReviewRank
+        case subInfo
     }
 }
 

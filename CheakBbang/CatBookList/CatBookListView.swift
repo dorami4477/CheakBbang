@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct TestList: Hashable {
     let id: Int
@@ -14,69 +15,101 @@ struct TestList: Hashable {
 
 
 struct CatBookListView: View {
-    @State private var list: [TestList] = []
-    let background = Color.blue
+    @ObservedResults(MyBook.self) var bookList
     
     var body: some View {
         NavigationView {
-                ScrollViewReader { proxy in
-                    ScrollView{
-                        LazyVStack {
-                            ForEach(list, id: \.id) { item in
-                                if item.id > 5 {
+            GeometryReader { geometry in
+                ZStack {
+                    ScrollViewReader { proxy in
+                        ScrollView {
+                            Spacer()
+                            LazyVStack {
+                                Spacer()
+                                ForEach(bookList, id: \.id) { item in
                                     addBook(item: item, align: .leading, padding: .leading)
                                         .id(item.id)
-                                } else {
-                                    addBook(item: item, align: .trailing, padding: .trailing)
-                                        .id(item.id)
+                                        .onTapGesture {
+                                            $bookList.remove(item)
+                                        }
                                 }
-                                
+                                .padding(.bottom, -29)
+                                .scaleEffect(y: -1)
+
+                                Spacer()
                             }
-                            .padding(.bottom, -50)
+                            .background(.gray)
+                            .frame(minHeight: geometry.size.height)
                             .scaleEffect(y: -1)
+                            
+                            
                         }
-                        .scaleEffect(y: -1)
+                        .onAppear {
+//                            DispatchQueue.main.async {
+//                                if let anchorId = bookList.last?.startDate {
+//                                    proxy.scrollTo(dataString(date: anchorId), anchor: .bottom)
+//                                }
+//                            }
+                        }
                     }
-                    
-                    .onAppear {
-                        for number in 0..<10 {
-                            list.append(TestList(id: number, title: "dfdddd-\(number)"))
+                    VStack{
+                        Button("추가") {
+                            let newItem = MyBook(id: Int.random(in: 1...100000), title: "타이틀입니다아", originalTitle: "타이틀입니다아타이틀입니다아", author: "타이틀입니다아", publisher: "타이틀입니다아", pubDate: "타이틀입니다아", explanation: "타이틀입니다아타이틀입니다아", cover: "타이틀입니다아", isbn13: "타이틀입니다아", rank: 3, status: .ing, startDate: Date(), endDate: Date())
+                            $bookList.append(newItem)
                         }
-                        DispatchQueue.main.async {
-                            if let anchorId = list.last?.id {
-                                proxy.scrollTo(anchorId)
-                            }
-                        }
+                        floatingButton()
                     }
                 }
-            
-            
-//            VStack{
-//                Button("책추가") {
-//                    //addBook()
-//                }
-//                NavigationLink {
-//                    NavigationLazyView(SearchView())
-//                } label: {
-//                    Text("이동")
-//                }
-//            }
+            }
         }
+        
+        
+    }
+
+    func addBook(item: MyBook, align: Alignment, padding:Edge.Set) -> some View {
+        ZStack {
+            Image("sampleBook")
+                .resizable()
+            Text(item.title.truncate(length: 12))
+                .font(.subheadline)
+                .foregroundStyle(.white)
+                .transformEffect(CGAffineTransform(1.0, 0.078, 0, 1, 0, 0))
+                .padding(.leading, 3)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .frame(width: 250, height: 55)
+        //.padding(padding, 30)
+        //.frame(maxWidth: .infinity, alignment: align)
     }
     
-    func addBook(item: TestList, align: Alignment, padding:Edge.Set) -> some View {
-        ZStack {
-            Image("testBook")
-                .resizable()
-                .frame(width: 100, height: 100)
-            Text(item.title)
-                .transformEffect(CGAffineTransform(1.0, 0.18, 0, 1, 0, 0))
-        }
-        .padding(padding, 30)
-        .frame(maxWidth: .infinity, alignment: align)
+    func dataString(date: Date) -> String {
+        let myFormatter = DateFormatter()
+        myFormatter.dateFormat = "yyyyMMddHHmmss"
+        let savedDateString = myFormatter.string(from: date)
+        return savedDateString
     }
-}
 
-#Preview {
-    CatBookListView()
+}
+//#Preview {
+//    CatBookListView()
+//}
+
+struct floatingButton: View {
+    var body: some View {
+        VStack {
+            Spacer()
+            HStack {
+                Spacer()
+                NavigationLink(destination: NavigationLazyView(SearchView(viewModel: SearchViewModel()))) {
+                    Image(systemName: "plus")
+                        .padding()
+                        .background(Color.black)
+                        .foregroundColor(.white)
+                        .clipShape(Circle())
+                        .shadow(radius: 4)
+                }
+                .padding()
+            }
+        }
+    }
 }

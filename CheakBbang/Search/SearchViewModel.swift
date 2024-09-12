@@ -41,7 +41,7 @@ extension SearchViewModel {
             .store(in: &cancellables)
     }
 
-    
+    @MainActor
     func fetchBookList(_ search: String) async {
         do {
             let value = try await NetworkManager.shared.callRequest(api: .list(query: search), model: Book.self)

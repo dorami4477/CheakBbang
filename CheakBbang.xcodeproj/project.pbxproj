@@ -25,7 +25,13 @@
 		483DBC0A2C91723D00C775BF /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC092C91723D00C775BF /* ViewModelType.swift */; };
 		483DBC0D2C91789100C775BF /* AddBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC0C2C91789100C775BF /* AddBookView.swift */; };
 		483DBC0F2C917A0E00C775BF /* AddBookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC0E2C917A0E00C775BF /* AddBookViewModel.swift */; };
-		483DBC122C91DFFF00C775BF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 483DBC112C91DFFF00C775BF /* RealmSwift */; };
+		483DBC1E2C92A2A900C775BF /* MyBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC1D2C92A2A900C775BF /* MyBook.swift */; };
+		483DBC202C92AD5200C775BF /* MyBookRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC1F2C92AD5200C775BF /* MyBookRepository.swift */; };
+		483DBC2A2C92B6EA00C775BF /* CoverFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC292C92B6EA00C775BF /* CoverFileManager.swift */; };
+		483DBC2D2C92B72900C775BF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 483DBC2C2C92B72900C775BF /* RealmSwift */; };
+		483DBC2F2C92E32D00C775BF /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC2E2C92E32D00C775BF /* String+.swift */; };
+		483DBC332C93276A00C775BF /* ImageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC322C93276A00C775BF /* ImageWrapper.swift */; };
+		483DBC352C932A1A00C775BF /* ButtonWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC342C932A1A00C775BF /* ButtonWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +53,12 @@
 		483DBC092C91723D00C775BF /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		483DBC0C2C91789100C775BF /* AddBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookView.swift; sourceTree = "<group>"; };
 		483DBC0E2C917A0E00C775BF /* AddBookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookViewModel.swift; sourceTree = "<group>"; };
+		483DBC1D2C92A2A900C775BF /* MyBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBook.swift; sourceTree = "<group>"; };
+		483DBC1F2C92AD5200C775BF /* MyBookRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBookRepository.swift; sourceTree = "<group>"; };
+		483DBC292C92B6EA00C775BF /* CoverFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverFileManager.swift; sourceTree = "<group>"; };
+		483DBC2E2C92E32D00C775BF /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		483DBC322C93276A00C775BF /* ImageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWrapper.swift; sourceTree = "<group>"; };
+		483DBC342C932A1A00C775BF /* ButtonWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				483DBC122C91DFFF00C775BF /* RealmSwift in Frameworks */,
+				483DBC2D2C92B72900C775BF /* RealmSwift in Frameworks */,
 				483DBBE62C903C9300C775BF /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -81,6 +93,9 @@
 		483DBBC92C90376C00C775BF /* CheakBbang */ = {
 			isa = PBXGroup;
 			children = (
+				483DBC312C93273A00C775BF /* Wrapper */,
+				483DBC302C9326A300C775BF /* Extension */,
+				483DBC132C91E02200C775BF /* DataBase */,
 				483DBC042C916EB000C775BF /* Helper */,
 				483DBBF82C915A7C00C775BF /* Model */,
 				483DBBE72C903CD100C775BF /* Network */,
@@ -167,7 +182,6 @@
 		483DBC042C916EB000C775BF /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				483DBC052C916EC400C775BF /* NavigationLazyView.swift */,
 				483DBC092C91723D00C775BF /* ViewModelType.swift */,
 			);
 			path = Helper;
@@ -180,6 +194,34 @@
 				483DBC0E2C917A0E00C775BF /* AddBookViewModel.swift */,
 			);
 			path = AddBook;
+			sourceTree = "<group>";
+		};
+		483DBC132C91E02200C775BF /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+				483DBC1D2C92A2A900C775BF /* MyBook.swift */,
+				483DBC1F2C92AD5200C775BF /* MyBookRepository.swift */,
+				483DBC292C92B6EA00C775BF /* CoverFileManager.swift */,
+			);
+			path = DataBase;
+			sourceTree = "<group>";
+		};
+		483DBC302C9326A300C775BF /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				483DBC2E2C92E32D00C775BF /* String+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		483DBC312C93273A00C775BF /* Wrapper */ = {
+			isa = PBXGroup;
+			children = (
+				483DBC052C916EC400C775BF /* NavigationLazyView.swift */,
+				483DBC322C93276A00C775BF /* ImageWrapper.swift */,
+				483DBC342C932A1A00C775BF /* ButtonWrapper.swift */,
+			);
+			path = Wrapper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,7 +242,7 @@
 			name = CheakBbang;
 			packageProductDependencies = (
 				483DBBE52C903C9300C775BF /* Alamofire */,
-				483DBC112C91DFFF00C775BF /* RealmSwift */,
+				483DBC2C2C92B72900C775BF /* RealmSwift */,
 			);
 			productName = CheakBbang;
 			productReference = 483DBBC72C90376C00C775BF /* CheakBbang.app */;
@@ -233,7 +275,7 @@
 			mainGroup = 483DBBBE2C90376C00C775BF;
 			packageReferences = (
 				483DBBE42C903C9300C775BF /* XCRemoteSwiftPackageReference "Alamofire" */,
-				483DBC102C91DFFF00C775BF /* XCRemoteSwiftPackageReference "realm-swift" */,
+				483DBC2B2C92B72900C775BF /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 483DBBC82C90376C00C775BF /* Products */;
 			projectDirPath = "";
@@ -264,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				483DBC0A2C91723D00C775BF /* ViewModelType.swift in Sources */,
+				483DBC202C92AD5200C775BF /* MyBookRepository.swift in Sources */,
 				483DBBE02C903AD200C775BF /* CatBookListView.swift in Sources */,
 				483DBBE32C903B3100C775BF /* APIKey.swift in Sources */,
 				483DBBFA2C915A9400C775BF /* Book.swift in Sources */,
@@ -273,7 +316,12 @@
 				483DBC0D2C91789100C775BF /* AddBookView.swift in Sources */,
 				483DBC082C9170F300C775BF /* SearchViewModel.swift in Sources */,
 				483DBBFE2C9160CF00C775BF /* TargetType.swift in Sources */,
+				483DBC2A2C92B6EA00C775BF /* CoverFileManager.swift in Sources */,
+				483DBC1E2C92A2A900C775BF /* MyBook.swift in Sources */,
+				483DBC332C93276A00C775BF /* ImageWrapper.swift in Sources */,
 				483DBC0F2C917A0E00C775BF /* AddBookViewModel.swift in Sources */,
+				483DBC352C932A1A00C775BF /* ButtonWrapper.swift in Sources */,
+				483DBC2F2C92E32D00C775BF /* String+.swift in Sources */,
 				483DBBCB2C90376C00C775BF /* CheakBbangApp.swift in Sources */,
 				483DBBE92C903D1200C775BF /* BookRouter.swift in Sources */,
 			);
@@ -501,12 +549,12 @@
 				minimumVersion = 5.9.1;
 			};
 		};
-		483DBC102C91DFFF00C775BF /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+		483DBC2B2C92B72900C775BF /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = exactVersion;
+				version = 20.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -517,9 +565,9 @@
 			package = 483DBBE42C903C9300C775BF /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
-		483DBC112C91DFFF00C775BF /* RealmSwift */ = {
+		483DBC2C2C92B72900C775BF /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 483DBC102C91DFFF00C775BF /* XCRemoteSwiftPackageReference "realm-swift" */;
+			package = 483DBC2B2C92B72900C775BF /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -26,7 +26,7 @@ extension AddBookViewModel {
     }
     
     struct Output {
-        var bookItem: Book = Book(version: "", title: "", link: "", pubDate: "", totalResults: 1, startIndex: 1, itemsPerPage: 1, query: "", searchCategoryID: 1, searchCategoryName: "", item: [])
+        var bookItem: Item = Item(title: "", link: "", author: "", pubDate: "", description: "", isbn: "", isbn13: "", itemID: 0, cover: "", categoryID: 0, categoryName: "", publisher: "", adult: true, customerReviewRank: 0, subInfo: SubInfo(subTitle: nil, originalTitle: nil, itemPage: nil))
     }
     
     func transform() {
@@ -40,11 +40,12 @@ extension AddBookViewModel {
             .store(in: &cancellables)
     }
 
-    
+    @MainActor
     func fetchBook(_ isbn: String) async {
         do {
             let value = try await NetworkManager.shared.callRequest(api: .item(id: isbn), model: Book.self)
-            output.bookItem = value
+            guard let firstItem = value.item.first else { return }
+            output.bookItem = firstItem
             
         } catch {
             print("Error fetching data: \(error)")
