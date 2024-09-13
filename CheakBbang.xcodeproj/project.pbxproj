@@ -33,6 +33,7 @@
 		483DBC332C93276A00C775BF /* ImageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC322C93276A00C775BF /* ImageWrapper.swift */; };
 		483DBC352C932A1A00C775BF /* ButtonWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC342C932A1A00C775BF /* ButtonWrapper.swift */; };
 		483DBC372C93469500C775BF /* AddBookAniView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC362C93469500C775BF /* AddBookAniView.swift */; };
+		483DBC392C94281100C775BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC382C94281100C775BF /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		483DBC322C93276A00C775BF /* ImageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWrapper.swift; sourceTree = "<group>"; };
 		483DBC342C932A1A00C775BF /* ButtonWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWrapper.swift; sourceTree = "<group>"; };
 		483DBC362C93469500C775BF /* AddBookAniView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookAniView.swift; sourceTree = "<group>"; };
+		483DBC382C94281100C775BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */,
+				483DBC382C94281100C775BF /* ContentView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 			files = (
 				483DBC0A2C91723D00C775BF /* ViewModelType.swift in Sources */,
 				483DBC202C92AD5200C775BF /* MyBookRepository.swift in Sources */,
+				483DBC392C94281100C775BF /* ContentView.swift in Sources */,
 				483DBBE02C903AD200C775BF /* CatBookListView.swift in Sources */,
 				483DBBE32C903B3100C775BF /* APIKey.swift in Sources */,
 				483DBBFA2C915A9400C775BF /* Book.swift in Sources */,

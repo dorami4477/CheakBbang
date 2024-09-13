@@ -27,7 +27,20 @@ struct AddBookView: View {
             DatePicker("종료일", selection: $endDate)
             Text("추가")
                 .wrapToButton {
-                    let newItem = MyBook(id: viewModel.output.bookItem.itemID, title: viewModel.output.bookItem.title, originalTitle: viewModel.output.bookItem.subInfo.originalTitle ?? "", author: viewModel.output.bookItem.author, publisher: viewModel.output.bookItem.publisher, pubDate: viewModel.output.bookItem.pubDate, explanation: viewModel.output.bookItem.description, cover: viewModel.output.bookItem.cover, isbn13: viewModel.output.bookItem.isbn13, rank: Int(rank) ?? 0, status: .ing, startDate: startDate, endDate: endDate)
+                    let newItem = MyBook(itemId: viewModel.output.bookItem.itemID, 
+                                         title: viewModel.output.bookItem.title,
+                                         originalTitle: viewModel.output.bookItem.subInfo.originalTitle ?? "",
+                                         author: viewModel.output.bookItem.author,
+                                         publisher: viewModel.output.bookItem.publisher,
+                                         pubDate: viewModel.output.bookItem.pubDate,
+                                         explanation: viewModel.output.bookItem.description,
+                                         cover: viewModel.output.bookItem.cover, 
+                                         isbn13: viewModel.output.bookItem.isbn13,
+                                         rank: Int(rank) ?? 0,
+                                         page: viewModel.output.bookItem.subInfo.itemPage ?? 0,
+                                         status: .ing,
+                                         startDate: startDate,
+                                         endDate: endDate)
                     viewModel.action(.addButtonTap(item: newItem))
                     isSaved = true
                 }

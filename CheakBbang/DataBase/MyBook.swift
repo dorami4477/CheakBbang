@@ -9,7 +9,8 @@ import Foundation
 import RealmSwift
 
 final class MyBook: Object, ObjectKeyIdentifiable {
-    @Persisted(primaryKey: true) var id: Int
+    @Persisted(primaryKey: true) var id: ObjectId
+    @Persisted var itemId: Int
     @Persisted(indexed: true) var title: String
     @Persisted var originalTitle: String
     @Persisted var author: String
@@ -20,14 +21,14 @@ final class MyBook: Object, ObjectKeyIdentifiable {
     @Persisted var isbn13: String
     @Persisted var rank: Int
     @Persisted var memo: List<Memo> = List<Memo>()
-    @Persisted var page: Int?
+    @Persisted var page: Int
     @Persisted var status: Status
     @Persisted var startDate: Date
     @Persisted var endDate: Date
     
-    convenience init(id: Int, title: String, originalTitle: String, author: String, publisher: String, pubDate: String, explanation: String, cover: String, isbn13: String, rank: Int, memo: List<Memo> = List<Memo>(), page: Int? = nil, status: Status, startDate: Date, endDate: Date) {
+    convenience init(itemId: Int, title: String, originalTitle: String, author: String, publisher: String, pubDate: String, explanation: String, cover: String, isbn13: String, rank: Int, memo: List<Memo> = List<Memo>(), page: Int = 0, status: Status, startDate: Date, endDate: Date) {
         self.init()
-        self.id = id
+        self.itemId = itemId
         self.title = title
         self.originalTitle = originalTitle
         self.author = author
