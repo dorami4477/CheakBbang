@@ -26,7 +26,7 @@ struct Book: Decodable {
 }
 
 // MARK: - Item
-struct Item: Decodable {
+struct Item: Decodable, Hashable {
     let title: String
     let link: String
     let author, pubDate, description, isbn: String
@@ -60,7 +60,7 @@ struct Item: Decodable {
 }
 
 // MARK: - SubInfo
-struct SubInfo: Decodable {
+struct SubInfo: Decodable, Hashable {
     let subTitle, originalTitle: String?
     let itemPage: Int?
 }

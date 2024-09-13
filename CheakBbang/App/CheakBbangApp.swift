@@ -9,9 +9,18 @@ import SwiftUI
 
 @main
 struct CheakBbangApp: App {
+    @ObservedObject var appState = AppState()
+    
     var body: some Scene {
         WindowGroup {
             CatBookListView()
+                .id(appState.rootViewId)
+                .environmentObject(appState)
         }
     }
+}
+
+
+final class AppState : ObservableObject {
+    @Published var rootViewId = UUID()
 }

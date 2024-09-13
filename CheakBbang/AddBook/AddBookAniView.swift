@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct AddBookAniView: View {
+
+    @EnvironmentObject var appState: AppState
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button("루트로 돌아가기") {
+            appState.rootViewId = UUID()
+        }
     }
 }
 

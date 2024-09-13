@@ -32,6 +32,7 @@
 		483DBC2F2C92E32D00C775BF /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC2E2C92E32D00C775BF /* String+.swift */; };
 		483DBC332C93276A00C775BF /* ImageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC322C93276A00C775BF /* ImageWrapper.swift */; };
 		483DBC352C932A1A00C775BF /* ButtonWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC342C932A1A00C775BF /* ButtonWrapper.swift */; };
+		483DBC372C93469500C775BF /* AddBookAniView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC362C93469500C775BF /* AddBookAniView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		483DBC2E2C92E32D00C775BF /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		483DBC322C93276A00C775BF /* ImageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWrapper.swift; sourceTree = "<group>"; };
 		483DBC342C932A1A00C775BF /* ButtonWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWrapper.swift; sourceTree = "<group>"; };
+		483DBC362C93469500C775BF /* AddBookAniView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookAniView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +194,7 @@
 			children = (
 				483DBC0C2C91789100C775BF /* AddBookView.swift */,
 				483DBC0E2C917A0E00C775BF /* AddBookViewModel.swift */,
+				483DBC362C93469500C775BF /* AddBookAniView.swift */,
 			);
 			path = AddBook;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 				483DBC352C932A1A00C775BF /* ButtonWrapper.swift in Sources */,
 				483DBC2F2C92E32D00C775BF /* String+.swift in Sources */,
 				483DBBCB2C90376C00C775BF /* CheakBbangApp.swift in Sources */,
+				483DBC372C93469500C775BF /* AddBookAniView.swift in Sources */,
 				483DBBE92C903D1200C775BF /* BookRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

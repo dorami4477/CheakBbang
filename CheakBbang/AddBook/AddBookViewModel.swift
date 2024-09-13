@@ -7,8 +7,11 @@
 
 import Foundation
 import Combine
+import RealmSwift
 
 final class AddBookViewModel: ViewModelType {
+    @ObservedResults(MyBook.self) var bookList
+    
     var cancellables = Set<AnyCancellable>()
     var input = Input()
     @Published var output = Output()
@@ -23,6 +26,7 @@ final class AddBookViewModel: ViewModelType {
 extension AddBookViewModel {
     struct Input {
         let viewOnTask = PassthroughSubject<String, Never>()
+        let addButtonTap = PassthroughSubject<MyBook, Never>()
     }
     
     struct Output {
@@ -36,6 +40,14 @@ extension AddBookViewModel {
                 Task { [weak self] in
                     await self?.fetchBook(value)
                 }
+            }
+            .store(in: &cancellables)
+        
+        input
+            .addButtonTap
+            .sink { [weak self] value in
+                self?.$bookList.append(value)
+                print("저장")
             }
             .store(in: &cancellables)
     }
@@ -57,12 +69,15 @@ extension AddBookViewModel {
 extension AddBookViewModel {
     enum Action {
         case viewOnTask(isbn: String)
+        case addButtonTap(item: MyBook)
     }
     
     func action(_ action: Action) {
         switch action {
         case .viewOnTask(let isbn):
             input.viewOnTask.send(isbn)
+        case .addButtonTap(let item):
+            input.addButtonTap.send(item)
         }
     }
 }
