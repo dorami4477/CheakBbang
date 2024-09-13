@@ -17,60 +17,48 @@ struct CatBookListView: View {
         NavigationView {
             GeometryReader { geometry in
                 ZStack {
-                        ScrollView {
-                                LazyVStack {
-                                    ForEach(Array(bookList.enumerated()), id: \.element.id) { index, item in
-                                        let share = index / 5
+                    ScrollView {
+                            LazyVStack {
+                                ForEach(Array(bookList.enumerated()), id: \.element.id) { index, item in
+                                    let share = index / 5
+                                    
+                                    if share % 2 == 0 {
+                                        if index % 5 == 0 {
+                                            addBook(item: item, align: .leading, padding: .leading, isFirst: true)
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                            //.padding(.bottom, -50)
+                                                .id(item.id)
+                                        } else {
+                                            addBook(item: item, align: .leading, padding: .leading, isFirst: false)
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                                .id(item.id)
+                                        }
                                         
-                                        if share % 2 == 0 {
-                                            if index % 5 == 0 {
-                                                addBook(item: item, align: .leading, padding: .leading, isFirst: true)
-                                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                                //.padding(.bottom, -50)
-                                                    .id(item.id)
-                                            } else {
-                                                addBook(item: item, align: .leading, padding: .leading, isFirst: false)
-                                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                                    .id(item.id)
-                                            }
-                                            
-                                        } else if share % 2 == 1 {
-                                            if index % 5 == 0 {
-                                                addBook(item: item, align: .trailing, padding: .trailing, isFirst: true)
-                                                    .frame(maxWidth: .infinity, alignment: .trailing)
-                                                //.padding(.bottom, -50)
-                                                    .id(item.id)
-                                            } else {
-                                                addBook(item: item, align: .trailing, padding: .trailing, isFirst: false)
-                                                    .frame(maxWidth: .infinity, alignment: .trailing)
-                                                    .id(item.id)
-                                            }
+                                    } else if share % 2 == 1 {
+                                        if index % 5 == 0 {
+                                            addBook(item: item, align: .trailing, padding: .trailing, isFirst: true)
+                                                .frame(maxWidth: .infinity, alignment: .trailing)
+                                            //.padding(.bottom, -50)
+                                                .id(item.id)
+                                        } else {
+                                            addBook(item: item, align: .trailing, padding: .trailing, isFirst: false)
+                                                .frame(maxWidth: .infinity, alignment: .trailing)
+                                                .id(item.id)
                                         }
                                     }
-                                    .padding(.bottom, -20)
-                                    .scaleEffect(y: -1)
                                 }
-                                .frame(minHeight: geometry.size.height)
+                                .padding(.bottom, -20)
                                 .scaleEffect(y: -1)
+                            }
+                            .frame(minHeight: geometry.size.height)
+                            .scaleEffect(y: -1)
                         }
                     VStack{
                         Button("추가") {
                             let newItem = MyBook(itemId: Int.random(in: 1...100000), title: "타이틀입니다아", originalTitle: "타이틀입니다아타이틀입니다아", author: "타이틀입니다아", publisher: "타이틀입니다아", pubDate: "타이틀입니다아", explanation: "타이틀입니다아타이틀입니다아", cover: "타이틀입니다아", isbn13: "타이틀입니다아", rank: 3, page: Int.random(in: 1...500), status: .ing, startDate: Date(), endDate: Date())
                             $bookList.append(newItem)
                         }
-                        HStack{
-                            VStack {
-                                Text("Volume")
-                                Text("\($bookList.wrappedValue.count)")
-                            }
-                            Spacer()
-                            VStack {
-                                Text("Total Pages")
-                                Text("\(getTotalPage())")
-                            }
-                        }
-                        .padding(.horizontal, 30)
-                        .frame(maxWidth: .infinity)
+                        infoView()
                         floatingButton()
                     }
                 }
@@ -159,6 +147,22 @@ struct CatBookListView: View {
         myFormatter.dateFormat = "yyyyMMddHHmmss"
         let savedDateString = myFormatter.string(from: date)
         return savedDateString
+    }
+    
+    func infoView() -> some View {
+        HStack{
+            VStack {
+                Text("Volume")
+                Text("\($bookList.wrappedValue.count)")
+            }
+            Spacer()
+            VStack {
+                Text("Total Pages")
+                Text("\(getTotalPage())")
+            }
+        }
+        .padding(.horizontal, 30)
+        .frame(maxWidth: .infinity)
     }
 
 }

@@ -7,4 +7,25 @@
 
 import SwiftUI
 
+struct ContentView: View {
+    var body: some View {
+        TabView {
+            CatBookListView()
+                .tabItem {
+                    Image(systemName: "1.square.fill")
+                    Text("First")
+                }
+            NavigationLazyView(SearchView(viewModel: SearchViewModel()))
+                .tabItem {
+                    Image(systemName: "2.square.fill")
+                    Text("Second")
+                }
+        }
+    }
+}
+
+
+#Preview {
+    ContentView()
+}
 

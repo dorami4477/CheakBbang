@@ -13,7 +13,7 @@ struct CheakBbangApp: App {
     
     var body: some Scene {
         WindowGroup {
-            CatBookListView()
+            ContentView()
                 .id(appState.rootViewId)
                 .environmentObject(appState)
         }
