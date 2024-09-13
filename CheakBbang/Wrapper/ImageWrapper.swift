@@ -9,8 +9,25 @@ import SwiftUI
 
 struct ImageWrapper: View {
     let url:String
+    
     var body: some View {
-        AsyncImage(url: URL(string: url))
+        AsyncImage(url: URL(string: url)){ image in
+            switch image {
+            case .empty:
+                Image(systemName: "star")
+                
+            case .success(let image):
+                image
+                    .resizable()
+                    .scaledToFit()
+                
+            case .failure:
+                Image(systemName: "star")
+                
+            @unknown default:
+                Image(systemName: "star")
+            }
+        }
     }
 }
 
