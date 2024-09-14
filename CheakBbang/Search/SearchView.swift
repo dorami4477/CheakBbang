@@ -44,5 +44,5 @@ struct BookListRow: View {
 }
 
 #Preview {
-    SearchView()
+    SearchView(viewModel: SearchViewModel())
 }

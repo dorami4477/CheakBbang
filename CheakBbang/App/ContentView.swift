@@ -20,6 +20,11 @@ struct ContentView: View {
                     Image(systemName: "2.square.fill")
                     Text("Second")
                 }
+            NavigationLazyView(LibraryView(viewModel: LibraryViewModel()))
+                .tabItem {
+                    Image(systemName: "3.square.fill")
+                    Text("third")
+                }
         }
     }
 }
