@@ -34,6 +34,9 @@
 		483DBC352C932A1A00C775BF /* ButtonWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC342C932A1A00C775BF /* ButtonWrapper.swift */; };
 		483DBC372C93469500C775BF /* AddBookAniView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC362C93469500C775BF /* AddBookAniView.swift */; };
 		483DBC392C94281100C775BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC382C94281100C775BF /* ContentView.swift */; };
+		483DBC3B2C94301300C775BF /* CatBookListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC3A2C94301300C775BF /* CatBookListViewModel.swift */; };
+		483DBC3E2C955ACE00C775BF /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC3D2C955ACE00C775BF /* LibraryView.swift */; };
+		483DBC402C955CEF00C775BF /* LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC3F2C955CEF00C775BF /* LibraryViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +66,9 @@
 		483DBC342C932A1A00C775BF /* ButtonWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWrapper.swift; sourceTree = "<group>"; };
 		483DBC362C93469500C775BF /* AddBookAniView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookAniView.swift; sourceTree = "<group>"; };
 		483DBC382C94281100C775BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		483DBC3A2C94301300C775BF /* CatBookListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBookListViewModel.swift; sourceTree = "<group>"; };
+		483DBC3D2C955ACE00C775BF /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
+		483DBC3F2C955CEF00C775BF /* LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +109,7 @@
 				483DBC042C916EB000C775BF /* Helper */,
 				483DBBF82C915A7C00C775BF /* Model */,
 				483DBBE72C903CD100C775BF /* Network */,
+				483DBC3C2C955A8B00C775BF /* Library */,
 				483DBC0B2C91787D00C775BF /* AddBook */,
 				483DBBDE2C903A9500C775BF /* CatBookList */,
 				483DBC012C916CB100C775BF /* Search */,
@@ -144,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				483DBBDF2C903AD200C775BF /* CatBookListView.swift */,
+				483DBC3A2C94301300C775BF /* CatBookListViewModel.swift */,
 			);
 			path = CatBookList;
 			sourceTree = "<group>";
@@ -230,6 +238,15 @@
 			path = Wrapper;
 			sourceTree = "<group>";
 		};
+		483DBC3C2C955A8B00C775BF /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				483DBC3D2C955ACE00C775BF /* LibraryView.swift */,
+				483DBC3F2C955CEF00C775BF /* LibraryViewModel.swift */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -314,12 +331,14 @@
 				483DBC0A2C91723D00C775BF /* ViewModelType.swift in Sources */,
 				483DBC202C92AD5200C775BF /* MyBookRepository.swift in Sources */,
 				483DBC392C94281100C775BF /* ContentView.swift in Sources */,
+				483DBC3E2C955ACE00C775BF /* LibraryView.swift in Sources */,
 				483DBBE02C903AD200C775BF /* CatBookListView.swift in Sources */,
 				483DBBE32C903B3100C775BF /* APIKey.swift in Sources */,
 				483DBBFA2C915A9400C775BF /* Book.swift in Sources */,
 				483DBBF72C9154C500C775BF /* NetworkManager.swift in Sources */,
 				483DBC032C916CC200C775BF /* SearchView.swift in Sources */,
 				483DBC062C916EC400C775BF /* NavigationLazyView.swift in Sources */,
+				483DBC402C955CEF00C775BF /* LibraryViewModel.swift in Sources */,
 				483DBC0D2C91789100C775BF /* AddBookView.swift in Sources */,
 				483DBC082C9170F300C775BF /* SearchViewModel.swift in Sources */,
 				483DBBFE2C9160CF00C775BF /* TargetType.swift in Sources */,
@@ -329,6 +348,7 @@
 				483DBC0F2C917A0E00C775BF /* AddBookViewModel.swift in Sources */,
 				483DBC352C932A1A00C775BF /* ButtonWrapper.swift in Sources */,
 				483DBC2F2C92E32D00C775BF /* String+.swift in Sources */,
+				483DBC3B2C94301300C775BF /* CatBookListViewModel.swift in Sources */,
 				483DBBCB2C90376C00C775BF /* CheakBbangApp.swift in Sources */,
 				483DBC372C93469500C775BF /* AddBookAniView.swift in Sources */,
 				483DBBE92C903D1200C775BF /* BookRouter.swift in Sources */,
