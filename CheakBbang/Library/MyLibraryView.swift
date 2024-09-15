@@ -23,7 +23,7 @@ struct MyLibraryView: View {
                     .tag(LibraryTab.currenltyReading)
                 
                 Color.red
-                    .tag(LibraryTab.Done)
+                    .tag(LibraryTab.done)
                 
                 Color.green
                     .tag(LibraryTab.wantToRead)

@@ -253,8 +253,8 @@
 			children = (
 				483DBC3D2C955ACE00C775BF /* LibraryView.swift */,
 				483DBC3F2C955CEF00C775BF /* LibraryViewModel.swift */,
-				48D09A142C95D316000328E3 /* MyLibraryView.swift */,
 				48D09A162C967D80000328E3 /* AllLibraryView.swift */,
+				48D09A142C95D316000328E3 /* MyLibraryView.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";

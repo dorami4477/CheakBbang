@@ -12,24 +12,48 @@ struct AllLibraryView: View {
     
     var body: some View {
         VStack {
-            sectionView("읽은 책")
-            sectionView("읽고 있는 책")
-            sectionView("읽고 싶은 책")
+            sectionView(.done, color: .orange)
+            sectionView(.currenltyReading, color: .purple)
+            sectionView(.wantToRead, color: .green)
         }
     }
     
-    func sectionView(_ title: String) -> some View {
+    func sectionView(_ type: LibraryTab, color: Color) -> some View {
         VStack {
-            Text(title)
+            HStack(spacing: 5) {
+                Circle()
+                    .fill(color)
+                    .frame(width: 10, height: 10)
+                
+                Text(type.rawValue)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .padding(.horizontal)
+            
             ScrollView(.horizontal) {
                 LazyHStack(spacing: 20) {
-                    ForEach(viewModel.output.bookList, id: \.id) { book in
+                    ForEach(dateBytype(type), id: \.id) { book in
                         bookListRow(book)
                     }
                 }
                 .padding()
             }
         }
+    }
+    
+    func dateBytype(_ type: LibraryTab) -> [MyBook] {
+        var list: [MyBook] = []
+        switch type {
+        case .all:
+            list = viewModel.output.bookList.filter{ $0.status == .ing }
+        case .currenltyReading:
+            list = viewModel.output.bookList.filter{ $0.status == .ing }
+        case .done:
+            list = viewModel.output.bookList.filter{ $0.status == .done }
+        case .wantToRead:
+            list = viewModel.output.bookList.filter{ $0.status == .will }
+        }
+        return list
     }
     
     func bookListRow(_ book: MyBook) -> some View {

@@ -20,6 +20,7 @@ final class CatBookListViewModel: ViewModelType {
     
     init() {
         self.realm = try! Realm()
+        print(realm.configuration.fileURL)
         transform()
     }
 }
