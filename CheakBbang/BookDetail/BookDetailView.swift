@@ -9,15 +9,18 @@ import SwiftUI
 import RealmSwift
 
 struct BookDetailView: View {
-    @ObservedResults(MyBook.self) var bookList
-    @Environment(\.dismiss) var dismiss
+    @StateObject var viewModel = BookDetailViewModel()
+   // @Environment(\.dismiss) var dismiss
     
     var item: MyBook
     
     var body: some View {
-        Button("책삭제") {
-            $bookList.remove(item)
-            dismiss()
+        Button("-책삭제") {
+            viewModel.action(.deleteButtonTap)
+          //  dismiss()
+        }
+        .onAppear{
+            viewModel.action(.viewOnAppear(item: item))
         }
     }
 }
