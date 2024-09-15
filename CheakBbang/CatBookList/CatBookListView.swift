@@ -17,7 +17,7 @@ struct CatBookListView: View {
         NavigationView {
             GeometryReader { geometry in
                 ZStack{
-                    Image("background")
+                    Image(ImageName.background)
                         .resizable()
                         .scaledToFill()
                         .frame(width: geometry.size.width, height: geometry.size.height)
@@ -30,7 +30,7 @@ struct CatBookListView: View {
                                         Spacer(minLength: geometry.size.height / 2)
                                     }
                                     bookListView()
-                                    Image("bottom")
+                                    Image(ImageName.bottom)
                                         .resizable()
                                         .frame(width: 366, height: 128)
                                 }
@@ -105,7 +105,7 @@ struct CatBookListView: View {
             }
             .zIndex(2)
             if isFirst {
-                Image("bookShelf")
+                Image(ImageName.shelf)
                     .resizable()
                     .frame(width: 169, height: 38)
                     .zIndex(1)

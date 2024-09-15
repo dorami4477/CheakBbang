@@ -40,6 +40,7 @@
 		48D09A132C95D209000328E3 /* LibraryTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A122C95D209000328E3 /* LibraryTab.swift */; };
 		48D09A152C95D316000328E3 /* MyLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A142C95D316000328E3 /* MyLibraryView.swift */; };
 		48D09A172C967D80000328E3 /* AllLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A162C967D80000328E3 /* AllLibraryView.swift */; };
+		48D09A192C968163000328E3 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A182C968163000328E3 /* DesignSystem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,7 @@
 		48D09A122C95D209000328E3 /* LibraryTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTab.swift; sourceTree = "<group>"; };
 		48D09A142C95D316000328E3 /* MyLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryView.swift; sourceTree = "<group>"; };
 		48D09A162C967D80000328E3 /* AllLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLibraryView.swift; sourceTree = "<group>"; };
+		48D09A182C968163000328E3 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				483DBC092C91723D00C775BF /* ViewModelType.swift */,
+				48D09A182C968163000328E3 /* DesignSystem.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				483DBC202C92AD5200C775BF /* MyBookRepository.swift in Sources */,
 				483DBC392C94281100C775BF /* ContentView.swift in Sources */,
 				483DBC3E2C955ACE00C775BF /* LibraryView.swift in Sources */,
+				48D09A192C968163000328E3 /* DesignSystem.swift in Sources */,
 				483DBBE02C903AD200C775BF /* CatBookListView.swift in Sources */,
 				483DBBE32C903B3100C775BF /* APIKey.swift in Sources */,
 				48D09A152C95D316000328E3 /* MyLibraryView.swift in Sources */,

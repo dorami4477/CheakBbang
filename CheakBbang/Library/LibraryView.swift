@@ -23,7 +23,7 @@ struct LibraryView: View {
     
     func bookListRow(_ book: MyBook) -> some View {
         HStack(alignment: .top, spacing: 15) {
-            Image("SingleBookCover")
+            Image(ImageName.SingleBookCover)
                 .resizable()
                 .frame(width: 118, height: 146)
                 .overlay(alignment: .top) {
