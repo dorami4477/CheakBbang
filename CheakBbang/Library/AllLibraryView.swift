@@ -58,15 +58,16 @@ struct AllLibraryView: View {
     
     func bookListRow(_ book: MyBook) -> some View {
         HStack(alignment: .top, spacing: 15) {
-            Image(ImageName.SingleBookCover)
-                .resizable()
-                .frame(width: 118, height: 146)
+            ImageWrapper(url: book.cover)
+                .frame(width: 90, height: 135)
+                .clipped()
                 .overlay(alignment: .top) {
-                    ImageWrapper(url: book.cover)
-                        .frame(width: 105, height: 136)
+                    Image(ImageName.SingleBookCover)
+                        .resizable()
+                        .frame(width: 118, height: 146)
                 }
-            
         }
+        .frame(width: 118, height: 146)
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 }

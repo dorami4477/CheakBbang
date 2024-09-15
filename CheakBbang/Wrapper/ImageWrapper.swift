@@ -19,7 +19,7 @@ struct ImageWrapper: View {
             case .success(let image):
                 image
                     .resizable()
-                    .scaledToFit()
+                    .scaledToFill()
                 
             case .failure:
                 Image(systemName: "star")

@@ -12,4 +12,5 @@ enum ImageName {
     static let shelf = "bookShelf"
     static let background = "background"
     static let bottom = "bottom"
+    static let toy = "toy2"
 }

@@ -39,10 +39,6 @@ struct CatBookListView: View {
                                 }
                             }
                             VStack{
-                                //                            Button("추가") {
-                                //                                let newItem = MyBook(itemId: Int.random(in: 1...100000), title: "타이틀입니다아", originalTitle: "타이틀입니다아타이틀입니다아", author: "타이틀입니다아", publisher: "타이틀입니다아", pubDate: "타이틀입니다아", explanation: "타이틀입니다아타이틀입니다아", cover: "타이틀입니다아", isbn13: "타이틀입니다아", rank: 3, page: Int.random(in: 1...500), status: .ing, startDate: Date(), endDate: Date())
-                                //                                //viewModel.$realmBookList.append(newItem)
-                                //                            }
                                 floatingButton()
                             }
                         }
