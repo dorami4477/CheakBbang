@@ -37,6 +37,8 @@
 		483DBC3B2C94301300C775BF /* CatBookListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC3A2C94301300C775BF /* CatBookListViewModel.swift */; };
 		483DBC3E2C955ACE00C775BF /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC3D2C955ACE00C775BF /* LibraryView.swift */; };
 		483DBC402C955CEF00C775BF /* LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC3F2C955CEF00C775BF /* LibraryViewModel.swift */; };
+		48D09A132C95D209000328E3 /* LibraryTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A122C95D209000328E3 /* LibraryTab.swift */; };
+		48D09A152C95D316000328E3 /* MyLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A142C95D316000328E3 /* MyLibraryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +71,8 @@
 		483DBC3A2C94301300C775BF /* CatBookListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBookListViewModel.swift; sourceTree = "<group>"; };
 		483DBC3D2C955ACE00C775BF /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 		483DBC3F2C955CEF00C775BF /* LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewModel.swift; sourceTree = "<group>"; };
+		48D09A122C95D209000328E3 /* LibraryTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTab.swift; sourceTree = "<group>"; };
+		48D09A142C95D316000328E3 /* MyLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				483DBBF92C915A9400C775BF /* Book.swift */,
+				48D09A122C95D209000328E3 /* LibraryTab.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -243,6 +248,7 @@
 			children = (
 				483DBC3D2C955ACE00C775BF /* LibraryView.swift */,
 				483DBC3F2C955CEF00C775BF /* LibraryViewModel.swift */,
+				48D09A142C95D316000328E3 /* MyLibraryView.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -334,7 +340,9 @@
 				483DBC3E2C955ACE00C775BF /* LibraryView.swift in Sources */,
 				483DBBE02C903AD200C775BF /* CatBookListView.swift in Sources */,
 				483DBBE32C903B3100C775BF /* APIKey.swift in Sources */,
+				48D09A152C95D316000328E3 /* MyLibraryView.swift in Sources */,
 				483DBBFA2C915A9400C775BF /* Book.swift in Sources */,
+				48D09A132C95D209000328E3 /* LibraryTab.swift in Sources */,
 				483DBBF72C9154C500C775BF /* NetworkManager.swift in Sources */,
 				483DBC032C916CC200C775BF /* SearchView.swift in Sources */,
 				483DBC062C916EC400C775BF /* NavigationLazyView.swift in Sources */,

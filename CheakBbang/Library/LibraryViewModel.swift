@@ -31,6 +31,7 @@ extension LibraryViewModel {
         var bookList: [MyBook] = []
         var totalPage: String = ""
         var bookCount: Int = 0
+        var readState: String = ""
     }
     
     func transform() {
@@ -60,6 +61,16 @@ extension LibraryViewModel {
         return savedDateString
     }
     
+    func getReadState(_ status: Status) -> String {
+        switch status {
+        case .done:
+            return "Done"
+        case .ing:
+            return "Ing"
+        case .will:
+            return "Wish"
+        }
+    }
 }
 
 // MARK: - Action

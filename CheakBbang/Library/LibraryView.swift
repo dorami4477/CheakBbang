@@ -34,7 +34,6 @@ struct LibraryView: View {
             VStack(alignment: .leading, spacing: 5) {
                 Text(book.title)
                     .bold()
-                    .font(.headline)
                 
                 HStack(spacing: 5) {
                     Image(systemName: "checkmark")
@@ -42,7 +41,7 @@ struct LibraryView: View {
                         .tint(.white)
                         .bold()
                         .frame(width:10, height:10)
-                    Text("Done")
+                    Text("\(viewModel.getReadState(book.status))")
                         .bold()
                         .font(.caption)
                 }
