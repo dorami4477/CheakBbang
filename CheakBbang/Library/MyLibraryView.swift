@@ -16,10 +16,10 @@ struct MyLibraryView: View {
                 .padding([.horizontal, .top], 15)
 
             TabView(selection: $activeTab) {
-                LibraryView(viewModel: LibraryViewModel())
+                AllLibraryView(viewModel: LibraryViewModel())
                     .tag(LibraryTab.all)
                 
-                Color.blue
+                NavigationLazyView(LibraryView(viewModel: LibraryViewModel()))
                     .tag(LibraryTab.currenltyReading)
                 
                 Color.red
@@ -29,7 +29,7 @@ struct MyLibraryView: View {
                     .tag(LibraryTab.wantToRead)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-            .allowsHitTesting(false)
+            //.allowsHitTesting(false)
         }
 
     }

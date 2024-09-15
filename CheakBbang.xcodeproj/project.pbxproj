@@ -39,6 +39,7 @@
 		483DBC402C955CEF00C775BF /* LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC3F2C955CEF00C775BF /* LibraryViewModel.swift */; };
 		48D09A132C95D209000328E3 /* LibraryTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A122C95D209000328E3 /* LibraryTab.swift */; };
 		48D09A152C95D316000328E3 /* MyLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A142C95D316000328E3 /* MyLibraryView.swift */; };
+		48D09A172C967D80000328E3 /* AllLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A162C967D80000328E3 /* AllLibraryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,7 @@
 		483DBC3F2C955CEF00C775BF /* LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewModel.swift; sourceTree = "<group>"; };
 		48D09A122C95D209000328E3 /* LibraryTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTab.swift; sourceTree = "<group>"; };
 		48D09A142C95D316000328E3 /* MyLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryView.swift; sourceTree = "<group>"; };
+		48D09A162C967D80000328E3 /* AllLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLibraryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +251,7 @@
 				483DBC3D2C955ACE00C775BF /* LibraryView.swift */,
 				483DBC3F2C955CEF00C775BF /* LibraryViewModel.swift */,
 				48D09A142C95D316000328E3 /* MyLibraryView.swift */,
+				48D09A162C967D80000328E3 /* AllLibraryView.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				483DBC2F2C92E32D00C775BF /* String+.swift in Sources */,
 				483DBC3B2C94301300C775BF /* CatBookListViewModel.swift in Sources */,
 				483DBBCB2C90376C00C775BF /* CheakBbangApp.swift in Sources */,
+				48D09A172C967D80000328E3 /* AllLibraryView.swift in Sources */,
 				483DBC372C93469500C775BF /* AddBookAniView.swift in Sources */,
 				483DBBE92C903D1200C775BF /* BookRouter.swift in Sources */,
 			);
