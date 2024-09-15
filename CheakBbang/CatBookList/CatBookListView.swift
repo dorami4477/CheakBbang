@@ -12,6 +12,7 @@ import RealmSwift
 struct CatBookListView: View {
     @StateObject var viewModel = CatBookListViewModel()
     @State private var bookHeight: CGFloat = 0
+    //@State private var padding: CGFloat = 0
     
     var body: some View {
         NavigationView {
@@ -26,12 +27,12 @@ struct CatBookListView: View {
                         ZStack(alignment: .bottom) {
                             VStack{
                                 ScrollView(.vertical) {
-                                    let space = geometry.size.height - (geometry.size.width + bookHeight)
+                                    let padding = ( viewModel.output.bookList.count / 5 ) * 50 + ( viewModel.output.bookCount % 5 > 0 ? 50 : 0 )
+                                    let space = geometry.size.height - (geometry.size.width + bookHeight - CGFloat(padding))
                                     if 0 < space {
                                         Spacer(minLength: space)
                                     }
                                     bookListView()
-                                    Text("\(geometry.size.height)-\(geometry.size.width)-\(bookHeight)")
                                     Image(ImageName.bottom)
                                         .resizable()
                                         .frame(width: geometry.size.width, height: geometry.size.width * 0.86)
@@ -49,39 +50,48 @@ struct CatBookListView: View {
                 }
             }
             .onAppear{
-                print("네비게이션 Appear")
                 bookHeight = 0
             }
         }
 
     }
     
+    func getPadding() -> CGFloat{
+        let padding: Int
+        if viewModel.output.bookCount % 5 > 0 {
+            padding = ( viewModel.output.bookList.count / 5 ) * 50 + ( viewModel.output.bookCount % 5 > 0 ? 50 : 0 )
+        } else {
+            padding = ( viewModel.output.bookCount / 5 ) * 50
+        }
+        print(viewModel.output.bookList.count, padding)
+        return CGFloat(padding)
+    }
     
     func bookListView() -> some View {
         LazyVStack {
             ForEach(Array(zip(viewModel.output.bookList.indices, viewModel.output.bookList)), id: \.1.id) { index, item in
-                
                 let alignment = viewModel.isLeadingAlignment(for: index) ? Alignment.leading : Alignment.trailing
                 let padding = viewModel.isLeadingAlignment(for: index) ? Edge.Set.leading : Edge.Set.trailing
                 
                 if viewModel.output.bookCount - 1 == index && index % 5 == 0 {
                     bookRowView(item: item, align: alignment, padding: padding, isFirst: true, isLast: true)
+                        .padding(.bottom, -50)
                     
                 } else if viewModel.output.bookCount - 1 == index && index % 5 != 0 {
                     bookRowView(item: item, align: alignment, padding: padding, isFirst: false, isLast: true)
                     
                 } else if index % 5 == 0 {
                     bookRowView(item: item, align: alignment, padding: padding, isFirst: true, isLast: false)
-                    
+                        .padding(.bottom, -50)
+
                 } else {
                     bookRowView(item: item, align: alignment, padding: padding, isFirst: false, isLast: false)
+                    
                 }
-                
+
             }
             .scaleEffect(y: -1)
         }
-        //.offset(y: 20)
-        //.background(Color.blue)
         .scaleEffect(y: -1)
     }
     
@@ -94,23 +104,26 @@ struct CatBookListView: View {
                     .zIndex(3)
                     .padding(.bottom, isLast ? -20 : 0)
             }
-            ZStack {
-                Image(viewModel.bookImage(item.page))
-                    .resizable()
-                Text(item.title.truncate(length: 10))
-                    .bold()
-                    .font(.caption)
-                    .foregroundStyle(.white)
-                    .transformEffect(CGAffineTransform(1.0, 0.069, 0, 1, 0, 0))
-                    .padding(.leading, 6)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
-            .frame(width: 161, height: viewModel.bookImageHeight(item.page))
-            .padding(.bottom, isFirst ? -23 : 0)
-            .onTapGesture {
-                //viewModel.$realmBookList.remove(item)
+            
+            NavigationLink {
+                NavigationLazyView(BookDetailView(item: item))
+            } label: {
+                ZStack {
+                    Image(viewModel.bookImage(item.page))
+                        .resizable()
+                    Text(item.title.truncate(length: 11))
+                        .bold()
+                        .font(.caption)
+                        .foregroundStyle(.white)
+                        .transformEffect(CGAffineTransform(1.0, 0.069, 0, 1, 0, 0))
+                        .padding(.leading, 6)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .frame(width: 161, height: viewModel.bookImageHeight(item.page))
+                .padding(.bottom, isFirst ? -23 : 0)
             }
             .zIndex(2)
+            
             if isFirst {
                 Image(ImageName.shelf)
                     .resizable()
@@ -124,7 +137,6 @@ struct CatBookListView: View {
         .frame(maxWidth: .infinity, alignment: align)
         .padding(.bottom, -20)
         .onAppear{
-            print("BookRow Appear")
             bookHeight = bookHeight + viewModel.bookImageHeight(item.page)
         }
     }
