@@ -11,7 +11,7 @@ import RealmSwift
 
 struct CatBookListView: View {
     @StateObject var viewModel = CatBookListViewModel()
-    @State private var bookHeight:CGFloat = 0
+    @State private var bookHeight: CGFloat = 0
     
     var body: some View {
         NavigationView {
@@ -26,13 +26,15 @@ struct CatBookListView: View {
                         ZStack(alignment: .bottom) {
                             VStack{
                                 ScrollView(.vertical) {
-                                    if viewModel.output.bookCount < 15 {
-                                        Spacer(minLength: geometry.size.height / 2)
+                                    let space = geometry.size.height - (geometry.size.width + bookHeight)
+                                    if 0 < space {
+                                        Spacer(minLength: space)
                                     }
                                     bookListView()
+                                    Text("\(geometry.size.height)-\(geometry.size.width)-\(bookHeight)")
                                     Image(ImageName.bottom)
                                         .resizable()
-                                        .frame(width: 366, height: 128)
+                                        .frame(width: geometry.size.width, height: geometry.size.width * 0.86)
                                 }
                             }
                             VStack{
@@ -46,7 +48,12 @@ struct CatBookListView: View {
                     }
                 }
             }
+            .onAppear{
+                print("네비게이션 Appear")
+                bookHeight = 0
+            }
         }
+
     }
     
     
@@ -117,8 +124,8 @@ struct CatBookListView: View {
         .frame(maxWidth: .infinity, alignment: align)
         .padding(.bottom, -20)
         .onAppear{
+            print("BookRow Appear")
             bookHeight = bookHeight + viewModel.bookImageHeight(item.page)
-            print(bookHeight)
         }
     }
         
