@@ -11,7 +11,7 @@ struct AllLibraryView: View {
     @StateObject var viewModel: LibraryViewModel
     
     var body: some View {
-        VStack {
+        VStack(spacing: 30) {
             sectionView(.done, color: .orange)
             sectionView(.currenltyReading, color: .purple)
             sectionView(.wantToRead, color: .green)
@@ -19,26 +19,28 @@ struct AllLibraryView: View {
     }
     
     func sectionView(_ type: LibraryTab, color: Color) -> some View {
-        VStack {
+        VStack(spacing: 0) {
             HStack(spacing: 5) {
                 Circle()
                     .fill(color)
                     .frame(width: 10, height: 10)
                 
                 Text(type.rawValue)
+                    .font(.subheadline)
+                    .bold()
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             .padding(.horizontal)
-            
             ScrollView(.horizontal) {
-                LazyHStack(spacing: 20) {
+                LazyHStack(spacing: 45) {
                     ForEach(dateBytype(type), id: \.id) { book in
-                        bookListRow(book)
+                        BookCover(coverUrl: book.cover)
                     }
                 }
-                .padding()
+                .padding(.leading, 30)
             }
         }
+        
     }
     
     func dateBytype(_ type: LibraryTab) -> [MyBook] {
@@ -56,20 +58,6 @@ struct AllLibraryView: View {
         return list
     }
     
-    func bookListRow(_ book: MyBook) -> some View {
-        HStack(alignment: .top, spacing: 15) {
-            ImageWrapper(url: book.cover)
-                .frame(width: 90, height: 135)
-                .clipped()
-                .overlay(alignment: .top) {
-                    Image(ImageName.SingleBookCover)
-                        .resizable()
-                        .frame(width: 118, height: 146)
-                }
-        }
-        .frame(width: 118, height: 146)
-        .frame(maxWidth: .infinity, alignment: .leading)
-    }
 }
 
 #Preview {

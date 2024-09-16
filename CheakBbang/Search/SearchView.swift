@@ -10,39 +10,76 @@ import SwiftUI
 struct SearchView: View {
     @State private var searchTerm = ""
     @StateObject var viewModel: SearchViewModel
-    
+
     var body: some View {
-        ScrollView{
-            LazyVStack {
-                ForEach(viewModel.output.bookList.item, id: \.itemID) { item in
-                    BookListRow(item: item)
+        VStack{
+            SearchBarView(searchText: $searchTerm, viewModel: viewModel)
+                .animation(.easeInOut, value: searchTerm)
+            
+            if !searchTerm.isEmpty {
+                ScrollView{
+                    LazyVStack {
+                        ForEach(viewModel.output.bookList.item, id: \.itemID) { item in
+                            BookListRow(item: item)
+                        }
+                    }
                 }
+
             }
-        }
-        .searchable(text: $searchTerm, prompt: "책 제목을 검색해보세요!")
-        .onSubmit(of: .search) {
-            viewModel.action(.searchOnSubmit(search: searchTerm))
         }
     }
 }
 
-struct BookListRow: View {
-    let item: Item
+struct SearchBarView: View {
+    @Binding var searchText: String
+    @StateObject var viewModel: SearchViewModel
     
     var body: some View {
         HStack {
-            AsyncImage(url: URL(string:item.cover)!)
-            Text("\(item.title)")
-            NavigationLink {
-                NavigationLazyView(AddBookView(isbn13: item.isbn13, viewModel: AddBookViewModel()))
-            } label: {
-                Text("추가하기")
-            }
-
+            Image(systemName: "magnifyingglass")
+                .foregroundColor(
+                    searchText.isEmpty ?
+                    Color.red : Color.green)
+            TextField("책 제목을 검색해보세요!", text: $searchText)
+                .autocorrectionDisabled(true)
+                .foregroundColor(Color.green)
+                .overlay(
+                    Image(systemName: "xmark.circle.fill")
+                        .padding()
+                        .offset(x: 10)
+                        .foregroundColor(Color.green)
+                        .opacity(searchText.isEmpty ? 0.0 : 1.0)
+                        .onTapGesture {
+                            searchText = ""
+                            UIApplication.shared.endEditing()
+                        }
+                    , alignment: .trailing
+                )
+                .onSubmit {
+                    print($searchText.wrappedValue)
+                    viewModel.action(.searchOnSubmit(search: $searchText.wrappedValue))
+                }
         }
+        .font(.headline)
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 25)
+                .fill(Color.gray)
+                .shadow(
+                    color: Color.green.opacity(0.5),
+                    radius: 10, x: 0, y: 0)
+        )
+        .padding()
     }
 }
 
 #Preview {
     SearchView(viewModel: SearchViewModel())
+}
+
+
+extension UIApplication {
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
 }

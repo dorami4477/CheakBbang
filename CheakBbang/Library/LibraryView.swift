@@ -9,11 +9,12 @@ import SwiftUI
 
 struct LibraryView: View {
     @StateObject var viewModel: LibraryViewModel
+    var status: Status
     
     var body: some View {
         ScrollView {
             LazyVStack(spacing: 20) {
-                ForEach(viewModel.output.bookList.sorted(by: { $0.startDate > $1.startDate }), id: \.id) { book in
+                ForEach(viewModel.output.bookList.filter{ $0.status == status }, id: \.id) { book in
                     bookListRow(book)
                 }
             }
@@ -23,15 +24,7 @@ struct LibraryView: View {
     
     func bookListRow(_ book: MyBook) -> some View {
         HStack(alignment: .top, spacing: 15) {
-            ImageWrapper(url: book.cover)
-                .frame(width: 90, height: 135)
-                .clipped()
-                .overlay(alignment: .top) {
-                    Image(ImageName.SingleBookCover)
-                        .resizable()
-                        .frame(width: 118, height: 146)
-                }
-                .frame(width: 118, height: 146)
+            BookCover(coverUrl: book.cover)
             
             VStack(alignment: .leading, spacing: 5) {
                 Text(book.title)

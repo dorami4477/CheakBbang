@@ -10,8 +10,8 @@ import Combine
 import RealmSwift
 
 final class CatBookListViewModel: ViewModelType {
-    //@ObservedResults(MyBook.self) var realmBookList
-    private var realm: Realm
+    @ObservedResults(MyBook.self) var realmBookList
+    //private var realm: Realm
     //@Published var bookList: [MyBook] = []
     
     var cancellables = Set<AnyCancellable>()
@@ -19,7 +19,7 @@ final class CatBookListViewModel: ViewModelType {
     @Published var output = Output()
     
     init() {
-        self.realm = try! Realm()
+       // self.realm = try! Realm()
        //print(realm.configuration.fileURL)
         transform()
     }
@@ -35,11 +35,14 @@ extension CatBookListViewModel {
         var bookList: [MyBook] = []
         var totalPage: String = ""
         var bookCount: Int = 0
+        var groupBottomPadding: CGFloat = 0
     }
     
     func transform() {
-        let books = realm.objects(MyBook.self)
-        books.collectionPublisher
+        //let books = realm.objects(MyBook.self)
+        //books.collectionPublisher
+        
+        realmBookList.collectionPublisher
             .map { Array($0) }
             .sink(receiveCompletion: { completion in
                 print(completion)
@@ -55,6 +58,7 @@ extension CatBookListViewModel {
         let totalPage = output.bookList.reduce(0) { $0 + $1.page }
         self.output.totalPage = totalPage.formatted()
         self.output.bookCount = output.bookList.count
+        self.output.groupBottomPadding = groupBottomPadding()
     }
     
     func dataString(date: Date) -> String {
@@ -103,6 +107,11 @@ extension CatBookListViewModel {
         default:
             return "book_\(randomColor)_01"
         }
+    }
+    
+    func groupBottomPadding() -> CGFloat{
+        let padding = (output.bookList.count / 5 ) * 50 + ( output.bookCount % 5 > 0 ? 50 : 0 )
+        return CGFloat(padding)
     }
 }
 
