@@ -11,10 +11,26 @@ struct SearchView: View {
     @State private var searchTerm = ""
     @StateObject var viewModel: SearchViewModel
     @FocusState private var focusField: Bool
+    @State var isAnimating: Bool = false
 
     var body: some View {
         VStack{
             SearchBarView(searchText: $searchTerm, viewModel: viewModel, focus: _focusField)
+                .background {
+                    GeometryReader { geometry in
+                        if viewModel.output.bookList.totalResults == 0 {
+                            Image(ImageName.searchBack)
+                                .resizable()
+                                .frame(width: geometry.size.width, height: geometry.size.width * 1.18)
+                                .offset(x: isAnimating ? 0 : geometry.size.width, y:  isAnimating ? -40 : 260)
+                        }
+                    }
+                    .onAppear {
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            isAnimating = true
+                        }
+                    }
+                }
             
             if !searchTerm.isEmpty || focusField {
                 ScrollView{
@@ -24,11 +40,18 @@ struct SearchView: View {
                         }
                     }
                 }
-
+                .onAppear{
+                    withAnimation(.easeInOut(duration: 0.5)) {
+                        isAnimating = false
+                    }
+                }
             }
+            
         }
         .animation(.easeInOut, value: searchTerm)
         .animation(.easeInOut, value: focusField)
+
+        
     }
 }
 
@@ -42,16 +65,16 @@ struct SearchBarView: View {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(
                     searchText.isEmpty ?
-                    Color.red : Color.green)
+                    Color.gray : Color.black)
             TextField("책 제목을 검색해보세요!", text: $searchText)
                 .autocorrectionDisabled(true)
-                .foregroundColor(Color.green)
+                .foregroundColor(Color.black)
                 .focused($focus, equals: true)
                 .overlay(
                     Image(systemName: "xmark.circle.fill")
                         .padding()
                         .offset(x: 10)
-                        .foregroundColor(Color.green)
+                        .foregroundColor(Color.black)
                         .opacity(searchText.isEmpty ? 0.0 : 1.0)
                         .onTapGesture {
                             searchText = ""
@@ -68,12 +91,13 @@ struct SearchBarView: View {
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 25)
-                .fill(Color.gray)
-                .shadow(
-                    color: Color.green.opacity(0.5),
-                    radius: 10, x: 0, y: 0)
+                .fill(.white)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 25)
+                        .stroke(Color.black, lineWidth: 4)
+                )
         )
-        .padding()
+        .padding(.horizontal)
     }
 }
 

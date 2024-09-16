@@ -27,7 +27,7 @@ extension SearchViewModel {
     }
     
     struct Output {
-        var bookList: Book = Book(version: "", title: "", link: "", pubDate: "", totalResults: 1, startIndex: 1, itemsPerPage: 1, query: "", searchCategoryID: 1, searchCategoryName: "", item: [])
+        var bookList: Book = Book(version: "", title: "", link: "", pubDate: "", totalResults: 0, startIndex: 1, itemsPerPage: 1, query: "", searchCategoryID: 1, searchCategoryName: "", item: [])
     }
     
     func transform() {

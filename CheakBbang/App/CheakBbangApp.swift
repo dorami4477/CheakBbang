@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 @main
 struct CheakBbangApp: App {

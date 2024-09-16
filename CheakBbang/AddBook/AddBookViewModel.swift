@@ -11,7 +11,6 @@ import RealmSwift
 
 final class AddBookViewModel: ViewModelType {
     @ObservedResults(MyBook.self) var bookList
-    
     var cancellables = Set<AnyCancellable>()
     var input = Input()
     @Published var output = Output()
@@ -47,7 +46,6 @@ extension AddBookViewModel {
             .addButtonTap
             .sink { [weak self] value in
                 self?.$bookList.append(value)
-                print("저장")
             }
             .store(in: &cancellables)
     }

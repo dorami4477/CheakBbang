@@ -36,6 +36,7 @@ extension CatBookListViewModel {
         var totalPage: String = ""
         var bookCount: Int = 0
         var groupBottomPadding: CGFloat = 0
+        var totalBookHeight: CGFloat = 0
     }
     
     func transform() {
@@ -59,6 +60,7 @@ extension CatBookListViewModel {
         self.output.totalPage = totalPage.formatted()
         self.output.bookCount = output.bookList.count
         self.output.groupBottomPadding = groupBottomPadding()
+        self.output.totalBookHeight = getTotalBookHeight()
     }
     
     func dataString(date: Date) -> String {
@@ -90,6 +92,15 @@ extension CatBookListViewModel {
         }
     }
     
+    func getTotalBookHeight() -> CGFloat {
+        var height: CGFloat = 0
+        output.bookList.forEach {
+            height += bookImageHeight($0.page)
+            print(height)
+        }
+        return height
+    }
+    
     func bookImage(_ page: Int) -> String {
         let randomColor = Int.random(in: 1...4)
         
@@ -110,7 +121,7 @@ extension CatBookListViewModel {
     }
     
     func groupBottomPadding() -> CGFloat{
-        let padding = (output.bookList.count / 5 ) * 50 + ( output.bookCount % 5 > 0 ? 50 : 0 )
+        let padding = (output.bookList.count / 5 ) * 35 + ( output.bookCount % 5 > 0 ? 35 : 0 )
         return CGFloat(padding)
     }
 }

@@ -10,7 +10,6 @@ import RealmSwift
 
 struct CatBookListView: View {
     @StateObject var viewModel = CatBookListViewModel()
-    @State private var bookHeight: CGFloat = 0
     //@Environment(\.safeAreaInsets) private var safeAreaInsets
     
     var body: some View {
@@ -28,8 +27,9 @@ struct CatBookListView: View {
                                 ScrollView(.vertical) {
                                     let safeAreaInsets = geometry.safeAreaInsets
                                     let heightWithoutSafeArea = geometry.size.height - safeAreaInsets.top - safeAreaInsets.bottom
-                                    let itemHeight = geometry.size.width * 0.86 + bookHeight - viewModel.output.groupBottomPadding - CGFloat((viewModel.output.bookCount - viewModel.output.bookCount / 5) * 20)
+                                    let itemHeight = geometry.size.width * 0.86 + viewModel.output.totalBookHeight - viewModel.output.groupBottomPadding - CGFloat((viewModel.output.bookCount - viewModel.output.bookCount / 5) * 15)
                                     let space = heightWithoutSafeArea - itemHeight
+                                    //Text("\(CGFloat((viewModel.output.bookCount - viewModel.output.bookCount / 5) * 10))")
                                     if 0 < space {
                                         Spacer(minLength: space)
                                     }
@@ -46,9 +46,6 @@ struct CatBookListView: View {
                     }
                 }
             }
-            .onAppear{
-                bookHeight = 0
-            }
         }
 
     }
@@ -59,19 +56,13 @@ struct CatBookListView: View {
                 let alignment = viewModel.isLeadingAlignment(for: index) ? Alignment.leading : Alignment.trailing
                 let padding = viewModel.isLeadingAlignment(for: index) ? Edge.Set.leading : Edge.Set.trailing
                 
-                if viewModel.output.bookCount - 1 == index && index % 5 == 0 {
-                    bookRowView(item: item, align: alignment, padding: padding, isFirst: true, isLast: true)
-                        .padding(.bottom, -50)
+                if viewModel.output.bookCount - 1 == index {
+                    bookRowView(item: item, align: alignment, padding: padding, isFirst: index % 5 == 0, isLast: true)
+                        .padding(.bottom, index % 5 == 0 ? -50 : 0)
                     
-                } else if viewModel.output.bookCount - 1 == index && index % 5 != 0 {
-                    bookRowView(item: item, align: alignment, padding: padding, isFirst: false, isLast: true)
-                    
-                } else if index % 5 == 0 {
-                    bookRowView(item: item, align: alignment, padding: padding, isFirst: true, isLast: false)
-                        .padding(.bottom, -50)
-
                 } else {
-                    bookRowView(item: item, align: alignment, padding: padding, isFirst: false, isLast: false)
+                    bookRowView(item: item, align: alignment, padding: padding, isFirst: index % 5 == 0, isLast: false)
+                        .padding(.bottom, index % 5 == 0 ? -50 : 0)
                     
                 }
 
@@ -116,17 +107,12 @@ struct CatBookListView: View {
                     .frame(width: 169, height: 38)
                     .zIndex(1)
             }
-            
-
 
         }
         .padding(padding, 53)
         .frame(width: 169)
         .frame(maxWidth: .infinity, alignment: align)
         .padding(.bottom, -20)
-        .onAppear{
-            bookHeight = bookHeight + viewModel.bookImageHeight(item.page)
-        }
     }
         
     func infoView() -> some View {
