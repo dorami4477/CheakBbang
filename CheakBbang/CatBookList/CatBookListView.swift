@@ -21,19 +21,18 @@ struct CatBookListView: View {
                         .resizable()
                         .scaledToFill()
                         .frame(width: geometry.size.width, height: geometry.size.height)
-                    VStack{
+                    VStack(spacing: 5) {
                         infoView()
                         ZStack(alignment: .bottom) {
                             VStack{
                                 ScrollView(.vertical) {
-                                    let padding = ( viewModel.output.bookList.count / 5 ) * 50 + ( viewModel.output.bookCount % 5 > 0 ? 50 : 0 )
                                     let safeAreaInsets = geometry.safeAreaInsets
                                     let heightWithoutSafeArea = geometry.size.height - safeAreaInsets.top - safeAreaInsets.bottom
-                                    let space = heightWithoutSafeArea - (geometry.size.width * 0.86 + bookHeight - CGFloat(padding))
+                                    let itemHeight = geometry.size.width * 0.86 + bookHeight - viewModel.output.groupBottomPadding - CGFloat((viewModel.output.bookCount - viewModel.output.bookCount / 5) * 20)
+                                    let space = heightWithoutSafeArea - itemHeight
                                     if 0 < space {
                                         Spacer(minLength: space)
                                     }
-                                    Text("\(heightWithoutSafeArea)")
                                     bookListView()
                                     Image(ImageName.bottom)
                                         .resizable()
