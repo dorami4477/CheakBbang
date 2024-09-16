@@ -10,13 +10,13 @@ import SwiftUI
 struct SearchView: View {
     @State private var searchTerm = ""
     @StateObject var viewModel: SearchViewModel
+    @FocusState private var focusField: Bool
 
     var body: some View {
         VStack{
-            SearchBarView(searchText: $searchTerm, viewModel: viewModel)
-                .animation(.easeInOut, value: searchTerm)
+            SearchBarView(searchText: $searchTerm, viewModel: viewModel, focus: _focusField)
             
-            if !searchTerm.isEmpty {
+            if !searchTerm.isEmpty || focusField {
                 ScrollView{
                     LazyVStack {
                         ForEach(viewModel.output.bookList.item, id: \.itemID) { item in
@@ -27,12 +27,15 @@ struct SearchView: View {
 
             }
         }
+        .animation(.easeInOut, value: searchTerm)
+        .animation(.easeInOut, value: focusField)
     }
 }
 
 struct SearchBarView: View {
     @Binding var searchText: String
     @StateObject var viewModel: SearchViewModel
+    @FocusState var focus: Bool
     
     var body: some View {
         HStack {
@@ -43,6 +46,7 @@ struct SearchBarView: View {
             TextField("책 제목을 검색해보세요!", text: $searchText)
                 .autocorrectionDisabled(true)
                 .foregroundColor(Color.green)
+                .focused($focus, equals: true)
                 .overlay(
                     Image(systemName: "xmark.circle.fill")
                         .padding()
