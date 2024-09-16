@@ -8,11 +8,10 @@
 import SwiftUI
 import RealmSwift
 
-
 struct CatBookListView: View {
     @StateObject var viewModel = CatBookListViewModel()
     @State private var bookHeight: CGFloat = 0
-    //@State private var padding: CGFloat = 0
+    //@Environment(\.safeAreaInsets) private var safeAreaInsets
     
     var body: some View {
         NavigationView {
@@ -28,10 +27,13 @@ struct CatBookListView: View {
                             VStack{
                                 ScrollView(.vertical) {
                                     let padding = ( viewModel.output.bookList.count / 5 ) * 50 + ( viewModel.output.bookCount % 5 > 0 ? 50 : 0 )
-                                    let space = geometry.size.height - (geometry.size.width + bookHeight - CGFloat(padding))
+                                    let safeAreaInsets = geometry.safeAreaInsets
+                                    let heightWithoutSafeArea = geometry.size.height - safeAreaInsets.top - safeAreaInsets.bottom
+                                    let space = heightWithoutSafeArea - (geometry.size.width * 0.86 + bookHeight - CGFloat(padding))
                                     if 0 < space {
                                         Spacer(minLength: space)
                                     }
+                                    Text("\(heightWithoutSafeArea)")
                                     bookListView()
                                     Image(ImageName.bottom)
                                         .resizable()
@@ -50,17 +52,6 @@ struct CatBookListView: View {
             }
         }
 
-    }
-    
-    func getPadding() -> CGFloat{
-        let padding: Int
-        if viewModel.output.bookCount % 5 > 0 {
-            padding = ( viewModel.output.bookList.count / 5 ) * 50 + ( viewModel.output.bookCount % 5 > 0 ? 50 : 0 )
-        } else {
-            padding = ( viewModel.output.bookCount / 5 ) * 50
-        }
-        print(viewModel.output.bookList.count, padding)
-        return CGFloat(padding)
     }
     
     func bookListView() -> some View {
@@ -120,12 +111,14 @@ struct CatBookListView: View {
             }
             .zIndex(2)
             
-            if isFirst {
+            if isFirst { 
                 Image(ImageName.shelf)
                     .resizable()
                     .frame(width: 169, height: 38)
                     .zIndex(1)
             }
+            
+
 
         }
         .padding(padding, 53)
@@ -181,3 +174,5 @@ struct floatingButton: View {
         }
     }
 }
+
+
