@@ -11,7 +11,7 @@ struct ImageWrapper: View {
     let url:String
     
     var body: some View {
-        AsyncImage(url: URL(string: url)){ image in
+        AsyncImage(url: URL(string: url)) { image in
             switch image {
             case .empty:
                 Image(systemName: "star")
@@ -29,8 +29,4 @@ struct ImageWrapper: View {
             }
         }
     }
-}
-
-#Preview {
-    ImageWrapper(url: "https://image.aladin.co.kr/product/18/70/coversum/8973372122_1.gif")
 }

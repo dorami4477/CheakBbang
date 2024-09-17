@@ -24,7 +24,7 @@ struct LibraryView: View {
     
     func bookListRow(_ book: MyBook) -> some View {
         HStack(alignment: .top, spacing: 15) {
-            BookCover(coverUrl: book.cover)
+            BookCover(coverUrl: book.cover, size: CGSize(width: 118, height: 146))
             
             VStack(alignment: .leading, spacing: 5) {
                 Text(book.title)
@@ -42,14 +42,14 @@ struct LibraryView: View {
                 }
                 .padding(.horizontal, 8)
                 .padding(.vertical, 2)
-                .background(Color.orange)
+                .background(.accent)
                 .foregroundColor(.white)
                 .cornerRadius(10)
                 
                 HStack(spacing: 0) {
                     ForEach(0..<5) { index in
                         Image(systemName: index < book.rank ? "heart.fill" : "heart")
-                            .foregroundColor(index < book.rank ? .red : .gray)
+                            .foregroundColor(index < book.rank ? .accent : .gray)
                     }
                 }
                 

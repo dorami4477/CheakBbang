@@ -15,15 +15,10 @@ struct ContentView: View {
                     Image(systemName: "1.square.fill")
                     Text("First")
                 }
-            NavigationLazyView(SearchView(viewModel: SearchViewModel()))
+            NavigationLazyView(MyLibraryView())
                 .tabItem {
                     Image(systemName: "2.square.fill")
                     Text("Second")
-                }
-            NavigationLazyView(MyLibraryView())
-                .tabItem {
-                    Image(systemName: "3.square.fill")
-                    Text("third")
                 }
         }
     }

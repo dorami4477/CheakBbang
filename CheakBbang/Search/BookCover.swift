@@ -9,17 +9,18 @@ import SwiftUI
 
 struct BookCover: View {
     var coverUrl: String
+    var size: CGSize
     
     var body: some View {
         ImageWrapper(url: coverUrl)
-            .frame(width: 90, height: 135)
+            .frame(width: size.width * 0.77, height: size.width * 1.15)
             .clipped()
             .overlay(alignment: .top) {
                 Image(ImageName.SingleBookCover)
                     .resizable()
-                    .frame(width: 118, height: 146)
+                    .frame(width: size.width, height: size.height)
             }
-            .frame(width: 118, height: 146)
+            .frame(width: size.width, height: size.height)
     }
 }
 

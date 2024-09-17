@@ -34,7 +34,7 @@ struct AllLibraryView: View {
             ScrollView(.horizontal) {
                 LazyHStack(spacing: 45) {
                     ForEach(dateBytype(type), id: \.id) { book in
-                        BookCover(coverUrl: book.cover)
+                        BookCover(coverUrl: book.cover, size: CGSize(width: 118, height: 146))
                     }
                 }
                 .padding(.leading, 30)

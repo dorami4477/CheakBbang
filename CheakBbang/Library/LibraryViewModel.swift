@@ -10,13 +10,14 @@ import Combine
 import RealmSwift
 
 final class LibraryViewModel: ViewModelType {
-    private var realm: Realm
+    @ObservedResults(MyBook.self) var realmBookList
+   // private var realm: Realm
     var cancellables = Set<AnyCancellable>()
     var input = Input()
     @Published var output = Output()
     
     init() {
-        self.realm = try! Realm()
+       // self.realm = try! Realm()
         transform()
     }
 }
@@ -35,8 +36,9 @@ extension LibraryViewModel {
     }
     
     func transform() {
-        let books = realm.objects(MyBook.self)
-        books.collectionPublisher
+//        let books = realm.objects(MyBook.self)
+//        books.collectionPublisher
+        realmBookList.collectionPublisher
             .map { Array($0) }
             .sink(receiveCompletion: { completion in
                 print(completion)
