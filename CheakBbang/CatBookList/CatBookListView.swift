@@ -13,41 +13,38 @@ struct CatBookListView: View {
     //@Environment(\.safeAreaInsets) private var safeAreaInsets
     
     var body: some View {
-        NavigationView {
-            GeometryReader { geometry in
-                ZStack{
-                    Image(ImageName.background)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: geometry.size.width, height: geometry.size.height)
-                    VStack(spacing: 5) {
-                        infoView()
-                        ZStack(alignment: .bottom) {
-                            VStack{
-                                ScrollView(.vertical) {
-                                    let safeAreaInsets = geometry.safeAreaInsets
-                                    let heightWithoutSafeArea = geometry.size.height - safeAreaInsets.top - safeAreaInsets.bottom
-                                    let itemHeight = geometry.size.width * 0.86 + viewModel.output.totalBookHeight - viewModel.output.groupBottomPadding - CGFloat((viewModel.output.bookCount - viewModel.output.bookCount / 5) * 15)
-                                    let space = heightWithoutSafeArea - itemHeight
-                                    //Text("\(CGFloat((viewModel.output.bookCount - viewModel.output.bookCount / 5) * 10))")
-                                    if 0 < space {
-                                        Spacer(minLength: space)
-                                    }
-                                    bookListView()
-                                    Image(ImageName.bottom)
-                                        .resizable()
-                                        .frame(width: geometry.size.width, height: geometry.size.width * 0.86)
+        GeometryReader { geometry in
+            ZStack{
+                Image(ImageName.background)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                VStack(spacing: 5) {
+                    infoView()
+                    ZStack(alignment: .bottom) {
+                        VStack{
+                            ScrollView(.vertical) {
+                                let safeAreaInsets = geometry.safeAreaInsets
+                                let heightWithoutSafeArea = geometry.size.height - safeAreaInsets.top - safeAreaInsets.bottom
+                                let itemHeight = geometry.size.width * 0.86 + viewModel.output.totalBookHeight - viewModel.output.groupBottomPadding - CGFloat((viewModel.output.bookCount - viewModel.output.bookCount / 5) * 15)
+                                let space = heightWithoutSafeArea - itemHeight
+                                //Text("\(CGFloat((viewModel.output.bookCount - viewModel.output.bookCount / 5) * 10))")
+                                if 0 < space {
+                                    Spacer(minLength: space)
                                 }
+                                bookListView()
+                                Image(ImageName.bottom)
+                                    .resizable()
+                                    .frame(width: geometry.size.width, height: geometry.size.width * 0.86)
                             }
-                            VStack{
-                                floatingButton()
-                            }
+                        }
+                        VStack{
+                            floatingButton()
                         }
                     }
                 }
             }
         }
-
     }
     
     func bookListView() -> some View {

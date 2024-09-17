@@ -14,4 +14,6 @@ enum ImageName {
     static let bottom = "bottom"
     static let toy = "toy2"
     static let searchBack = "searchBack"
+    static let edit = "icon_edit"
+    static let trash = "icon_trash"
 }

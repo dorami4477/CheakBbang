@@ -16,22 +16,7 @@ struct BookDetailView: View {
     var body: some View {
         ScrollView {
             VStack {
-                BookCover(coverUrl: item.cover, size: CGSize(width: 170, height: 209.1))
-                    .padding(.bottom, 20)
-                
-                Text(item.title)
-                    .frame(maxWidth: .infinity)
-                    .bold()
-                    .font(.title3)
-                    .multilineTextAlignment(.center)
-                
-                
-                
-                Text(item.originalTitle)
-                    .bold()
-                    .font(.title3)
-                    .multilineTextAlignment(.center)
-                    .frame(maxWidth: .infinity)
+                BookDetailTopView(coverUrl: item.cover, title: item.title, ogTitle: item.originalTitle)
                 
                 Divider()
                     .padding(.vertical)
@@ -83,49 +68,7 @@ struct BookDetailView: View {
                 Divider()
                     .padding(.vertical)
                 
-                VStack(alignment: .leading, spacing: 8) {
-                    HStack(alignment: .top) {
-                        Text("작가")
-                            .fontWeight(.medium)
-                            .foregroundStyle(.gray)
-                            .frame(maxWidth: 80, alignment: .topLeading)
-                        Text(item.author)
-                    }
-                    
-                    HStack(alignment: .top) {
-                        Text("출판사")
-                            .fontWeight(.medium)
-                            .foregroundStyle(.gray)
-                            .frame(maxWidth: 80, alignment: .topLeading)
-                        Text(item.publisher)
-                    }
-                    
-                    HStack(alignment: .top) {
-                        Text("출판일")
-                            .fontWeight(.medium)
-                            .foregroundStyle(.gray)
-                            .frame(maxWidth: 80, alignment: .topLeading)
-                        Text(item.pubDate)
-                    }
-                    
-                    HStack(alignment: .top) {
-                        Text("페이지수")
-                            .fontWeight(.medium)
-                            .foregroundStyle(.gray)
-                            .frame(maxWidth: 80, alignment: .topLeading)
-                        Text("\(item.page)")
-                    }
-                    
-                    HStack(alignment: .top) {
-                        Text("설명글")
-                            .fontWeight(.medium)
-                            .foregroundStyle(.gray)
-                            .frame(maxWidth: 80, alignment: .topLeading)
-                        Text(item.explanation)
-                            .lineLimit(nil)
-                    }
-                }
-                .font(.body)
+                BookDetailBottomView(item: item)
                 
                 Spacer()
             }
@@ -133,13 +76,13 @@ struct BookDetailView: View {
         }
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
-                Image("icon_edit")
+                Image(ImageName.edit)
                     .resizable()
                     .frame(width: 24, height: 24)
                     .wrapToButton {
                         viewModel.action(.deleteButtonTap)
                     }
-                Image("icon_trach")
+                Image(ImageName.trash)
                     .resizable()
                     .frame(width: 24, height: 24)
                     .wrapToButton {
@@ -153,6 +96,8 @@ struct BookDetailView: View {
             viewModel.action(.viewOnAppear(item: item))
         }
     }
+    
+    
 }
 
 struct QuoteView: View {
@@ -187,5 +132,57 @@ struct QuoteView: View {
             RoundedRectangle(cornerRadius: 20)
                 .stroke(Color.orange, lineWidth: 3)
         )
+    }
+}
+
+struct BookDetailTopView: View {
+
+    let coverUrl: String
+    let title: String
+    let ogTitle: String
+    
+    var body: some View {
+        VStack {
+            BookCover(coverUrl: coverUrl, size: CGSize(width: 170, height: 209.1))
+                .padding(.bottom, 20)
+            
+            Text(title)
+                .frame(maxWidth: .infinity)
+                .bold()
+                .font(.title3)
+                .multilineTextAlignment(.center)
+            
+            Text(ogTitle)
+                .bold()
+                .font(.title3)
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity)
+        }
+    }
+}
+
+struct BookDetailBottomView: View {
+    let item: MyBook
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            rowView("작가", content: item.author)
+            rowView("출판사", content: item.publisher)
+            rowView("출판일", content: item.pubDate)
+            rowView("페이지수", content: "\(item.page)")
+            rowView("설명글", content: item.explanation)
+        }
+        .font(.body)
+    }
+    
+    func rowView(_ title: String, content: String) -> some View {
+        HStack(alignment: .top) {
+            Text(title)
+                .fontWeight(.medium)
+                .foregroundStyle(.gray)
+                .frame(maxWidth: 80, alignment: .topLeading)
+            Text(content)
+                .lineLimit(nil)
+        }
     }
 }

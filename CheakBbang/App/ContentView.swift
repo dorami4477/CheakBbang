@@ -9,17 +9,19 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        TabView {
-            CatBookListView()
-                .tabItem {
-                    Image(systemName: "1.square.fill")
-                    Text("First")
-                }
-            NavigationLazyView(MyLibraryView())
-                .tabItem {
-                    Image(systemName: "2.square.fill")
-                    Text("Second")
-                }
+        NavigationView {
+            TabView {
+                CatBookListView()
+                    .tabItem {
+                        Image(systemName: "1.square.fill")
+                        Text("First")
+                    }
+                NavigationLazyView(MyLibraryView())
+                    .tabItem {
+                        Image(systemName: "2.square.fill")
+                        Text("Second")
+                    }
+            }
         }
     }
 }
