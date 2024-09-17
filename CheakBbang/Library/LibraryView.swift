@@ -53,25 +53,20 @@ struct LibraryView: View {
                     }
                 }
                 
-                HStack(spacing: 0) {
-                    Text(dataString(book.startDate) + " ~ ")
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                    Text(dataString(book.endDate))
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                }
+                Text("\(book.startDate.dateString()) - \(book.endDate.dateString())")
+                    .font(.caption)
+                    .foregroundColor(.gray)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
     
-    func dataString(_ date: Date) -> String {
-        let myFormatter = DateFormatter()
-        myFormatter.dateFormat = "yyyy.MM.dd"
-        let savedDateString = myFormatter.string(from: date)
-        return savedDateString
-    }
+//    func dataString(_ date: Date) -> String {
+//        let myFormatter = DateFormatter()
+//        myFormatter.dateFormat = "yyyy.MM.dd"
+//        let savedDateString = myFormatter.string(from: date)
+//        return savedDateString
+//    }
 }
 
 

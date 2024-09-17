@@ -98,6 +98,8 @@ struct SearchBarView: View {
                 )
         )
         .padding(.horizontal)
+        .navigationTitle("도서검색")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

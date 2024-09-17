@@ -44,10 +44,4 @@ struct BookListRow: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
     
-    func dataString(_ date: Date) -> String {
-        let myFormatter = DateFormatter()
-        myFormatter.dateFormat = "yyyy.MM.dd"
-        let savedDateString = myFormatter.string(from: date)
-        return savedDateString
-    }
 }

@@ -47,6 +47,8 @@
 		48D09A222C9825D9000328E3 /* BookCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A212C9825D9000328E3 /* BookCover.swift */; };
 		48D09A232C9916C4000328E3 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 483DBC2C2C92B72900C775BF /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		48D09A282C991E1A000328E3 /* CaplusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A272C991E19000328E3 /* CaplusButton.swift */; };
+		48D09A2A2C9965CE000328E3 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A292C9965CE000328E3 /* Date+.swift */; };
+		48D09A2C2C997CA8000328E3 /* ReadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A2B2C997CA8000328E3 /* ReadingState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -103,6 +105,8 @@
 		48D09A212C9825D9000328E3 /* BookCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCover.swift; sourceTree = "<group>"; };
 		48D09A252C991839000328E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		48D09A272C991E19000328E3 /* CaplusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaplusButton.swift; sourceTree = "<group>"; };
+		48D09A292C9965CE000328E3 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		48D09A2B2C997CA8000328E3 /* ReadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +241,7 @@
 			children = (
 				483DBC092C91723D00C775BF /* ViewModelType.swift */,
 				48D09A182C968163000328E3 /* DesignSystem.swift */,
+				48D09A2B2C997CA8000328E3 /* ReadingState.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -265,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				483DBC2E2C92E32D00C775BF /* String+.swift */,
+				48D09A292C9965CE000328E3 /* Date+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -394,6 +400,7 @@
 				483DBC202C92AD5200C775BF /* MyBookRepository.swift in Sources */,
 				483DBC392C94281100C775BF /* ContentView.swift in Sources */,
 				483DBC3E2C955ACE00C775BF /* LibraryView.swift in Sources */,
+				48D09A2C2C997CA8000328E3 /* ReadingState.swift in Sources */,
 				48D09A192C968163000328E3 /* DesignSystem.swift in Sources */,
 				483DBBE02C903AD200C775BF /* CatBookListView.swift in Sources */,
 				483DBBE32C903B3100C775BF /* APIKey.swift in Sources */,
@@ -418,6 +425,7 @@
 				483DBC3B2C94301300C775BF /* CatBookListViewModel.swift in Sources */,
 				483DBBCB2C90376C00C775BF /* CheakBbangApp.swift in Sources */,
 				48D09A1E2C9732F7000328E3 /* BookDetailViewModel.swift in Sources */,
+				48D09A2A2C9965CE000328E3 /* Date+.swift in Sources */,
 				48D09A172C967D80000328E3 /* AllLibraryView.swift in Sources */,
 				483DBC372C93469500C775BF /* AddBookAniView.swift in Sources */,
 				483DBBE92C903D1200C775BF /* BookRouter.swift in Sources */,
