@@ -16,4 +16,7 @@ enum ImageName {
     static let searchBack = "searchBack"
     static let edit = "icon_edit"
     static let trash = "icon_trash"
+    static let finished = "icon_progress_finish"
+    static let ongoing = "icon_progress_ongoing"
+    static let upcoming = "icon_progress_upcoming"
 }

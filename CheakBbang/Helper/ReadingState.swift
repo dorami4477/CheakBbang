@@ -7,10 +7,10 @@
 
 import Foundation
 
-enum ReadingState {
-    case finished
-    case ongoing
-    case upcoming
+enum ReadingState: String, CaseIterable {
+    case finished = "읽은 책"
+    case ongoing = "읽고 있는 책"
+    case upcoming = "읽을 책"
     
     var imageName: String {
         switch self {
@@ -24,7 +24,6 @@ enum ReadingState {
             "icon_progress_upcoming"
         }
     }
-
 }
 
 func getReadState(_ status: Status) -> ReadingState {

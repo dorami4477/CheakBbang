@@ -51,6 +51,8 @@
 		48D09A2C2C997CA8000328E3 /* ReadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A2B2C997CA8000328E3 /* ReadingState.swift */; };
 		48D09A2E2C9AE905000328E3 /* SearchResultDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A2D2C9AE905000328E3 /* SearchResultDetailView.swift */; };
 		48D09A332C9AF071000328E3 /* SearchResultDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A322C9AF071000328E3 /* SearchResultDetailViewModel.swift */; };
+		48D09A352C9B2123000328E3 /* RratingHeartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A342C9B2123000328E3 /* RratingHeartView.swift */; };
+		48D09A382C9B222D000328E3 /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = 48D09A372C9B222D000328E3 /* Cosmos */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -111,6 +113,7 @@
 		48D09A2B2C997CA8000328E3 /* ReadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingState.swift; sourceTree = "<group>"; };
 		48D09A2D2C9AE905000328E3 /* SearchResultDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDetailView.swift; sourceTree = "<group>"; };
 		48D09A322C9AF071000328E3 /* SearchResultDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDetailViewModel.swift; sourceTree = "<group>"; };
+		48D09A342C9B2123000328E3 /* RratingHeartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RratingHeartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48D09A382C9B222D000328E3 /* Cosmos in Frameworks */,
 				483DBC2D2C92B72900C775BF /* RealmSwift in Frameworks */,
 				483DBBE62C903C9300C775BF /* Alamofire in Frameworks */,
 			);
@@ -339,6 +343,7 @@
 			isa = PBXGroup;
 			children = (
 				48D09A212C9825D9000328E3 /* BookCover.swift */,
+				48D09A342C9B2123000328E3 /* RratingHeartView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -363,6 +368,7 @@
 			packageProductDependencies = (
 				483DBBE52C903C9300C775BF /* Alamofire */,
 				483DBC2C2C92B72900C775BF /* RealmSwift */,
+				48D09A372C9B222D000328E3 /* Cosmos */,
 			);
 			productName = CheakBbang;
 			productReference = 483DBBC72C90376C00C775BF /* CheakBbang.app */;
@@ -396,6 +402,7 @@
 			packageReferences = (
 				483DBBE42C903C9300C775BF /* XCRemoteSwiftPackageReference "Alamofire" */,
 				483DBC2B2C92B72900C775BF /* XCRemoteSwiftPackageReference "realm-swift" */,
+				48D09A362C9B222D000328E3 /* XCRemoteSwiftPackageReference "Cosmos" */,
 			);
 			productRefGroup = 483DBBC82C90376C00C775BF /* Products */;
 			projectDirPath = "";
@@ -436,6 +443,7 @@
 				483DBBE32C903B3100C775BF /* APIKey.swift in Sources */,
 				48D09A152C95D316000328E3 /* MyLibraryView.swift in Sources */,
 				483DBBFA2C915A9400C775BF /* Book.swift in Sources */,
+				48D09A352C9B2123000328E3 /* RratingHeartView.swift in Sources */,
 				48D09A132C95D209000328E3 /* LibraryTab.swift in Sources */,
 				483DBBF72C9154C500C775BF /* NetworkManager.swift in Sources */,
 				483DBC032C916CC200C775BF /* SearchView.swift in Sources */,
@@ -699,6 +707,14 @@
 				version = 20.0.0;
 			};
 		};
+		48D09A362C9B222D000328E3 /* XCRemoteSwiftPackageReference "Cosmos" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/Cosmos.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 25.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -711,6 +727,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 483DBC2B2C92B72900C775BF /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		48D09A372C9B222D000328E3 /* Cosmos */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 48D09A362C9B222D000328E3 /* XCRemoteSwiftPackageReference "Cosmos" */;
+			productName = Cosmos;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

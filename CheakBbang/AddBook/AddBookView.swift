@@ -16,13 +16,22 @@ struct AddBookView: View {
     @State private var startDate: Date = Date()
     @State private var endDate: Date = Date()
     @State private var isSaved = false
+    @State var rating = 3.0
     
     var body: some View {
         VStack {
-            ImageWrapper(url: viewModel.output.bookItem.cover)
-                .frame(width:100, height: 130)
             Text(viewModel.output.bookItem.title)
+            Text(viewModel.output.bookItem.subInfo.originalTitle ?? "")
+            Divider()
+                .padding(.vertical)
+            Text("상태")
+            HStack {
+                radioSectionGroup(sectionTitle: "readingState", selectedItem: "읽고 있는 책", selectedColor: .accent) { index, title in
+                    print(index, title)
+                }
+            }
             TextField("별점을 적으시오", text: $rank)
+            RratingHeartView(rating: $rating)
             DatePicker("시작일", selection: $startDate)
             DatePicker("종료일", selection: $endDate)
             Text("추가")
@@ -46,6 +55,7 @@ struct AddBookView: View {
                 }
 
         }
+        .padding()
         .task {
             viewModel.action(.viewOnTask(isbn: isbn13))
         }
@@ -55,6 +65,71 @@ struct AddBookView: View {
     }
 }
 
-#Preview {
-    AddBookView(isbn13: "9788965966463", viewModel: AddBookViewModel())
+
+private struct radioButton: View {
+    let title: String
+    let imageName: String
+    let isSelected: Bool
+    let selectedColor: Color
+    let action: (() -> Void)?
+    
+    var body: some View {
+        Button {
+            action?()
+        } label: {
+            VStack {
+                Image(imageName)
+                    .resizable()
+                    .frame(width: 112.6, height: 23.3)
+                Text(LocalizedStringKey(title))
+                ZStack(alignment: .center) {
+                    Circle()
+                        .strokeBorder(lineWidth: 2.0)
+                        .scaleEffect(isSelected ? 1 : 0.8)
+                        .foregroundColor(.gray)
+                        .opacity(isSelected ? 0.8 : 0.0)
+                    Circle()
+                        .strokeBorder(lineWidth: 2.0)
+                        .scaleEffect(isSelected ? 0.8 : 1)
+                        .foregroundColor(.gray)
+                        .opacity(isSelected ? 0.0 : 0.8)
+                    Circle()
+                        .fill(selectedColor)
+                        .scaleEffect(isSelected ? 0.65 : 0.001)
+                        .opacity(isSelected ? 1 : 0)
+                }
+                .animation(.spring(), value: isSelected)
+                .frame(width: 23, height: 23)
+            }
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(PlainButtonStyle())
+    }
+}
+
+private struct radioSectionGroup: View {
+    
+    let sectionTitle: String
+    @State var selectedItem: String = ""
+    let selectedColor: Color
+    let action: ((Int, String) -> Void)?
+    
+    var body: some View {
+            getContent()
+    }
+    
+    private func getContent() -> some View {
+        ForEach(Array(ReadingState.allCases.enumerated()), id: \.offset) { index, item in
+            radioButton(title: item.rawValue, imageName: item.imageName, isSelected: selectedItem == item.rawValue, selectedColor: selectedColor) {
+                self.selectedItem = item.rawValue
+                action?(index, selectedItem)
+                vibration()
+            }
+        }
+    }
+    
+    func vibration() {
+        let generator = UISelectionFeedbackGenerator()
+        generator.selectionChanged()
+    }
 }
