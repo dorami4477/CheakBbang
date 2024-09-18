@@ -56,7 +56,7 @@ extension AddBookViewModel {
             let value = try await NetworkManager.shared.callRequest(api: .item(id: isbn), model: Book.self)
             guard let firstItem = value.item.first else { return }
             output.bookItem = firstItem
-            
+
         } catch {
             print("Error fetching data: \(error)")
         }

@@ -68,7 +68,7 @@ struct BookDetailView: View {
                 Divider()
                     .padding(.vertical)
                 
-                BookDetailBottomView(item: item)
+                BookDetailBottomView(item)
                 
                 Spacer()
             }
@@ -97,6 +97,16 @@ struct BookDetailView: View {
         }
     }
     
+    func BookDetailBottomView(_ item: MyBook) -> some View {
+            VStack(alignment: .leading, spacing: 8) {
+                BottomRowView(title: "작가", content: item.author)
+                BottomRowView(title: "출판사", content: item.publisher)
+                BottomRowView(title: "출판일", content: item.pubDate)
+                BottomRowView(title: "페이지수", content: "\(item.page)")
+                BottomRowView(title: "설명글", content: item.explanation)
+            }
+            .font(.body)
+    }
     
 }
 
@@ -161,21 +171,11 @@ struct BookDetailTopView: View {
     }
 }
 
-struct BookDetailBottomView: View {
-    let item: MyBook
+struct BottomRowView: View {
+    let title: String
+    let content: String
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            rowView("작가", content: item.author)
-            rowView("출판사", content: item.publisher)
-            rowView("출판일", content: item.pubDate)
-            rowView("페이지수", content: "\(item.page)")
-            rowView("설명글", content: item.explanation)
-        }
-        .font(.body)
-    }
-    
-    func rowView(_ title: String, content: String) -> some View {
         HStack(alignment: .top) {
             Text(title)
                 .fontWeight(.medium)

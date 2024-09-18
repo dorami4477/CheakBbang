@@ -96,7 +96,6 @@ extension CatBookListViewModel {
         var height: CGFloat = 0
         output.bookList.forEach {
             height += bookImageHeight($0.page)
-            print(height)
         }
         return height
     }
