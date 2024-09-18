@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct SearchResultDetailView: View {
-    var item: Item
+    @StateObject var viewModel = SearchResultDetailViewModel()
+    var itemId: String
     
     var body: some View {
         ScrollView {
             VStack {
-                BookDetailTopView(coverUrl: item.cover, title: item.title, ogTitle: item.subInfo.originalTitle ?? "")
+                BookDetailTopView(coverUrl: viewModel.output.book.cover, title: viewModel.output.book.title, ogTitle: viewModel.output.book.subInfo.originalTitle ?? "")
                 
                 Divider()
                     .padding(.vertical)
                 
-                BookDetailBottomView(item)
+                BookDetailBottomView(viewModel.output.book)
                 
                 Spacer()
             }
@@ -26,6 +27,9 @@ struct SearchResultDetailView: View {
         }
         .navigationTitle("도서 상세 정보")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear{
+            viewModel.action(.viewOnTask(isbn: itemId))
+        }
     }
     
     func BookDetailBottomView(_ item: Item) -> some View {

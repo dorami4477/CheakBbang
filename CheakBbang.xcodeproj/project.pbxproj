@@ -50,6 +50,7 @@
 		48D09A2A2C9965CE000328E3 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A292C9965CE000328E3 /* Date+.swift */; };
 		48D09A2C2C997CA8000328E3 /* ReadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A2B2C997CA8000328E3 /* ReadingState.swift */; };
 		48D09A2E2C9AE905000328E3 /* SearchResultDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A2D2C9AE905000328E3 /* SearchResultDetailView.swift */; };
+		48D09A332C9AF071000328E3 /* SearchResultDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A322C9AF071000328E3 /* SearchResultDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -109,6 +110,7 @@
 		48D09A292C9965CE000328E3 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		48D09A2B2C997CA8000328E3 /* ReadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingState.swift; sourceTree = "<group>"; };
 		48D09A2D2C9AE905000328E3 /* SearchResultDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDetailView.swift; sourceTree = "<group>"; };
+		48D09A322C9AF071000328E3 /* SearchResultDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				48D09A2D2C9AE905000328E3 /* SearchResultDetailView.swift */,
+				48D09A322C9AF071000328E3 /* SearchResultDetailViewModel.swift */,
 			);
 			path = ResultDetail;
 			sourceTree = "<group>";
@@ -438,6 +441,7 @@
 				483DBC032C916CC200C775BF /* SearchView.swift in Sources */,
 				483DBC062C916EC400C775BF /* NavigationLazyView.swift in Sources */,
 				483DBC402C955CEF00C775BF /* LibraryViewModel.swift in Sources */,
+				48D09A332C9AF071000328E3 /* SearchResultDetailViewModel.swift in Sources */,
 				483DBC0D2C91789100C775BF /* AddBookView.swift in Sources */,
 				483DBC082C9170F300C775BF /* SearchViewModel.swift in Sources */,
 				483DBBFE2C9160CF00C775BF /* TargetType.swift in Sources */,

@@ -25,7 +25,7 @@ struct BookListRow: View {
                 
                 HStack {
                     NavigationLink {
-                        NavigationLazyView(SearchResultDetailView(item: item))
+                        NavigationLazyView(SearchResultDetailView(viewModel: SearchResultDetailViewModel(), itemId: item.isbn13))
                     } label: {
                         Text("상세정보")
                             .asCaplusButton(color: .gray)
