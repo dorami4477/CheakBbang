@@ -33,13 +33,22 @@ extension AddBookViewModel {
     }
     
     func transform() {
-        input
-            .viewOnTask
-            .sink { [weak self] value in
-                Task { [weak self] in
-                    await self?.fetchBook(value)
-                }
+        input.viewOnTask
+            .flatMap { value in
+                NetworkManager.shared.fetchSingleBookItem(value)
             }
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("Error fetching book item: \(error)")
+                }
+            }, receiveValue: { [weak self] item in
+                    self?.output.bookItem = item
+
+            })
             .store(in: &cancellables)
         
         input
@@ -50,17 +59,6 @@ extension AddBookViewModel {
             .store(in: &cancellables)
     }
 
-    @MainActor
-    func fetchBook(_ isbn: String) async {
-        do {
-            let value = try await NetworkManager.shared.callRequest(api: .item(id: isbn), model: Book.self)
-            guard let firstItem = value.item.first else { return }
-            output.bookItem = firstItem
-
-        } catch {
-            print("Error fetching data: \(error)")
-        }
-    }
 }
 
 // MARK: - Action

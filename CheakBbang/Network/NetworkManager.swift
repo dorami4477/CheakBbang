@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import Combine
 
 enum ErrorCode:Error{
     case BadRequest
@@ -32,10 +33,34 @@ final class NetworkManager {
                     continuation.resume(returning: data)
                     
                 case let .failure(error):
-                    print(response.response?.statusCode)
                     continuation.resume(throwing: error)
                 }
             }
         }
     }
 }
+
+
+extension NetworkManager {
+    
+    func fetchSingleBookItem(_ isbn: String) -> AnyPublisher<Item, Error> {
+        Future { promise in
+            Task { [weak self] in
+                do {
+                    let value = try await self?.callRequest(api: .item(id: isbn), model: Book.self)
+                    if let item = value?.item.first {
+                        promise(.success(item))
+                    } else {
+                        promise(.failure(MyError.noItemsFound))
+                    }
+                } catch {
+                    promise(.failure(error))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+}
+
+
+

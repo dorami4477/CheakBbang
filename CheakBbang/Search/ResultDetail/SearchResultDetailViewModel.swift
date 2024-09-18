@@ -29,28 +29,28 @@ extension SearchResultDetailViewModel {
         var book: Item = Item(title: "", link: "", author: "", pubDate: "", description: "", isbn: "", isbn13: "", itemID: 0, cover: "", categoryID: 0, categoryName: "", publisher: "", adult: true, customerReviewRank: 0, subInfo: SubInfo(subTitle: nil, originalTitle: nil, itemPage: nil))
     }
     
+ 
     func transform() {
-        input
-            .viewOnTask
-            .sink { [weak self] value in
-                Task { [weak self] in
-                    await self?.fetchBook(value)
-                }
+        input.viewOnTask
+            .flatMap { value in
+                NetworkManager.shared.fetchSingleBookItem(value)
             }
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("Error fetching book item: \(error)")
+                }
+            }, receiveValue: { [weak self] item in
+                    self?.output.book = item
+
+            })
             .store(in: &cancellables)
+        
     }
 
-    @MainActor
-    func fetchBook(_ isbn: String) async {
-        do {
-            let value = try await NetworkManager.shared.callRequest(api: .item(id: isbn), model: Book.self)
-            guard let firstItem = value.item.first else { return }
-            output.book = firstItem
-
-        } catch {
-            print("Error fetching data: \(error)")
-        }
-    }
 }
 
 // MARK: - Action
@@ -65,4 +65,8 @@ extension SearchResultDetailViewModel {
             input.viewOnTask.send(isbn)
         }
     }
+}
+
+enum MyError: Error {
+    case noItemsFound
 }
