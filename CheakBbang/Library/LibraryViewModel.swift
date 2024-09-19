@@ -63,16 +63,6 @@ extension LibraryViewModel {
         return savedDateString
     }
     
-    func getReadState(_ status: Status) -> String {
-        switch status {
-        case .done:
-            return "Done"
-        case .ing:
-            return "Ing"
-        case .will:
-            return "Wish"
-        }
-    }
 }
 
 // MARK: - Action

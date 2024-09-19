@@ -24,14 +24,14 @@ struct BookDetailView: View {
                 VStack(spacing: 16) {
 
                     VStack(spacing: 8) {
-                        Image(getReadState(item.status).imageName)
+                        Image(item.status.imageName)
                             .resizable()
                             .frame(width: 100, height: 23.3)
                         
                         HStack(spacing: 0) {
                             ForEach(0..<5) { index in
-                                Image(systemName: index < item.rank ? "heart.fill" : "heart")
-                                    .foregroundColor(index < item.rank ? .accent : .gray)
+                                Image(systemName: Double(index) < item.rate ? "heart.fill" : "heart")
+                                    .foregroundColor(Double(index) < item.rate ? .accent : .gray)
                             }
                         }
                         

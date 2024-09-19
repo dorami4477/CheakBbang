@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LibraryView: View {
     @StateObject var viewModel: LibraryViewModel
-    var status: Status
+    var status: ReadingState
     
     var body: some View {
         ScrollView {
@@ -36,7 +36,7 @@ struct LibraryView: View {
                         .tint(.white)
                         .bold()
                         .frame(width:10, height:10)
-                    Text("\(viewModel.getReadState(book.status))")
+                    Text("\(book.status)")
                         .bold()
                         .font(.caption)
                 }
@@ -48,8 +48,8 @@ struct LibraryView: View {
                 
                 HStack(spacing: 0) {
                     ForEach(0..<5) { index in
-                        Image(systemName: index < book.rank ? "heart.fill" : "heart")
-                            .foregroundColor(index < book.rank ? .accent : .gray)
+                        Image(systemName: Double(index) < book.rate ? "heart.fill" : "heart")
+                            .foregroundColor(Double(index) < book.rate ? .accent : .gray)
                     }
                 }
                 
@@ -61,12 +61,6 @@ struct LibraryView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
     
-//    func dataString(_ date: Date) -> String {
-//        let myFormatter = DateFormatter()
-//        myFormatter.dateFormat = "yyyy.MM.dd"
-//        let savedDateString = myFormatter.string(from: date)
-//        return savedDateString
-//    }
 }
 
 

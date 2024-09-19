@@ -30,7 +30,7 @@ struct AddBookView: View {
                     print(index, title)
                 }
             }
-            TextField("별점을 적으시오", text: $rank)
+            Text("평점")
             RratingHeartView(rating: $rating)
             DatePicker("시작일", selection: $startDate)
             DatePicker("종료일", selection: $endDate)
@@ -45,9 +45,9 @@ struct AddBookView: View {
                                          explanation: viewModel.output.bookItem.description,
                                          cover: viewModel.output.bookItem.cover, 
                                          isbn13: viewModel.output.bookItem.isbn13,
-                                         rank: Int(rank) ?? 0,
+                                         rate: rating,
                                          page: viewModel.output.bookItem.subInfo.itemPage ?? 0,
-                                         status: .ing,
+                                         status: .finished,
                                          startDate: startDate,
                                          endDate: endDate)
                     viewModel.action(.addButtonTap(item: newItem))

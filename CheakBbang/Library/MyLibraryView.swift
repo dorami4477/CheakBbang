@@ -19,13 +19,13 @@ struct MyLibraryView: View {
                 AllLibraryView(viewModel: LibraryViewModel())
                     .tag(LibraryTab.all)
                 
-                NavigationLazyView(LibraryView(viewModel: LibraryViewModel(), status: .ing))
+                NavigationLazyView(LibraryView(viewModel: LibraryViewModel(), status: .ongoing))
                     .tag(LibraryTab.currenltyReading)
                 
-                NavigationLazyView(LibraryView(viewModel: LibraryViewModel(), status: .done))
+                NavigationLazyView(LibraryView(viewModel: LibraryViewModel(), status: .finished))
                     .tag(LibraryTab.done)
                 
-                NavigationLazyView(LibraryView(viewModel: LibraryViewModel(), status: .will))
+                NavigationLazyView(LibraryView(viewModel: LibraryViewModel(), status: .upcoming))
                     .tag(LibraryTab.wantToRead)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))

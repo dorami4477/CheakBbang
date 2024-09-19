@@ -19,14 +19,14 @@ final class MyBook: Object, ObjectKeyIdentifiable {
     @Persisted var explanation: String
     @Persisted var cover: String
     @Persisted var isbn13: String
-    @Persisted var rank: Int
+    @Persisted var rate: Double
     @Persisted var memo: List<Memo> = List<Memo>()
     @Persisted var page: Int
-    @Persisted var status: Status
+    @Persisted var status: ReadingState
     @Persisted var startDate: Date
     @Persisted var endDate: Date
     
-    convenience init(itemId: Int, title: String, originalTitle: String, author: String, publisher: String, pubDate: String, explanation: String, cover: String, isbn13: String, rank: Int, memo: List<Memo> = List<Memo>(), page: Int = 0, status: Status, startDate: Date, endDate: Date) {
+    convenience init(itemId: Int, title: String, originalTitle: String, author: String, publisher: String, pubDate: String, explanation: String, cover: String, isbn13: String, rate: Double, memo: List<Memo> = List<Memo>(), page: Int = 0, status: ReadingState, startDate: Date, endDate: Date) {
         self.init()
         self.itemId = itemId
         self.title = title
@@ -37,19 +37,13 @@ final class MyBook: Object, ObjectKeyIdentifiable {
         self.explanation = explanation
         self.cover = cover
         self.isbn13 = isbn13
-        self.rank = rank
+        self.rate = rate
         self.memo = memo
         self.page = page
         self.status = status
         self.startDate = startDate
         self.endDate = endDate
     }
-}
-
-enum Status: String, PersistableEnum {
-    case will
-    case ing
-    case done
 }
 
 final class Memo: Object, ObjectKeyIdentifiable {

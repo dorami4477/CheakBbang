@@ -52,13 +52,13 @@ struct AllLibraryView: View {
         var list: [MyBook] = []
         switch type {
         case .all:
-            list = viewModel.output.bookList.filter{ $0.status == .ing }
+            list = viewModel.output.bookList.filter{ $0.status == .ongoing }
         case .currenltyReading:
-            list = viewModel.output.bookList.filter{ $0.status == .ing }
+            list = viewModel.output.bookList.filter{ $0.status == .ongoing }
         case .done:
-            list = viewModel.output.bookList.filter{ $0.status == .done }
+            list = viewModel.output.bookList.filter{ $0.status == .finished }
         case .wantToRead:
-            list = viewModel.output.bookList.filter{ $0.status == .will }
+            list = viewModel.output.bookList.filter{ $0.status == .upcoming }
         }
         return list
     }

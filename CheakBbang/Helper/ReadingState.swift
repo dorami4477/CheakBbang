@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import RealmSwift
 
-enum ReadingState: String, CaseIterable {
+enum ReadingState: String, CaseIterable, PersistableEnum {
     case finished = "읽은 책"
     case ongoing = "읽고 있는 책"
     case upcoming = "읽을 책"
@@ -26,13 +27,3 @@ enum ReadingState: String, CaseIterable {
     }
 }
 
-func getReadState(_ status: Status) -> ReadingState {
-    switch status {
-    case .done:
-        return .finished
-    case .ing:
-        return .ongoing
-    case .will:
-        return .upcoming
-    }
-}
