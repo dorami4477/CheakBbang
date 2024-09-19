@@ -79,7 +79,7 @@ struct BookDetailView: View {
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 NavigationLink {
-                    EditBook(book: item)
+                    EditBookView(book: item, viewModel: EditBookViewModel())
                 } label: {
                     Image(ImageName.edit)
                         .resizable()
