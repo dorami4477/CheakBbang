@@ -55,11 +55,11 @@ struct CatBookListView: View {
                 
                 if viewModel.output.bookCount - 1 == index {
                     bookRowView(item: item, align: alignment, padding: padding, isFirst: index % 5 == 0, isLast: true)
-                       // .padding(.bottom, index % 5 == 0 ? -50 : 0)
+                        .padding(.bottom, index != 0 && index % 5 == 0 ? -50 : 0)
                     
                 } else {
                     bookRowView(item: item, align: alignment, padding: padding, isFirst: index % 5 == 0, isLast: false)
-                       // .padding(.bottom, index % 5 == 0 ? -50 : 0)
+                        .padding(.bottom, index != 0 && index % 5 == 0 ? -50 : 0)
                     
                 }
 

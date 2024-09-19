@@ -30,22 +30,31 @@ struct BookDetailView: View {
                             .resizable()
                             .frame(width: 100, height: 23.3)
                         
-                        HStack(spacing: 0) {
-                            ForEach(0..<5) { index in
-                                Image(systemName: Double(index) < item.rate ? "heart.fill" : "heart")
-                                    .foregroundColor(Double(index) < item.rate ? .accent : .gray)
-                            }
+                        RratingHeartView(rating: $item.rate, isEditable: false)
+                            .padding(.bottom, 15)
+                        
+                        if item.status == .finished {
+                            Text("읽은기간")
+                                .font(.system(size: 15))
+                                .foregroundColor(.gray)
+                                .padding(.bottom, -5)
+                            
+                            Text("\(item.startDate.dateString()) - \(item.endDate.dateString())")
+                                .font(.system(size: 15))
+                                .foregroundColor(.black)
+                                .padding(.bottom, 15)
+                            
+                        } else if item.status == .ongoing {
+                            Text("읽은기간")
+                                .font(.system(size: 15))
+                                .foregroundColor(.gray)
+                                .padding(.bottom, -5)
+                            
+                            Text("\(item.startDate.dateString()) -")
+                                .font(.system(size: 15))
+                                .foregroundColor(.black)
+                                .padding(.bottom, 15)
                         }
-                        
-                        
-                        Text("읽은기간")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                            .padding(.bottom, -5)
-                        
-                        Text("\(item.startDate.dateString()) - \(item.endDate.dateString())")
-                            .font(.system(size: 15))
-                            .foregroundColor(.black)
                     }
                     
                     VStack(spacing: 12) {
@@ -171,12 +180,12 @@ struct BookDetailTopView: View {
             Text(title)
                 .frame(maxWidth: .infinity)
                 .bold()
-                .font(.title3)
+                .font(.system(size: 21))
                 .multilineTextAlignment(.center)
             
             Text(ogTitle)
                 .bold()
-                .font(.title3)
+                .font(.system(size: 17))
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity)
         }

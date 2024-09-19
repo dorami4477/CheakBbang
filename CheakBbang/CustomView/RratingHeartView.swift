@@ -11,6 +11,7 @@ import Cosmos
 // A SwiftUI wrapper for Cosmos view
 struct RratingHeartView: UIViewRepresentable {
     @Binding var rating: Double
+    var isEditable = true
 
     func makeUIView(context: Context) -> CosmosView {
         CosmosView()
@@ -29,6 +30,10 @@ struct RratingHeartView: UIViewRepresentable {
  
         uiView.didFinishTouchingCosmos = { rate in
             rating = rate
+        }
+        
+        if !isEditable {
+            uiView.settings.updateOnTouch = false
         }
     }
 }

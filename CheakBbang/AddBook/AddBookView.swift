@@ -40,7 +40,7 @@ struct AddBookView: View {
             Divider()
                 .padding(.vertical)
             
-            Text("내 평점")
+            Text(viewModel.input.readingState == .upcoming ? "내 기대" : "내 평점")
                 .foregroundStyle(.gray)
                 .font(.system(size: 14))
             RratingHeartView(rating: $viewModel.input.rating)
@@ -48,18 +48,23 @@ struct AddBookView: View {
             Divider()
                 .padding(.vertical)
             
-            Text("독서 시작일")
-                .foregroundStyle(.gray)
-                .font(.system(size: 14))
-            DatePicker(selection: $viewModel.input.startDate, displayedComponents: .date) {}
-                .labelsHidden()
-                .padding(.bottom, 10)
+            if viewModel.input.readingState == .finished || viewModel.input.readingState == .ongoing {
+                Text("독서 시작일")
+                    .foregroundStyle(.gray)
+                    .font(.system(size: 14))
+                DatePicker(selection: $viewModel.input.startDate, displayedComponents: .date) {}
+                    .labelsHidden()
+                    .padding(.bottom, 10)
+            }
+
             
-            Text("독서 종료일")
-                .foregroundStyle(.gray)
-                .font(.system(size: 14))
-            DatePicker(selection: $viewModel.input.endDate, displayedComponents: .date) {}
-                .labelsHidden()
+            if viewModel.input.readingState == .finished {
+                Text("독서 종료일")
+                    .foregroundStyle(.gray)
+                    .font(.system(size: 14))
+                DatePicker(selection: $viewModel.input.endDate, displayedComponents: .date) {}
+                    .labelsHidden()   
+            }
             
             Spacer()
             
