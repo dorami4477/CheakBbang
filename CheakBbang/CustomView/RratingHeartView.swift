@@ -12,6 +12,7 @@ import Cosmos
 struct RratingHeartView: UIViewRepresentable {
     @Binding var rating: Double
     var isEditable = true
+    var size = 30.0
 
     func makeUIView(context: Context) -> CosmosView {
         CosmosView()
@@ -23,10 +24,10 @@ struct RratingHeartView: UIViewRepresentable {
         uiView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         uiView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
 
-        uiView.settings.starSize = 30
+        uiView.settings.starSize = size
         uiView.settings.fillMode = .precise
-        uiView.settings.filledImage = UIImage(named: "icon_heart_01")
-        uiView.settings.emptyImage = UIImage(named: "icon_heart_03")
+        uiView.settings.filledImage = UIImage(named: ImageName.ratingHeartFill)
+        uiView.settings.emptyImage = UIImage(named: ImageName.ratingHeart)
  
         uiView.didFinishTouchingCosmos = { rate in
             rating = rate

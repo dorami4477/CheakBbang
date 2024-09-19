@@ -19,4 +19,6 @@ enum ImageName {
     static let finished = "icon_progress_finish"
     static let ongoing = "icon_progress_ongoing"
     static let upcoming = "icon_progress_upcoming"
+    static let ratingHeartFill = "icon_heart_01"
+    static let ratingHeart = "icon_heart_03"
 }
