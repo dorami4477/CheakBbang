@@ -16,24 +16,59 @@ struct AddBookView: View {
     @State private var startDate: Date = Date()
     @State private var endDate: Date = Date()
     @State private var isSaved = false
+    @State private var readingState: ReadingState = .finished
     @State var rating = 3.0
     
     var body: some View {
         VStack {
             Text(viewModel.output.bookItem.title)
+                .multilineTextAlignment(.center)
+                .bold()
+                .font(.system(size: 21))
+                .padding(.bottom, 10)
+            
             Text(viewModel.output.bookItem.subInfo.originalTitle ?? "")
+                .multilineTextAlignment(.center)
+                .font(.system(size: 17))
+            
             Divider()
                 .padding(.vertical)
+            
             Text("상태")
+                .foregroundStyle(.gray)
+                .font(.system(size: 14))
             HStack {
-                radioSectionGroup(sectionTitle: "readingState", selectedItem: "읽고 있는 책", selectedColor: .accent) { index, title in
-                    print(index, title)
+                radioSectionGroup(sectionTitle: "readingState", selectedItem: .finished, selectedColor: .accent) { index, state in
+                    readingState = state
                 }
             }
-            Text("평점")
+            
+            Divider()
+                .padding(.vertical)
+            
+            Text("내 평점")
+                .foregroundStyle(.gray)
+                .font(.system(size: 14))
             RratingHeartView(rating: $rating)
-            DatePicker("시작일", selection: $startDate)
-            DatePicker("종료일", selection: $endDate)
+            
+            Divider()
+                .padding(.vertical)
+            
+            Text("독서 시작일")
+                .foregroundStyle(.gray)
+                .font(.system(size: 14))
+            DatePicker(selection: $startDate, displayedComponents: .date) {}
+                .labelsHidden()
+                .padding(.bottom, 10)
+            
+            Text("독서 종료일")
+                .foregroundStyle(.gray)
+                .font(.system(size: 14))
+            DatePicker(selection: $endDate, displayedComponents: .date) {}
+                .labelsHidden()
+            
+            Spacer()
+            
             Text("추가")
                 .wrapToButton {
                     let newItem = MyBook(itemId: viewModel.output.bookItem.itemID, 
@@ -47,7 +82,7 @@ struct AddBookView: View {
                                          isbn13: viewModel.output.bookItem.isbn13,
                                          rate: rating,
                                          page: viewModel.output.bookItem.subInfo.itemPage ?? 0,
-                                         status: .finished,
+                                         status: readingState,
                                          startDate: startDate,
                                          endDate: endDate)
                     viewModel.action(.addButtonTap(item: newItem))
@@ -82,6 +117,8 @@ private struct radioButton: View {
                     .resizable()
                     .frame(width: 112.6, height: 23.3)
                 Text(LocalizedStringKey(title))
+                    .font(.system(size: 15))
+                
                 ZStack(alignment: .center) {
                     Circle()
                         .strokeBorder(lineWidth: 2.0)
@@ -110,9 +147,9 @@ private struct radioButton: View {
 private struct radioSectionGroup: View {
     
     let sectionTitle: String
-    @State var selectedItem: String = ""
+    @State var selectedItem: ReadingState = .finished
     let selectedColor: Color
-    let action: ((Int, String) -> Void)?
+    let action: ((Int, ReadingState) -> Void)?
     
     var body: some View {
             getContent()
@@ -120,8 +157,8 @@ private struct radioSectionGroup: View {
     
     private func getContent() -> some View {
         ForEach(Array(ReadingState.allCases.enumerated()), id: \.offset) { index, item in
-            radioButton(title: item.rawValue, imageName: item.imageName, isSelected: selectedItem == item.rawValue, selectedColor: selectedColor) {
-                self.selectedItem = item.rawValue
+            radioButton(title: item.rawValue, imageName: item.imageName, isSelected: selectedItem == item, selectedColor: selectedColor) {
+                self.selectedItem = item
                 action?(index, selectedItem)
                 vibration()
             }

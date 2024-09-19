@@ -248,7 +248,6 @@
 			children = (
 				483DBC092C91723D00C775BF /* ViewModelType.swift */,
 				48D09A182C968163000328E3 /* DesignSystem.swift */,
-				48D09A2B2C997CA8000328E3 /* ReadingState.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -269,6 +268,7 @@
 				483DBC1D2C92A2A900C775BF /* MyBook.swift */,
 				483DBC1F2C92AD5200C775BF /* MyBookRepository.swift */,
 				483DBC292C92B6EA00C775BF /* CoverFileManager.swift */,
+				48D09A2B2C997CA8000328E3 /* ReadingState.swift */,
 			);
 			path = DataBase;
 			sourceTree = "<group>";
