@@ -10,8 +10,10 @@ import RealmSwift
 
 struct BookDetailView: View {
     @StateObject var viewModel = BookDetailViewModel()
+    @State private var showAlert = false
+    @Environment(\.dismiss) private var dismiss
 
-    var item: MyBook
+    @State var item: MyBook
     
     var body: some View {
         ScrollView {
@@ -86,7 +88,15 @@ struct BookDetailView: View {
                     .resizable()
                     .frame(width: 24, height: 24)
                     .wrapToButton {
-                        viewModel.action(.deleteButtonTap)
+                        showAlert = true
+                    }
+                    .alert("정말 삭제 하시겠습니까?", isPresented: $showAlert) {
+                        Button("삭제") {
+                            viewModel.action(.deleteButtonTap)
+                            self.item = MyBook()
+                            dismiss()
+                        }
+                        Button("취소", role: .cancel) {}
                     }
             }
         }
