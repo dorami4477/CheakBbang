@@ -12,7 +12,7 @@ import RealmSwift
 final class AddBookViewModel: ViewModelType {
     @ObservedResults(MyBook.self) var bookList
     var cancellables = Set<AnyCancellable>()
-    var input = Input()
+    @Published var input = Input()
     @Published var output = Output()
     
     init() {
@@ -24,8 +24,12 @@ final class AddBookViewModel: ViewModelType {
 // MARK: - Input / Output
 extension AddBookViewModel {
     struct Input {
+        var startDate: Date = Date()
+        var endDate: Date = Date()
+        var readingState: ReadingState = .finished
+        var rating = 3.0
         let viewOnTask = PassthroughSubject<String, Never>()
-        let addButtonTap = PassthroughSubject<MyBook, Never>()
+        let addButtonTap = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
@@ -54,7 +58,22 @@ extension AddBookViewModel {
         input
             .addButtonTap
             .sink { [weak self] value in
-                self?.$bookList.append(value)
+                guard let self else { return }
+                let newItem = MyBook(itemId: self.output.bookItem.itemID,
+                                     title: self.output.bookItem.title,
+                                     originalTitle: self.output.bookItem.subInfo.originalTitle ?? "",
+                                     author: self.output.bookItem.author,
+                                     publisher: self.output.bookItem.publisher,
+                                     pubDate: self.output.bookItem.pubDate,
+                                     explanation: self.output.bookItem.description,
+                                     cover: self.output.bookItem.cover,
+                                     isbn13: self.output.bookItem.isbn13,
+                                     rate: self.input.rating,
+                                     page: self.output.bookItem.subInfo.itemPage ?? 0,
+                                     status: self.input.readingState,
+                                     startDate: self.input.startDate,
+                                     endDate: self.input.endDate)
+                self.$bookList.append(newItem)
             }
             .store(in: &cancellables)
     }
@@ -65,15 +84,15 @@ extension AddBookViewModel {
 extension AddBookViewModel {
     enum Action {
         case viewOnTask(isbn: String)
-        case addButtonTap(item: MyBook)
+        case addButtonTap
     }
     
     func action(_ action: Action) {
         switch action {
         case .viewOnTask(let isbn):
             input.viewOnTask.send(isbn)
-        case .addButtonTap(let item):
-            input.addButtonTap.send(item)
+        case .addButtonTap:
+            input.addButtonTap.send(())
         }
     }
 }

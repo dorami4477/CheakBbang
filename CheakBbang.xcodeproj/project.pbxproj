@@ -55,6 +55,7 @@
 		48D09A382C9B222D000328E3 /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = 48D09A372C9B222D000328E3 /* Cosmos */; };
 		48D09A3B2C9BEF88000328E3 /* EditBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A3A2C9BEF88000328E3 /* EditBookView.swift */; };
 		48D09A3D2C9BFF64000328E3 /* EditBookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A3C2C9BFF64000328E3 /* EditBookViewModel.swift */; };
+		48D09A3F2C9C093F000328E3 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A3E2C9C093F000328E3 /* RadioButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -118,6 +119,7 @@
 		48D09A342C9B2123000328E3 /* RratingHeartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RratingHeartView.swift; sourceTree = "<group>"; };
 		48D09A3A2C9BEF88000328E3 /* EditBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBookView.swift; sourceTree = "<group>"; };
 		48D09A3C2C9BFF64000328E3 /* EditBookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBookViewModel.swift; sourceTree = "<group>"; };
+		48D09A3E2C9C093F000328E3 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -349,6 +351,7 @@
 			children = (
 				48D09A212C9825D9000328E3 /* BookCover.swift */,
 				48D09A342C9B2123000328E3 /* RratingHeartView.swift */,
+				48D09A3E2C9C093F000328E3 /* RadioButton.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				48D09A1C2C96D6B1000328E3 /* BookDetailView.swift in Sources */,
+				48D09A3F2C9C093F000328E3 /* RadioButton.swift in Sources */,
 				483DBC0A2C91723D00C775BF /* ViewModelType.swift in Sources */,
 				48D09A3B2C9BEF88000328E3 /* EditBookView.swift in Sources */,
 				483DBC202C92AD5200C775BF /* MyBookRepository.swift in Sources */,
