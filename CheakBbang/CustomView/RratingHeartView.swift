@@ -18,7 +18,7 @@ struct RratingHeartView: UIViewRepresentable {
 
     func updateUIView(_ uiView: CosmosView, context: Context) {
         uiView.rating = rating
-
+        
         uiView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         uiView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
 
@@ -27,7 +27,9 @@ struct RratingHeartView: UIViewRepresentable {
         uiView.settings.filledImage = UIImage(named: "icon_heart_01")
         uiView.settings.emptyImage = UIImage(named: "icon_heart_03")
  
-        
+        uiView.didFinishTouchingCosmos = { rate in
+            rating = rate
+        }
     }
 }
 

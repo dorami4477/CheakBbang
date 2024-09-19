@@ -53,6 +53,7 @@
 		48D09A332C9AF071000328E3 /* SearchResultDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A322C9AF071000328E3 /* SearchResultDetailViewModel.swift */; };
 		48D09A352C9B2123000328E3 /* RratingHeartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A342C9B2123000328E3 /* RratingHeartView.swift */; };
 		48D09A382C9B222D000328E3 /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = 48D09A372C9B222D000328E3 /* Cosmos */; };
+		48D09A3B2C9BEF88000328E3 /* EditBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A3A2C9BEF88000328E3 /* EditBook.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -114,6 +115,7 @@
 		48D09A2D2C9AE905000328E3 /* SearchResultDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDetailView.swift; sourceTree = "<group>"; };
 		48D09A322C9AF071000328E3 /* SearchResultDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDetailViewModel.swift; sourceTree = "<group>"; };
 		48D09A342C9B2123000328E3 /* RratingHeartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RratingHeartView.swift; sourceTree = "<group>"; };
+		48D09A3A2C9BEF88000328E3 /* EditBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBook.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 				483DBBF82C915A7C00C775BF /* Model */,
 				483DBBE72C903CD100C775BF /* Network */,
 				483DBC3C2C955A8B00C775BF /* Library */,
+				48D09A392C9BEF5A000328E3 /* EditBook */,
 				483DBC0B2C91787D00C775BF /* AddBook */,
 				48D09A1A2C96D69A000328E3 /* BookDetail */,
 				483DBBDE2C903A9500C775BF /* CatBookList */,
@@ -348,6 +351,14 @@
 			path = CustomView;
 			sourceTree = "<group>";
 		};
+		48D09A392C9BEF5A000328E3 /* EditBook */ = {
+			isa = PBXGroup;
+			children = (
+				48D09A3A2C9BEF88000328E3 /* EditBook.swift */,
+			);
+			path = EditBook;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -434,6 +445,7 @@
 			files = (
 				48D09A1C2C96D6B1000328E3 /* BookDetailView.swift in Sources */,
 				483DBC0A2C91723D00C775BF /* ViewModelType.swift in Sources */,
+				48D09A3B2C9BEF88000328E3 /* EditBook.swift in Sources */,
 				483DBC202C92AD5200C775BF /* MyBookRepository.swift in Sources */,
 				483DBC392C94281100C775BF /* ContentView.swift in Sources */,
 				483DBC3E2C955ACE00C775BF /* LibraryView.swift in Sources */,

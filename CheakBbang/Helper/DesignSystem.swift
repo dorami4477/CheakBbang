@@ -9,7 +9,7 @@ import Foundation
 
 enum ImageName {
     static let SingleBookCover = "SingleBookCover"
-    static let shelf = "bookShelf"
+    static let shelf = "book_shelf_02"
     static let background = "background"
     static let bottom = "bottom"
     static let toy = "toy2"

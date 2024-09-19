@@ -55,11 +55,11 @@ struct CatBookListView: View {
                 
                 if viewModel.output.bookCount - 1 == index {
                     bookRowView(item: item, align: alignment, padding: padding, isFirst: index % 5 == 0, isLast: true)
-                        .padding(.bottom, index % 5 == 0 ? -50 : 0)
+                       // .padding(.bottom, index % 5 == 0 ? -50 : 0)
                     
                 } else {
                     bookRowView(item: item, align: alignment, padding: padding, isFirst: index % 5 == 0, isLast: false)
-                        .padding(.bottom, index % 5 == 0 ? -50 : 0)
+                       // .padding(.bottom, index % 5 == 0 ? -50 : 0)
                     
                 }
 
@@ -94,14 +94,14 @@ struct CatBookListView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .frame(width: 161, height: viewModel.bookImageHeight(item.page))
-                .padding(.bottom, isFirst ? -23 : 0)
+                .padding(.bottom, isFirst ? -15 : 0)
             }
             .zIndex(2)
             
             if isFirst { 
                 Image(ImageName.shelf)
                     .resizable()
-                    .frame(width: 169, height: 38)
+                    .frame(width: 169, height: 31.5)
                     .zIndex(1)
             }
 

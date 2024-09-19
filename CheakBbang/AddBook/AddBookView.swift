@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct AddBookView: View {
    
     var isbn13: String
@@ -101,7 +100,7 @@ struct AddBookView: View {
 }
 
 
-private struct radioButton: View {
+struct radioButton: View {
     let title: String
     let imageName: String
     let isSelected: Bool
@@ -144,7 +143,7 @@ private struct radioButton: View {
     }
 }
 
-private struct radioSectionGroup: View {
+struct radioSectionGroup: View {
     
     let sectionTitle: String
     @State var selectedItem: ReadingState = .finished

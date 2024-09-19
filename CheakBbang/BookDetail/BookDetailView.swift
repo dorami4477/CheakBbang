@@ -78,12 +78,14 @@ struct BookDetailView: View {
         }
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
-                Image(ImageName.edit)
-                    .resizable()
-                    .frame(width: 24, height: 24)
-                    .wrapToButton {
-                        viewModel.action(.deleteButtonTap)
-                    }
+                NavigationLink {
+                    EditBook(book: item)
+                } label: {
+                    Image(ImageName.edit)
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                }
+
                 Image(ImageName.trash)
                     .resizable()
                     .frame(width: 24, height: 24)
