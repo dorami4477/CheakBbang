@@ -56,6 +56,7 @@
 		48D09A3B2C9BEF88000328E3 /* EditBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A3A2C9BEF88000328E3 /* EditBookView.swift */; };
 		48D09A3D2C9BFF64000328E3 /* EditBookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A3C2C9BFF64000328E3 /* EditBookViewModel.swift */; };
 		48D09A3F2C9C093F000328E3 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A3E2C9C093F000328E3 /* RadioButton.swift */; };
+		48D09A422C9C2AD0000328E3 /* AddMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A412C9C2AD0000328E3 /* AddMemoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -120,6 +121,7 @@
 		48D09A3A2C9BEF88000328E3 /* EditBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBookView.swift; sourceTree = "<group>"; };
 		48D09A3C2C9BFF64000328E3 /* EditBookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBookViewModel.swift; sourceTree = "<group>"; };
 		48D09A3E2C9C093F000328E3 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
+		48D09A412C9C2AD0000328E3 /* AddMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,15 +157,16 @@
 		483DBBC92C90376C00C775BF /* CheakBbang */ = {
 			isa = PBXGroup;
 			children = (
+				48D09A252C991839000328E3 /* Info.plist */,
 				48D09A312C9AEF95000328E3 /* CustomView */,
 				48D09A262C991DDA000328E3 /* CustomModifier */,
-				48D09A252C991839000328E3 /* Info.plist */,
 				483DBC312C93273A00C775BF /* Wrapper */,
 				483DBC302C9326A300C775BF /* Extension */,
 				483DBC132C91E02200C775BF /* DataBase */,
 				483DBC042C916EB000C775BF /* Helper */,
 				483DBBF82C915A7C00C775BF /* Model */,
 				483DBBE72C903CD100C775BF /* Network */,
+				48D09A402C9C2A44000328E3 /* Memo */,
 				483DBC3C2C955A8B00C775BF /* Library */,
 				48D09A392C9BEF5A000328E3 /* EditBook */,
 				483DBC0B2C91787D00C775BF /* AddBook */,
@@ -365,6 +368,14 @@
 			path = EditBook;
 			sourceTree = "<group>";
 		};
+		48D09A402C9C2A44000328E3 /* Memo */ = {
+			isa = PBXGroup;
+			children = (
+				48D09A412C9C2AD0000328E3 /* AddMemoView.swift */,
+			);
+			path = Memo;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -463,6 +474,7 @@
 				48D09A152C95D316000328E3 /* MyLibraryView.swift in Sources */,
 				483DBBFA2C915A9400C775BF /* Book.swift in Sources */,
 				48D09A352C9B2123000328E3 /* RratingHeartView.swift in Sources */,
+				48D09A422C9C2AD0000328E3 /* AddMemoView.swift in Sources */,
 				48D09A132C95D209000328E3 /* LibraryTab.swift in Sources */,
 				483DBBF72C9154C500C775BF /* NetworkManager.swift in Sources */,
 				483DBC032C916CC200C775BF /* SearchView.swift in Sources */,

@@ -58,21 +58,26 @@ struct BookDetailView: View {
                     }
                     
                     VStack(spacing: 12) {
-                        QuoteView(text: "돈, 그것은 나의 걱정을 모두 사라지게 했다. 월 1억은 쉽지!", page: "128p")
-                        QuoteView(text: "어느날 서랍을 열어보니, 불안 대신에 돈이 가득 들어있는게 아닌가!! 놀란 나는 춤을 췄다.", page: "327p")
+                        ForEach(item.memo, id:\.id) { memo in
+                            QuoteView(memo: memo)
+                        }
                     }
                     
 
                     Button(action: {
 
                     }) {
-                        Text("글귀 추가 하기")
-                            .font(.headline)
-                            .padding()
-                            .frame(maxWidth: 200)
-                            .background(Color.orange)
-                            .foregroundColor(.white)
-                            .clipShape(.capsule)
+                        NavigationLink {
+                            NavigationLazyView(AddMemoView(item: item, memo: nil))
+                        } label: {
+                            Text("글귀 추가 하기")
+                                .font(.headline)
+                                .padding()
+                                .frame(maxWidth: 200)
+                                .background(Color.orange)
+                                .foregroundColor(.white)
+                                .clipShape(.capsule)
+                        }
                     }
                 }
                 
@@ -132,25 +137,26 @@ struct BookDetailView: View {
 }
 
 struct QuoteView: View {
-    var text: String
-    var page: String
+    var memo: Memo
+    //var text: String
+    //var page: String
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(text)
+            Text(memo.title)
                 .font(.body)
                 .multilineTextAlignment(.leading)
                 
             
             HStack {
-                Text(page)
+                Text("\(memo.page)p")
                     .font(.caption)
                     .foregroundColor(.gray)
                 
                 Spacer()
                 
                 NavigationLink {
-        
+                    NavigationLazyView(AddMemoView(item: MyBook(), memo: memo))
                 } label: {
                     Image("icon_edit_small")
                         .resizable()
