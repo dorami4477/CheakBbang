@@ -57,6 +57,9 @@
 		48D09A3D2C9BFF64000328E3 /* EditBookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A3C2C9BFF64000328E3 /* EditBookViewModel.swift */; };
 		48D09A3F2C9C093F000328E3 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A3E2C9C093F000328E3 /* RadioButton.swift */; };
 		48D09A422C9C2AD0000328E3 /* AddMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A412C9C2AD0000328E3 /* AddMemoView.swift */; };
+		48D09A4E2C9D63C7000328E3 /* OCRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A4D2C9D63C7000328E3 /* OCRView.swift */; };
+		48D09A542C9D6EE3000328E3 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A532C9D6EE3000328E3 /* TestView.swift */; };
+		48D09A582C9D9FCA000328E3 /* Testview1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A572C9D9FCA000328E3 /* Testview1.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -122,6 +125,9 @@
 		48D09A3C2C9BFF64000328E3 /* EditBookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBookViewModel.swift; sourceTree = "<group>"; };
 		48D09A3E2C9C093F000328E3 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		48D09A412C9C2AD0000328E3 /* AddMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemoView.swift; sourceTree = "<group>"; };
+		48D09A4D2C9D63C7000328E3 /* OCRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRView.swift; sourceTree = "<group>"; };
+		48D09A532C9D6EE3000328E3 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		48D09A572C9D9FCA000328E3 /* Testview1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testview1.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -372,6 +378,9 @@
 			isa = PBXGroup;
 			children = (
 				48D09A412C9C2AD0000328E3 /* AddMemoView.swift */,
+				48D09A4D2C9D63C7000328E3 /* OCRView.swift */,
+				48D09A532C9D6EE3000328E3 /* TestView.swift */,
+				48D09A572C9D9FCA000328E3 /* Testview1.swift */,
 			);
 			path = Memo;
 			sourceTree = "<group>";
@@ -482,6 +491,7 @@
 				483DBC402C955CEF00C775BF /* LibraryViewModel.swift in Sources */,
 				48D09A332C9AF071000328E3 /* SearchResultDetailViewModel.swift in Sources */,
 				483DBC0D2C91789100C775BF /* AddBookView.swift in Sources */,
+				48D09A582C9D9FCA000328E3 /* Testview1.swift in Sources */,
 				483DBC082C9170F300C775BF /* SearchViewModel.swift in Sources */,
 				483DBBFE2C9160CF00C775BF /* TargetType.swift in Sources */,
 				483DBC2A2C92B6EA00C775BF /* CoverFileManager.swift in Sources */,
@@ -499,6 +509,8 @@
 				48D09A2A2C9965CE000328E3 /* Date+.swift in Sources */,
 				48D09A172C967D80000328E3 /* AllLibraryView.swift in Sources */,
 				483DBC372C93469500C775BF /* AddBookAniView.swift in Sources */,
+				48D09A4E2C9D63C7000328E3 /* OCRView.swift in Sources */,
+				48D09A542C9D6EE3000328E3 /* TestView.swift in Sources */,
 				483DBBE92C903D1200C775BF /* BookRouter.swift in Sources */,
 				48D09A202C98243C000328E3 /* BookListRow.swift in Sources */,
 				48D09A3D2C9BFF64000328E3 /* EditBookViewModel.swift in Sources */,
@@ -639,6 +651,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CheakBbang/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "갤러리의 사진을 허용해주세요.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -675,6 +688,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CheakBbang/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "갤러리의 사진을 허용해주세요.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

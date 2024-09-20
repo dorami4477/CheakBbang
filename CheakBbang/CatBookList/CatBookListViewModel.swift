@@ -42,7 +42,8 @@ extension CatBookListViewModel {
     func transform() {
         //let books = realm.objects(MyBook.self)
         //books.collectionPublisher
-        print(Realm.Configuration.defaultConfiguration.fileURL)
+        //print(Realm.Configuration.defaultConfiguration.fileURL)
+        
         realmBookList.collectionPublisher
             .map { Array($0) }
             .sink(receiveCompletion: { completion in

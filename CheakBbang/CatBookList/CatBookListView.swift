@@ -10,7 +10,6 @@ import RealmSwift
 
 struct CatBookListView: View {
     @StateObject var viewModel = CatBookListViewModel()
-    //@Environment(\.safeAreaInsets) private var safeAreaInsets
     
     var body: some View {
         GeometryReader { geometry in

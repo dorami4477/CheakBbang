@@ -24,7 +24,6 @@ struct AddMemoView: View {
             TextField("페이지", text: $page)
                 .onAppear {
                     if let memo {
-                    //if memo.title != "" {
                         page = memo.page
                     }
                 }
@@ -32,7 +31,6 @@ struct AddMemoView: View {
             TextField("제목", text: $title)
                 .onAppear {
                     if let memo {
-                    //if memo.title != "" {
                         title = memo.title
                     }
                 }
@@ -40,10 +38,16 @@ struct AddMemoView: View {
             TextField("내용", text: $contents)
                 .onAppear {
                     if let memo {
-                    //if memo.title != "" {
                         contents = memo.contents ?? ""
                     }
                 }
+            
+            NavigationLink("ocrTest") {
+                OCRView()
+            }
+            NavigationLink("pickTest") {
+                TestView()
+            }
             
             Button(isEditing ? "수정" : "저장") {
                 if isEditing {

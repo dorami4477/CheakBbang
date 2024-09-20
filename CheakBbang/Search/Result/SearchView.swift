@@ -50,8 +50,6 @@ struct SearchView: View {
         }
         .animation(.easeInOut, value: searchTerm)
         .animation(.easeInOut, value: focusField)
-
-        
     }
 }
 
