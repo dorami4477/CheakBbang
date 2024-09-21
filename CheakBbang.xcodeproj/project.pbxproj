@@ -64,6 +64,7 @@
 		48D09A622C9EE11D000328E3 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A612C9EE11D000328E3 /* CameraService.swift */; };
 		48D09A642C9EE184000328E3 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A632C9EE184000328E3 /* CameraView.swift */; };
 		48D09A662C9EE1B4000328E3 /* CameraContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A652C9EE1B4000328E3 /* CameraContentView.swift */; };
+		48D09A682C9F16D1000328E3 /* PencilTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A672C9F16D1000328E3 /* PencilTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -136,6 +137,7 @@
 		48D09A612C9EE11D000328E3 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
 		48D09A632C9EE184000328E3 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		48D09A652C9EE1B4000328E3 /* CameraContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraContentView.swift; sourceTree = "<group>"; };
+		48D09A672C9F16D1000328E3 /* PencilTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -393,6 +395,7 @@
 				48D09A612C9EE11D000328E3 /* CameraService.swift */,
 				48D09A632C9EE184000328E3 /* CameraView.swift */,
 				48D09A652C9EE1B4000328E3 /* CameraContentView.swift */,
+				48D09A672C9F16D1000328E3 /* PencilTest.swift */,
 			);
 			path = Memo;
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 				48D09A3B2C9BEF88000328E3 /* EditBookView.swift in Sources */,
 				483DBC202C92AD5200C775BF /* MyBookRepository.swift in Sources */,
 				483DBC392C94281100C775BF /* ContentView.swift in Sources */,
+				48D09A682C9F16D1000328E3 /* PencilTest.swift in Sources */,
 				483DBC3E2C955ACE00C775BF /* LibraryView.swift in Sources */,
 				48D09A2C2C997CA8000328E3 /* ReadingState.swift in Sources */,
 				48D09A192C968163000328E3 /* DesignSystem.swift in Sources */,
