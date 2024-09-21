@@ -11,8 +11,11 @@ import PhotosUI
 
 struct OCRView: View {
     @State private var selectedPhoto: PhotosPickerItem?
-    @State private var image: Image?
+    @State private var image: Image? = nil
     @State var recognizedText = ""
+    
+   // @State private var capturedImage : UIImage? = nil
+    @State private var isCustomCameraViewPresented = false
     
     var body: some View {
         VStack {
@@ -46,6 +49,15 @@ struct OCRView: View {
             TextEditor(text: $recognizedText)
         }
 
+        
+
+
+        VStack{
+            Spacer()
+            Button(action: {isCustomCameraViewPresented.toggle()}, label: {Image(systemName: "camera.fill").font(.largeTitle).padding().background(Color.black).foregroundColor(.white).clipShape(Circle())}).padding(.bottom).sheet(isPresented: $isCustomCameraViewPresented, content: {CustomCameraView(capturedImage: $image)})
+            // 실시간으로 카메라 영상이 보이는 화면 표시
+        }
+            
 
 
     }

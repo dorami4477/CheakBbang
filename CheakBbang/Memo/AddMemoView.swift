@@ -48,6 +48,10 @@ struct AddMemoView: View {
                 OCRView()
             }
             
+//            NavigationLink("cameraTest") {
+//                CameraContentView()
+//            }
+            
             Button(isEditing ? "수정" : "저장") {
                 let newMemo = Memo(page: page, title: title, contents: contents, date: Date())
                 

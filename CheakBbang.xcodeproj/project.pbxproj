@@ -61,6 +61,9 @@
 		48D09A542C9D6EE3000328E3 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A532C9D6EE3000328E3 /* TestView.swift */; };
 		48D09A5A2C9E6399000328E3 /* Image+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A592C9E6399000328E3 /* Image+.swift */; };
 		48D09A5C2C9E6E77000328E3 /* AddMemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A5B2C9E6E77000328E3 /* AddMemoViewModel.swift */; };
+		48D09A622C9EE11D000328E3 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A612C9EE11D000328E3 /* CameraService.swift */; };
+		48D09A642C9EE184000328E3 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A632C9EE184000328E3 /* CameraView.swift */; };
+		48D09A662C9EE1B4000328E3 /* CameraContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A652C9EE1B4000328E3 /* CameraContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -130,6 +133,9 @@
 		48D09A532C9D6EE3000328E3 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		48D09A592C9E6399000328E3 /* Image+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+.swift"; sourceTree = "<group>"; };
 		48D09A5B2C9E6E77000328E3 /* AddMemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemoViewModel.swift; sourceTree = "<group>"; };
+		48D09A612C9EE11D000328E3 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
+		48D09A632C9EE184000328E3 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		48D09A652C9EE1B4000328E3 /* CameraContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -384,6 +390,9 @@
 				48D09A5B2C9E6E77000328E3 /* AddMemoViewModel.swift */,
 				48D09A4D2C9D63C7000328E3 /* OCRView.swift */,
 				48D09A532C9D6EE3000328E3 /* TestView.swift */,
+				48D09A612C9EE11D000328E3 /* CameraService.swift */,
+				48D09A632C9EE184000328E3 /* CameraView.swift */,
+				48D09A652C9EE1B4000328E3 /* CameraContentView.swift */,
 			);
 			path = Memo;
 			sourceTree = "<group>";
@@ -494,11 +503,14 @@
 				48D09A5A2C9E6399000328E3 /* Image+.swift in Sources */,
 				483DBC402C955CEF00C775BF /* LibraryViewModel.swift in Sources */,
 				48D09A332C9AF071000328E3 /* SearchResultDetailViewModel.swift in Sources */,
+				48D09A642C9EE184000328E3 /* CameraView.swift in Sources */,
 				483DBC0D2C91789100C775BF /* AddBookView.swift in Sources */,
 				483DBC082C9170F300C775BF /* SearchViewModel.swift in Sources */,
+				48D09A662C9EE1B4000328E3 /* CameraContentView.swift in Sources */,
 				48D09A5C2C9E6E77000328E3 /* AddMemoViewModel.swift in Sources */,
 				483DBBFE2C9160CF00C775BF /* TargetType.swift in Sources */,
 				483DBC2A2C92B6EA00C775BF /* CoverFileManager.swift in Sources */,
+				48D09A622C9EE11D000328E3 /* CameraService.swift in Sources */,
 				483DBC1E2C92A2A900C775BF /* MyBook.swift in Sources */,
 				48D09A222C9825D9000328E3 /* BookCover.swift in Sources */,
 				483DBC332C93276A00C775BF /* ImageWrapper.swift in Sources */,
@@ -655,6 +667,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CheakBbang/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 이용을 허용해주세요.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "갤러리의 사진을 허용해주세요.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -692,6 +705,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CheakBbang/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 이용을 허용해주세요.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "갤러리의 사진을 허용해주세요.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

@@ -24,7 +24,7 @@ struct CatBookListView: View {
                         
                         VStack{
                             ScrollView(.vertical) {
-                                let safeAreaInsets = geometry.safeAreaInsets
+                               // let safeAreaInsets = geometry.safeAreaInsets
                                // let heightWithoutSafeArea = geometry.size.height - safeAreaInsets.top - safeAreaInsets.bottom
                                 let itemHeight = geometry.size.width * 0.86 + viewModel.output.totalBookHeight - viewModel.output.groupBottomPadding - CGFloat((viewModel.output.bookCount - viewModel.output.bookCount / 5) * 15)
                                 let space = (geometry.size.height - itemHeight) - 30
