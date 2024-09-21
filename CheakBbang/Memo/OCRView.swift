@@ -7,39 +7,53 @@
 
 import SwiftUI
 import Vision
-
+import PhotosUI
 
 struct OCRView: View {
-   
+    @State private var selectedPhoto: PhotosPickerItem?
+    @State private var image: Image?
     @State var recognizedText = ""
     
     var body: some View {
         VStack {
-
-            Text("OCR using Vission")
-                .font(.title)
-            
-            Image("test")
+            image?
                 .resizable()
                 .scaledToFit()
             
+            PhotosPicker(
+                selection: $selectedPhoto,
+                matching: .all(of: [.screenshots, .images])
+            ) {
+                Image(systemName: "pencil")
+            }
+            .onChange(of: selectedPhoto) { newItem in
+                Task {
+                    guard let newItem = newItem else { return }
+                    do {
+                        image = try await newItem.loadTransferable(type: Image.self)
+                        print("Image loaded successfully")
+                    } catch {
+                        print("Error loading image: \(error)")
+                    }
+                }
+            }
+            
             Button("Recognize Text"){
-                ocr()
+                guard let image else { return }
+                ocr(image)
             }
             
             TextEditor(text: $recognizedText)
-            
         }
-        .padding()
-        
-        
+
+
 
     }
     
-    func ocr() {
-        let image = UIImage(named: "test")
+    func ocr(_ image: Image) {
+        guard let uiImage = image.toUIImage() else { return }
         
-        if let cgImage = image?.cgImage {
+        if let cgImage = uiImage.cgImage {
             
             // Request handler
             let handler = VNImageRequestHandler(cgImage: cgImage)

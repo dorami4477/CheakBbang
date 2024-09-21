@@ -32,6 +32,19 @@ final class MyBookRepository {
         }
 
     }
+
+    
+    func createMemo(book: MyBook, data: Memo) {
+        do {
+            let book = fetchSingleItem(book.id)
+            try realm.write {
+                book?.memo.append(data)
+            }
+        } catch {
+            print("faild to create data")
+        }
+
+    }
     
     //Delete
     func deleteData(data: MyBook) {
@@ -58,7 +71,7 @@ final class MyBookRepository {
     }
     
     //Read one
-    func fetchSingleItem(_ id:String) -> MyBook? {
+    func fetchSingleItem(_ id: ObjectId) -> MyBook? {
         let specificItem = realm.object(ofType: MyBook.self, forPrimaryKey: id)
         return specificItem
     }

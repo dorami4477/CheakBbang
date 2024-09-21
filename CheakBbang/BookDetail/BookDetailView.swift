@@ -138,9 +138,7 @@ struct BookDetailView: View {
 
 struct QuoteView: View {
     var memo: Memo
-    //var text: String
-    //var page: String
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(memo.title)

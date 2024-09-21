@@ -15,7 +15,7 @@ struct ContentView: View {
     }
     
     var body: some View {
-        //NavigationView {
+
         TabView(selection: $selectedTab) {
             NavigationView {
                 CatBookListView()
@@ -34,16 +34,8 @@ struct ContentView: View {
                 Text("Second")
             }
             
-            NavigationView {
-                Testview1()
-            }
-            .tabItem {
-                Image(systemName: "1.square.fill")
-                Text("First")
-            }
-            
         }
-        // }
+
     }
 }
 

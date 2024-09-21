@@ -59,7 +59,8 @@
 		48D09A422C9C2AD0000328E3 /* AddMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A412C9C2AD0000328E3 /* AddMemoView.swift */; };
 		48D09A4E2C9D63C7000328E3 /* OCRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A4D2C9D63C7000328E3 /* OCRView.swift */; };
 		48D09A542C9D6EE3000328E3 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A532C9D6EE3000328E3 /* TestView.swift */; };
-		48D09A582C9D9FCA000328E3 /* Testview1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A572C9D9FCA000328E3 /* Testview1.swift */; };
+		48D09A5A2C9E6399000328E3 /* Image+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A592C9E6399000328E3 /* Image+.swift */; };
+		48D09A5C2C9E6E77000328E3 /* AddMemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A5B2C9E6E77000328E3 /* AddMemoViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -127,7 +128,8 @@
 		48D09A412C9C2AD0000328E3 /* AddMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemoView.swift; sourceTree = "<group>"; };
 		48D09A4D2C9D63C7000328E3 /* OCRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRView.swift; sourceTree = "<group>"; };
 		48D09A532C9D6EE3000328E3 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
-		48D09A572C9D9FCA000328E3 /* Testview1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testview1.swift; sourceTree = "<group>"; };
+		48D09A592C9E6399000328E3 /* Image+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+.swift"; sourceTree = "<group>"; };
+		48D09A5B2C9E6E77000328E3 /* AddMemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemoViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -294,6 +296,7 @@
 			children = (
 				483DBC2E2C92E32D00C775BF /* String+.swift */,
 				48D09A292C9965CE000328E3 /* Date+.swift */,
+				48D09A592C9E6399000328E3 /* Image+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -378,9 +381,9 @@
 			isa = PBXGroup;
 			children = (
 				48D09A412C9C2AD0000328E3 /* AddMemoView.swift */,
+				48D09A5B2C9E6E77000328E3 /* AddMemoViewModel.swift */,
 				48D09A4D2C9D63C7000328E3 /* OCRView.swift */,
 				48D09A532C9D6EE3000328E3 /* TestView.swift */,
-				48D09A572C9D9FCA000328E3 /* Testview1.swift */,
 			);
 			path = Memo;
 			sourceTree = "<group>";
@@ -488,11 +491,12 @@
 				483DBBF72C9154C500C775BF /* NetworkManager.swift in Sources */,
 				483DBC032C916CC200C775BF /* SearchView.swift in Sources */,
 				483DBC062C916EC400C775BF /* NavigationLazyView.swift in Sources */,
+				48D09A5A2C9E6399000328E3 /* Image+.swift in Sources */,
 				483DBC402C955CEF00C775BF /* LibraryViewModel.swift in Sources */,
 				48D09A332C9AF071000328E3 /* SearchResultDetailViewModel.swift in Sources */,
 				483DBC0D2C91789100C775BF /* AddBookView.swift in Sources */,
-				48D09A582C9D9FCA000328E3 /* Testview1.swift in Sources */,
 				483DBC082C9170F300C775BF /* SearchViewModel.swift in Sources */,
+				48D09A5C2C9E6E77000328E3 /* AddMemoViewModel.swift in Sources */,
 				483DBBFE2C9160CF00C775BF /* TargetType.swift in Sources */,
 				483DBC2A2C92B6EA00C775BF /* CoverFileManager.swift in Sources */,
 				483DBC1E2C92A2A900C775BF /* MyBook.swift in Sources */,

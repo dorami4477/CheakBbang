@@ -25,7 +25,6 @@ struct TestView: View {
                 Image(systemName: "pencil")
             }
             .onChange(of: selectedPhoto) { newItem in
-                print("onChange fired with newItem: \(String(describing: newItem))")
                 Task {
                     guard let newItem = newItem else { return }
                     do {

@@ -9,7 +9,9 @@ import SwiftUI
 import RealmSwift
 
 struct AddMemoView: View {
-    @ObservedRealmObject var item: MyBook
+    @StateObject var viewModel = AddMemoViewModel()
+    
+    @State var item: MyBook
     @State var memo: Memo?
     @State private var page: String = ""
     @State private var title: String = ""
@@ -45,9 +47,6 @@ struct AddMemoView: View {
             NavigationLink("ocrTest") {
                 OCRView()
             }
-            NavigationLink("pickTest") {
-                TestView()
-            }
             
             Button(isEditing ? "수정" : "저장") {
                 if isEditing {
@@ -60,11 +59,29 @@ struct AddMemoView: View {
                     
                 } else {
                     let newMemo = Memo(page: page, title: title, contents: contents, date: Date())
-                    $item.memo.append(newMemo)
+                    viewModel.action(.addButtonTap(memo: newMemo))
                 }
             }
             .disabled(page.isEmpty)
         }
         .padding()
+        .onAppear{
+            viewModel.action(.viewOnAppear(item: item))
+        }
     }
 }
+
+//struct AddMemoView: View {
+//    @State var item: MyBook = MyBook()
+//    let repository = MyBookRepository()
+//    @State var memo: Memo?
+//    
+//    var body: some View {
+//        Button("저장") {
+//            let newMemo = Memo(page: "page", title: "title", contents: "contents", date: Date())
+//            repository?.createMemo(book: item, data: newMemo)
+//            item = MyBook()
+//            memo = nil
+//        }
+//    }
+//}
