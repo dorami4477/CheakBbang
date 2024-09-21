@@ -20,14 +20,15 @@ struct CatBookListView: View {
                     .frame(width: geometry.size.width, height: geometry.size.height)
                 VStack(spacing: 5) {
                     infoView()
-                    ZStack(alignment: .bottom) {
+                    ZStack {
+                        
                         VStack{
                             ScrollView(.vertical) {
                                 let safeAreaInsets = geometry.safeAreaInsets
-                                let heightWithoutSafeArea = geometry.size.height - safeAreaInsets.top - safeAreaInsets.bottom
+                               // let heightWithoutSafeArea = geometry.size.height - safeAreaInsets.top - safeAreaInsets.bottom
                                 let itemHeight = geometry.size.width * 0.86 + viewModel.output.totalBookHeight - viewModel.output.groupBottomPadding - CGFloat((viewModel.output.bookCount - viewModel.output.bookCount / 5) * 15)
-                                let space = heightWithoutSafeArea - itemHeight
-                                //Text("\(CGFloat((viewModel.output.bookCount - viewModel.output.bookCount / 5) * 10))")
+                                let space = (geometry.size.height - itemHeight) - 30
+                               // Text("\(space), \(viewModel.output.totalBookHeight), \(viewModel.output.groupBottomPadding)")
                                 if 0 < space {
                                     Spacer(minLength: space)
                                 }
@@ -78,7 +79,9 @@ struct CatBookListView: View {
                     .padding(.bottom, isLast ? -20 : 0)
             }
             
-            NavigationLink(value: item) {
+            NavigationLink {
+                NavigationLazyView(BookDetailView(item: item))
+            } label: {
                 ZStack {
                     Image(viewModel.bookImage(item.page))
                         .resizable()
@@ -93,10 +96,8 @@ struct CatBookListView: View {
                 .frame(width: 161, height: viewModel.bookImageHeight(item.page))
                 .padding(.bottom, isFirst ? -15 : 0)
             }
-            .navigationDestination(for: MyBook.self) { item in
-                NavigationLazyView(BookDetailView(item: item))
-            }
             .zIndex(2)
+
 
             if isFirst {
                 Image(ImageName.shelf)
@@ -132,6 +133,7 @@ struct CatBookListView: View {
         }
         .padding(.horizontal, 30)
         .frame(maxWidth: .infinity)
+        .frame(height: 30)
     }
     
 }

@@ -98,6 +98,9 @@ extension CatBookListViewModel {
         output.bookList.forEach {
             height += bookImageHeight($0.page)
         }
+        if output.bookList.count > 0 {
+            height += 53
+        }
         return height
     }
     
@@ -121,7 +124,7 @@ extension CatBookListViewModel {
     }
     
     func groupBottomPadding() -> CGFloat{
-        let padding = (output.bookList.count / 5 ) * 35 + ( output.bookCount % 5 > 0 ? 35 : 0 )
+        let padding = (output.bookList.count / 5 ) * 35 + ( output.bookCount % 5 > 0 ? 35 : 0 ) - (output.bookCount > 0 ? 35 : 0) 
         return CGFloat(padding)
     }
 }

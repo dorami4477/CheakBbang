@@ -40,18 +40,22 @@ extension BookRouter: TargetType {
                 URLQueryItem(name: "query", value: query),
                 URLQueryItem(name: "QueryType", value: "Title"),
                 URLQueryItem(name: "MaxResults", value: "10"),
+                URLQueryItem(name: "Cover", value: "Big"),
                 URLQueryItem(name: "start", value: "1"),
                 URLQueryItem(name: "SearchTarget", value: "Book"),
                 URLQueryItem(name: "output", value: "JS"),
                 URLQueryItem(name: "Version", value: "20131101")
+                
             ]
         case .item(let id):
             return [
                 URLQueryItem(name: "ttbkey", value: APIKey.key),
                 URLQueryItem(name: "itemIdType", value: "ISBN"),
+                URLQueryItem(name: "Cover", value: "Big"),
                 URLQueryItem(name: "ItemId", value: id),
                 URLQueryItem(name: "output", value: "JS"),
                 URLQueryItem(name: "Version", value: "20131101")
+                
             ]
         }
     }

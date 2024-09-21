@@ -12,7 +12,7 @@ import Combine
 final class AddMemoViewModel: ViewModelType {
     @ObservedRealmObject var item: MyBook = MyBook()
     @ObservedRealmObject var memo: Memo = Memo()
-    let repository = MyBookRepository()
+    
     var cancellables = Set<AnyCancellable>()
     var input = Input()
     @Published var output = Output()
@@ -38,8 +38,7 @@ extension AddMemoViewModel {
         input.viewOnAppear
             .sink { [weak self] book in
                 guard let self else { return }
-                item = self.repository?.fetchSingleItem(book.id) ?? MyBook()
-                //item = book
+                item = book
             }
             .store(in: &cancellables)
         
