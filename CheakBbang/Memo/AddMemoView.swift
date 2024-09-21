@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
-import RealmSwift
 
 struct AddMemoView: View {
     @StateObject var viewModel = AddMemoViewModel()
+    @Environment(\.dismiss) private var dismiss
     
     @State var item: MyBook
     @State var memo: Memo?
@@ -49,39 +49,21 @@ struct AddMemoView: View {
             }
             
             Button(isEditing ? "수정" : "저장") {
+                let newMemo = Memo(page: page, title: title, contents: contents, date: Date())
+                
                 if isEditing {
-                    let thawedMemo = memo?.thaw() ?? memo
-                    try? thawedMemo?.realm?.write {
-                        thawedMemo?.page = page
-                        thawedMemo?.title = title
-                        thawedMemo?.contents = contents.isEmpty ? nil : contents
-                    }
-                    
+                    viewModel.action(.editButtonTap(memo: newMemo))
                 } else {
-                    let newMemo = Memo(page: page, title: title, contents: contents, date: Date())
                     viewModel.action(.addButtonTap(memo: newMemo))
                 }
+                
+                dismiss()
             }
             .disabled(page.isEmpty)
         }
         .padding()
         .onAppear{
-            viewModel.action(.viewOnAppear(item: item))
+            viewModel.action(.viewOnAppear(item: item, memo: memo ?? Memo()))
         }
     }
 }
-
-//struct AddMemoView: View {
-//    @State var item: MyBook = MyBook()
-//    let repository = MyBookRepository()
-//    @State var memo: Memo?
-//    
-//    var body: some View {
-//        Button("저장") {
-//            let newMemo = Memo(page: "page", title: "title", contents: "contents", date: Date())
-//            repository?.createMemo(book: item, data: newMemo)
-//            item = MyBook()
-//            memo = nil
-//        }
-//    }
-//}

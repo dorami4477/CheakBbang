@@ -11,6 +11,7 @@ import Combine
 
 final class AddMemoViewModel: ViewModelType {
     @ObservedRealmObject var item: MyBook = MyBook()
+    @ObservedRealmObject var memo: Memo = Memo()
     let repository = MyBookRepository()
     var cancellables = Set<AnyCancellable>()
     var input = Input()
@@ -25,7 +26,9 @@ final class AddMemoViewModel: ViewModelType {
 extension AddMemoViewModel {
     struct Input {
         let viewOnAppear = PassthroughSubject<MyBook, Never>()
+        let viewOnAppearMemo = PassthroughSubject<Memo, Never>()
         let addButtonTap = PassthroughSubject<Memo, Never>()
+        let editButtonTap = PassthroughSubject<Memo, Never>()
     }
     
     struct Output {
@@ -36,7 +39,13 @@ extension AddMemoViewModel {
             .sink { [weak self] book in
                 guard let self else { return }
                 item = self.repository?.fetchSingleItem(book.id) ?? MyBook()
-                print(item)
+                //item = book
+            }
+            .store(in: &cancellables)
+        
+        input.viewOnAppearMemo
+            .sink { [weak self] value in
+                self?.memo = value
             }
             .store(in: &cancellables)
         
@@ -45,6 +54,15 @@ extension AddMemoViewModel {
                 self?.$item.memo.append(item)
             }
             .store(in: &cancellables)
+        
+        input.editButtonTap
+            .sink { [weak self] item in
+                self?.$memo.page.wrappedValue = item.page
+                self?.$memo.title.wrappedValue = item.title
+                self?.$memo.contents.wrappedValue = item.contents
+            }
+            .store(in: &cancellables)
+    
     }
 
 }
@@ -52,17 +70,22 @@ extension AddMemoViewModel {
 // MARK: - Action
 extension AddMemoViewModel {
     enum Action {
-        case viewOnAppear(item: MyBook)
+        case viewOnAppear(item: MyBook, memo:Memo)
         case addButtonTap(memo : Memo)
+        case editButtonTap(memo : Memo)
     }
     
     func action(_ action: Action) {
         switch action {
-        case .viewOnAppear(let item):
+        case .viewOnAppear(let item, let memo):
             input.viewOnAppear.send(item)
+            input.viewOnAppearMemo.send(memo)
             
         case .addButtonTap(let memo):
             input.addButtonTap.send(memo)
+            
+        case .editButtonTap(let memo):
+            input.editButtonTap.send(memo)
         }
     }
 }

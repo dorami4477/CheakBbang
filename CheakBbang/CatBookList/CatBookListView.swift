@@ -78,9 +78,7 @@ struct CatBookListView: View {
                     .padding(.bottom, isLast ? -20 : 0)
             }
             
-            NavigationLink {
-                NavigationLazyView(BookDetailView(item: item))
-            } label: {
+            NavigationLink(value: item) {
                 ZStack {
                     Image(viewModel.bookImage(item.page))
                         .resizable()
@@ -95,9 +93,12 @@ struct CatBookListView: View {
                 .frame(width: 161, height: viewModel.bookImageHeight(item.page))
                 .padding(.bottom, isFirst ? -15 : 0)
             }
+            .navigationDestination(for: MyBook.self) { item in
+                NavigationLazyView(BookDetailView(item: item))
+            }
             .zIndex(2)
-            
-            if isFirst { 
+
+            if isFirst {
                 Image(ImageName.shelf)
                     .resizable()
                     .frame(width: 169, height: 31.5)

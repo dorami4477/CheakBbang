@@ -46,6 +46,8 @@ final class MyBookRepository {
 
     }
     
+    
+    
     //Delete
     func deleteData(data: MyBook) {
         let data = realm.object(ofType: MyBook.self, forPrimaryKey: data.id)!
@@ -73,6 +75,11 @@ final class MyBookRepository {
     //Read one
     func fetchSingleItem(_ id: ObjectId) -> MyBook? {
         let specificItem = realm.object(ofType: MyBook.self, forPrimaryKey: id)
+        return specificItem
+    }
+    
+    func fetchSingleMemo(_ id: ObjectId) -> Memo? {
+        let specificItem = realm.object(ofType: Memo.self, forPrimaryKey: id)
         return specificItem
     }
     
