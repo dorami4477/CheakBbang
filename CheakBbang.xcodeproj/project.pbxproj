@@ -10,7 +10,6 @@
 		483DBBCB2C90376C00C775BF /* CheakBbangApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */; };
 		483DBBCF2C90376E00C775BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBCE2C90376E00C775BF /* Assets.xcassets */; };
 		483DBBD22C90376E00C775BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBD12C90376E00C775BF /* Preview Assets.xcassets */; };
-		483DBBDA2C90379500C775BF /* GitIgnoreSetting in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBD92C90379500C775BF /* GitIgnoreSetting */; };
 		483DBBDD2C903A7600C775BF /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBDC2C903A7600C775BF /* Localizable.xcstrings */; };
 		483DBBE02C903AD200C775BF /* CatBookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBDF2C903AD200C775BF /* CatBookListView.swift */; };
 		483DBBE62C903C9300C775BF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 483DBBE52C903C9300C775BF /* Alamofire */; };
@@ -88,7 +87,6 @@
 		483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheakBbangApp.swift; sourceTree = "<group>"; };
 		483DBBCE2C90376E00C775BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		483DBBD12C90376E00C775BF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		483DBBD92C90379500C775BF /* GitIgnoreSetting */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GitIgnoreSetting; sourceTree = "<group>"; };
 		483DBBDC2C903A7600C775BF /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		483DBBDF2C903AD200C775BF /* CatBookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBookListView.swift; sourceTree = "<group>"; };
 		483DBBE82C903D1200C775BF /* BookRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRouter.swift; sourceTree = "<group>"; };
@@ -213,7 +211,6 @@
 		483DBBD82C90378800C775BF /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				483DBBD92C90379500C775BF /* GitIgnoreSetting */,
 				483DBBCE2C90376E00C775BF /* Assets.xcassets */,
 				48D09A6D2C9FE247000328E3 /* APIKeys.swift */,
 			);
@@ -477,7 +474,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				48D09A6C2C9FE209000328E3 /* .gitignore in Resources */,
-				483DBBDA2C90379500C775BF /* GitIgnoreSetting in Resources */,
 				483DBBD22C90376E00C775BF /* Preview Assets.xcassets in Resources */,
 				483DBBDD2C903A7600C775BF /* Localizable.xcstrings in Resources */,
 				483DBBCF2C90376E00C775BF /* Assets.xcassets in Resources */,

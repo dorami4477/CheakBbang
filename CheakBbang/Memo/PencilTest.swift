@@ -16,7 +16,7 @@ struct Writer: View {
     @State private var backgroundImage: UIImage?
 
     var body: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 11) {
             PhotosPicker(
                 selection: $selectedPhoto,
                 matching: .images
