@@ -7,79 +7,15 @@
 
 import SwiftUI
 import PhotosUI
-/*
-struct AddMemoView: View {
-    @StateObject var viewModel = AddMemoViewModel()
-    @Environment(\.dismiss) private var dismiss
-    
-    @State var item: MyBook
-    @State var memo: Memo?
-    @State private var page: String = ""
-    @State private var title: String = ""
-    @State private var contents: String = ""
 
-    var isEditing: Bool {
-        return memo != nil
-    }
-
-    var body: some View {
-        VStack {
-            TextField("페이지", text: $page)
-                .onAppear {
-                    if let memo {
-                        page = memo.page
-                    }
-                }
-            
-            TextField("제목", text: $title)
-                .onAppear {
-                    if let memo {
-                        title = memo.title
-                    }
-                }
-            
-            TextField("내용", text: $contents)
-                .onAppear {
-                    if let memo {
-                        contents = memo.contents ?? ""
-                    }
-                }
-            
-            NavigationLink("ocrTest") {
-                OCRView()
-            }
-            
-            NavigationLink("ocrTest") {
-                Writer()
-            }
-            
-            Button(isEditing ? "수정" : "저장") {
-                let newMemo = Memo(page: page, title: title, contents: contents, date: Date())
-                
-                if isEditing {
-                    viewModel.action(.editButtonTap(memo: newMemo))
-                } else {
-                    viewModel.action(.addButtonTap(memo: newMemo))
-                }
-                
-                dismiss()
-            }
-            .disabled(page.isEmpty)
-        }
-        .padding()
-        .onAppear{
-            viewModel.action(.viewOnAppear(item: item, memo: memo ?? Memo()))
-        }
-    }
-}
-*/
 struct AddMemoView: View {    
     @StateObject var viewModel = AddMemoViewModel()
     @Environment(\.dismiss) private var dismiss
-    @State private var showAlert = false
     
+    @State private var showAlert = false
     @State private var isCustomCameraViewPresented = false
     @State private var isDrawingViewPresented = false
+    
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var image: Image? = nil
     @State private var pickerImage: UIImage? = nil
@@ -179,7 +115,6 @@ struct AddMemoView: View {
                     PhotosPicker(
                         selection: $selectedPhoto,
                         matching: .images
-                                //.all(of: [.screenshots, .images])
                     ) {
                         Image("icon_gallery")
                             .resizable()
@@ -191,7 +126,6 @@ struct AddMemoView: View {
                             guard let newItem = newItem else { return }
                             do {
                                 //image = try await newItem.loadTransferable(type: Image.self)
-                                isDrawingViewPresented = true
                                 if let imageData = try await newItem.loadTransferable(type: Data.self) {
                                     pickerImage = UIImage(data: imageData)
                                     isDrawingViewPresented = true
@@ -209,27 +143,20 @@ struct AddMemoView: View {
                 }
             }
             
-            Button(action: {
-                let newMemo = Memo(page: page, title: "", contents: content, date: Date())
-                
-                if isEditing {
-                    viewModel.action(.editButtonTap(memo: newMemo))
-                } else {
-                    viewModel.action(.addButtonTap(memo: newMemo))
+            Text(isEditing ? "수정" : "저장")
+                .asfullCapsuleButton()
+                .wrapToButton {
+                    let newMemo = Memo(page: page, title: "", contents: content, date: Date())
+                    
+                    if isEditing {
+                        viewModel.action(.editButtonTap(memo: newMemo))
+                    } else {
+                        viewModel.action(.addButtonTap(memo: newMemo))
+                    }
+                    
+                    dismiss()
                 }
-                
-                dismiss()
-            }) {
-                Text(isEditing ? "수정" : "저장")
-                    .font(.system(size: 18, weight: .bold))
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 10)
-                    .padding(.horizontal)
-                    .background(.accent)
-                    .foregroundColor(.white)
-                    .clipShape(.capsule)
-            }
-            .disabled(content.isEmpty)
+                .disabled(content.isEmpty)
             
             Spacer()
             

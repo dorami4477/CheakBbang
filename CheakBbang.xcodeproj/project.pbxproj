@@ -60,11 +60,12 @@
 		48D09A5C2C9E6E77000328E3 /* AddMemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A5B2C9E6E77000328E3 /* AddMemoViewModel.swift */; };
 		48D09A622C9EE11D000328E3 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A612C9EE11D000328E3 /* CameraService.swift */; };
 		48D09A642C9EE184000328E3 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A632C9EE184000328E3 /* CameraView.swift */; };
-		48D09A682C9F16D1000328E3 /* PencilTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A672C9F16D1000328E3 /* PencilTest.swift */; };
+		48D09A682C9F16D1000328E3 /* MyCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A672C9F16D1000328E3 /* MyCanvas.swift */; };
 		48D09A6A2C9FB885000328E3 /* TextBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A692C9FB885000328E3 /* TextBubble.swift */; };
 		48D09A6C2C9FE209000328E3 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 48D09A6B2C9FE209000328E3 /* .gitignore */; };
 		48D09A6E2C9FE247000328E3 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A6D2C9FE247000328E3 /* APIKeys.swift */; };
 		48D09A702CA053D3000328E3 /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A6F2CA053D3000328E3 /* DrawingView.swift */; };
+		48D09A722CA05FB8000328E3 /* FullCapsuleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A712CA05FB8000328E3 /* FullCapsuleButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -133,11 +134,12 @@
 		48D09A5B2C9E6E77000328E3 /* AddMemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemoViewModel.swift; sourceTree = "<group>"; };
 		48D09A612C9EE11D000328E3 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
 		48D09A632C9EE184000328E3 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
-		48D09A672C9F16D1000328E3 /* PencilTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilTest.swift; sourceTree = "<group>"; };
+		48D09A672C9F16D1000328E3 /* MyCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCanvas.swift; sourceTree = "<group>"; };
 		48D09A692C9FB885000328E3 /* TextBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBubble.swift; sourceTree = "<group>"; };
 		48D09A6B2C9FE209000328E3 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		48D09A6D2C9FE247000328E3 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		48D09A6F2CA053D3000328E3 /* DrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
+		48D09A712CA05FB8000328E3 /* FullCapsuleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullCapsuleButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -316,6 +318,7 @@
 				483DBC052C916EC400C775BF /* NavigationLazyView.swift */,
 				483DBC322C93276A00C775BF /* ImageWrapper.swift */,
 				483DBC342C932A1A00C775BF /* ButtonWrapper.swift */,
+				48D09A712CA05FB8000328E3 /* FullCapsuleButton.swift */,
 			);
 			path = Wrapper;
 			sourceTree = "<group>";
@@ -394,7 +397,7 @@
 				48D09A4D2C9D63C7000328E3 /* OCRView.swift */,
 				48D09A612C9EE11D000328E3 /* CameraService.swift */,
 				48D09A632C9EE184000328E3 /* CameraView.swift */,
-				48D09A672C9F16D1000328E3 /* PencilTest.swift */,
+				48D09A672C9F16D1000328E3 /* MyCanvas.swift */,
 				48D09A6F2CA053D3000328E3 /* DrawingView.swift */,
 			);
 			path = Memo;
@@ -491,7 +494,7 @@
 				48D09A3B2C9BEF88000328E3 /* EditBookView.swift in Sources */,
 				483DBC202C92AD5200C775BF /* MyBookRepository.swift in Sources */,
 				483DBC392C94281100C775BF /* ContentView.swift in Sources */,
-				48D09A682C9F16D1000328E3 /* PencilTest.swift in Sources */,
+				48D09A682C9F16D1000328E3 /* MyCanvas.swift in Sources */,
 				483DBC3E2C955ACE00C775BF /* LibraryView.swift in Sources */,
 				48D09A2C2C997CA8000328E3 /* ReadingState.swift in Sources */,
 				48D09A192C968163000328E3 /* DesignSystem.swift in Sources */,
@@ -522,6 +525,7 @@
 				48D09A2E2C9AE905000328E3 /* SearchResultDetailView.swift in Sources */,
 				483DBC352C932A1A00C775BF /* ButtonWrapper.swift in Sources */,
 				48D09A702CA053D3000328E3 /* DrawingView.swift in Sources */,
+				48D09A722CA05FB8000328E3 /* FullCapsuleButton.swift in Sources */,
 				48D09A282C991E1A000328E3 /* CaplusButton.swift in Sources */,
 				483DBC2F2C92E32D00C775BF /* String+.swift in Sources */,
 				483DBC3B2C94301300C775BF /* CatBookListViewModel.swift in Sources */,

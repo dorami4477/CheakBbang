@@ -63,23 +63,13 @@ struct BookDetailView: View {
                         }
                     }
                     
-
-                    Button(action: {
-
-                    }) {
-                        NavigationLink {
-                            NavigationLazyView(AddMemoView(item: item, memo: nil))
-                        } label: {
-                            Text("글귀 추가 하기")
-                                .font(.headline)
-                                .padding(.vertical, 10)
-                                .padding(.horizontal)
-                                .frame(maxWidth: 200)
-                                .background(.accent)
-                                .foregroundColor(.white)
-                                .clipShape(.capsule)
-                        }
+                    NavigationLink {
+                        NavigationLazyView(AddMemoView(item: item, memo: nil))
+                    } label: {
+                        Text("글귀 추가하기")
+                            .asfullCapsuleButton()
                     }
+                    
                 }
                 
                 Divider()
@@ -142,7 +132,7 @@ struct QuoteView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(memo.title)
+            Text(memo.contents ?? "")
                 .font(.body)
                 .multilineTextAlignment(.leading)
                 
