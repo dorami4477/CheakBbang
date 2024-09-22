@@ -10,6 +10,8 @@ import RealmSwift
 
 struct CatBookListView: View {
     @StateObject var viewModel = CatBookListViewModel()
+    @State private var showBubble = false
+    @State private var txtBubble: TextBubble = .phrase1
     
     var body: some View {
         GeometryReader { geometry in
@@ -21,7 +23,6 @@ struct CatBookListView: View {
                 VStack(spacing: 5) {
                     infoView()
                     ZStack {
-                        
                         VStack{
                             ScrollView(.vertical) {
                                // let safeAreaInsets = geometry.safeAreaInsets
@@ -60,7 +61,6 @@ struct CatBookListView: View {
                 } else {
                     bookRowView(item: item, align: alignment, padding: padding, isFirst: index % 5 == 0, isLast: false)
                         .padding(.bottom, index != 0 && index % 5 == 0 ? -50 : 0)
-                    
                 }
 
             }
@@ -77,6 +77,13 @@ struct CatBookListView: View {
                     .frame(width: 110, height: 73)
                     .zIndex(3)
                     .padding(.bottom, isLast ? -20 : 0)
+                    .onTapGesture {
+                        withAnimation(.bouncy) {
+                            showBubble = true
+                            txtBubble = TextBubble.allCases.randomElement()!
+                        }
+                        print(showBubble)
+                    }
             }
             
             NavigationLink {
@@ -122,6 +129,47 @@ struct CatBookListView: View {
                     .bold()
                     .font(.title2)
             }
+            
+            Spacer()
+            if showBubble {
+                VStack {
+                    Text(txtBubble.rawValue)
+                        .font(.system(size: 15))
+                        .bold()
+                        .padding(10)
+                        .background(
+                            RoundedRectangle(cornerRadius: 15)
+                                .fill(Color.white)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .stroke(Color.black, lineWidth: 2)
+                                )
+                        )
+                        .foregroundColor(.black)
+                        .padding(.top, 15)
+                    
+                    Triangle()
+                        .fill(Color.white)
+                        .frame(width: 13, height: 10)
+                        .rotationEffect(.degrees(180))
+                        .padding(.top, -10)
+                        .background {
+                            Triangle()
+                                .stroke(Color.black, lineWidth: 2)
+                                .frame(width: 13, height: 10)
+                                .rotationEffect(.degrees(180))
+                                .padding(.top, -5)
+                        }
+                }
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        withAnimation {
+                            showBubble = false
+                        }
+                    }
+                }
+            }
+            
             Spacer()
             VStack {
                 Text("Pages")
@@ -156,6 +204,18 @@ struct floatingButton: View {
                 .padding()
             }
         }
+    }
+}
+
+
+struct Triangle: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: rect.midX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
+        path.closeSubpath()
+        return path
     }
 }
 
