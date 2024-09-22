@@ -72,9 +72,10 @@ struct BookDetailView: View {
                         } label: {
                             Text("글귀 추가 하기")
                                 .font(.headline)
-                                .padding()
+                                .padding(.vertical, 10)
+                                .padding(.horizontal)
                                 .frame(maxWidth: 200)
-                                .background(Color.orange)
+                                .background(.accent)
                                 .foregroundColor(.white)
                                 .clipShape(.capsule)
                         }
@@ -165,7 +166,7 @@ struct QuoteView: View {
         .padding()
         .overlay(
             RoundedRectangle(cornerRadius: 20)
-                .stroke(Color.orange, lineWidth: 3)
+                .stroke(.accent, lineWidth: 3)
         )
     }
 }
