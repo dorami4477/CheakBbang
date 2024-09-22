@@ -7,29 +7,59 @@
 
 import SwiftUI
 import AVFoundation
+import PencilKit
 
 struct CustomCameraView : View {
     let cameraService = CameraService()
-    @Binding var capturedImage : Image?
+    @Binding var imageWithPen : Image?
+    @State var capturedImage : UIImage?
     @Environment(\.presentationMode) private var presentationMode
     
+    @Environment(\.undoManager) private var undoManager
+    @State private var canvasView = PKCanvasView()
+    
     var body: some View{
-        ZStack{
-            capturedImage?
-                .resizable()
-                .scaledToFill()
+        VStack{
+            Text(capturedImage == nil ? "간직하고 싶은 페이지를 촬영해주세요." : "마음에 드는 글귀에 밑줄을 그어주세요.")
+                .foregroundStyle(.gray)
+                .font(.system(size: 14))
+            
+            if let image = capturedImage {
+                ZStack {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFill()
+                    
+                    MyCanvas(canvasView: $canvasView, backgroundImage: capturedImage)
+                    
+                }
                 .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.width - 40)
                 .clipped()
-            
-            if capturedImage == nil {
+                
+                HStack {
+                    Button("Clear") {
+                        canvasView.drawing = PKDrawing()
+                    }
+                    Button("Undo") {
+                        undoManager?.undo()
+                    }
+                    Button("Redo") {
+                        undoManager?.redo()
+                    }
+                    Button("Save Drawing") {
+                        saveDrawing()
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }
+            } else {
                 CameraView(cameraService: cameraService) { result in
                     switch result{
                     case .success(let photo):
                         if let data = photo.fileDataRepresentation(){
-                            // 사진 버튼을 누르면 아래와 같이 동작
-                            //capturedImage = UIImage(data : data)
-                            capturedImage = Image(uiImage: UIImage(data : data)!)
+                            capturedImage = UIImage(data : data)
+                            canvasView.backgroundColor = .clear
                             //presentationMode.wrappedValue.dismiss()
+                            
                         }else{
                             print("Error : no image data found")
                         }
@@ -39,14 +69,31 @@ struct CustomCameraView : View {
                 }
                 .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.width - 40)
                 
-                VStack{
-                    Spacer()
-                    Button(action: {
-                        cameraService.capturePhoto()
-                    }, label: {Image(systemName: "circle").font(.system(size: 72)).foregroundColor(.black)})
-                }
+                
+                Button(action: {
+                    cameraService.capturePhoto()
+                }, label: {
+                    Image(systemName: "circle")
+                        .font(.system(size: 72))
+                        .foregroundColor(.black)
+                })
+                
             }
         }
+    }
+    
+    private func saveDrawing() {
+        let renderer = UIGraphicsImageRenderer(size: canvasView.bounds.size)
+
+        let combinedImage = renderer.image { context in
+            capturedImage?.draw(in: canvasView.bounds)
+
+            let drawingImage = canvasView.drawing.image(from: canvasView.bounds, scale: UIScreen.main.scale)
+            drawingImage.draw(in: canvasView.bounds)
+        }
+
+        imageWithPen = Image(uiImage: combinedImage)
+       //UIImageWriteToSavedPhotosAlbum(combinedImage, nil, nil, nil)
     }
 }
 

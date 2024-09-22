@@ -77,7 +77,7 @@ struct Writer: View {
             let drawingImage = canvasView.drawing.image(from: canvasView.bounds, scale: UIScreen.main.scale)
             drawingImage.draw(in: canvasView.bounds)
         }
-
+        
         // 이미지를 카메라 롤에 저장
         UIImageWriteToSavedPhotosAlbum(combinedImage, nil, nil, nil)
     }

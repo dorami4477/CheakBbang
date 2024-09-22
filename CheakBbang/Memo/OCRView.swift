@@ -52,11 +52,11 @@ struct OCRView: View {
         
 
 
-        VStack{
-            Spacer()
-            Button(action: {isCustomCameraViewPresented.toggle()}, label: {Image(systemName: "camera.fill").font(.largeTitle).padding().background(Color.black).foregroundColor(.white).clipShape(Circle())}).padding(.bottom).sheet(isPresented: $isCustomCameraViewPresented, content: {CustomCameraView(capturedImage: $image)})
-            // 실시간으로 카메라 영상이 보이는 화면 표시
-        }
+//        VStack{
+//            Spacer()
+//            Button(action: {isCustomCameraViewPresented.toggle()}, label: {Image(systemName: "camera.fill").font(.largeTitle).padding().background(Color.black).foregroundColor(.white).clipShape(Circle())}).padding(.bottom).sheet(isPresented: $isCustomCameraViewPresented, content: {CustomCameraView(capturedImage: $image)})
+//            // 실시간으로 카메라 영상이 보이는 화면 표시
+//        }
             
 
 

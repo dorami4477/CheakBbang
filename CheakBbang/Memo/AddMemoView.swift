@@ -79,8 +79,10 @@ struct AddMemoView: View {
     @State private var showAlert = false
     
     @State private var isCustomCameraViewPresented = false
+    @State private var isDrawingViewPresented = false
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var image: Image? = nil
+    @State private var pickerImage: UIImage? = nil
     
     @State var item: MyBook
     @State var memo: Memo?
@@ -155,13 +157,13 @@ struct AddMemoView: View {
                     .frame(maxWidth: 70, alignment: .leading)
                 
                 HStack(alignment: .top, spacing: 5) {
-                    image?
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 200, height: 200)
-                        .clipped()
-                        .cornerRadius(10)
-                    
+                        image?
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 200, height: 200)
+                            .clipped()
+                            .cornerRadius(10)
+
                     Button {
                         isCustomCameraViewPresented.toggle()
                     } label: {
@@ -171,12 +173,13 @@ struct AddMemoView: View {
                             .frame(width: 32, height: 32)
                     }
                     .sheet(isPresented: $isCustomCameraViewPresented, content: {
-                        CustomCameraView(capturedImage: $image)
+                        CustomCameraView(imageWithPen: $image)
                     })
                     
                     PhotosPicker(
                         selection: $selectedPhoto,
-                        matching: .all(of: [.screenshots, .images])
+                        matching: .images
+                                //.all(of: [.screenshots, .images])
                     ) {
                         Image("icon_gallery")
                             .resizable()
@@ -187,13 +190,20 @@ struct AddMemoView: View {
                         Task {
                             guard let newItem = newItem else { return }
                             do {
-                                image = try await newItem.loadTransferable(type: Image.self)
-                                print("Image loaded successfully")
+                                //image = try await newItem.loadTransferable(type: Image.self)
+                                isDrawingViewPresented = true
+                                if let imageData = try await newItem.loadTransferable(type: Data.self) {
+                                    pickerImage = UIImage(data: imageData)
+                                    isDrawingViewPresented = true
+                                }
                             } catch {
                                 print("Error loading image: \(error)")
                             }
                         }
                     }
+                    .sheet(isPresented: $isDrawingViewPresented, content: {
+                        DrawingView(imageWithPen: $image, perkerImage: $pickerImage)
+                    })
                     
 
                 }
