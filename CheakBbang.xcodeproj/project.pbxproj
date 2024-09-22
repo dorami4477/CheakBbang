@@ -61,7 +61,6 @@
 		48D09A5C2C9E6E77000328E3 /* AddMemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A5B2C9E6E77000328E3 /* AddMemoViewModel.swift */; };
 		48D09A622C9EE11D000328E3 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A612C9EE11D000328E3 /* CameraService.swift */; };
 		48D09A642C9EE184000328E3 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A632C9EE184000328E3 /* CameraView.swift */; };
-		48D09A662C9EE1B4000328E3 /* CameraContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A652C9EE1B4000328E3 /* CameraContentView.swift */; };
 		48D09A682C9F16D1000328E3 /* PencilTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A672C9F16D1000328E3 /* PencilTest.swift */; };
 		48D09A6A2C9FB885000328E3 /* TextBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A692C9FB885000328E3 /* TextBubble.swift */; };
 		48D09A6C2C9FE209000328E3 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 48D09A6B2C9FE209000328E3 /* .gitignore */; };
@@ -135,7 +134,6 @@
 		48D09A5B2C9E6E77000328E3 /* AddMemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemoViewModel.swift; sourceTree = "<group>"; };
 		48D09A612C9EE11D000328E3 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
 		48D09A632C9EE184000328E3 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
-		48D09A652C9EE1B4000328E3 /* CameraContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraContentView.swift; sourceTree = "<group>"; };
 		48D09A672C9F16D1000328E3 /* PencilTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilTest.swift; sourceTree = "<group>"; };
 		48D09A692C9FB885000328E3 /* TextBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBubble.swift; sourceTree = "<group>"; };
 		48D09A6B2C9FE209000328E3 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -397,7 +395,6 @@
 				48D09A532C9D6EE3000328E3 /* TestView.swift */,
 				48D09A612C9EE11D000328E3 /* CameraService.swift */,
 				48D09A632C9EE184000328E3 /* CameraView.swift */,
-				48D09A652C9EE1B4000328E3 /* CameraContentView.swift */,
 				48D09A672C9F16D1000328E3 /* PencilTest.swift */,
 			);
 			path = Memo;
@@ -514,7 +511,6 @@
 				48D09A642C9EE184000328E3 /* CameraView.swift in Sources */,
 				483DBC0D2C91789100C775BF /* AddBookView.swift in Sources */,
 				483DBC082C9170F300C775BF /* SearchViewModel.swift in Sources */,
-				48D09A662C9EE1B4000328E3 /* CameraContentView.swift in Sources */,
 				48D09A5C2C9E6E77000328E3 /* AddMemoViewModel.swift in Sources */,
 				483DBBFE2C9160CF00C775BF /* TargetType.swift in Sources */,
 				483DBC2A2C92B6EA00C775BF /* CoverFileManager.swift in Sources */,

@@ -8,10 +8,52 @@
 import SwiftUI
 import AVFoundation
 
-// 버튼 뒤에 나오는 실시간 화면
-struct CameraView : UIViewControllerRepresentable {
-   
+struct CustomCameraView : View {
+    let cameraService = CameraService()
+    @Binding var capturedImage : Image?
+    @Environment(\.presentationMode) private var presentationMode
     
+    var body: some View{
+        ZStack{
+            capturedImage?
+                .resizable()
+                .scaledToFill()
+                .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.width - 40)
+                .clipped()
+            
+            if capturedImage == nil {
+                CameraView(cameraService: cameraService) { result in
+                    switch result{
+                    case .success(let photo):
+                        if let data = photo.fileDataRepresentation(){
+                            // 사진 버튼을 누르면 아래와 같이 동작
+                            //capturedImage = UIImage(data : data)
+                            capturedImage = Image(uiImage: UIImage(data : data)!)
+                            //presentationMode.wrappedValue.dismiss()
+                        }else{
+                            print("Error : no image data found")
+                        }
+                    case .failure(let err):
+                        print(err.localizedDescription)
+                    }
+                }
+                .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.width - 40)
+                
+                VStack{
+                    Spacer()
+                    Button(action: {
+                        cameraService.capturePhoto()
+                    }, label: {Image(systemName: "circle").font(.system(size: 72)).foregroundColor(.black)})
+                }
+            }
+        }
+    }
+}
+
+// 버튼 뒤에 나오는 실시간 화면
+
+struct CameraView : UIViewControllerRepresentable {
+
     typealias UIViewControllerType = UIViewController
     
     // 카메라 보기 외부에서 캡처 사진에 엑세스하기를 원하기 때문에 카메라 서비스를 초기화해줘야함
@@ -33,10 +75,11 @@ struct CameraView : UIViewControllerRepresentable {
         // ViewController 선언
         let viewController = UIViewController()
         
-        viewController.view.backgroundColor = .blue
+        viewController.view.backgroundColor = .black
         viewController.view.layer.addSublayer(cameraService.previewLayer)
         // 이전에 클래스에 선언해둔 previewLayer
-        cameraService.previewLayer.frame = viewController.view.bounds
+        //cameraService.previewLayer.frame = viewController.view.bounds
+        cameraService.previewLayer.frame = CGRect(x: 0, y: 0, width: viewController.view.bounds.width - 40, height: viewController.view.bounds.width - 40)
         return viewController
     }
     
@@ -46,7 +89,7 @@ struct CameraView : UIViewControllerRepresentable {
     
     
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-        
+
     }
     
     // 실제로 원하는 대리자를 준수하게 된다.
@@ -78,39 +121,3 @@ struct CameraView : UIViewControllerRepresentable {
     
 }
 
-
-
-struct CustomCameraView : View
-{
-    let cameraService = CameraService()
-    //@Binding var capturedImage : UIImage?
-    @Binding var capturedImage : Image?
-    
-    @Environment(\.presentationMode) private var presentationMode
-    
-    var body: some View{
-        ZStack{
-            CameraView(cameraService: cameraService) { result in
-                switch result{
-                case .success(let photo):
-                    if let data = photo.fileDataRepresentation(){
-                        // 사진 버튼을 누르면 아래와 같이 동작
-                        //capturedImage = UIImage(data : data)
-                        capturedImage = Image(uiImage: UIImage(data : data)!)
-                        presentationMode.wrappedValue.dismiss()
-                    }else{
-                        print("Error : no image data found")
-                    }
-                case .failure(let err):
-                    print(err.localizedDescription)
-                }
-            }
-            VStack{
-                Spacer()
-                Button(action: {
-                    cameraService.capturePhoto()
-                }, label: {Image(systemName: "circle").font(.system(size: 72)).foregroundColor(.white)})
-            }
-        }
-    }
-}

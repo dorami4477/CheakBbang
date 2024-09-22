@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PhotosUI
 /*
 struct AddMemoView: View {
     @StateObject var viewModel = AddMemoViewModel()
@@ -75,12 +76,21 @@ struct AddMemoView: View {
 struct AddMemoView: View {    
     @StateObject var viewModel = AddMemoViewModel()
     @Environment(\.dismiss) private var dismiss
+    @State private var showAlert = false
+    
+    @State private var isCustomCameraViewPresented = false
+    @State private var selectedPhoto: PhotosPickerItem?
+    @State private var image: Image? = nil
     
     @State var item: MyBook
     @State var memo: Memo?
     
     @State private var page: String = ""
     @State private var content: String = ""
+    
+    var isEditing: Bool {
+        return memo != nil
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -101,6 +111,11 @@ struct AddMemoView: View {
                                 .stroke(.accent, lineWidth:5)
                                 .frame(height: 150)
                         }
+                        .onAppear {
+                            if let memo {
+                                content = memo.contents ?? ""
+                            }
+                        }
                     
                     if content.isEmpty {
                         Text("메모를 입력하세요.")
@@ -109,7 +124,7 @@ struct AddMemoView: View {
                     }
                 }
             }
-            // 페이지 필드
+
             HStack(alignment: .top) {
                 Text("페이지")
                     .font(.system(size: 17, weight: .bold))
@@ -122,47 +137,80 @@ struct AddMemoView: View {
                     .padding(.vertical, 8)
                     .background(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 2))
                     .frame(width: 80)
+                    .onAppear {
+                        if let memo {
+                            page = memo.page
+                        }
+                    }
                 
                 Text("전체 책에 대한 메모라면, 비워주세요!")
                     .foregroundColor(.gray)
                     .font(.system(size: 14))
             }
             
-            // 사진 추가
             HStack(alignment: .top) {
                 Text("사진")
                     .font(.system(size: 17, weight: .bold))
                     .foregroundColor(Color.black)
                     .frame(maxWidth: 70, alignment: .leading)
                 
-                HStack(spacing: 5) {
-                    // 카메라 버튼
-                    Button(action: {
-
-                    }) {
+                HStack(alignment: .top, spacing: 5) {
+                    image?
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 200, height: 200)
+                        .clipped()
+                        .cornerRadius(10)
+                    
+                    Button {
+                        isCustomCameraViewPresented.toggle()
+                    } label: {
                         Image("icon_camera")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 32, height: 32)
                     }
+                    .sheet(isPresented: $isCustomCameraViewPresented, content: {
+                        CustomCameraView(capturedImage: $image)
+                    })
                     
-                    // 사진 선택 버튼
-                    Button(action: {
-
-                    }) {
+                    PhotosPicker(
+                        selection: $selectedPhoto,
+                        matching: .all(of: [.screenshots, .images])
+                    ) {
                         Image("icon_gallery")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 32, height: 32)
                     }
+                    .onChange(of: selectedPhoto) { newItem in
+                        Task {
+                            guard let newItem = newItem else { return }
+                            do {
+                                image = try await newItem.loadTransferable(type: Image.self)
+                                print("Image loaded successfully")
+                            } catch {
+                                print("Error loading image: \(error)")
+                            }
+                        }
+                    }
+                    
+
                 }
             }
             
-            // 저장 버튼
             Button(action: {
-                // 저장 동작 추가
+                let newMemo = Memo(page: page, title: "", contents: content, date: Date())
+                
+                if isEditing {
+                    viewModel.action(.editButtonTap(memo: newMemo))
+                } else {
+                    viewModel.action(.addButtonTap(memo: newMemo))
+                }
+                
+                dismiss()
             }) {
-                Text("저장")
+                Text(isEditing ? "수정" : "저장")
                     .font(.system(size: 18, weight: .bold))
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 10)
@@ -171,10 +219,31 @@ struct AddMemoView: View {
                     .foregroundColor(.white)
                     .clipShape(.capsule)
             }
+            .disabled(content.isEmpty)
             
             Spacer()
+            
         }
         .padding()
         .navigationTitle("메모")
+        .onAppear{
+            viewModel.action(.viewOnAppear(item: item, memo: memo ?? Memo()))
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .topBarTrailing) {
+                Image(ImageName.trash)
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .wrapToButton {
+                        showAlert = true
+                    }
+                    .alert("정말 삭제 하시겠습니까?", isPresented: $showAlert) {
+                        Button("삭제") {
+                            //삭제 함수 구현해야함
+                        }
+                        Button("취소", role: .cancel) {}
+                    }
+            }
+        }
     }
 }
