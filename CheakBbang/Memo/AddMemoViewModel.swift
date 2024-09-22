@@ -29,6 +29,7 @@ extension AddMemoViewModel {
         let viewOnAppearMemo = PassthroughSubject<Memo, Never>()
         let addButtonTap = PassthroughSubject<Memo, Never>()
         let editButtonTap = PassthroughSubject<Memo, Never>()
+        let deleteButtonTap = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
@@ -61,6 +62,16 @@ extension AddMemoViewModel {
                 self?.$memo.contents.wrappedValue = item.contents
             }
             .store(in: &cancellables)
+        
+        input.deleteButtonTap
+            .sink { [weak self] _ in
+                guard let self else { return }
+            
+                if let index = self.item.memo.firstIndex(where: { $0.id == self.memo.id }) {
+                    $item.memo.remove(at: index)
+                }
+            }
+            .store(in: &cancellables)
     
     }
 
@@ -72,6 +83,7 @@ extension AddMemoViewModel {
         case viewOnAppear(item: MyBook, memo:Memo)
         case addButtonTap(memo : Memo)
         case editButtonTap(memo : Memo)
+        case deleteButtonTap
     }
     
     func action(_ action: Action) {
@@ -85,6 +97,9 @@ extension AddMemoViewModel {
             
         case .editButtonTap(let memo):
             input.editButtonTap.send(memo)
+            
+        case .deleteButtonTap:
+            input.deleteButtonTap.send(())
         }
     }
 }

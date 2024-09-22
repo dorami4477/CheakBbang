@@ -59,7 +59,7 @@ struct BookDetailView: View {
                     
                     VStack(spacing: 12) {
                         ForEach(item.memo, id:\.id) { memo in
-                            QuoteView(memo: memo)
+                            QuoteView(memo: memo, book: item)
                         }
                     }
                     
@@ -129,6 +129,7 @@ struct BookDetailView: View {
 
 struct QuoteView: View {
     var memo: Memo
+    var book: MyBook
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -145,7 +146,7 @@ struct QuoteView: View {
                 Spacer()
                 
                 NavigationLink {
-                    NavigationLazyView(AddMemoView(item: MyBook(), memo: memo))
+                    NavigationLazyView(AddMemoView(item: book, memo: memo))
                 } label: {
                     Image("icon_edit_small")
                         .resizable()
