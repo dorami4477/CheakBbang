@@ -13,7 +13,6 @@
 		483DBBDA2C90379500C775BF /* GitIgnoreSetting in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBD92C90379500C775BF /* GitIgnoreSetting */; };
 		483DBBDD2C903A7600C775BF /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBDC2C903A7600C775BF /* Localizable.xcstrings */; };
 		483DBBE02C903AD200C775BF /* CatBookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBDF2C903AD200C775BF /* CatBookListView.swift */; };
-		483DBBE32C903B3100C775BF /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBE22C903B3100C775BF /* APIKey.swift */; };
 		483DBBE62C903C9300C775BF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 483DBBE52C903C9300C775BF /* Alamofire */; };
 		483DBBE92C903D1200C775BF /* BookRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBE82C903D1200C775BF /* BookRouter.swift */; };
 		483DBBF72C9154C500C775BF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBF62C9154C500C775BF /* NetworkManager.swift */; };
@@ -65,6 +64,9 @@
 		48D09A642C9EE184000328E3 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A632C9EE184000328E3 /* CameraView.swift */; };
 		48D09A662C9EE1B4000328E3 /* CameraContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A652C9EE1B4000328E3 /* CameraContentView.swift */; };
 		48D09A682C9F16D1000328E3 /* PencilTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A672C9F16D1000328E3 /* PencilTest.swift */; };
+		48D09A6A2C9FB885000328E3 /* TextBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A692C9FB885000328E3 /* TextBubble.swift */; };
+		48D09A6C2C9FE209000328E3 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 48D09A6B2C9FE209000328E3 /* .gitignore */; };
+		48D09A6E2C9FE247000328E3 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A6D2C9FE247000328E3 /* APIKeys.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -89,7 +91,6 @@
 		483DBBD92C90379500C775BF /* GitIgnoreSetting */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GitIgnoreSetting; sourceTree = "<group>"; };
 		483DBBDC2C903A7600C775BF /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		483DBBDF2C903AD200C775BF /* CatBookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBookListView.swift; sourceTree = "<group>"; };
-		483DBBE22C903B3100C775BF /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		483DBBE82C903D1200C775BF /* BookRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRouter.swift; sourceTree = "<group>"; };
 		483DBBF62C9154C500C775BF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		483DBBF92C915A9400C775BF /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
@@ -138,6 +139,9 @@
 		48D09A632C9EE184000328E3 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		48D09A652C9EE1B4000328E3 /* CameraContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraContentView.swift; sourceTree = "<group>"; };
 		48D09A672C9F16D1000328E3 /* PencilTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilTest.swift; sourceTree = "<group>"; };
+		48D09A692C9FB885000328E3 /* TextBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBubble.swift; sourceTree = "<group>"; };
+		48D09A6B2C9FE209000328E3 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		48D09A6D2C9FE247000328E3 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +161,7 @@
 		483DBBBE2C90376C00C775BF = {
 			isa = PBXGroup;
 			children = (
+				48D09A6B2C9FE209000328E3 /* .gitignore */,
 				483DBBC92C90376C00C775BF /* CheakBbang */,
 				483DBBC82C90376C00C775BF /* Products */,
 			);
@@ -210,7 +215,7 @@
 			children = (
 				483DBBD92C90379500C775BF /* GitIgnoreSetting */,
 				483DBBCE2C90376E00C775BF /* Assets.xcassets */,
-				483DBBE22C903B3100C775BF /* APIKey.swift */,
+				48D09A6D2C9FE247000328E3 /* APIKeys.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -274,6 +279,7 @@
 			children = (
 				483DBC092C91723D00C775BF /* ViewModelType.swift */,
 				48D09A182C968163000328E3 /* DesignSystem.swift */,
+				48D09A692C9FB885000328E3 /* TextBubble.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -470,6 +476,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48D09A6C2C9FE209000328E3 /* .gitignore in Resources */,
 				483DBBDA2C90379500C775BF /* GitIgnoreSetting in Resources */,
 				483DBBD22C90376E00C775BF /* Preview Assets.xcassets in Resources */,
 				483DBBDD2C903A7600C775BF /* Localizable.xcstrings in Resources */,
@@ -486,6 +493,7 @@
 			files = (
 				48D09A1C2C96D6B1000328E3 /* BookDetailView.swift in Sources */,
 				48D09A3F2C9C093F000328E3 /* RadioButton.swift in Sources */,
+				48D09A6E2C9FE247000328E3 /* APIKeys.swift in Sources */,
 				483DBC0A2C91723D00C775BF /* ViewModelType.swift in Sources */,
 				48D09A3B2C9BEF88000328E3 /* EditBookView.swift in Sources */,
 				483DBC202C92AD5200C775BF /* MyBookRepository.swift in Sources */,
@@ -495,12 +503,12 @@
 				48D09A2C2C997CA8000328E3 /* ReadingState.swift in Sources */,
 				48D09A192C968163000328E3 /* DesignSystem.swift in Sources */,
 				483DBBE02C903AD200C775BF /* CatBookListView.swift in Sources */,
-				483DBBE32C903B3100C775BF /* APIKey.swift in Sources */,
 				48D09A152C95D316000328E3 /* MyLibraryView.swift in Sources */,
 				483DBBFA2C915A9400C775BF /* Book.swift in Sources */,
 				48D09A352C9B2123000328E3 /* RratingHeartView.swift in Sources */,
 				48D09A422C9C2AD0000328E3 /* AddMemoView.swift in Sources */,
 				48D09A132C95D209000328E3 /* LibraryTab.swift in Sources */,
+				48D09A6A2C9FB885000328E3 /* TextBubble.swift in Sources */,
 				483DBBF72C9154C500C775BF /* NetworkManager.swift in Sources */,
 				483DBC032C916CC200C775BF /* SearchView.swift in Sources */,
 				483DBC062C916EC400C775BF /* NavigationLazyView.swift in Sources */,

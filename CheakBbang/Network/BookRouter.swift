@@ -16,7 +16,7 @@ enum BookRouter {
 extension BookRouter: TargetType {
 
     var baseURL: String {
-        return APIKey.baseUrl
+        return APIKeys.baseUrl
     }
     
     var path: String {
@@ -36,7 +36,7 @@ extension BookRouter: TargetType {
         switch self {
         case .list(let query):
             return [
-                URLQueryItem(name: "ttbkey", value: APIKey.key),
+                URLQueryItem(name: "ttbkey", value: APIKeys.key),
                 URLQueryItem(name: "query", value: query),
                 URLQueryItem(name: "QueryType", value: "Title"),
                 URLQueryItem(name: "MaxResults", value: "10"),
@@ -49,7 +49,7 @@ extension BookRouter: TargetType {
             ]
         case .item(let id):
             return [
-                URLQueryItem(name: "ttbkey", value: APIKey.key),
+                URLQueryItem(name: "ttbkey", value: APIKeys.key),
                 URLQueryItem(name: "itemIdType", value: "ISBN"),
                 URLQueryItem(name: "Cover", value: "Big"),
                 URLQueryItem(name: "ItemId", value: id),
