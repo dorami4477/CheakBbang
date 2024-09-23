@@ -58,7 +58,7 @@ struct BookDetailView: View {
                     }
                     
                     VStack(spacing: 12) {
-                        ForEach(item.memo, id:\.id) { memo in
+                        ForEach(item.memo.sorted(by: { $0.date > $1.date }), id:\.id) { memo in
                             QuoteView(memo: memo, book: item)
                         }
                     }
@@ -84,7 +84,7 @@ struct BookDetailView: View {
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 NavigationLink {
-                    EditBookView(book: item, viewModel: EditBookViewModel())
+                    EditBookView(viewModel: EditBookViewModel(), book: item)
                 } label: {
                     Image(ImageName.edit)
                         .resizable()
@@ -139,7 +139,7 @@ struct QuoteView: View {
                 
             
             HStack {
-                Text("\(memo.page)p")
+                Text("\(memo.page == "" ? "전체소감" : memo.page + "p")")
                     .font(.caption)
                     .foregroundColor(.gray)
                 

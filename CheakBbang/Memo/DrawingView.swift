@@ -14,12 +14,12 @@ struct DrawingView: View {
     @Environment(\.undoManager) private var undoManager
     
     @Binding var imageWithPen : Image?
-    @Binding var perkerImage : UIImage?
+    @Binding var pickerImage : UIImage?
     @State private var canvasView = PKCanvasView()
     
     var body: some View{
         VStack{
-            if let image = perkerImage {
+            if let image = pickerImage {
                 Text("마음에 드는 글귀에 밑줄을 그어주세요.")
                     .foregroundStyle(.gray)
                     .font(.system(size: 14))
@@ -29,7 +29,7 @@ struct DrawingView: View {
                         .resizable()
                         .scaledToFill()
                 
-                    MyCanvas(canvasView: $canvasView, backgroundImage: perkerImage)
+                    MyCanvas(canvasView: $canvasView, backgroundImage: pickerImage)
 
                 }
                 .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.width - 40)
@@ -63,7 +63,7 @@ struct DrawingView: View {
         let renderer = UIGraphicsImageRenderer(size: canvasView.bounds.size)
 
         let combinedImage = renderer.image { context in
-            perkerImage?.draw(in: canvasView.bounds)
+            pickerImage?.draw(in: canvasView.bounds)
 
             let drawingImage = canvasView.drawing.image(from: canvasView.bounds, scale: UIScreen.main.scale)
             drawingImage.draw(in: canvasView.bounds)

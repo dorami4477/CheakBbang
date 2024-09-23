@@ -54,12 +54,6 @@ struct AddMemoView: View {
                                 content = memo.contents ?? ""
                             }
                         }
-                    
-                    if content.isEmpty {
-                        Text("메모를 입력하세요.")
-                            .foregroundColor(.gray)
-                            .padding(12)
-                    }
                 }
             }
 
@@ -69,7 +63,7 @@ struct AddMemoView: View {
                     .foregroundColor(Color.black)
                     .frame(maxWidth: 70, alignment: .leading)
                 
-                TextField("페이지", text: $page)
+                TextField("", text: $page)
                     .keyboardType(.numberPad)
                     .multilineTextAlignment(.center)
                     .padding(.vertical, 8)
@@ -136,7 +130,7 @@ struct AddMemoView: View {
                         }
                     }
                     .sheet(isPresented: $isDrawingViewPresented, content: {
-                        DrawingView(imageWithPen: $image, perkerImage: $pickerImage)
+                        DrawingView(imageWithPen: $image, pickerImage: $pickerImage)
                     })
                     
 
@@ -149,9 +143,9 @@ struct AddMemoView: View {
                     let newMemo = Memo(page: page, title: "", contents: content, date: Date())
                     
                     if isEditing {
-                        viewModel.action(.editButtonTap(memo: newMemo))
+                        viewModel.action(.editButtonTap(memo: newMemo, image: image))
                     } else {
-                        viewModel.action(.addButtonTap(memo: newMemo))
+                        viewModel.action(.addButtonTap(memo: newMemo, image: image))
                     }
                     
                     dismiss()

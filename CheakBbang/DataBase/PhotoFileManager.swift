@@ -1,18 +1,47 @@
 //
-//  CoverFileManager.swift
+//  PhotoFileManager.swift
 //  CheakBbang
 //
 //  Created by 박다현 on 9/12/24.
 //
 
-import UIKit
+import SwiftUI
 
-final class CoverFileManager{
+final class PhotoFileManager{
     
-    static let shared = CoverFileManager()
+    static let shared = PhotoFileManager()
     private init() {}
     
     //Create
+    func saveImageToDocument(image: Image, filename: String) {
+        guard let uiImage = image.asUIImage() else {
+            print("UIImage로 변환실패")
+            return
+        }
+
+        guard let documentDirectory = FileManager.default.urls(
+            for: .documentDirectory,
+            in: .userDomainMask).first else {
+            print("Failed to get document directory")
+            return
+        }
+
+        let fileURL = documentDirectory.appendingPathComponent("\(filename).jpg")
+
+        guard let imageData = uiImage.jpegData(compressionQuality: 0.5) else {
+            print("Failed to convert image to JPEG data")
+            return
+        }
+
+        do {
+            try imageData.write(to: fileURL)
+            print("Image saved successfully at: \(fileURL)")
+        } catch {
+            print("Failed to save image: \(error)")
+        }
+    }
+
+    /*
     func saveImageToDocument(imageURL: String, filename: String) {
         guard let url = URL(string: imageURL) else {
             print("Invalid URL string")
@@ -54,7 +83,7 @@ final class CoverFileManager{
         }
         task.resume()
     }
-    
+    */
     //get FileURL
     func loadFileURL(filename: String) -> URL? {
         guard let documentDirectory = FileManager.default.urls(

@@ -68,6 +68,7 @@ struct AddBookView: View {
             Spacer()
             
             Text("추가")
+                .asfullCapsuleButton()
                 .wrapToButton {
                     viewModel.action(.addButtonTap)
                     isSaved = true

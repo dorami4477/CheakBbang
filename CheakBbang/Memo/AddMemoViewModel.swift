@@ -8,6 +8,7 @@
 import Foundation
 import RealmSwift
 import Combine
+import SwiftUI
 
 final class AddMemoViewModel: ViewModelType {
     @ObservedRealmObject var item: MyBook = MyBook()
@@ -27,8 +28,8 @@ extension AddMemoViewModel {
     struct Input {
         let viewOnAppear = PassthroughSubject<MyBook, Never>()
         let viewOnAppearMemo = PassthroughSubject<Memo, Never>()
-        let addButtonTap = PassthroughSubject<Memo, Never>()
-        let editButtonTap = PassthroughSubject<Memo, Never>()
+        let addButtonTap = PassthroughSubject<(Memo, Image?), Never>()
+        let editButtonTap = PassthroughSubject<(Memo, Image?), Never>()
         let deleteButtonTap = PassthroughSubject<Void, Never>()
     }
     
@@ -50,16 +51,23 @@ extension AddMemoViewModel {
             .store(in: &cancellables)
         
         input.addButtonTap
-            .sink { [weak self] item in
-                self?.$item.memo.append(item)
+            .sink { [weak self] (memo, image) in
+                self?.$item.memo.append(memo)
+                guard let image else { return }
+                PhotoFileManager.shared.saveImageToDocument(image: image, filename: "\(memo.id)")
             }
             .store(in: &cancellables)
         
         input.editButtonTap
-            .sink { [weak self] item in
-                self?.$memo.page.wrappedValue = item.page
-                self?.$memo.title.wrappedValue = item.title
-                self?.$memo.contents.wrappedValue = item.contents
+            .sink { [weak self] (memo, image) in
+                guard let self else { return }
+                self.$memo.page.wrappedValue = memo.page
+                self.$memo.title.wrappedValue = memo.title
+                self.$memo.contents.wrappedValue = memo.contents
+                
+                PhotoFileManager.shared.removeImageFromDocument(filename: "\(self.memo.id)")
+                guard let image else { return }
+                PhotoFileManager.shared.saveImageToDocument(image: image, filename: "\(memo.id)")
             }
             .store(in: &cancellables)
         
@@ -68,6 +76,7 @@ extension AddMemoViewModel {
                 guard let self else { return }
             
                 if let index = self.item.memo.firstIndex(where: { $0.id == self.memo.id }) {
+                    PhotoFileManager.shared.removeImageFromDocument(filename: "\(self.memo.id)")
                     $item.memo.remove(at: index)
                 }
             }
@@ -81,8 +90,8 @@ extension AddMemoViewModel {
 extension AddMemoViewModel {
     enum Action {
         case viewOnAppear(item: MyBook, memo:Memo)
-        case addButtonTap(memo : Memo)
-        case editButtonTap(memo : Memo)
+        case addButtonTap(memo : Memo, image: Image?)
+        case editButtonTap(memo : Memo, image: Image?)
         case deleteButtonTap
     }
     
@@ -92,14 +101,15 @@ extension AddMemoViewModel {
             input.viewOnAppear.send(item)
             input.viewOnAppearMemo.send(memo)
             
-        case .addButtonTap(let memo):
-            input.addButtonTap.send(memo)
+        case .addButtonTap(let memo, let image):
+            input.addButtonTap.send((memo, image ?? nil))
             
-        case .editButtonTap(let memo):
-            input.editButtonTap.send(memo)
+        case .editButtonTap(let memo, let image):
+            input.editButtonTap.send((memo, image ?? nil))
             
         case .deleteButtonTap:
             input.deleteButtonTap.send(())
+
         }
     }
 }

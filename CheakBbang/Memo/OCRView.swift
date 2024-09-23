@@ -63,7 +63,7 @@ struct OCRView: View {
     }
     
     func ocr(_ image: Image) {
-        guard let uiImage = image.toUIImage() else { return }
+        guard let uiImage = image.asUIImage() else { return }
         
         if let cgImage = uiImage.cgImage {
             
