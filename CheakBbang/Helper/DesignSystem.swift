@@ -21,4 +21,8 @@ enum ImageName {
     static let upcoming = "icon_progress_upcoming"
     static let ratingHeartFill = "icon_heart_01"
     static let ratingHeart = "icon_heart_03"
+    static let dwMarker = "icon_dw_marker"
+    static let dwClear = "icon_dw_clear"
+    static let dwUndo = "icon_dw_undo"
+    static let dwRedo = "icon_dw_redo"
 }

@@ -37,21 +37,36 @@ struct DrawingView: View {
             }
             
             VStack{
-                HStack {
-                    Button("Clear") {
-                        canvasView.drawing = PKDrawing()
-                    }
-                    Button("Undo") {
-                        undoManager?.undo()
-                    }
-                    Button("Redo") {
-                        undoManager?.redo()
-                    }
-                    Button("Save Drawing") {
+                HStack(spacing: 10) {
+                    Image(ImageName.dwMarker)
+                        .resizable()
+                        .frame(width: 40, height: 60)
+                    Image(ImageName.dwClear)
+                        .resizable()
+                        .frame(width: 40, height: 60)
+                        .wrapToButton {
+                            canvasView.drawing = PKDrawing()
+                        }
+                    Image(ImageName.dwUndo)
+                        .resizable()
+                        .frame(width: 40, height: 60)
+                        .wrapToButton {
+                            undoManager?.undo()
+                        }
+                    Image(ImageName.dwRedo)
+                        .resizable()
+                        .frame(width: 40, height: 60)
+                        .wrapToButton {
+                            undoManager?.redo()
+                        }
+                }
+                Text("저장")
+                    .asfullCapsuleButton()
+                    .wrapToButton {
                         saveDrawing()
                         presentationMode.wrappedValue.dismiss()
                     }
-                }
+                    .padding()
             }
         }
         .onAppear{

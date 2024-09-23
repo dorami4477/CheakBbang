@@ -36,20 +36,37 @@ struct CustomCameraView : View {
                 .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.width - 40)
                 .clipped()
                 
-                HStack {
-                    Button("Clear") {
-                        canvasView.drawing = PKDrawing()
+                VStack{
+                    HStack(spacing: 10) {
+                        Image(ImageName.dwMarker)
+                            .resizable()
+                            .frame(width: 40, height: 60)
+                        Image(ImageName.dwClear)
+                            .resizable()
+                            .frame(width: 40, height: 60)
+                            .wrapToButton {
+                                canvasView.drawing = PKDrawing()
+                            }
+                        Image(ImageName.dwUndo)
+                            .resizable()
+                            .frame(width: 40, height: 60)
+                            .wrapToButton {
+                                undoManager?.undo()
+                            }
+                        Image(ImageName.dwRedo)
+                            .resizable()
+                            .frame(width: 40, height: 60)
+                            .wrapToButton {
+                                undoManager?.redo()
+                            }
                     }
-                    Button("Undo") {
-                        undoManager?.undo()
-                    }
-                    Button("Redo") {
-                        undoManager?.redo()
-                    }
-                    Button("Save Drawing") {
-                        saveDrawing()
-                        presentationMode.wrappedValue.dismiss()
-                    }
+                    Text("저장")
+                        .asfullCapsuleButton()
+                        .wrapToButton {
+                            saveDrawing()
+                            presentationMode.wrappedValue.dismiss()
+                        }
+                        .padding()
                 }
             } else {
                 CameraView(cameraService: cameraService) { result in
