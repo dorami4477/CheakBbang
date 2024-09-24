@@ -64,10 +64,9 @@ extension AddMemoViewModel {
                 guard let self else { return }
                 self.$memo.page.wrappedValue = memo.page
                 self.$memo.contents.wrappedValue = memo.contents
-                
-                PhotoFileManager.shared.removeImageFromDocument(filename: "\(self.memo.id)")
+
                 guard let image else { return }
-                PhotoFileManager.shared.saveImageToDocument(image: image, filename: "\(memo.id)")
+                PhotoFileManager.shared.saveImageToDocument(image: image, filename: "\(self.memo.id)")
             }
             .store(in: &cancellables)
         

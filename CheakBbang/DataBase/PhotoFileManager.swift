@@ -21,16 +21,20 @@ final class PhotoFileManager{
             print("Failed to get document directory")
             return
         }
-
+        
         let fileURL = documentDirectory.appendingPathComponent("\(filename).jpg")
-
+        
         guard let imageData = image.jpegData(compressionQuality: 0.5) else {
             print("Failed to convert image to JPEG data")
             return
         }
-
+        
         do {
-            try imageData.write(to: fileURL)
+            if FileManager.default.fileExists(atPath: fileURL.path) {
+                try FileManager.default.removeItem(at: fileURL)
+            }
+            
+            try imageData.write(to: fileURL, options: .atomic)
             print("Image saved successfully at: \(fileURL)")
         } catch {
             print("Failed to save image: \(error)")
@@ -71,6 +75,8 @@ final class PhotoFileManager{
             }
         }
     }
+    
+
     
     //Delete All
     func removeAllImagesFromDocument() {
