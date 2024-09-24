@@ -12,7 +12,7 @@ struct BookCover: View {
     var size: CGSize
     
     var body: some View {
-        ImageWrapper(url: coverUrl)
+        ImageWrapper(url: URL(string: coverUrl))
             .frame(width: size.width * 0.77, height: size.width * 1.15)
             .clipped()
             .overlay(alignment: .top) {

@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ImageWrapper: View {
-    let url:String
+    let url:URL?
     
     var body: some View {
-        AsyncImage(url: URL(string: url)) { image in
+        AsyncImage(url: url) { image in
             switch image {
             case .empty:
                 Image(systemName: "star")

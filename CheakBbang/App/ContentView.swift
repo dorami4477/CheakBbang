@@ -38,7 +38,6 @@ struct ContentView: View {
                         Image(systemName: "3.square.fill")
                         Text("third")
                     }
-                
             }
         }
 

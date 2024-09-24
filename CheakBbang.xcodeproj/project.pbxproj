@@ -69,6 +69,7 @@
 		48D09A752CA15EA4000328E3 /* MemoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A742CA15EA4000328E3 /* MemoList.swift */; };
 		48D09A772CA27EDC000328E3 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A762CA27EDC000328E3 /* View+.swift */; };
 		48D09A792CA29D08000328E3 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A782CA29D08000328E3 /* UIApplication+.swift */; };
+		48D09A832CA2F766000328E3 /* MemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A822CA2F766000328E3 /* MemoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -146,6 +147,7 @@
 		48D09A742CA15EA4000328E3 /* MemoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoList.swift; sourceTree = "<group>"; };
 		48D09A762CA27EDC000328E3 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		48D09A782CA29D08000328E3 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
+		48D09A822CA2F766000328E3 /* MemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -416,6 +418,7 @@
 			isa = PBXGroup;
 			children = (
 				48D09A742CA15EA4000328E3 /* MemoList.swift */,
+				48D09A822CA2F766000328E3 /* MemoView.swift */,
 			);
 			path = MemoList;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				48D09A682C9F16D1000328E3 /* MyCanvas.swift in Sources */,
 				483DBC3E2C955ACE00C775BF /* LibraryView.swift in Sources */,
 				48D09A2C2C997CA8000328E3 /* ReadingState.swift in Sources */,
+				48D09A832CA2F766000328E3 /* MemoView.swift in Sources */,
 				48D09A192C968163000328E3 /* DesignSystem.swift in Sources */,
 				483DBBE02C903AD200C775BF /* CatBookListView.swift in Sources */,
 				48D09A152C95D316000328E3 /* MyLibraryView.swift in Sources */,
