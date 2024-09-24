@@ -13,12 +13,8 @@ final class PhotoFileManager{
     private init() {}
     
     //Create
-    func saveImageToDocument(image: Image, filename: String) {
-        guard let uiImage = image.asUIImage() else {
-            print("UIImage로 변환실패")
-            return
-        }
-
+    func saveImageToDocument(image: UIImage, filename: String) {
+        
         guard let documentDirectory = FileManager.default.urls(
             for: .documentDirectory,
             in: .userDomainMask).first else {
@@ -28,7 +24,7 @@ final class PhotoFileManager{
 
         let fileURL = documentDirectory.appendingPathComponent("\(filename).jpg")
 
-        guard let imageData = uiImage.jpegData(compressionQuality: 0.5) else {
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
             print("Failed to convert image to JPEG data")
             return
         }

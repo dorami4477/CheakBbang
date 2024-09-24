@@ -17,7 +17,7 @@ struct AddMemoView: View {
     @State private var isDrawingViewPresented = false
     
     @State private var selectedPhoto: PhotosPickerItem?
-    @State private var image: Image? = nil
+    @State private var image: UIImage? = nil
     @State private var pickerImage: UIImage? = nil
     
     @State var item: MyBook
@@ -88,13 +88,14 @@ struct AddMemoView: View {
                         .frame(maxWidth: 70, alignment: .leading)
                     
                     HStack(alignment: .top, spacing: 5) {
-                        image?
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 200, height: 200)
-                            .clipped()
-                            .cornerRadius(10)
-                        
+                        if let image {
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 200, height: 200)
+                                .clipped()
+                                .cornerRadius(10)
+                        }
                         Button {
                             isCustomCameraViewPresented.toggle()
                         } label: {

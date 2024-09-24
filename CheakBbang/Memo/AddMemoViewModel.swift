@@ -8,7 +8,8 @@
 import Foundation
 import RealmSwift
 import Combine
-import SwiftUI
+import UIKit
+
 
 final class AddMemoViewModel: ViewModelType {
     @ObservedRealmObject var item: MyBook = MyBook()
@@ -28,8 +29,8 @@ extension AddMemoViewModel {
     struct Input {
         let viewOnAppear = PassthroughSubject<MyBook, Never>()
         let viewOnAppearMemo = PassthroughSubject<Memo, Never>()
-        let addButtonTap = PassthroughSubject<(Memo, Image?), Never>()
-        let editButtonTap = PassthroughSubject<(Memo, Image?), Never>()
+        let addButtonTap = PassthroughSubject<(Memo, UIImage?), Never>()
+        let editButtonTap = PassthroughSubject<(Memo, UIImage?), Never>()
         let deleteButtonTap = PassthroughSubject<Void, Never>()
     }
     
@@ -89,8 +90,8 @@ extension AddMemoViewModel {
 extension AddMemoViewModel {
     enum Action {
         case viewOnAppear(item: MyBook, memo:Memo)
-        case addButtonTap(memo : Memo, image: Image?)
-        case editButtonTap(memo : Memo, image: Image?)
+        case addButtonTap(memo : Memo, image: UIImage?)
+        case editButtonTap(memo : Memo, image: UIImage?)
         case deleteButtonTap
     }
     

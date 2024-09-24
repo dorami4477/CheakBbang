@@ -11,7 +11,7 @@ import PencilKit
 
 struct CustomCameraView : View {
     let cameraService = CameraService()
-    @Binding var imageWithPen : Image?
+    @Binding var imageWithPen : UIImage?
     @State var capturedImage : UIImage?
     @Environment(\.presentationMode) private var presentationMode
     
@@ -109,7 +109,7 @@ struct CustomCameraView : View {
             drawingImage.draw(in: canvasView.bounds)
         }
 
-        imageWithPen = Image(uiImage: combinedImage)
+        imageWithPen = combinedImage
        //UIImageWriteToSavedPhotosAlbum(combinedImage, nil, nil, nil)
     }
 }

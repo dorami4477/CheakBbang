@@ -13,7 +13,7 @@ struct DrawingView: View {
     @Environment(\.presentationMode) private var presentationMode
     @Environment(\.undoManager) private var undoManager
     
-    @Binding var imageWithPen : Image?
+    @Binding var imageWithPen : UIImage?
     @Binding var pickerImage : UIImage?
     @State private var canvasView = PKCanvasView()
     
@@ -84,7 +84,7 @@ struct DrawingView: View {
             drawingImage.draw(in: canvasView.bounds)
         }
 
-        imageWithPen = Image(uiImage: combinedImage)
+        imageWithPen = combinedImage
     }
 }
 
