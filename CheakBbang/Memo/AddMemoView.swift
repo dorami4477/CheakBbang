@@ -26,16 +26,12 @@ struct AddMemoView: View {
     @State private var page: String = ""
     @State private var content: String = ""
     
-    @FocusState private var focusedField: Field?
     var isEditing: Bool {
         return memo != nil
     }
     
-    enum Field: Int, CaseIterable {
-            case content, page
-        }
-    
     var body: some View {
+        ScrollView {
             VStack(alignment: .leading, spacing: 20) {
                 
                 HStack(alignment: .top) {
@@ -54,7 +50,6 @@ struct AddMemoView: View {
                                     .stroke(.accent, lineWidth:5)
                                     .frame(height: 150)
                             }
-                            .focused($focusedField, equals: .content)
                             .onAppear {
                                 if let memo {
                                     content = memo.contents
@@ -75,7 +70,6 @@ struct AddMemoView: View {
                         .padding(.vertical, 8)
                         .background(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 2))
                         .frame(width: 80)
-                        .focused($focusedField, equals: .page)
                         .onAppear {
                             if let memo {
                                 page = memo.page
@@ -163,7 +157,12 @@ struct AddMemoView: View {
                 
             }
             .padding()
+        }
+            .onTapGesture(perform: {
+                UIApplication.shared.endEditing()
+            })
             .navigationTitle("메모")
+            .navigationBarTitleDisplayMode(.inline)
             .onAppear{
                 viewModel.action(.viewOnAppear(item: item, memo: memo ?? Memo()))
             }
@@ -188,3 +187,4 @@ struct AddMemoView: View {
             }
     }
 }
+

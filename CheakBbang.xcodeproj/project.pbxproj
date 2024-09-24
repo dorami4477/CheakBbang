@@ -69,7 +69,6 @@
 		48D09A752CA15EA4000328E3 /* MemoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A742CA15EA4000328E3 /* MemoList.swift */; };
 		48D09A772CA27EDC000328E3 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A762CA27EDC000328E3 /* View+.swift */; };
 		48D09A792CA29D08000328E3 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A782CA29D08000328E3 /* UIApplication+.swift */; };
-		48D09A7D2CA2A63F000328E3 /* TextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A7C2CA2A63F000328E3 /* TextFieldType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -147,7 +146,6 @@
 		48D09A742CA15EA4000328E3 /* MemoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoList.swift; sourceTree = "<group>"; };
 		48D09A762CA27EDC000328E3 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		48D09A782CA29D08000328E3 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
-		48D09A7C2CA2A63F000328E3 /* TextFieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -387,7 +385,6 @@
 				48D09A212C9825D9000328E3 /* BookCover.swift */,
 				48D09A342C9B2123000328E3 /* RratingHeartView.swift */,
 				48D09A3E2C9C093F000328E3 /* RadioButton.swift */,
-				48D09A7C2CA2A63F000328E3 /* TextFieldType.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -560,7 +557,6 @@
 				48D09A4E2C9D63C7000328E3 /* OCRView.swift in Sources */,
 				483DBBE92C903D1200C775BF /* BookRouter.swift in Sources */,
 				48D09A202C98243C000328E3 /* BookListRow.swift in Sources */,
-				48D09A7D2CA2A63F000328E3 /* TextFieldType.swift in Sources */,
 				48D09A3D2C9BFF64000328E3 /* EditBookViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
