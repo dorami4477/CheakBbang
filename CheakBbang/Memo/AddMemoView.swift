@@ -26,158 +26,165 @@ struct AddMemoView: View {
     @State private var page: String = ""
     @State private var content: String = ""
     
+    @FocusState private var focusedField: Field?
     var isEditing: Bool {
         return memo != nil
     }
     
+    enum Field: Int, CaseIterable {
+            case content, page
+        }
+    
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            
-            HStack(alignment: .top) {
-                Text("내용*")
-                    .font(.system(size: 17, weight: .bold))
-                    .foregroundColor(Color.black)
-                    .frame(maxWidth: 70, alignment: .leading)
+            VStack(alignment: .leading, spacing: 20) {
                 
-                ZStack(alignment: .topLeading) {
-                    TextEditor(text: $content)
-                        .background(Color.white)
-                        .frame(height: 150)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .background {
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(.accent, lineWidth:5)
-                                .frame(height: 150)
-                        }
+                HStack(alignment: .top) {
+                    Text("내용*")
+                        .font(.system(size: 17, weight: .bold))
+                        .foregroundColor(Color.black)
+                        .frame(maxWidth: 70, alignment: .leading)
+                    
+                    ZStack(alignment: .topLeading) {
+                        TextEditor(text: $content)
+                            .background(Color.white)
+                            .frame(height: 150)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .background {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(.accent, lineWidth:5)
+                                    .frame(height: 150)
+                            }
+                            .focused($focusedField, equals: .content)
+                            .onAppear {
+                                if let memo {
+                                    content = memo.contents
+                                }
+                            }
+                    }
+                }
+                
+                HStack(alignment: .top) {
+                    Text("페이지")
+                        .font(.system(size: 17, weight: .bold))
+                        .foregroundColor(Color.black)
+                        .frame(maxWidth: 70, alignment: .leading)
+                    
+                    TextField("", text: $page)
+                        .keyboardType(.numberPad)
+                        .multilineTextAlignment(.center)
+                        .padding(.vertical, 8)
+                        .background(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 2))
+                        .frame(width: 80)
+                        .focused($focusedField, equals: .page)
                         .onAppear {
                             if let memo {
-                                content = memo.contents ?? ""
+                                page = memo.page
                             }
                         }
+                    
+                    Text("전체 책에 대한 메모라면, 비워주세요!")
+                        .foregroundColor(.gray)
+                        .font(.system(size: 14))
                 }
-            }
-
-            HStack(alignment: .top) {
-                Text("페이지")
-                    .font(.system(size: 17, weight: .bold))
-                    .foregroundColor(Color.black)
-                    .frame(maxWidth: 70, alignment: .leading)
                 
-                TextField("", text: $page)
-                    .keyboardType(.numberPad)
-                    .multilineTextAlignment(.center)
-                    .padding(.vertical, 8)
-                    .background(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 2))
-                    .frame(width: 80)
-                    .onAppear {
-                        if let memo {
-                            page = memo.page
-                        }
-                    }
-                
-                Text("전체 책에 대한 메모라면, 비워주세요!")
-                    .foregroundColor(.gray)
-                    .font(.system(size: 14))
-            }
-            
-            HStack(alignment: .top) {
-                Text("사진")
-                    .font(.system(size: 17, weight: .bold))
-                    .foregroundColor(Color.black)
-                    .frame(maxWidth: 70, alignment: .leading)
-                
-                HStack(alignment: .top, spacing: 5) {
+                HStack(alignment: .top) {
+                    Text("사진")
+                        .font(.system(size: 17, weight: .bold))
+                        .foregroundColor(Color.black)
+                        .frame(maxWidth: 70, alignment: .leading)
+                    
+                    HStack(alignment: .top, spacing: 5) {
                         image?
                             .resizable()
                             .scaledToFill()
                             .frame(width: 200, height: 200)
                             .clipped()
                             .cornerRadius(10)
-
-                    Button {
-                        isCustomCameraViewPresented.toggle()
-                    } label: {
-                        Image("icon_camera")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 32, height: 32)
-                    }
-                    .sheet(isPresented: $isCustomCameraViewPresented, content: {
-                        CustomCameraView(imageWithPen: $image)
-                    })
-                    
-                    PhotosPicker(
-                        selection: $selectedPhoto,
-                        matching: .images
-                    ) {
-                        Image("icon_gallery")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 32, height: 32)
-                    }
-                    .onChange(of: selectedPhoto) { newItem in
-                        Task {
-                            guard let newItem = newItem else { return }
-                            do {
-                                //image = try await newItem.loadTransferable(type: Image.self)
-                                if let imageData = try await newItem.loadTransferable(type: Data.self) {
-                                    pickerImage = UIImage(data: imageData)
-                                    isDrawingViewPresented = true
+                        
+                        Button {
+                            isCustomCameraViewPresented.toggle()
+                        } label: {
+                            Image("icon_camera")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 32, height: 32)
+                        }
+                        .sheet(isPresented: $isCustomCameraViewPresented, content: {
+                            CustomCameraView(imageWithPen: $image)
+                        })
+                        
+                        PhotosPicker(
+                            selection: $selectedPhoto,
+                            matching: .images
+                        ) {
+                            Image("icon_gallery")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 32, height: 32)
+                        }
+                        .onChange(of: selectedPhoto) { newItem in
+                            Task {
+                                guard let newItem = newItem else { return }
+                                do {
+                                    //image = try await newItem.loadTransferable(type: Image.self)
+                                    if let imageData = try await newItem.loadTransferable(type: Data.self) {
+                                        pickerImage = UIImage(data: imageData)
+                                        isDrawingViewPresented = true
+                                    }
+                                } catch {
+                                    print("Error loading image: \(error)")
                                 }
-                            } catch {
-                                print("Error loading image: \(error)")
                             }
                         }
+                        .sheet(isPresented: $isDrawingViewPresented, content: {
+                            DrawingView(imageWithPen: $image, pickerImage: $pickerImage)
+                        })
+                        
+                        
                     }
-                    .sheet(isPresented: $isDrawingViewPresented, content: {
-                        DrawingView(imageWithPen: $image, pickerImage: $pickerImage)
-                    })
-                    
-
                 }
-            }
-            
-            Text(isEditing ? "수정" : "저장")
-                .asfullCapsuleButton()
-                .wrapToButton {
-                    let newMemo = Memo(page: page, title: "", contents: content, date: Date())
-                    
-                    if isEditing {
-                        viewModel.action(.editButtonTap(memo: newMemo, image: image))
-                    } else {
-                        viewModel.action(.addButtonTap(memo: newMemo, image: image))
-                    }
-                    
-                    dismiss()
-                }
-                .disabled(content.isEmpty)
-            
-            Spacer()
-            
-        }
-        .padding()
-        .navigationTitle("메모")
-        .onAppear{
-            viewModel.action(.viewOnAppear(item: item, memo: memo ?? Memo()))
-        }
-        .toolbar {
-            if isEditing {
-                ToolbarItemGroup(placement: .topBarTrailing) {
-                    Image(ImageName.trash)
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .wrapToButton {
-                            showAlert = true
+                
+                Text(isEditing ? "수정" : "저장")
+                    .asfullCapsuleButton()
+                    .wrapToButton {
+                        let newMemo = Memo(page: page, contents: content, date: Date())
+                        
+                        if isEditing {
+                            viewModel.action(.editButtonTap(memo: newMemo, image: image))
+                        } else {
+                            viewModel.action(.addButtonTap(memo: newMemo, image: image))
                         }
-                        .alert("정말 삭제 하시겠습니까?", isPresented: $showAlert) {
-                            Button("삭제") {
-                                viewModel.action(.deleteButtonTap)
-                                dismiss()
+                        
+                        dismiss()
+                    }
+                    .disabled(content.isEmpty)
+                
+                Spacer()
+                
+            }
+            .padding()
+            .navigationTitle("메모")
+            .onAppear{
+                viewModel.action(.viewOnAppear(item: item, memo: memo ?? Memo()))
+            }
+            .toolbar {
+                if isEditing {
+                    ToolbarItemGroup(placement: .topBarTrailing) {
+                        Image(ImageName.trash)
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .wrapToButton {
+                                showAlert = true
                             }
-                            Button("취소", role: .cancel) {}
-                        }
+                            .alert("정말 삭제 하시겠습니까?", isPresented: $showAlert) {
+                                Button("삭제") {
+                                    viewModel.action(.deleteButtonTap)
+                                    dismiss()
+                                }
+                                Button("취소", role: .cancel) {}
+                            }
+                    }
                 }
             }
-        }
     }
 }

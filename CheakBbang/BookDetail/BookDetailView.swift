@@ -133,7 +133,7 @@ struct QuoteView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(memo.contents ?? "")
+            Text(memo.contents)
                 .font(.body)
                 .multilineTextAlignment(.leading)
                 

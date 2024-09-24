@@ -49,19 +49,19 @@ final class MyBook: Object, ObjectKeyIdentifiable {
 final class Memo: Object, ObjectKeyIdentifiable {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var page: String
-    @Persisted var title: String
-    @Persisted var contents: String?
+    @Persisted var contents: String
+    @Persisted var contents2: String?
     @Persisted var date: Date
     
-    convenience init(page: String, title: String, contents: String? = nil, date: Date) {
+    let myBook = LinkingObjects(fromType: MyBook.self, property: "memo")
+    
+    convenience init(page: String, contents: String, content2: String? = nil, date: Date) {
         self.init()
         self.page = page
-        self.title = title
         self.contents = contents
+        self.contents2 = content2
         self.date = date
     }
-    
-    let myBook = LinkingObjects(fromType: MyBook.self, property: "memo")
 }
 
 final class User: Object, ObjectKeyIdentifiable {

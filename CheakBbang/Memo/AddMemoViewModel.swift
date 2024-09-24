@@ -62,7 +62,6 @@ extension AddMemoViewModel {
             .sink { [weak self] (memo, image) in
                 guard let self else { return }
                 self.$memo.page.wrappedValue = memo.page
-                self.$memo.title.wrappedValue = memo.title
                 self.$memo.contents.wrappedValue = memo.contents
                 
                 PhotoFileManager.shared.removeImageFromDocument(filename: "\(self.memo.id)")

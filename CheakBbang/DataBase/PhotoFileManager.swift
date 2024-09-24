@@ -41,49 +41,6 @@ final class PhotoFileManager{
         }
     }
 
-    /*
-    func saveImageToDocument(imageURL: String, filename: String) {
-        guard let url = URL(string: imageURL) else {
-            print("Invalid URL string")
-            return
-        }
-        
-        // URLSession을 사용하여 이미지 다운로드
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print("Failed to download image: \(error)")
-                return
-            }
-            
-            guard let data = data, let image = UIImage(data: data) else {
-                print("Failed to create image from data")
-                return
-            }
-            
-            guard let documentDirectory = FileManager.default.urls(
-                for: .documentDirectory,
-                in: .userDomainMask).first else {
-                print("Failed to get document directory")
-                return
-            }
-            
-            let fileURL = documentDirectory.appendingPathComponent("\(filename).jpg")
-            
-            guard let imageData = image.jpegData(compressionQuality: 0.5) else {
-                print("Failed to convert image to JPEG data")
-                return
-            }
-            
-            // 이미지 데이터 저장
-            do {
-                try imageData.write(to: fileURL)
-            } catch {
-                print("Failed to save image: \(error)")
-            }
-        }
-        task.resume()
-    }
-    */
     //get FileURL
     func loadFileURL(filename: String) -> URL? {
         guard let documentDirectory = FileManager.default.urls(
