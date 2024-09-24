@@ -47,7 +47,7 @@ struct AddMemoView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                             .background {
                                 RoundedRectangle(cornerRadius: 10)
-                                    .stroke(.accent, lineWidth:5)
+                                    .stroke(.accent, lineWidth: 2)
                                     .frame(height: 150)
                             }
                             .onAppear {
@@ -68,7 +68,10 @@ struct AddMemoView: View {
                         .keyboardType(.numberPad)
                         .multilineTextAlignment(.center)
                         .padding(.vertical, 8)
-                        .background(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 2))
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.gray, lineWidth: 2)
+                        )
                         .frame(width: 80)
                         .onAppear {
                             if let memo {
@@ -96,6 +99,7 @@ struct AddMemoView: View {
                                 .clipped()
                                 .cornerRadius(10)
                         }
+                            
                         Button {
                             isCustomCameraViewPresented.toggle()
                         } label: {
@@ -137,6 +141,9 @@ struct AddMemoView: View {
                         
                         
                     }
+                }
+                .onAppear {
+                    loadImageFromFile()
                 }
                 
                 Text(isEditing ? "수정" : "저장")
@@ -187,5 +194,19 @@ struct AddMemoView: View {
                 }
             }
     }
+    
+    
+    
+    func loadImageFromFile() {
+        if let memo, let url = PhotoFileManager.shared.loadFileURL(filename: "\(memo.id)") {
+            do {
+                let data = try Data(contentsOf: url)
+                self.image = UIImage(data: data)
+            } catch {
+                print("Error loading image from URL: \(error)")
+            }
+        }
+    }
+
 }
 
