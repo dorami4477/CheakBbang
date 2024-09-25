@@ -23,6 +23,8 @@ struct MemoView: View {
                     .padding()
             }
             Text(viewModel.output.memo.contents)
+            Text("\(viewModel.output.memo.page == "" ? "전체소감" : viewModel.output.memo.page + "p")")
+            Text(viewModel.output.myBook.title)
                 .navigationTitle("메모 서랍")
                 .navigationBarTitleDisplayMode(.inline)
         }

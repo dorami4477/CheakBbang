@@ -13,7 +13,7 @@ import UIKit
 
 final class MemoViewModel: ViewModelType {
     @ObservedResults(Memo.self) var memoList
-    
+    let repsoitory = MyBookRepository()
     var cancellables = Set<AnyCancellable>()
     var input = Input()
     @Published var output = Output()
@@ -33,6 +33,7 @@ extension MemoViewModel {
     struct Output {
         var memo: Memo = Memo()
         var imageUrl: URL?
+        var myBook: MyBook = MyBook()
     }
     
     func transform() {
@@ -41,6 +42,10 @@ extension MemoViewModel {
                 guard let self else { return }
                 self.output.memo = value
                 self.output.imageUrl = PhotoFileManager.shared.loadFileURL(filename: "\(value.id)")
+                
+                if let book = repsoitory?.fetchSingleItem(self.output.memo.bookId) {
+                    self.output.myBook = book
+                }
             }
             .store(in: &cancellables)
         
