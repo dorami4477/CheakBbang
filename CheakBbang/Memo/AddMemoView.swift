@@ -196,7 +196,7 @@ struct AddMemoView: View {
     }
     
     
-    
+    @MainActor
     func loadImageFromFile() {
         if let memo, let url = PhotoFileManager.shared.loadFileURL(filename: "\(memo.id)") {
             do {

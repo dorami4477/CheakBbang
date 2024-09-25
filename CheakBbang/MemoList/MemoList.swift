@@ -12,26 +12,28 @@ struct MemoList: View {
     @ObservedResults(Memo.self) var realmMemoList
     
     var body: some View {
-        ScrollView {
-            LazyVStack(spacing: 0) {
-                Image(ImageName.memoCoverTop)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: UIScreen.main.bounds.width - 16)
-                
-                ForEach(realmMemoList, id:\.id) { memo in
-                    NavigationLink {
-                        NavigationLazyView(MemoView())
-                    } label: {
-                        listRow(memo)
+            ScrollView {
+                LazyVStack(spacing: 0) {
+                    Image(ImageName.memoCoverTop)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: UIScreen.main.bounds.width - 16)
+                    
+                    ForEach(realmMemoList.sorted(by: { $0.date > $1.date }), id:\.id) { memo in
+                        NavigationLink {
+                            NavigationLazyView(MemoView(viewModel: MemoViewModel(), memo: memo))
+                        } label: {
+                            listRow(memo)
+                        }
                     }
+                    Image(ImageName.memoCoverBottom)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: UIScreen.main.bounds.width - 16)
                 }
-                Image(ImageName.memoCoverBottom)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: UIScreen.main.bounds.width - 16)
             }
-        }
+            .navigationTitle("메모 서랍")
+            .navigationBarTitleDisplayMode(.inline)
     }
     
     func listRow(_ memo: Memo) -> some View {
