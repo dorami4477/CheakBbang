@@ -73,15 +73,20 @@ struct DrawingView: View {
             canvasView.backgroundColor = .clear
         }
     }
-    
     private func saveDrawing() {
-        let renderer = UIGraphicsImageRenderer(size: canvasView.bounds.size)
+        let targetSize = CGSize(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.width - 40)
+        
+        let imageOriginX = (canvasView.bounds.width - targetSize.width) / 2
+        let imageOriginY = (canvasView.bounds.height - targetSize.height) / 2
+        let drawingRect = CGRect(origin: CGPoint(x: -imageOriginX, y: -imageOriginY), size: canvasView.bounds.size)
+
+        let renderer = UIGraphicsImageRenderer(size: targetSize)
 
         let combinedImage = renderer.image { context in
-            pickerImage?.draw(in: canvasView.bounds)
-
+            pickerImage?.draw(in: drawingRect)
+            
             let drawingImage = canvasView.drawing.image(from: canvasView.bounds, scale: UIScreen.main.scale)
-            drawingImage.draw(in: canvasView.bounds)
+            drawingImage.draw(in: drawingRect)
         }
 
         imageWithPen = combinedImage
