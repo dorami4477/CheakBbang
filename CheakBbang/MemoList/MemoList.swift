@@ -54,7 +54,8 @@ struct MemoList: View {
                 }
                 Spacer()
                 if let url = PhotoFileManager.shared.loadFileURL(filename: "\(memo.id)") {
-                    ImageWrapper(url: url)
+                    let modifiedURL = url.appendingQueryParameter("timestamp", "\(Date().timeIntervalSince1970)")
+                    ImageWrapper(url: modifiedURL)
                         .frame(width: 110, height: 110)
                         .clipShape(.rect(cornerRadius: 10))
                 }

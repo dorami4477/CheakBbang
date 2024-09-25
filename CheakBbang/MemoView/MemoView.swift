@@ -17,13 +17,11 @@ struct MemoView: View {
     var body: some View {
         VStack {
             if let url = viewModel.output.imageUrl {
-                Image(uiImage: UIImage(contentsOfFile: url.path) ?? UIImage())
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+                let modifiedURL = url.appendingQueryParameter("timestamp", "\(Date().timeIntervalSince1970)")
+                ImageWrapper(url: modifiedURL)
                     .frame(maxWidth: .infinity)
                     .padding()
             }
-            Text("\(Int.random(in: 1...1000))")
             Text(viewModel.output.memo.contents)
                 .navigationTitle("메모 서랍")
                 .navigationBarTitleDisplayMode(.inline)
