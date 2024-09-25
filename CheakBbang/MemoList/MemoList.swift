@@ -10,28 +10,39 @@ import RealmSwift
 
 struct MemoList: View {
     @ObservedResults(Memo.self) var realmMemoList
+    var bookID: String? = nil
+    var isBookDetailView = false
     
     var body: some View {
-            ScrollView {
-                LazyVStack(spacing: 0) {
-                    Image(ImageName.memoCoverTop)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: UIScreen.main.bounds.width - 16)
-                    
-                    ForEach(realmMemoList.sorted(by: { $0.date > $1.date }), id:\.id) { memo in
-                        NavigationLink {
-                            NavigationLazyView(MemoView(viewModel: MemoViewModel(), memo: memo))
-                        } label: {
-                            listRow(memo)
-                        }
+        ScrollView {
+            LazyVStack(spacing: 0) {
+                Image(ImageName.memoCoverTop)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: UIScreen.main.bounds.width - 16)
+                
+                let filteredMemos = realmMemoList.filter { memo in
+                    if let bookID = self.bookID {
+                        return "\(memo.bookId)" == bookID
+                    } else {
+                        return true
                     }
-                    Image(ImageName.memoCoverBottom)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: UIScreen.main.bounds.width - 16)
+                }.sorted(by: { $0.date > $1.date })
+                
+                ForEach(filteredMemos, id:\.id) { memo in
+                    NavigationLink {
+                        NavigationLazyView(MemoView(viewModel: MemoViewModel(), memo: memo))
+                    } label: {
+                        listRow(memo)
+                    }
                 }
+                
+                Image(ImageName.memoCoverBottom)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: UIScreen.main.bounds.width - 16)
             }
+        }
             .navigationTitle("메모 서랍")
             .navigationBarTitleDisplayMode(.inline)
     }

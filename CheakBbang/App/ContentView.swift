@@ -31,7 +31,7 @@ struct ContentView: View {
                     }
                     .tag(1)
                 
-                MemoList()
+                NavigationLazyView(MemoList())
                     .tabItem {
                         Image(systemName: "3.square.fill")
                         Text("메모서랍")

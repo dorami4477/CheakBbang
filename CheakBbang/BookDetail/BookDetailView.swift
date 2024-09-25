@@ -58,10 +58,12 @@ struct BookDetailView: View {
                     }
                     
                     VStack(spacing: 12) {
-                        ForEach(item.memo.sorted(by: { $0.date > $1.date }), id:\.id) { memo in
-                            QuoteView(memo: memo, book: item)
-                        }
+                        MemoList(bookID: "\(item.id)", isBookDetailView: true)
+//                        ForEach(item.memo.sorted(by: { $0.date > $1.date }), id:\.id) { memo in
+//                            QuoteView(memo: memo, book: item)
+//                        }
                     }
+                    .padding(.horizontal, -16)
                     
                     NavigationLink {
                         NavigationLazyView(AddMemoView(item: item, memo: nil))

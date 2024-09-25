@@ -149,7 +149,7 @@ struct AddMemoView: View {
                 Text(isEditing ? "수정" : "저장")
                     .asfullCapsuleButton()
                     .wrapToButton {
-                        let newMemo = Memo(page: page, contents: content, date: Date())
+                        let newMemo = Memo(bookId: item.id, page: page, contents: content, date: Date())
                         
                         if isEditing {
                             viewModel.action(.editButtonTap(memo: newMemo, image: image))

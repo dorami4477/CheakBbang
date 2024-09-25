@@ -48,6 +48,7 @@ final class MyBook: Object, ObjectKeyIdentifiable {
 
 final class Memo: Object, ObjectKeyIdentifiable {
     @Persisted(primaryKey: true) var id: ObjectId
+    @Persisted var bookId: ObjectId
     @Persisted var page: String
     @Persisted var contents: String
     @Persisted var contents2: String?
@@ -55,8 +56,9 @@ final class Memo: Object, ObjectKeyIdentifiable {
     
     let myBook = LinkingObjects(fromType: MyBook.self, property: "memo")
     
-    convenience init(page: String, contents: String, content2: String? = nil, date: Date) {
+    convenience init(bookId: ObjectId, page: String, contents: String, content2: String? = nil, date: Date) {
         self.init()
+        self.bookId = bookId
         self.page = page
         self.contents = contents
         self.contents2 = content2
