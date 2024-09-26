@@ -170,6 +170,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		483975DD2CA59253004C495A /* Memo */ = {
+			isa = PBXGroup;
+			children = (
+				48D09A732CA15E81000328E3 /* MemoList */,
+				48D09A842CA3CB55000328E3 /* MemoView */,
+				48D09A402C9C2A44000328E3 /* AddMemo */,
+			);
+			path = Memo;
+			sourceTree = "<group>";
+		};
 		483DBBBE2C90376C00C775BF = {
 			isa = PBXGroup;
 			children = (
@@ -199,9 +209,7 @@
 				483DBC042C916EB000C775BF /* Helper */,
 				483DBBF82C915A7C00C775BF /* Model */,
 				483DBBE72C903CD100C775BF /* Network */,
-				48D09A842CA3CB55000328E3 /* MemoView */,
-				48D09A732CA15E81000328E3 /* MemoList */,
-				48D09A402C9C2A44000328E3 /* Memo */,
+				483975DD2CA59253004C495A /* Memo */,
 				483DBC3C2C955A8B00C775BF /* Library */,
 				48D09A392C9BEF5A000328E3 /* EditBook */,
 				483DBC0B2C91787D00C775BF /* AddBook */,
@@ -408,7 +416,7 @@
 			path = EditBook;
 			sourceTree = "<group>";
 		};
-		48D09A402C9C2A44000328E3 /* Memo */ = {
+		48D09A402C9C2A44000328E3 /* AddMemo */ = {
 			isa = PBXGroup;
 			children = (
 				48D09A412C9C2AD0000328E3 /* AddMemoView.swift */,
@@ -419,7 +427,7 @@
 				48D09A672C9F16D1000328E3 /* MyCanvas.swift */,
 				48D09A6F2CA053D3000328E3 /* DrawingView.swift */,
 			);
-			path = Memo;
+			path = AddMemo;
 			sourceTree = "<group>";
 		};
 		48D09A732CA15E81000328E3 /* MemoList */ = {
