@@ -18,7 +18,7 @@ struct MemoView: View {
         VStack {
             if let url = viewModel.output.imageUrl {
                 let modifiedURL = url.appendingQueryParameter("timestamp", "\(Date().timeIntervalSince1970)")
-                ImageWrapper(url: modifiedURL, contentMode: .fit)
+                ImageWrapperForMemo(url: modifiedURL, contentMode: .fit)
                     .frame(maxWidth: .infinity)
                     .padding()
             }

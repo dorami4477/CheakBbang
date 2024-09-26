@@ -43,8 +43,8 @@ struct MemoList: View {
                     .frame(width: UIScreen.main.bounds.width - 16)
             }
         }
-            .navigationTitle("메모 서랍")
-            .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("메모 서랍")
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     func listRow(_ memo: Memo) -> some View {
@@ -57,7 +57,6 @@ struct MemoList: View {
                         .foregroundStyle(.black)
                         .multilineTextAlignment(.leading)
                     
-                    //Text("\(memo.myBook.first?.title ?? "책이름 없음")")
                     Text("\(memo.page == "" ? "전체소감" : memo.page + "p")")
                         .foregroundStyle(.gray)
                         .font(.system(size: 14))
@@ -66,7 +65,7 @@ struct MemoList: View {
                 Spacer()
                 if let url = PhotoFileManager.shared.loadFileURL(filename: "\(memo.id)") {
                     let modifiedURL = url.appendingQueryParameter("timestamp", "\(Date().timeIntervalSince1970)")
-                    ImageWrapper(url: modifiedURL)
+                    ImageWrapperForMemo(url: modifiedURL)
                         .frame(width: 110, height: 110)
                         .clipShape(.rect(cornerRadius: 10))
                 }

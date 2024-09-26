@@ -31,3 +31,17 @@ struct ImageWrapper: View {
         }
     }
 }
+
+struct ImageWrapperForMemo: View {
+    let url:URL?
+    var contentMode:ContentMode = .fill
+    
+    var body: some View {
+        AsyncImage(url: url) { image in
+            image.image?
+                .resizable()
+                .aspectRatio(contentMode: contentMode)
+        }
+    }
+}
+
