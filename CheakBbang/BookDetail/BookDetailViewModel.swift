@@ -11,10 +11,11 @@ import RealmSwift
 
 final class BookDetailViewModel: ViewModelType {
     @ObservedResults(MyBook.self) var realmBookList
+    let repository = MyBookRepository()
     var cancellables = Set<AnyCancellable>()
     var input = Input()
     @Published var output = Output()
-    
+
     init() {
         transform()
     }
@@ -38,7 +39,10 @@ extension BookDetailViewModel {
             }
             .eraseToAnyPublisher()
             .sink { [weak self] item in
-                self?.$realmBookList.remove(item)
+                item.memo.forEach({ memo in
+                    PhotoFileManager.shared.removeImageFromDocument(filename: "\(memo.id)")
+                })
+                self?.repository?.deleteSingleBook(item)
             }
             .store(in: &cancellables)
     }
