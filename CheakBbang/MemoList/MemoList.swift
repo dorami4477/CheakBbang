@@ -43,8 +43,7 @@ struct MemoList: View {
                     .frame(width: UIScreen.main.bounds.width - 16)
             }
         }
-        .navigationTitle("메모 서랍")
-        .navigationBarTitleDisplayMode(.inline)
+
     }
     
     func listRow(_ memo: Memo) -> some View {
@@ -65,7 +64,7 @@ struct MemoList: View {
                 Spacer()
                 if let url = PhotoFileManager.shared.loadFileURL(filename: "\(memo.id)") {
                     let modifiedURL = url.appendingQueryParameter("timestamp", "\(Date().timeIntervalSince1970)")
-                    ImageWrapperForMemo(url: modifiedURL)
+                    ImageWrapper(url: modifiedURL)
                         .frame(width: 110, height: 110)
                         .clipShape(.rect(cornerRadius: 10))
                 }

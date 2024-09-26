@@ -48,8 +48,14 @@ final class PhotoFileManager{
             in: .userDomainMask).first else { return nil }
         
         let fileURL = documentDirectory.appendingPathComponent("\(filename).jpg")
-        return fileURL
+        
+        if FileManager.default.fileExists(atPath: fileURL.path) {
+                return fileURL
+            } else {
+                return nil
+            }
     }
+    
     
     
     //Delete
