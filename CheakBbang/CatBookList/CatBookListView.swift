@@ -46,9 +46,9 @@ struct CatBookListView: View {
                 }
             }
         }
-        .onAppear {
-            print(Realm.Configuration.defaultConfiguration.fileURL)
-        }
+//        .onAppear {
+//            print(Realm.Configuration.defaultConfiguration.fileURL)
+//        }
     }
     
     func bookListView() -> some View {

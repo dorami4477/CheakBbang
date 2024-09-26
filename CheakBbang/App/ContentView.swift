@@ -15,29 +15,33 @@ struct ContentView: View {
     }
     
     var body: some View {
-        NavigationStack{
             TabView(selection: $selectedTab) {
-                CatBookListView()
+                NavigationStack {
+                    CatBookListView()
+                }
                     .tabItem {
                         Image(systemName: "1.square.fill")
                         Text("북타워")
                     }
                     .tag(0)
                 
-                NavigationLazyView(MyLibraryView())
+                NavigationStack {
+                    NavigationLazyView(MyLibraryView())
+                }
                     .tabItem {
                         Image(systemName: "2.square.fill")
                         Text("내서재")
                     }
                     .tag(1)
                 
-                NavigationLazyView(MemoList())
+                NavigationStack {
+                    NavigationLazyView(MemoListWrapper())
+                }
                     .tabItem {
                         Image(systemName: "3.square.fill")
                         Text("메모서랍")
                     }
                     .tag(2)
-            }
         }
 
     }

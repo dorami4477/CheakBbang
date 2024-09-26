@@ -18,7 +18,7 @@ struct MemoView: View {
         VStack {
             if let url = viewModel.output.imageUrl {
                 let modifiedURL = url.appendingQueryParameter("timestamp", "\(Date().timeIntervalSince1970)")
-                ImageWrapperForMemo(url: modifiedURL, contentMode: .fit)
+                ImageWrapper(url: modifiedURL, contentMode: .fit)
                     .frame(maxWidth: .infinity)
                     .padding()
             }
@@ -28,6 +28,8 @@ struct MemoView: View {
                 .navigationTitle("메모 서랍")
                 .navigationBarTitleDisplayMode(.inline)
         }
+        .navigationTitle("메모 상세")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 NavigationLink {
@@ -54,9 +56,34 @@ struct MemoView: View {
             }
         }
         .onAppear{
-            print("onAppear")
             viewModel.action(.viewOnAppear(memo: memo))
         }
     }
 }
 
+
+
+struct Test01: View {
+    var body: some View {
+        NavigationStack {
+            VStack {
+                NavigationLink("test03") {
+                    Test02()
+                }
+            }
+                .navigationTitle("Test01")
+                .navigationBarTitleDisplayMode(.inline)
+        }
+    }
+}
+
+struct Test02: View {
+    var body: some View {
+            VStack {
+                Text("test")
+            }
+                .navigationTitle("Test02")
+                .navigationBarTitleDisplayMode(.inline)
+        }
+
+}

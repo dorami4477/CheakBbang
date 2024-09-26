@@ -31,7 +31,6 @@ struct MyLibraryView: View {
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             //.allowsHitTesting(false)
         }
-
     }
 }
 
