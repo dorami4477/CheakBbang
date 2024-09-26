@@ -27,4 +27,7 @@ enum ImageName {
     static let dwRedo = "icon_dw_redo"
     static let memoCoverTop = "image_memo_top_cover"
     static let memoCoverBottom = "image_memo_bottom_cover"
+    static let memoViewTop = "image_memo_detail_top"
+    static let memoViewMiddle = "image_memo_detail_middle"
+    static let memoViewBottom = "image_memo_detail_bottom"
 }

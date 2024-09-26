@@ -16,10 +16,8 @@ struct MemoList: View {
     var body: some View {
         ScrollView {
             LazyVStack(spacing: 0) {
-                Image(ImageName.memoCoverTop)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: UIScreen.main.bounds.width - 16)
+                ImageWrapper(name: ImageName.memoCoverTop)
+                    .padding(.horizontal, 8)
                 
                 let filteredMemos = realmMemoList.filter { memo in
                     if let bookID = self.bookID {
@@ -37,13 +35,11 @@ struct MemoList: View {
                     }
                 }
                 
-                Image(ImageName.memoCoverBottom)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: UIScreen.main.bounds.width - 16)
+                ImageWrapper(name: ImageName.memoCoverBottom)
+                    .padding(.horizontal, 8)
             }
         }
-
+        .toolbar(.visible, for: .tabBar)
     }
     
     func listRow(_ memo: Memo) -> some View {
@@ -64,7 +60,7 @@ struct MemoList: View {
                 Spacer()
                 if let url = PhotoFileManager.shared.loadFileURL(filename: "\(memo.id)") {
                     let modifiedURL = url.appendingQueryParameter("timestamp", "\(Date().timeIntervalSince1970)")
-                    ImageWrapper(url: modifiedURL)
+                    AsyncImageWrapper(url: modifiedURL)
                         .frame(width: 110, height: 110)
                         .clipShape(.rect(cornerRadius: 10))
                 }

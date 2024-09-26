@@ -26,8 +26,16 @@ struct AsyncImageWrapper: View {
         }
     }
 }
-//Image(ImageName.memoViewTop)
-//    .resizable()
-//    .scaledToFit()
-//    .frame(maxWidth: .infinity)
 
+
+struct ImageWrapper: View {
+    let name: String
+    var contentMode:ContentMode = .fit
+    
+    var body: some View {
+        Image(name)
+            .resizable()
+            .aspectRatio(contentMode: contentMode)
+            .frame(maxWidth: .infinity)
+    }
+}
