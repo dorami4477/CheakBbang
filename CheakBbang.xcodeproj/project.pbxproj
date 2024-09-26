@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		483975DC2CA570FA004C495A /* MemoListWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975DB2CA570FA004C495A /* MemoListWrapper.swift */; };
 		483975DF2CA5A7A7004C495A /* FontWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975DE2CA5A7A7004C495A /* FontWrapper.swift */; };
+		483975E22CA5AE6B004C495A /* BinggraeII.otf in Resources */ = {isa = PBXBuildFile; fileRef = 483975E12CA5AE6B004C495A /* BinggraeII.otf */; };
 		483DBBCB2C90376C00C775BF /* CheakBbangApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */; };
 		483DBBCF2C90376E00C775BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBCE2C90376E00C775BF /* Assets.xcassets */; };
 		483DBBD22C90376E00C775BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBD12C90376E00C775BF /* Preview Assets.xcassets */; };
@@ -93,6 +94,7 @@
 /* Begin PBXFileReference section */
 		483975DB2CA570FA004C495A /* MemoListWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListWrapper.swift; sourceTree = "<group>"; };
 		483975DE2CA5A7A7004C495A /* FontWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWrapper.swift; sourceTree = "<group>"; };
+		483975E12CA5AE6B004C495A /* BinggraeII.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BinggraeII.otf; sourceTree = "<group>"; };
 		483DBBC72C90376C00C775BF /* CheakBbang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheakBbang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheakBbangApp.swift; sourceTree = "<group>"; };
 		483DBBCE2C90376E00C775BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -182,6 +184,14 @@
 			path = Memo;
 			sourceTree = "<group>";
 		};
+		483975E02CA5AE49004C495A /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				483975E12CA5AE6B004C495A /* BinggraeII.otf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		483DBBBE2C90376C00C775BF = {
 			isa = PBXGroup;
 			children = (
@@ -237,6 +247,7 @@
 		483DBBD82C90378800C775BF /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				483975E02CA5AE49004C495A /* Font */,
 				483DBBCE2C90376E00C775BF /* Assets.xcassets */,
 				48D09A6D2C9FE247000328E3 /* APIKeys.swift */,
 			);
@@ -525,6 +536,7 @@
 				483DBBD22C90376E00C775BF /* Preview Assets.xcassets in Resources */,
 				483DBBDD2C903A7600C775BF /* Localizable.xcstrings in Resources */,
 				483DBBCF2C90376E00C775BF /* Assets.xcassets in Resources */,
+				483975E22CA5AE6B004C495A /* BinggraeII.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -737,7 +749,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -775,7 +787,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (

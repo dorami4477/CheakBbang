@@ -22,7 +22,7 @@ struct MemoView: View {
                 
                 Text(viewModel.output.memo.contents)
                     .bold()
-                    .font(.system(size: 26.3))
+                    .font(.custom("BinggraeII", size: 26.3))
                 
                 ImageWrapper(name: ImageName.memoViewMiddle)
                 
@@ -38,7 +38,7 @@ struct MemoView: View {
                         .multilineTextAlignment(.leading)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    Text("\(viewModel.output.memo.page == "" ? "전체소감" : viewModel.output.memo.page + "p")")
+                    Text("\(viewModel.output.memo.page == "" ? "소감" : viewModel.output.memo.page + "p")")
                         .foregroundStyle(.gray)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     

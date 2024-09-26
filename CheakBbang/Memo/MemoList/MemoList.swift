@@ -46,13 +46,15 @@ struct MemoList: View {
             HStack(alignment: .top) {
                 VStack(alignment: .leading) {
                     Text(memo.contents)
+                        .font(.custom("BinggraeII", size: 15))
                         .bold()
                         .lineLimit(3)
                         .truncationMode(.tail)
                         .foregroundStyle(.black)
                         .multilineTextAlignment(.leading)
+                        .padding(.bottom, 10)
                     
-                    Text("\(memo.page == "" ? "전체소감" : memo.page + "p")")
+                    Text("\(memo.page == "" ? "소감" : memo.page + "p")")
                         .foregroundStyle(.gray)
                         .font(.system(size: 14))
                     Spacer()
