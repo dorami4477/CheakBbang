@@ -29,7 +29,6 @@ struct MyLibraryView: View {
                     .tag(LibraryTab.wantToRead)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-            //.allowsHitTesting(false)
         }
     }
 }
@@ -53,7 +52,7 @@ struct TabBarView: View {
                             ZStack {
                                 if selectedTab == tab {
                                     Capsule()
-                                        .fill(Color.black)
+                                        .fill(Color.accentColor)
                                         .matchedGeometryEffect(id: "tabUnderline", in: animationNamespace)
                                         .frame(width: tabSizes[tab]?.width ?? 0, height: 35)
                                         .transition(.opacity)
@@ -72,7 +71,7 @@ struct TabBarView: View {
                             tabSizes[tab] = newSize
                         }
                 }
-                .frame(height: 40)
+                .frame(height: 35)
             }
         }
         .background(Color.white)
