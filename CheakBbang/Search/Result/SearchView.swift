@@ -36,7 +36,11 @@ struct SearchView: View {
                 ScrollView{
                     LazyVStack {
                         ForEach(viewModel.output.bookList.item, id: \.itemID) { item in
-                            BookListRow(item: item)
+                            NavigationLink {
+                                NavigationLazyView(SearchResultDetailView(viewModel: SearchResultDetailViewModel(), itemId: item.isbn13))
+                            } label: {
+                                BookListRow(item: item)
+                            }
                         }
                     }
                 }
@@ -48,6 +52,9 @@ struct SearchView: View {
             }
             
         }
+        .onTapGesture(perform: {
+            UIApplication.shared.endEditing()
+        })
         .animation(.easeInOut, value: searchTerm)
         .animation(.easeInOut, value: focusField)
     }
@@ -60,7 +67,7 @@ struct SearchBarView: View {
     
     var body: some View {
         HStack {
-            Image(systemName: "magnifyingglass")
+            Image(systemName: ImageName.search)
                 .foregroundColor(
                     searchText.isEmpty ?
                     Color.gray : Color.black)
@@ -69,7 +76,7 @@ struct SearchBarView: View {
                 .foregroundColor(Color.black)
                 .focused($focus, equals: true)
                 .overlay(
-                    Image(systemName: "xmark.circle.fill")
+                    Image(systemName: ImageName.searchCancel)
                         .padding()
                         .offset(x: 10)
                         .foregroundColor(Color.black)
@@ -101,7 +108,4 @@ struct SearchBarView: View {
     }
 }
 
-#Preview {
-    SearchView(viewModel: SearchViewModel())
-}
 

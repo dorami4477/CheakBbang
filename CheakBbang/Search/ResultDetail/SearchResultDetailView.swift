@@ -14,7 +14,7 @@ struct SearchResultDetailView: View {
     var body: some View {
         ScrollView {
             VStack {
-                BookDetailTopView(coverUrl: viewModel.output.book.cover, title: viewModel.output.book.title, ogTitle: viewModel.output.book.subInfo.originalTitle ?? "")
+                BookCoverInfoView(coverUrl: viewModel.output.book.cover, title: viewModel.output.book.title, ogTitle: viewModel.output.book.subInfo.originalTitle ?? "")
                 
                 Divider()
                     .padding(.vertical)
@@ -34,11 +34,11 @@ struct SearchResultDetailView: View {
     
     func BookDetailBottomView(_ item: Item) -> some View {
             VStack(alignment: .leading, spacing: 8) {
-                BottomRowView(title: "작가", content: item.author)
-                BottomRowView(title: "출판사", content: item.publisher)
-                BottomRowView(title: "출판일", content: item.pubDate)
-                BottomRowView(title: "페이지수", content: "\(item.subInfo.itemPage ?? 0)")
-                BottomRowView(title: "설명글", content: item.description)
+                BiblioRowView(title: "작가", content: item.author)
+                BiblioRowView(title: "출판사", content: item.publisher)
+                BiblioRowView(title: "출판일", content: item.pubDate)
+                BiblioRowView(title: "페이지수", content: "\(item.subInfo.itemPage ?? 0)")
+                BiblioRowView(title: "설명글", content: item.description)
             }
             .font(.body)
     }

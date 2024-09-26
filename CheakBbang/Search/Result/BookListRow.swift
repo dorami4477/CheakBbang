@@ -17,6 +17,7 @@ struct BookListRow: View {
                 Text(item.title)
                     .font(.headline)
                     .fontWeight(.bold)
+                    .foregroundStyle(.black)
                 
                 Text(item.author + " / " + item.publisher + " / " + item.pubDate)
                 .foregroundStyle(.gray)

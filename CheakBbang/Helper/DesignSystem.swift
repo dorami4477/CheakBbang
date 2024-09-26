@@ -30,4 +30,6 @@ enum ImageName {
     static let memoViewTop = "image_memo_detail_top"
     static let memoViewMiddle = "image_memo_detail_middle"
     static let memoViewBottom = "image_memo_detail_bottom"
+    static let search = "magnifyingglass"
+    static let searchCancel = "xmark.circle.fill"
 }

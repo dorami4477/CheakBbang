@@ -7,10 +7,8 @@
 
 import Foundation
 import Combine
-import RealmSwift
 
 final class BookDetailViewModel: ViewModelType {
-    @ObservedResults(MyBook.self) var realmBookList
     let repository = MyBookRepository()
     var cancellables = Set<AnyCancellable>()
     var input = Input()

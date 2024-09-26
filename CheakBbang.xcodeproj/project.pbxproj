@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		483975DC2CA570FA004C495A /* MemoListWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975DB2CA570FA004C495A /* MemoListWrapper.swift */; };
+		483975DF2CA5A7A7004C495A /* FontWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975DE2CA5A7A7004C495A /* FontWrapper.swift */; };
 		483DBBCB2C90376C00C775BF /* CheakBbangApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */; };
 		483DBBCF2C90376E00C775BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBCE2C90376E00C775BF /* Assets.xcassets */; };
 		483DBBD22C90376E00C775BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBD12C90376E00C775BF /* Preview Assets.xcassets */; };
@@ -91,6 +92,7 @@
 
 /* Begin PBXFileReference section */
 		483975DB2CA570FA004C495A /* MemoListWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListWrapper.swift; sourceTree = "<group>"; };
+		483975DE2CA5A7A7004C495A /* FontWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWrapper.swift; sourceTree = "<group>"; };
 		483DBBC72C90376C00C775BF /* CheakBbang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheakBbang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheakBbangApp.swift; sourceTree = "<group>"; };
 		483DBBCE2C90376E00C775BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -345,7 +347,6 @@
 				483DBC052C916EC400C775BF /* NavigationLazyView.swift */,
 				483DBC322C93276A00C775BF /* AsyncImageWrapper.swift */,
 				483DBC342C932A1A00C775BF /* ButtonWrapper.swift */,
-				48D09A712CA05FB8000328E3 /* FullCapsuleButton.swift */,
 			);
 			path = Wrapper;
 			sourceTree = "<group>";
@@ -374,6 +375,8 @@
 			isa = PBXGroup;
 			children = (
 				48D09A272C991E19000328E3 /* CaplusButton.swift */,
+				48D09A712CA05FB8000328E3 /* FullCapsuleButton.swift */,
+				483975DE2CA5A7A7004C495A /* FontWrapper.swift */,
 			);
 			path = CustomModifier;
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 				48D09A192C968163000328E3 /* DesignSystem.swift in Sources */,
 				483DBBE02C903AD200C775BF /* CatBookListView.swift in Sources */,
 				48D09A152C95D316000328E3 /* MyLibraryView.swift in Sources */,
+				483975DF2CA5A7A7004C495A /* FontWrapper.swift in Sources */,
 				483DBBFA2C915A9400C775BF /* Book.swift in Sources */,
 				48D09A352C9B2123000328E3 /* RratingHeartView.swift in Sources */,
 				48D09A422C9C2AD0000328E3 /* AddMemoView.swift in Sources */,

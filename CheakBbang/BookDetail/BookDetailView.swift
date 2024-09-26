@@ -18,44 +18,13 @@ struct BookDetailView: View {
     var body: some View {
         ScrollView {
             VStack {
-                BookDetailTopView(coverUrl: item.cover, title: item.title, ogTitle: item.originalTitle)
+                BookCoverInfoView(coverUrl: item.cover, title: item.title, ogTitle: item.originalTitle)
                 
                 Divider()
                     .padding(.vertical)
                 
                 VStack(spacing: 16) {
-
-                    VStack(spacing: 8) {
-                        Image(item.status.imageName)
-                            .resizable()
-                            .frame(width: 100, height: 23.3)
-                        
-                        RratingHeartView(rating: $item.rate, isEditable: false)
-                            .padding(.bottom, 15)
-                        
-                        if item.status == .finished {
-                            Text("읽은기간")
-                                .font(.system(size: 15))
-                                .foregroundColor(.gray)
-                                .padding(.bottom, -5)
-                            
-                            Text("\(item.startDate.dateString()) - \(item.endDate.dateString())")
-                                .font(.system(size: 15))
-                                .foregroundColor(.black)
-                                .padding(.bottom, 15)
-                            
-                        } else if item.status == .ongoing {
-                            Text("읽은기간")
-                                .font(.system(size: 15))
-                                .foregroundColor(.gray)
-                                .padding(.bottom, -5)
-                            
-                            Text("\(item.startDate.dateString()) -")
-                                .font(.system(size: 15))
-                                .foregroundColor(.black)
-                                .padding(.bottom, 15)
-                        }
-                    }
+                    ReadingStatusView(item: $item)
                     
                     MemoList(bookID: "\(item.id)", isBookDetailView: true)
                         .padding(.horizontal, -16)
@@ -72,7 +41,7 @@ struct BookDetailView: View {
                 Divider()
                     .padding(.vertical)
                 
-                BookDetailBottomView(item)
+                BiblioInfoView(item)
                 
                 Spacer()
             }
@@ -88,8 +57,7 @@ struct BookDetailView: View {
                         .frame(width: 24, height: 24)
                 }
 
-                Image(ImageName.trash)
-                    .resizable()
+                ImageWrapper(name: ImageName.trash)
                     .frame(width: 24, height: 24)
                     .wrapToButton {
                         showAlert = true
@@ -111,55 +79,19 @@ struct BookDetailView: View {
         }
     }
     
-    func BookDetailBottomView(_ item: MyBook) -> some View {
+    func BiblioInfoView(_ item: MyBook) -> some View {
             VStack(alignment: .leading, spacing: 8) {
-                BottomRowView(title: "작가", content: item.author)
-                BottomRowView(title: "출판사", content: item.publisher)
-                BottomRowView(title: "출판일", content: item.pubDate)
-                BottomRowView(title: "페이지수", content: "\(item.page)")
-                BottomRowView(title: "설명글", content: item.explanation)
+                BiblioRowView(title: "작가", content: item.author)
+                BiblioRowView(title: "출판사", content: item.publisher)
+                BiblioRowView(title: "출판일", content: item.pubDate)
+                BiblioRowView(title: "페이지수", content: "\(item.page)")
+                BiblioRowView(title: "설명글", content: item.explanation)
             }
             .font(.body)
     }
-    
 }
 
-struct QuoteView: View {
-    var memo: Memo
-    var book: MyBook
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(memo.contents)
-                .font(.body)
-                .multilineTextAlignment(.leading)
-                
-            
-            HStack {
-                Text("\(memo.page == "" ? "전체소감" : memo.page + "p")")
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                
-                Spacer()
-                
-                NavigationLink {
-                    NavigationLazyView(AddMemoView(item: book, memo: memo))
-                } label: {
-                    Image("icon_edit_small")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                }
-            }
-        }
-        .padding()
-        .overlay(
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(.accent, lineWidth: 3)
-        )
-    }
-}
-
-struct BookDetailTopView: View {
+struct BookCoverInfoView: View {
 
     let coverUrl: String
     let title: String
@@ -185,7 +117,44 @@ struct BookDetailTopView: View {
     }
 }
 
-struct BottomRowView: View {
+struct ReadingStatusView: View {
+    @Binding var item: MyBook
+    
+    var body: some View {
+        VStack(spacing: 8) {
+            ImageWrapper(name: item.status.imageName)
+                .frame(width: 100, height: 23.3)
+            
+            RratingHeartView(rating: $item.rate, isEditable: false)
+                .padding(.bottom, 15)
+            
+            if item.status == .finished {
+                Text("읽은기간")
+                    .font(.system(size: 15))
+                    .foregroundColor(.gray)
+                    .padding(.bottom, -5)
+                
+                Text("\(item.startDate.dateString()) - \(item.endDate.dateString())")
+                    .font(.system(size: 15))
+                    .foregroundColor(.black)
+                    .padding(.bottom, 15)
+                
+            } else if item.status == .ongoing {
+                Text("읽은기간")
+                    .font(.system(size: 15))
+                    .foregroundColor(.gray)
+                    .padding(.bottom, -5)
+                
+                Text("\(item.startDate.dateString()) -")
+                    .font(.system(size: 15))
+                    .foregroundColor(.black)
+                    .padding(.bottom, 15)
+            }
+        }
+    }
+}
+
+struct BiblioRowView: View {
     let title: String
     let content: String
     
