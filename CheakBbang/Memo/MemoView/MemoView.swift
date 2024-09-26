@@ -15,18 +15,42 @@ struct MemoView: View {
     @ObservedRealmObject var memo: Memo
 
     var body: some View {
-        VStack {
-            if let url = viewModel.output.imageUrl {
-                let modifiedURL = url.appendingQueryParameter("timestamp", "\(Date().timeIntervalSince1970)")
-                ImageWrapper(url: modifiedURL, contentMode: .fit)
-                    .frame(maxWidth: .infinity)
-                    .padding()
+        ScrollView {
+            VStack {
+                ImageWrapper(name: ImageName.memoViewTop)
+                    .padding(.top, 20)
+                
+                Text(viewModel.output.memo.contents)
+                    .bold()
+                    .font(.system(size: 26.3))
+                
+                ImageWrapper(name: ImageName.memoViewMiddle)
+                
+                if let url = viewModel.output.imageUrl {
+                    let modifiedURL = url.appendingQueryParameter("timestamp", "\(Date().timeIntervalSince1970)")
+                    AsyncImageWrapper(url: modifiedURL, contentMode: .fit)
+                        .frame(maxWidth: .infinity)
+                }
+                
+                VStack {
+                    Text(viewModel.output.myBook.title)
+                        .foregroundStyle(.gray)
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Text("\(viewModel.output.memo.page == "" ? "전체소감" : viewModel.output.memo.page + "p")")
+                        .foregroundStyle(.gray)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Text(viewModel.output.memo.date.dateString())
+                        .foregroundStyle(.accent)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .padding()
+                
+                ImageWrapper(name: ImageName.memoViewBottom)
+                
             }
-            Text(viewModel.output.memo.contents)
-            Text("\(viewModel.output.memo.page == "" ? "전체소감" : viewModel.output.memo.page + "p")")
-            Text(viewModel.output.myBook.title)
-                .navigationTitle("메모 서랍")
-                .navigationBarTitleDisplayMode(.inline)
         }
         .navigationTitle("메모 상세")
         .navigationBarTitleDisplayMode(.inline)
@@ -35,13 +59,11 @@ struct MemoView: View {
                 NavigationLink {
                     NavigationLazyView(AddMemoView(item: MyBook(), memo: memo))
                 } label: {
-                    Image(ImageName.edit)
-                        .resizable()
+                    ImageWrapper(name: ImageName.edit)
                         .frame(width: 24, height: 24)
                 }
                 
-                Image(ImageName.trash)
-                    .resizable()
+                ImageWrapper(name: ImageName.trash)
                     .frame(width: 24, height: 24)
                     .wrapToButton {
                         showAlert = true
@@ -55,35 +77,9 @@ struct MemoView: View {
                     }
             }
         }
+        .toolbar(.hidden, for: .tabBar)
         .onAppear{
             viewModel.action(.viewOnAppear(memo: memo))
         }
     }
-}
-
-
-
-struct Test01: View {
-    var body: some View {
-        NavigationStack {
-            VStack {
-                NavigationLink("test03") {
-                    Test02()
-                }
-            }
-                .navigationTitle("Test01")
-                .navigationBarTitleDisplayMode(.inline)
-        }
-    }
-}
-
-struct Test02: View {
-    var body: some View {
-            VStack {
-                Text("test")
-            }
-                .navigationTitle("Test02")
-                .navigationBarTitleDisplayMode(.inline)
-        }
-
 }
