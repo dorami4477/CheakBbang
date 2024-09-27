@@ -75,9 +75,9 @@ struct CatBookListView: View {
     func bookRowView(item: MyBook, align: Alignment, padding: Edge.Set, isFirst: Bool, isLast: Bool) -> some View {
         VStack{
             if isLast {
-                Image("cat_1")
-                    .resizable()
+                GIFView(gifName: ImageName.cat01, width: 110)
                     .frame(width: 110, height: 73)
+                    .clipped()
                     .zIndex(3)
                     .padding(.bottom, isLast ? -20 : 0)
                     .onTapGesture {

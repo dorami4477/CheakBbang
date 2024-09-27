@@ -10,6 +10,10 @@
 		483975DC2CA570FA004C495A /* MemoListWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975DB2CA570FA004C495A /* MemoListWrapper.swift */; };
 		483975DF2CA5A7A7004C495A /* FontWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975DE2CA5A7A7004C495A /* FontWrapper.swift */; };
 		483975E22CA5AE6B004C495A /* BinggraeII.otf in Resources */ = {isa = PBXBuildFile; fileRef = 483975E12CA5AE6B004C495A /* BinggraeII.otf */; };
+		483975E42CA68DC8004C495A /* GIFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975E32CA68DC8004C495A /* GIFView.swift */; };
+		483975E92CA6979C004C495A /* cat_anigif_5sec.gif in Resources */ = {isa = PBXBuildFile; fileRef = 483975E82CA6979C004C495A /* cat_anigif_5sec.gif */; };
+		483975EC2CA697E1004C495A /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 483975EB2CA697E1004C495A /* SDWebImageSwiftUI */; };
+		483975F32CA6B28F004C495A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975F22CA6B28F004C495A /* OnboardingView.swift */; };
 		483DBBCB2C90376C00C775BF /* CheakBbangApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */; };
 		483DBBCF2C90376E00C775BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBCE2C90376E00C775BF /* Assets.xcassets */; };
 		483DBBD22C90376E00C775BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBD12C90376E00C775BF /* Preview Assets.xcassets */; };
@@ -95,6 +99,9 @@
 		483975DB2CA570FA004C495A /* MemoListWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListWrapper.swift; sourceTree = "<group>"; };
 		483975DE2CA5A7A7004C495A /* FontWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWrapper.swift; sourceTree = "<group>"; };
 		483975E12CA5AE6B004C495A /* BinggraeII.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BinggraeII.otf; sourceTree = "<group>"; };
+		483975E32CA68DC8004C495A /* GIFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFView.swift; sourceTree = "<group>"; };
+		483975E82CA6979C004C495A /* cat_anigif_5sec.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = cat_anigif_5sec.gif; sourceTree = "<group>"; };
+		483975F22CA6B28F004C495A /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		483DBBC72C90376C00C775BF /* CheakBbang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheakBbang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheakBbangApp.swift; sourceTree = "<group>"; };
 		483DBBCE2C90376E00C775BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -165,6 +172,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				483975EC2CA697E1004C495A /* SDWebImageSwiftUI in Frameworks */,
 				48D09A382C9B222D000328E3 /* Cosmos in Frameworks */,
 				483DBC2D2C92B72900C775BF /* RealmSwift in Frameworks */,
 				483DBBE62C903C9300C775BF /* Alamofire in Frameworks */,
@@ -190,6 +198,22 @@
 				483975E12CA5AE6B004C495A /* BinggraeII.otf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		483975E52CA68F6A004C495A /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				483975E82CA6979C004C495A /* cat_anigif_5sec.gif */,
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
+		483975F12CA6B266004C495A /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				483975F22CA6B28F004C495A /* OnboardingView.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		483DBBBE2C90376C00C775BF = {
@@ -228,6 +252,7 @@
 				48D09A1A2C96D69A000328E3 /* BookDetail */,
 				483DBBDE2C903A9500C775BF /* CatBookList */,
 				483DBC012C916CB100C775BF /* Search */,
+				483975F12CA6B266004C495A /* Onboarding */,
 				483DBBDB2C903A6000C775BF /* Localization */,
 				483DBBD82C90378800C775BF /* Resource */,
 				483DBBE12C903B0700C775BF /* App */,
@@ -247,6 +272,7 @@
 		483DBBD82C90378800C775BF /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				483975E52CA68F6A004C495A /* Video */,
 				483975E02CA5AE49004C495A /* Font */,
 				483DBBCE2C90376E00C775BF /* Assets.xcassets */,
 				48D09A6D2C9FE247000328E3 /* APIKeys.swift */,
@@ -267,6 +293,7 @@
 			children = (
 				483DBBDF2C903AD200C775BF /* CatBookListView.swift */,
 				483DBC3A2C94301300C775BF /* CatBookListViewModel.swift */,
+				483975E32CA68DC8004C495A /* GIFView.swift */,
 			);
 			path = CatBookList;
 			sourceTree = "<group>";
@@ -483,6 +510,7 @@
 				483DBBE52C903C9300C775BF /* Alamofire */,
 				483DBC2C2C92B72900C775BF /* RealmSwift */,
 				48D09A372C9B222D000328E3 /* Cosmos */,
+				483975EB2CA697E1004C495A /* SDWebImageSwiftUI */,
 			);
 			productName = CheakBbang;
 			productReference = 483DBBC72C90376C00C775BF /* CheakBbang.app */;
@@ -517,6 +545,7 @@
 				483DBBE42C903C9300C775BF /* XCRemoteSwiftPackageReference "Alamofire" */,
 				483DBC2B2C92B72900C775BF /* XCRemoteSwiftPackageReference "realm-swift" */,
 				48D09A362C9B222D000328E3 /* XCRemoteSwiftPackageReference "Cosmos" */,
+				483975EA2CA697E1004C495A /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 483DBBC82C90376C00C775BF /* Products */;
 			projectDirPath = "";
@@ -536,6 +565,7 @@
 				483DBBD22C90376E00C775BF /* Preview Assets.xcassets in Resources */,
 				483DBBDD2C903A7600C775BF /* Localizable.xcstrings in Resources */,
 				483DBBCF2C90376E00C775BF /* Assets.xcassets in Resources */,
+				483975E92CA6979C004C495A /* cat_anigif_5sec.gif in Resources */,
 				483975E22CA5AE6B004C495A /* BinggraeII.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -555,11 +585,13 @@
 				483DBC202C92AD5200C775BF /* MyBookRepository.swift in Sources */,
 				483DBC392C94281100C775BF /* ContentView.swift in Sources */,
 				48D09A682C9F16D1000328E3 /* MyCanvas.swift in Sources */,
+				483975E42CA68DC8004C495A /* GIFView.swift in Sources */,
 				48D09A862CA3CB7D000328E3 /* MemoViewModel.swift in Sources */,
 				483DBC3E2C955ACE00C775BF /* LibraryView.swift in Sources */,
 				48D09A2C2C997CA8000328E3 /* ReadingState.swift in Sources */,
 				48D09A832CA2F766000328E3 /* MemoView.swift in Sources */,
 				48D09A192C968163000328E3 /* DesignSystem.swift in Sources */,
+				483975F32CA6B28F004C495A /* OnboardingView.swift in Sources */,
 				483DBBE02C903AD200C775BF /* CatBookListView.swift in Sources */,
 				48D09A152C95D316000328E3 /* MyLibraryView.swift in Sources */,
 				483975DF2CA5A7A7004C495A /* FontWrapper.swift in Sources */,
@@ -831,6 +863,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		483975EA2CA697E1004C495A /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.2;
+			};
+		};
 		483DBBE42C903C9300C775BF /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -858,6 +898,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		483975EB2CA697E1004C495A /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 483975EA2CA697E1004C495A /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
 		483DBBE52C903C9300C775BF /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 483DBBE42C903C9300C775BF /* XCRemoteSwiftPackageReference "Alamofire" */;
