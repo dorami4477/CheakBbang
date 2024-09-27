@@ -147,7 +147,7 @@ struct AddMemoView: View {
                 }
                 
                 Text(isEditing ? "수정" : "저장")
-                    .asfullCapsuleButton()
+                    .asfullCapsuleButton(background: content.isEmpty ? .gray : .accent)
                     .wrapToButton {
                         let newMemo = Memo(bookId: item.id, page: page, contents: content, date: Date())
                         

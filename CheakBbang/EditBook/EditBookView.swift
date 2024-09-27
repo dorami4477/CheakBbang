@@ -69,7 +69,7 @@ struct EditBookView: View {
             Spacer()
             
             Text("저장")
-                .asfullCapsuleButton()
+                .asfullCapsuleButton(background: .accent)
                 .wrapToButton {
                     viewModel.action(.addButtonTap(item: book))
                     dismiss()

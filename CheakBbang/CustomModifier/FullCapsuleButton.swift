@@ -8,6 +8,7 @@
 import SwiftUI
 
 private struct FullCapsuleButton: ViewModifier {
+    var background:Color
     
     func body(content: Content) -> some View {
             content
@@ -15,14 +16,14 @@ private struct FullCapsuleButton: ViewModifier {
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 10)
                 .padding(.horizontal)
-                .background(.accent)
+                .background(background)
                 .foregroundColor(.white)
                 .clipShape(.capsule)
     }
 }
 
 extension View {
-    func asfullCapsuleButton() -> some View {
-        modifier(FullCapsuleButton())
+    func asfullCapsuleButton(background: Color) -> some View {
+        modifier(FullCapsuleButton(background: background))
     }
 }

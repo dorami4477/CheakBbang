@@ -61,7 +61,7 @@ struct DrawingView: View {
                         }
                 }
                 Text("저장")
-                    .asfullCapsuleButton()
+                    .asfullCapsuleButton(background: .accent)
                     .wrapToButton {
                         saveDrawing()
                         presentationMode.wrappedValue.dismiss()

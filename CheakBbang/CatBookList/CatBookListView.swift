@@ -33,6 +33,10 @@ struct CatBookListView: View {
                                 if 0 < space {
                                     Spacer(minLength: space)
                                 }
+                                Text("지우기")
+                                    .wrapToButton {
+                                        UserDefaults.standard.removeObject(forKey: "nickName")
+                                    }
                                 bookListView()
                                 Image(ImageName.bottom)
                                     .resizable()

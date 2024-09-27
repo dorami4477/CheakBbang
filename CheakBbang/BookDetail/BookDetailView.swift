@@ -33,7 +33,7 @@ struct BookDetailView: View {
                         NavigationLazyView(AddMemoView(item: item, memo: nil))
                     } label: {
                         Text("글귀 추가하기")
-                            .asfullCapsuleButton()
+                            .asfullCapsuleButton(background: .accent)
                     }
                     
                 }
