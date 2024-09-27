@@ -18,10 +18,12 @@ struct BookListRow: View {
                     .font(.headline)
                     .fontWeight(.bold)
                     .foregroundStyle(.black)
+                    .multilineTextAlignment(.leading)
                 
                 Text(item.author + " / " + item.publisher + " / " + item.pubDate)
                 .foregroundStyle(.gray)
                 .font(.caption)
+                .multilineTextAlignment(.leading)
                 .padding(.bottom, 4)
                 
                 HStack {
