@@ -15,33 +15,33 @@ struct ContentView: View {
     }
     
     var body: some View {
-            TabView(selection: $selectedTab) {
-                NavigationStack {
-                    CatBookListView()
-                }
-                    .tabItem {
-                        Image(systemName: "1.square.fill")
-                        Text("북타워")
-                    }
-                    .tag(0)
-                
-                NavigationStack {
-                    NavigationLazyView(MyLibraryView())
-                }
-                    .tabItem {
-                        Image(systemName: "2.square.fill")
-                        Text("내서재")
-                    }
-                    .tag(1)
-                
-                NavigationStack {
-                    NavigationLazyView(MemoListWrapper())
-                }
-                    .tabItem {
-                        Image(systemName: "3.square.fill")
-                        Text("메모서랍")
-                    }
-                    .tag(2)
+        TabView(selection: $selectedTab) {
+            NavigationStack {
+                CatBookListView()
+            }
+            .tabItem {
+                Image(systemName: "1.square.fill")
+                Text("북타워")
+            }
+            .tag(0)
+            
+            NavigationStack {
+                NavigationLazyView(MyLibraryView())
+            }
+            .tabItem {
+                Image(systemName: "2.square.fill")
+                Text("내서재")
+            }
+            .tag(1)
+            
+            NavigationStack {
+                NavigationLazyView(MemoListWrapper())
+            }
+            .tabItem {
+                Image(systemName: "3.square.fill")
+                Text("메모서랍")
+            }
+            .tag(2)
         }
 
     }

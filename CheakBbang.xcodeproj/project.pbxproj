@@ -14,6 +14,7 @@
 		483975E92CA6979C004C495A /* cat_anigif_5sec.gif in Resources */ = {isa = PBXBuildFile; fileRef = 483975E82CA6979C004C495A /* cat_anigif_5sec.gif */; };
 		483975EC2CA697E1004C495A /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 483975EB2CA697E1004C495A /* SDWebImageSwiftUI */; };
 		483975F32CA6B28F004C495A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975F22CA6B28F004C495A /* OnboardingView.swift */; };
+		483975F52CA6D42E004C495A /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975F42CA6D42E004C495A /* ContentViewModel.swift */; };
 		483DBBCB2C90376C00C775BF /* CheakBbangApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */; };
 		483DBBCF2C90376E00C775BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBCE2C90376E00C775BF /* Assets.xcassets */; };
 		483DBBD22C90376E00C775BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBD12C90376E00C775BF /* Preview Assets.xcassets */; };
@@ -102,6 +103,7 @@
 		483975E32CA68DC8004C495A /* GIFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFView.swift; sourceTree = "<group>"; };
 		483975E82CA6979C004C495A /* cat_anigif_5sec.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = cat_anigif_5sec.gif; sourceTree = "<group>"; };
 		483975F22CA6B28F004C495A /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		483975F42CA6D42E004C495A /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		483DBBC72C90376C00C775BF /* CheakBbang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheakBbang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheakBbangApp.swift; sourceTree = "<group>"; };
 		483DBBCE2C90376E00C775BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -250,8 +252,8 @@
 				48D09A392C9BEF5A000328E3 /* EditBook */,
 				483DBC0B2C91787D00C775BF /* AddBook */,
 				48D09A1A2C96D69A000328E3 /* BookDetail */,
-				483DBBDE2C903A9500C775BF /* CatBookList */,
 				483DBC012C916CB100C775BF /* Search */,
+				483DBBDE2C903A9500C775BF /* CatBookList */,
 				483975F12CA6B266004C495A /* Onboarding */,
 				483DBBDB2C903A6000C775BF /* Localization */,
 				483DBBD82C90378800C775BF /* Resource */,
@@ -303,6 +305,7 @@
 			children = (
 				483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */,
 				483DBC382C94281100C775BF /* ContentView.swift */,
+				483975F42CA6D42E004C495A /* ContentViewModel.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -601,6 +604,7 @@
 				48D09A132C95D209000328E3 /* LibraryTab.swift in Sources */,
 				48D09A6A2C9FB885000328E3 /* TextBubble.swift in Sources */,
 				483DBBF72C9154C500C775BF /* NetworkManager.swift in Sources */,
+				483975F52CA6D42E004C495A /* ContentViewModel.swift in Sources */,
 				483DBC032C916CC200C775BF /* SearchView.swift in Sources */,
 				483DBC062C916EC400C775BF /* NavigationLazyView.swift in Sources */,
 				48D09A5A2C9E6399000328E3 /* Image+.swift in Sources */,

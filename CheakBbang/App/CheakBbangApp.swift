@@ -11,12 +11,18 @@ import RealmSwift
 @main
 struct CheakBbangApp: App {
     @ObservedObject var appState = AppState()
+    @ObservedObject var viewModel = ContentViewModel()
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .id(appState.rootViewId)
-                .environmentObject(appState)
+            if viewModel.isFirstRun {
+                OnboardingView(viewModel: viewModel)
+                    .environmentObject(appState)
+            } else {
+                ContentView()
+                    .id(appState.rootViewId)
+                    .environmentObject(appState)
+            }
         }
     }
 }
