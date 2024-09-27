@@ -18,7 +18,7 @@ struct SearchView: View {
             SearchBarView(searchText: $searchTerm, viewModel: viewModel, focus: _focusField)
                 .background {
                     GeometryReader { geometry in
-                        if viewModel.output.bookList.totalResults == 0 {
+                        if viewModel.output.bookList.count == 0 {
                             Image(ImageName.searchBack)
                                 .resizable()
                                 .frame(width: geometry.size.width, height: geometry.size.width * 1.18)
@@ -35,11 +35,14 @@ struct SearchView: View {
             if !searchTerm.isEmpty || focusField {
                 ScrollView{
                     LazyVStack {
-                        ForEach(viewModel.output.bookList.item, id: \.itemID) { item in
+                        ForEach(viewModel.output.bookList, id: \.itemID) { item in
                             NavigationLink {
                                 NavigationLazyView(SearchResultDetailView(viewModel: SearchResultDetailViewModel(), itemId: item.isbn13))
                             } label: {
                                 BookListRow(item: item)
+                                    .onAppear {
+                                        viewModel.action(.loadMoreItems(item: item))
+                                    }
                             }
                         }
                     }

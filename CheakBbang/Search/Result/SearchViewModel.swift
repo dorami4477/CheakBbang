@@ -12,7 +12,9 @@ final class SearchViewModel: ViewModelType {
     var cancellables = Set<AnyCancellable>()
     var input = Input()
     @Published var output = Output()
-
+    var searchResult: Book? = nil
+    var searchTerm = ""
+    var itemCount = 0
     
     init() {
         transform()
@@ -24,45 +26,74 @@ final class SearchViewModel: ViewModelType {
 extension SearchViewModel {
     struct Input {
         let searchOnSubmit = PassthroughSubject<String, Never>()
+        let loadMoreItems = PassthroughSubject<Item, Never>()
     }
     
     struct Output {
-        var bookList: Book = Book(version: "", title: "", link: "", pubDate: "", totalResults: 0, startIndex: 1, itemsPerPage: 1, query: "", searchCategoryID: 1, searchCategoryName: "", item: [])
+        var bookList: [Item] = []
     }
     
     func transform() {
+        
+        input.searchOnSubmit
+            .flatMap { [weak self] value in
+                guard let self else {
+                    return Empty<Book, Error>().eraseToAnyPublisher()
+                }
+                return NetworkManager.shared.fetchBookList(value, index: self.itemCount + 1)
+            }
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("Error fetching book item: \(error)")
+                }
+            }, receiveValue: { [weak self] value in
+                guard let self else { return }
+                searchResult = value
+                self.itemCount += value.itemsPerPage
+                
+                if value.startIndex == 1 {
+                    self.output.bookList = value.item
+                } else {
+                    self.output.bookList.append(contentsOf: value.item)
+                }
+
+            })
+            .store(in: &cancellables)
+        
         input
-            .searchOnSubmit
-            .sink { [weak self] value in
+            .loadMoreItems
+            .sink { [weak self] item in
                 Task { [weak self] in
-                    await self?.fetchBookList(value)
+                    guard let self else { return }
+                    guard let searchResult = self.searchResult else { return }
+                    if self.output.bookList.last == item && searchResult.totalResults != itemCount {
+                        //await self.fetchBookList(searchTerm, index: itemCount + 1)
+                    }
                 }
             }
             .store(in: &cancellables)
     }
 
-    @MainActor
-    func fetchBookList(_ search: String) async {
-        do {
-            let value = try await NetworkManager.shared.callRequest(api: .list(query: search), model: Book.self)
-            output.bookList = value
-            
-        } catch {
-            print("Error fetching data: \(error)")
-        }
-    }
 }
 
 // MARK: - Action
 extension SearchViewModel {
     enum Action {
         case searchOnSubmit(search: String)
+        case loadMoreItems(item: Item)
     }
     
     func action(_ action: Action) {
         switch action {
         case .searchOnSubmit(let search):
             input.searchOnSubmit.send(search)
+        case .loadMoreItems(let item):
+            input.loadMoreItems.send(item)
         }
+        
     }
 }

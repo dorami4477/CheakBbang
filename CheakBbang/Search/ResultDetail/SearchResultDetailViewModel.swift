@@ -27,6 +27,7 @@ extension SearchResultDetailViewModel {
     
     struct Output {
         var book: Item = Item(title: "", link: "", author: "", pubDate: "", description: "", isbn: "", isbn13: "", itemID: 0, cover: "", categoryID: 0, categoryName: "", publisher: "", adult: true, customerReviewRank: 0, subInfo: SubInfo(subTitle: nil, originalTitle: nil, itemPage: nil))
+        var notFoundItem = false
     }
     
  
@@ -36,16 +37,16 @@ extension SearchResultDetailViewModel {
                 NetworkManager.shared.fetchSingleBookItem(value)
             }
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
+            .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
                 case .finished:
                     break
                 case .failure(let error):
+                    self?.output.notFoundItem = true
                     print("Error fetching book item: \(error)")
                 }
             }, receiveValue: { [weak self] item in
                     self?.output.book = item
-
             })
             .store(in: &cancellables)
         
@@ -67,6 +68,3 @@ extension SearchResultDetailViewModel {
     }
 }
 
-enum MyError: Error {
-    case noItemsFound
-}

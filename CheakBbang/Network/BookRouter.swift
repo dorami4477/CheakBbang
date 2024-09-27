@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 enum BookRouter {
-    case list(query: String)
+    case list(query: String, index:Int)
     case item(id: String)
 }
 
@@ -34,14 +34,13 @@ extension BookRouter: TargetType {
     
     var queryItems: [URLQueryItem] {
         switch self {
-        case .list(let query):
+        case .list(let query, let index):
             return [
                 URLQueryItem(name: "ttbkey", value: APIKeys.key),
                 URLQueryItem(name: "query", value: query),
-                URLQueryItem(name: "QueryType", value: "Title"),
-                URLQueryItem(name: "MaxResults", value: "10"),
-                URLQueryItem(name: "Cover", value: "Big"),
-                URLQueryItem(name: "start", value: "1"),
+                URLQueryItem(name: "MaxResults", value: "20"),
+                URLQueryItem(name: "Cover", value: "MidBig"),
+                URLQueryItem(name: "start", value: "\(index)"),
                 URLQueryItem(name: "SearchTarget", value: "Book"),
                 URLQueryItem(name: "output", value: "JS"),
                 URLQueryItem(name: "Version", value: "20131101")

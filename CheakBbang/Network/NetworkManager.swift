@@ -9,13 +9,14 @@ import Foundation
 import Alamofire
 import Combine
 
-enum ErrorCode:Error{
+enum BookError:Error{
     case BadRequest
     case Unauthorized
     case Forbidden
     case NotFound
     case serverError
     case NetworError
+    case noItemsFound
 }
 
 final class NetworkManager {
@@ -25,7 +26,7 @@ final class NetworkManager {
     func callRequest<T: Decodable>(api:BookRouter, model:T.Type) async throws -> T {
         
         let request = try api.asURLRequest()
-        
+        print(request)
         return try await withCheckedThrowingContinuation { continuation in
             AF.request(request).responseDecodable(of: model) { response in
                 switch response.result {
@@ -40,8 +41,22 @@ final class NetworkManager {
     }
 }
 
-
 extension NetworkManager {
+    
+    func fetchBookList(_ search: String, index: Int)  -> AnyPublisher<Book, Error> {
+        Future { promise in
+            Task { [weak self] in
+                do {
+                    guard let self else { return }
+                    let value = try await self.callRequest(api: .list(query: search, index: index), model: Book.self)
+                    promise(.success(value))
+                } catch {
+                    promise(.failure(error))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
+    }
     
     func fetchSingleBookItem(_ isbn: String) -> AnyPublisher<Item, Error> {
         Future { promise in
@@ -51,10 +66,11 @@ extension NetworkManager {
                     if let item = value?.item.first {
                         promise(.success(item))
                     } else {
-                        promise(.failure(MyError.noItemsFound))
+                        promise(.failure(BookError.noItemsFound))
                     }
                 } catch {
-                    promise(.failure(error))
+                    print(error)
+                    promise(.failure(BookError.BadRequest))
                 }
             }
         }
