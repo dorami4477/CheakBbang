@@ -11,10 +11,12 @@ struct AllLibraryView: View {
     @StateObject var viewModel: LibraryViewModel
     
     var body: some View {
-        VStack(spacing: 30) {
-            sectionWrap(.done, color: .orange)
-            sectionWrap(.currenltyReading, color: .purple)
-            sectionWrap(.wantToRead, color: .green)
+        ScrollView {
+            VStack(spacing: 30) {
+                sectionWrap(.done, color: .orange)
+                sectionWrap(.currenltyReading, color: .purple)
+                sectionWrap(.wantToRead, color: .green)
+            }
         }
     }
     
