@@ -19,8 +19,6 @@ struct SettingView: View {
         Text("\(viewModel.output.bookCount)")
         Text("\(viewModel.output.totalPage)")
         Text("\(viewModel.output.MemoCount)")
-        
-        let nowVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-        Text("\(String(describing: nowVersion))")
+        Text("\(viewModel.output.version)")
     }
 }
