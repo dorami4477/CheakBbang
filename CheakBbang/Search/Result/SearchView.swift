@@ -34,23 +34,28 @@ struct SearchView: View {
                 }
             
             if !searchTerm.isEmpty || focusField {
-                ScrollView{
-                    LazyVStack {
-                        ForEach(viewModel.output.bookList, id: \.itemID) { item in
-                            NavigationLink {
-                                NavigationLazyView(SearchResultDetailView(viewModel: SearchResultDetailViewModel(), itemId: item.isbn13))
-                            } label: {
-                                BookListRow(item: item)
-                                    .onAppear {
-                                        viewModel.action(.loadMoreItems(item: item))
-                                    }
+                if viewModel.output.isLoading {
+                    ProgressView()
+                        .padding()
+                } else {
+                    ScrollView{
+                        LazyVStack {
+                            ForEach(viewModel.output.bookList, id: \.itemID) { item in
+                                NavigationLink {
+                                    NavigationLazyView(SearchResultDetailView(viewModel: SearchResultDetailViewModel(), itemId: item.isbn13))
+                                } label: {
+                                    BookListRow(item: item)
+                                        .onAppear {
+                                            viewModel.action(.loadMoreItems(item: item))
+                                        }
+                                }
                             }
                         }
                     }
-                }
-                .onAppear{
-                    withAnimation(.easeInOut(duration: 0.5)) {
-                        isAnimating = false
+                    .onAppear{
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            isAnimating = false
+                        }
                     }
                 }
             }
@@ -69,14 +74,14 @@ struct SearchView: View {
     }
     
     private func checkForToast() {
-            if viewModel.output.bookListZero {
-                toast = Toast(style: .info, message: "검색하신 책이 없습니다. \n다른 검색어를 입력해주세요 :)")
-            } else if viewModel.output.searchFailure {
-                toast = Toast(style: .error, message: "네트워크 오류가 발생했습니다:( \n잠시후 시도해주세요!")
-            } else {
-                toast = nil
-            }
+        if viewModel.output.bookListZero {
+            toast = Toast(style: .info, message: "검색하신 책이 없습니다. \n다른 검색어를 입력해주세요 :)")
+        } else if viewModel.output.searchFailure {
+            toast = Toast(style: .error, message: "네트워크 오류가 발생했습니다:( \n잠시후 시도해주세요!")
+        } else {
+            toast = nil
         }
+    }
 }
 
 struct SearchBarView: View {
@@ -109,6 +114,7 @@ struct SearchBarView: View {
                 .onSubmit {
                     print($searchText.wrappedValue)
                     viewModel.action(.searchOnSubmit(search: $searchText.wrappedValue))
+                    viewModel.output.isLoading = true
                 }
         }
         .font(.headline)

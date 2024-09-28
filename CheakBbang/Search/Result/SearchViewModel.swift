@@ -33,6 +33,7 @@ extension SearchViewModel {
         var bookList: [Item] = []
         var searchFailure: Bool = false
         var bookListZero: Bool = false
+        var isLoading: Bool = false
     }
     
     func transform() {
@@ -56,11 +57,14 @@ extension SearchViewModel {
             }, receiveValue: { [weak self] value in
                 guard let self else { return }
                 searchResult = value
+                output.isLoading = false
+                
                 if value.item.isEmpty {
                     output.bookListZero = true
                 }
-                self.itemCount += value.itemsPerPage
                 
+                self.itemCount += value.itemsPerPage
+
                 if value.startIndex == 1 {
                     self.output.bookList = value.item
                 } else {
@@ -96,6 +100,8 @@ extension SearchViewModel {
     func action(_ action: Action) {
         switch action {
         case .searchOnSubmit(let search):
+            output.bookListZero = false
+            output.searchFailure = false
             input.searchOnSubmit.send(search)
         case .loadMoreItems(let item):
             input.loadMoreItems.send(item)
