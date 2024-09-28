@@ -42,3 +42,10 @@ enum ImageName {
     static let configNum03 = "image_config_num03"
     static let configBG = "image_configBG"
 }
+
+enum TabbarImageName {
+    static let tag01 = "icon_menu_01"
+    static let tag02 = "icon_menu_02"
+    static let tag03 = "icon_menu_03"
+    static let tag04 = "icon_menu_04"
+}

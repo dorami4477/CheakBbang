@@ -20,7 +20,7 @@ struct ContentView: View {
                 CatBookListView(viewModel: CatBookListViewModel())
             }
             .tabItem {
-                Image(systemName: "1.square.fill")
+                Image(TabbarImageName.tag01)
                 Text("북타워")
             }
             .tag(0)
@@ -29,7 +29,7 @@ struct ContentView: View {
                 NavigationLazyView(MyLibraryView())
             }
             .tabItem {
-                Image(systemName: "2.square.fill")
+                Image(TabbarImageName.tag02)
                 Text("내서재")
             }
             .tag(1)
@@ -38,7 +38,7 @@ struct ContentView: View {
                 NavigationLazyView(MemoListWrapper())
             }
             .tabItem {
-                Image(systemName: "3.square.fill")
+                Image(TabbarImageName.tag03)
                 Text("메모서랍")
             }
             .tag(2)
@@ -47,13 +47,13 @@ struct ContentView: View {
                 NavigationLazyView(SettingView(viewModel: SettingViewModel()))
             }
             .tabItem {
-                Image(systemName: "3.square.fill")
+                Image(TabbarImageName.tag04)
                 Text("마이페이지")
             }
-            .tag(2)
+            .tag(3)
         }
-
     }
+    
 }
 
 
