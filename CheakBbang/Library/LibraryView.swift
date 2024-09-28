@@ -13,19 +13,23 @@ struct LibraryView: View {
     var status: ReadingState
     
     var body: some View {
-        ScrollView {
-            LazyVStack(spacing: 20) {
-                ForEach(realmBookList.filter{ $0.status == status }, id: \.id) { book in
-                    NavigationLink {
-                        NavigationLazyView(BookDetailView(viewModel: BookDetailViewModel(), item: book))
-                    } label: {
-                        bookListRow(book: book)
+        if realmBookList.filter({ $0.status == status }).count != 0 {
+            ScrollView {
+                LazyVStack(spacing: 20) {
+                    ForEach(realmBookList.filter{ $0.status == status }, id: \.id) { book in
+                        NavigationLink {
+                            NavigationLazyView(BookDetailView(viewModel: BookDetailViewModel(), item: book))
+                        } label: {
+                            bookListRow(book: book)
+                        }
                     }
                 }
+                .padding()
             }
-            .padding()
+        } else {
+            Text("\(status.rawValue)을 등록해주세요:)")
         }
-    }    
+    }
 }
     struct bookListRow: View {
         @ObservedRealmObject var book: MyBook
