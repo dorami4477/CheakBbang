@@ -33,7 +33,7 @@ extension SettingViewModel {
         var MemoCount: Int = 0
         var bookCount: Int = 0
         var version: String = ""
-        
+        var memoPharse: String = ""
     }
     
     func transform() {
@@ -44,6 +44,7 @@ extension SettingViewModel {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.00"
         output.version = "\(appVersion) (\(shouldUpdate() ? "업데이트 필요" :"최신 버전"))"
         output.nickName = UserDefaults.standard.string(forKey: "nickName") ?? "냥이 이름을 설정해주세요!"
+        output.memoPharse = realmMemoList.randomElement()?.contents ?? "메모를 등록해주세요:)"
     }
     
     func latestVersion(completion: @escaping (String?) -> Void) {

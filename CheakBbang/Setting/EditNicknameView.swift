@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EditNicknameView: View {
     @Binding var isPresented: Bool
-    @State var nickName: String = UserDefaultsManager.nickName
+    @Binding var nickName: String
     @FocusState var focus: Bool
     
     var body: some View {
@@ -31,7 +31,7 @@ struct EditNicknameView: View {
                 )
                 .padding(.vertical)
             
-            Text("저장하기")
+            Text("확 인")
                 .asfullCapsuleButton(background: nickName.isEmpty ? .gray.opacity(0.7) : .accent)
                 .wrapToButton {
                     UserDefaultsManager.nickName = nickName

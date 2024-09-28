@@ -11,13 +11,13 @@ import RealmSwift
 struct SettingView: View {
     @StateObject var viewModel: SettingViewModel
     @State private var showEditName: Bool = false
-    
+    @State private var nickName: String = UserDefaultsManager.nickName
     var body: some View {
         VStack {
             ImageWrapper(name: ImageName.configBG, contentMode: .fill)
                 .overlay {
                     VStack {
-                        Text("텍스트가 있어야 하네")
+                        Text(viewModel.output.memoPharse)
                             .font(.custom("BinggraeII", size: 16))
                             .multilineTextAlignment(.center)
                             .lineLimit(3)
@@ -32,7 +32,7 @@ struct SettingView: View {
                 .padding(.vertical, 30)
             
             HStack {
-                Text(viewModel.output.nickName)
+                Text(nickName)
                     .bold()
                     .font(.system(size: 25))
                 
@@ -93,8 +93,11 @@ struct SettingView: View {
         }
         .padding()
         .sheet(isPresented: $showEditName) {
-            EditNicknameView(isPresented: $showEditName)
+            EditNicknameView(isPresented: $showEditName, nickName: $nickName)
                 .presentationDetents([.fraction(0.3)])
+        }
+        .onAppear{
+            print("\(UserDefaultsManager.nickName)")
         }
         
     }
