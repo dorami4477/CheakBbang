@@ -11,16 +11,12 @@ import RealmSwift
 
 final class CatBookListViewModel: ViewModelType {
     @ObservedResults(MyBook.self) var realmBookList
-    //private var realm: Realm
-    //@Published var bookList: [MyBook] = []
     
     var cancellables = Set<AnyCancellable>()
     var input = Input()
     @Published var output = Output()
     
     init() {
-       // self.realm = try! Realm()
-       //print(realm.configuration.fileURL)
         transform()
     }
 }
@@ -33,17 +29,14 @@ extension CatBookListViewModel {
     
     struct Output {
         var bookList: [MyBook] = []
-        var totalPage: String = ""
+        var totalPage: String = "0"
         var bookCount: Int = 0
         var groupBottomPadding: CGFloat = 0
         var totalBookHeight: CGFloat = 0
+        var shelfHeight: CGFloat = 0
     }
     
-    func transform() {
-        //let books = realm.objects(MyBook.self)
-        //books.collectionPublisher
-        //print(Realm.Configuration.defaultConfiguration.fileURL)
-        
+    func transform() {    
         realmBookList.collectionPublisher
             .map { Array($0) }
             .sink(receiveCompletion: { completion in
@@ -62,6 +55,7 @@ extension CatBookListViewModel {
         self.output.bookCount = output.bookList.count
         self.output.groupBottomPadding = groupBottomPadding()
         self.output.totalBookHeight = getTotalBookHeight()
+        self.output.shelfHeight = getShelfHeight()
     }
     
     func dataString(date: Date) -> String {
@@ -99,6 +93,7 @@ extension CatBookListViewModel {
             height += bookImageHeight($0.page)
         }
         if output.bookList.count > 0 {
+            //고양이 높이
             height += 53
         }
         return height
@@ -124,8 +119,13 @@ extension CatBookListViewModel {
     }
     
     func groupBottomPadding() -> CGFloat{
-        let padding = (output.bookList.count / 5 ) * 35 + ( output.bookCount % 5 > 0 ? 35 : 0 ) - (output.bookCount > 0 ? 35 : 0) 
+        let padding = (output.bookList.count / 5 ) * 50 + ( output.bookCount % 5 > 0 ? 50 : 0 ) - (output.bookCount > 0 ? 50 : 0) 
         return CGFloat(padding)
+    }
+    
+    func getShelfHeight() -> CGFloat{
+        let height = (output.bookList.count / 5 ) * 31 + (output.bookCount > 0 && output.bookCount < 5 ? 31 : 0)
+        return CGFloat(height)
     }
 }
 

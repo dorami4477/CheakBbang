@@ -22,21 +22,17 @@ struct CatBookListView: View {
                     .frame(width: geometry.size.width, height: geometry.size.height)
                 VStack(spacing: 5) {
                     infoView()
+                        .frame(height: 52)
+                    
                     ZStack {
                         VStack{
                             ScrollView(.vertical) {
-                               // let safeAreaInsets = geometry.safeAreaInsets
-                               // let heightWithoutSafeArea = geometry.size.height - safeAreaInsets.top - safeAreaInsets.bottom
-                                let itemHeight = geometry.size.width * 0.86 + viewModel.output.totalBookHeight - viewModel.output.groupBottomPadding - CGFloat((viewModel.output.bookCount - viewModel.output.bookCount / 5) * 15)
-                                let space = (geometry.size.height - itemHeight) - 30
-                               // Text("\(space), \(viewModel.output.totalBookHeight), \(viewModel.output.groupBottomPadding)")
+                                let infoHeight: CGFloat = 52
+                                let itemHeight = (geometry.size.width * 0.86 + infoHeight + viewModel.output.totalBookHeight) + viewModel.output.shelfHeight - (viewModel.output.groupBottomPadding + CGFloat(viewModel.output.bookCount * 20))
+                                let space = (geometry.size.height - itemHeight)
                                 if 0 < space {
                                     Spacer(minLength: space)
                                 }
-                                Text("지우기")
-                                    .wrapToButton {
-                                        UserDefaults.standard.removeObject(forKey: "nickName")
-                                    }
                                 bookListView()
                                 Image(ImageName.bottom)
                                     .resizable()
@@ -50,9 +46,6 @@ struct CatBookListView: View {
                 }
             }
         }
-//        .onAppear {
-//            print(Realm.Configuration.defaultConfiguration.fileURL)
-//        }
     }
     
     func bookListView() -> some View {
@@ -213,7 +206,6 @@ struct floatingButton: View {
         }
     }
 }
-
 
 struct Triangle: Shape {
     func path(in rect: CGRect) -> Path {
