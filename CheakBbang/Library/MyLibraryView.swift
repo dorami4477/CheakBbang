@@ -30,6 +30,8 @@ struct MyLibraryView: View {
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
         }
+        .navigationTitle("내서재")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

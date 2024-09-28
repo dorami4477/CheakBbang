@@ -29,7 +29,7 @@ struct SettingView: View {
                             .padding(.bottom, -13)
                     }
                 }
-                .padding(.vertical, 30)
+                .padding(.vertical, 25)
             
             HStack {
                 Text(nickName)
@@ -99,6 +99,8 @@ struct SettingView: View {
         .onAppear{
             print("\(UserDefaultsManager.nickName)")
         }
+        .navigationTitle("마이페이지")
+        .navigationBarTitleDisplayMode(.inline)
         
     }
 
