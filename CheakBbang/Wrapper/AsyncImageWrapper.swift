@@ -19,7 +19,7 @@ struct AsyncImageWrapper: View {
                     .aspectRatio(contentMode: contentMode)
                 
             } else if phase.error != nil {
-                Image(systemName: "heart")
+                Image(ImageName.emptyBook)
             } else {
                 ProgressView()
             }
