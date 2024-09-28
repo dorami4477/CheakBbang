@@ -42,6 +42,15 @@ struct ContentView: View {
                 Text("메모서랍")
             }
             .tag(2)
+            
+            NavigationStack {
+                NavigationLazyView(SettingView(viewModel: SettingViewModel()))
+            }
+            .tabItem {
+                Image(systemName: "3.square.fill")
+                Text("마이페이지")
+            }
+            .tag(2)
         }
 
     }

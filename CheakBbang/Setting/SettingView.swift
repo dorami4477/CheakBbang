@@ -6,13 +6,21 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct SettingView: View {
+    @StateObject var viewModel: SettingViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GIFView(gifName: ImageName.cat01, width: 110)
+            .frame(width: 110, height: 73)
+        let nickName = UserDefaults.standard.string(forKey: "nickName")
+        Text(nickName ?? "")
+        Text("\(viewModel.output.bookCount)")
+        Text("\(viewModel.output.totalPage)")
+        Text("\(viewModel.output.MemoCount)")
+        
+        let nowVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        Text("\(String(describing: nowVersion))")
     }
-}
-
-#Preview {
-    SettingView()
 }

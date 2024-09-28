@@ -12,7 +12,6 @@ class ContentViewModel: ObservableObject {
     
     init() {
         self.checkFirstRun()
-        print(isFirstRun)
     }
     
     func checkFirstRun() {
