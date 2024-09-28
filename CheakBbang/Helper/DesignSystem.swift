@@ -33,4 +33,12 @@ enum ImageName {
     static let search = "magnifyingglass"
     static let searchCancel = "xmark.circle.fill"
     static let cat01 = "cat_anigif_5sec"
+    static let configAppver = "image_config_appver"
+    static let configMail = "image_config_mail"
+    static let configMember = "image_config_member"
+    static let configEdit = "image_config_nameedit"
+    static let configNum01 = "image_config_num01"
+    static let configNum02 = "image_config_num02"
+    static let configNum03 = "image_config_num03"
+    static let configBG = "image_configBG"
 }

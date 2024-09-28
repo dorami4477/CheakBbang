@@ -17,6 +17,8 @@
 		483975F52CA6D42E004C495A /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975F42CA6D42E004C495A /* ContentViewModel.swift */; };
 		483975FA2CA7AF3B004C495A /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975F92CA7AF3B004C495A /* SettingView.swift */; };
 		483975FC2CA7BF9D004C495A /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975FB2CA7BF9D004C495A /* SettingViewModel.swift */; };
+		483975FE2CA800CF004C495A /* EditNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975FD2CA800CF004C495A /* EditNicknameView.swift */; };
+		483976002CA801CF004C495A /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975FF2CA801CF004C495A /* UserDefaultManager.swift */; };
 		483DBBCB2C90376C00C775BF /* CheakBbangApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */; };
 		483DBBCF2C90376E00C775BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBCE2C90376E00C775BF /* Assets.xcassets */; };
 		483DBBD22C90376E00C775BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBD12C90376E00C775BF /* Preview Assets.xcassets */; };
@@ -108,6 +110,8 @@
 		483975F42CA6D42E004C495A /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		483975F92CA7AF3B004C495A /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		483975FB2CA7BF9D004C495A /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		483975FD2CA800CF004C495A /* EditNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNicknameView.swift; sourceTree = "<group>"; };
+		483975FF2CA801CF004C495A /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
 		483DBBC72C90376C00C775BF /* CheakBbang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheakBbang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheakBbangApp.swift; sourceTree = "<group>"; };
 		483DBBCE2C90376E00C775BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -227,6 +231,7 @@
 			children = (
 				483975F92CA7AF3B004C495A /* SettingView.swift */,
 				483975FB2CA7BF9D004C495A /* SettingViewModel.swift */,
+				483975FD2CA800CF004C495A /* EditNicknameView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -357,6 +362,7 @@
 				483DBC092C91723D00C775BF /* ViewModelType.swift */,
 				48D09A182C968163000328E3 /* DesignSystem.swift */,
 				48D09A692C9FB885000328E3 /* TextBubble.swift */,
+				483975FF2CA801CF004C495A /* UserDefaultManager.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -605,12 +611,14 @@
 				48D09A682C9F16D1000328E3 /* MyCanvas.swift in Sources */,
 				483975E42CA68DC8004C495A /* GIFView.swift in Sources */,
 				48D09A862CA3CB7D000328E3 /* MemoViewModel.swift in Sources */,
+				483975FE2CA800CF004C495A /* EditNicknameView.swift in Sources */,
 				483DBC3E2C955ACE00C775BF /* LibraryView.swift in Sources */,
 				48D09A2C2C997CA8000328E3 /* ReadingState.swift in Sources */,
 				48D09A832CA2F766000328E3 /* MemoView.swift in Sources */,
 				48D09A192C968163000328E3 /* DesignSystem.swift in Sources */,
 				483975F32CA6B28F004C495A /* OnboardingView.swift in Sources */,
 				483DBBE02C903AD200C775BF /* CatBookListView.swift in Sources */,
+				483976002CA801CF004C495A /* UserDefaultManager.swift in Sources */,
 				48D09A152C95D316000328E3 /* MyLibraryView.swift in Sources */,
 				483975DF2CA5A7A7004C495A /* FontWrapper.swift in Sources */,
 				483DBBFA2C915A9400C775BF /* Book.swift in Sources */,
