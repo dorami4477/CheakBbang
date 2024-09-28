@@ -11,6 +11,10 @@ extension View {
     func border(width: CGFloat, edges: [Edge], color: Color) -> some View {
         overlay(EdgeBorder(width: width, edges: edges).foregroundColor(color))
     }
+    
+    func toastView(toast: Binding<Toast?>) -> some View {
+      self.modifier(ToastModifier(toast: toast))
+    }
 }
 
 struct EdgeBorder: Shape {

@@ -12,13 +12,15 @@
 		483975E22CA5AE6B004C495A /* BinggraeII.otf in Resources */ = {isa = PBXBuildFile; fileRef = 483975E12CA5AE6B004C495A /* BinggraeII.otf */; };
 		483975E42CA68DC8004C495A /* GIFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975E32CA68DC8004C495A /* GIFView.swift */; };
 		483975E92CA6979C004C495A /* cat_anigif_5sec.gif in Resources */ = {isa = PBXBuildFile; fileRef = 483975E82CA6979C004C495A /* cat_anigif_5sec.gif */; };
-		483975EC2CA697E1004C495A /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 483975EB2CA697E1004C495A /* SDWebImageSwiftUI */; };
 		483975F32CA6B28F004C495A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975F22CA6B28F004C495A /* OnboardingView.swift */; };
 		483975F52CA6D42E004C495A /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975F42CA6D42E004C495A /* ContentViewModel.swift */; };
 		483975FA2CA7AF3B004C495A /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975F92CA7AF3B004C495A /* SettingView.swift */; };
 		483975FC2CA7BF9D004C495A /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975FB2CA7BF9D004C495A /* SettingViewModel.swift */; };
 		483975FE2CA800CF004C495A /* EditNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975FD2CA800CF004C495A /* EditNicknameView.swift */; };
 		483976002CA801CF004C495A /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975FF2CA801CF004C495A /* UserDefaultManager.swift */; };
+		483976042CA85347004C495A /* ToastModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483976032CA85347004C495A /* ToastModifier.swift */; };
+		483976062CA8536F004C495A /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483976052CA8536F004C495A /* ToastView.swift */; };
+		483976082CA85390004C495A /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483976072CA85390004C495A /* Toast.swift */; };
 		483DBBCB2C90376C00C775BF /* CheakBbangApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */; };
 		483DBBCF2C90376E00C775BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBCE2C90376E00C775BF /* Assets.xcassets */; };
 		483DBBD22C90376E00C775BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBD12C90376E00C775BF /* Preview Assets.xcassets */; };
@@ -112,6 +114,9 @@
 		483975FB2CA7BF9D004C495A /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		483975FD2CA800CF004C495A /* EditNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNicknameView.swift; sourceTree = "<group>"; };
 		483975FF2CA801CF004C495A /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
+		483976032CA85347004C495A /* ToastModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastModifier.swift; sourceTree = "<group>"; };
+		483976052CA8536F004C495A /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		483976072CA85390004C495A /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		483DBBC72C90376C00C775BF /* CheakBbang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheakBbang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheakBbangApp.swift; sourceTree = "<group>"; };
 		483DBBCE2C90376E00C775BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -182,7 +187,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				483975EC2CA697E1004C495A /* SDWebImageSwiftUI in Frameworks */,
 				48D09A382C9B222D000328E3 /* Cosmos in Frameworks */,
 				483DBC2D2C92B72900C775BF /* RealmSwift in Frameworks */,
 				483DBBE62C903C9300C775BF /* Alamofire in Frameworks */,
@@ -343,6 +347,7 @@
 			children = (
 				483DBBF92C915A9400C775BF /* Book.swift */,
 				48D09A122C95D209000328E3 /* LibraryTab.swift */,
+				483976072CA85390004C495A /* Toast.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -437,6 +442,7 @@
 				48D09A272C991E19000328E3 /* CaplusButton.swift */,
 				48D09A712CA05FB8000328E3 /* FullCapsuleButton.swift */,
 				483975DE2CA5A7A7004C495A /* FontWrapper.swift */,
+				483976032CA85347004C495A /* ToastModifier.swift */,
 			);
 			path = CustomModifier;
 			sourceTree = "<group>";
@@ -467,6 +473,7 @@
 				48D09A342C9B2123000328E3 /* RratingHeartView.swift */,
 				48D09A3E2C9C093F000328E3 /* RadioButton.swift */,
 				483975E32CA68DC8004C495A /* GIFView.swift */,
+				483976052CA8536F004C495A /* ToastView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -533,7 +540,6 @@
 				483DBBE52C903C9300C775BF /* Alamofire */,
 				483DBC2C2C92B72900C775BF /* RealmSwift */,
 				48D09A372C9B222D000328E3 /* Cosmos */,
-				483975EB2CA697E1004C495A /* SDWebImageSwiftUI */,
 			);
 			productName = CheakBbang;
 			productReference = 483DBBC72C90376C00C775BF /* CheakBbang.app */;
@@ -568,7 +574,6 @@
 				483DBBE42C903C9300C775BF /* XCRemoteSwiftPackageReference "Alamofire" */,
 				483DBC2B2C92B72900C775BF /* XCRemoteSwiftPackageReference "realm-swift" */,
 				48D09A362C9B222D000328E3 /* XCRemoteSwiftPackageReference "Cosmos" */,
-				483975EA2CA697E1004C495A /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 483DBBC82C90376C00C775BF /* Products */;
 			projectDirPath = "";
@@ -600,6 +605,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				483976062CA8536F004C495A /* ToastView.swift in Sources */,
 				48D09A1C2C96D6B1000328E3 /* BookDetailView.swift in Sources */,
 				48D09A3F2C9C093F000328E3 /* RadioButton.swift in Sources */,
 				48D09A6E2C9FE247000328E3 /* APIKeys.swift in Sources */,
@@ -642,6 +648,7 @@
 				48D09A772CA27EDC000328E3 /* View+.swift in Sources */,
 				48D09A792CA29D08000328E3 /* UIApplication+.swift in Sources */,
 				483DBC2A2C92B6EA00C775BF /* PhotoFileManager.swift in Sources */,
+				483976042CA85347004C495A /* ToastModifier.swift in Sources */,
 				48D09A622C9EE11D000328E3 /* CameraService.swift in Sources */,
 				483DBC1E2C92A2A900C775BF /* MyBook.swift in Sources */,
 				48D09A222C9825D9000328E3 /* BookCover.swift in Sources */,
@@ -665,6 +672,7 @@
 				483DBBE92C903D1200C775BF /* BookRouter.swift in Sources */,
 				48D09A202C98243C000328E3 /* BookListRow.swift in Sources */,
 				48D09A882CA3DF0E000328E3 /* URL+.swift in Sources */,
+				483976082CA85390004C495A /* Toast.swift in Sources */,
 				48D09A3D2C9BFF64000328E3 /* EditBookViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -889,14 +897,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		483975EA2CA697E1004C495A /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.1.2;
-			};
-		};
 		483DBBE42C903C9300C775BF /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -924,11 +924,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		483975EB2CA697E1004C495A /* SDWebImageSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 483975EA2CA697E1004C495A /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
-			productName = SDWebImageSwiftUI;
-		};
 		483DBBE52C903C9300C775BF /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 483DBBE42C903C9300C775BF /* XCRemoteSwiftPackageReference "Alamofire" */;

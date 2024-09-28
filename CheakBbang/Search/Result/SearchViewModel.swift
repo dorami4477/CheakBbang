@@ -31,6 +31,8 @@ extension SearchViewModel {
     
     struct Output {
         var bookList: [Item] = []
+        var searchFailure: Bool = false
+        var bookListZero: Bool = false
     }
     
     func transform() {
@@ -43,16 +45,20 @@ extension SearchViewModel {
                 return NetworkManager.shared.fetchBookList(value, index: self.itemCount + 1)
             }
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
+            .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
                 case .finished:
                     break
                 case .failure(let error):
+                    self?.output.searchFailure = true
                     print("Error fetching book item: \(error)")
                 }
             }, receiveValue: { [weak self] value in
                 guard let self else { return }
                 searchResult = value
+                if value.item.isEmpty {
+                    output.bookListZero = true
+                }
                 self.itemCount += value.itemsPerPage
                 
                 if value.startIndex == 1 {

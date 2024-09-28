@@ -26,7 +26,6 @@ final class NetworkManager {
     func callRequest<T: Decodable>(api:BookRouter, model:T.Type) async throws -> T {
         
         let request = try api.asURLRequest()
-        print(request)
         return try await withCheckedThrowingContinuation { continuation in
             AF.request(request).responseDecodable(of: model) { response in
                 switch response.result {
