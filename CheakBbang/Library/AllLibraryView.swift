@@ -12,9 +12,37 @@ struct AllLibraryView: View {
     
     var body: some View {
         VStack(spacing: 30) {
-            sectionView(.done, color: .orange)
-            sectionView(.currenltyReading, color: .purple)
-            sectionView(.wantToRead, color: .green)
+            sectionWrap(.done, color: .orange)
+            sectionWrap(.currenltyReading, color: .purple)
+            sectionWrap(.wantToRead, color: .green)
+        }
+    }
+    
+    @ViewBuilder
+    func sectionWrap(_ type: LibraryTab, color: Color) -> some View {
+        if dateBytype(type).count != 0 {
+            sectionView(type, color: color)
+        } else {
+            VStack(spacing: 0) {
+                HStack(spacing: 5) {
+                    Circle()
+                        .fill(color)
+                        .frame(width: 10, height: 10)
+                    
+                    Text(type.rawValue)
+                        .font(.subheadline)
+                        .bold()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .padding(.horizontal)
+                .padding(.bottom, 12)
+                HStack {
+                    ImageWrapper(name: ImageName.emptySelf)
+                        .frame(width: 118, height: 146)
+                        .padding(.leading, 30)
+                    Spacer()
+                }
+            }
         }
     }
     
