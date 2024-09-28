@@ -9,7 +9,7 @@ import SwiftUI
 import RealmSwift
 
 struct CatBookListView: View {
-    @StateObject var viewModel = CatBookListViewModel()
+    @StateObject var viewModel: CatBookListViewModel
     @State private var showBubble = false
     @State private var txtBubble: TextBubble = .phrase1
     
@@ -94,7 +94,7 @@ struct CatBookListView: View {
             }
             
             NavigationLink {
-                NavigationLazyView(BookDetailView(item: item))
+                NavigationLazyView(BookDetailView(viewModel: BookDetailViewModel(), item: item))
             } label: {
                 ZStack {
                     Image(viewModel.bookImage(item.page))

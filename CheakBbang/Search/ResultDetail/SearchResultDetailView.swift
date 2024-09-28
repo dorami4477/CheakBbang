@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SearchResultDetailView: View {
-    @StateObject var viewModel = SearchResultDetailViewModel()
+    @StateObject var viewModel: SearchResultDetailViewModel
     var itemId: String
     
     var body: some View {

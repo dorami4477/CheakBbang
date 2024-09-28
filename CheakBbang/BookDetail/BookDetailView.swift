@@ -9,7 +9,7 @@ import SwiftUI
 import RealmSwift
 
 struct BookDetailView: View {
-    @StateObject var viewModel = BookDetailViewModel()
+    @StateObject var viewModel: BookDetailViewModel
     @State private var showAlert = false
     @Environment(\.dismiss) private var dismiss
 
@@ -30,7 +30,7 @@ struct BookDetailView: View {
                         .padding(.horizontal, -16)
 
                     NavigationLink {
-                        NavigationLazyView(AddMemoView(item: item, memo: nil))
+                        NavigationLazyView(AddMemoView(viewModel: AddMemoViewModel(), item: item, memo: nil))
                     } label: {
                         Text("글귀 추가하기")
                             .asfullCapsuleButton(background: .accent)

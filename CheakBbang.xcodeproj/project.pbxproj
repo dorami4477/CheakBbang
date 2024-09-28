@@ -309,7 +309,6 @@
 			children = (
 				483DBBDF2C903AD200C775BF /* CatBookListView.swift */,
 				483DBC3A2C94301300C775BF /* CatBookListViewModel.swift */,
-				483975E32CA68DC8004C495A /* GIFView.swift */,
 			);
 			path = CatBookList;
 			sourceTree = "<group>";
@@ -461,6 +460,7 @@
 				48D09A212C9825D9000328E3 /* BookCover.swift */,
 				48D09A342C9B2123000328E3 /* RratingHeartView.swift */,
 				48D09A3E2C9C093F000328E3 /* RadioButton.swift */,
+				483975E32CA68DC8004C495A /* GIFView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";

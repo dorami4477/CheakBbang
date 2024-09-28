@@ -17,7 +17,7 @@ struct LibraryView: View {
             LazyVStack(spacing: 20) {
                 ForEach(realmBookList.filter{ $0.status == status }, id: \.id) { book in
                     NavigationLink {
-                        NavigationLazyView(BookDetailView(item: book))
+                        NavigationLazyView(BookDetailView(viewModel: BookDetailViewModel(), item: book))
                     } label: {
                         bookListRow(book: book)
                     }

@@ -9,7 +9,7 @@ import SwiftUI
 import PhotosUI
 
 struct AddMemoView: View {    
-    @StateObject var viewModel = AddMemoViewModel()
+    @StateObject var viewModel: AddMemoViewModel
     @Environment(\.dismiss) private var dismiss
     
     @State private var showAlert = false

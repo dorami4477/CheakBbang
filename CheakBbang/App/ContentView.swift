@@ -17,7 +17,7 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             NavigationStack {
-                CatBookListView()
+                CatBookListView(viewModel: CatBookListViewModel())
             }
             .tabItem {
                 Image(systemName: "1.square.fill")
