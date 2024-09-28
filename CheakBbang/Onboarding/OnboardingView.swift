@@ -16,30 +16,36 @@ struct OnboardingView: View {
     
     var body: some View {
         VStack{
-            GIFView(gifName: ImageName.cat01, width: 220)
-                .frame(width: 220, height: 146)
-                .padding(.bottom, -32)
-                .zIndex(2)
-            Image("book_4_05")
-                .resizable()
-                .frame(width: 305.2, height: 103.6)
-                .padding(.bottom)
+            ZStack {
+                Image("image_door_catBG")
+                    .resizable()
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width * 0.78)
+                GIFView(gifName: ImageName.cat01, width: UIScreen.main.bounds.width * 0.4)
+                    .frame(width: UIScreen.main.bounds.width * 0.42, height: UIScreen.main.bounds.width * 0.29)
+                    .padding(.top, -25)
+            }
+            .padding(.bottom, 40)
+            
+            Text("책빵과 함께 당신의 독서를 기록하세요!")
+                .fontWeight(.heavy)
+            
             TextField("닉네임을 적어주세요!", text: $nickName)
                 .autocorrectionDisabled(true)
                 .foregroundColor(Color.black)
                 .focused($focus, equals: true)
-                .padding(10)
+                .padding()
                 .background(
                     RoundedRectangle(cornerRadius: 25)
                         .fill(.white)
                         .overlay(
                             RoundedRectangle(cornerRadius: 25)
-                                .stroke(Color.accentColor, lineWidth: 4)
+                                .stroke(Color.black, lineWidth: 4)
                         )
                 )
-                
+                .padding(.vertical)
+            
                 Text("시작하기")
-                .asfullCapsuleButton(background: nickName.isEmpty ? .gray : .accent)
+                .asfullCapsuleButton(background: nickName.isEmpty ? .gray.opacity(0.7) : .accent)
                 .wrapToButton {
                     viewModel.saveNickname(nickName)
                     viewModel.isFirstRun = false
