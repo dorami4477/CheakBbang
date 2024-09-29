@@ -70,6 +70,8 @@ struct SearchView: View {
         .onReceive(viewModel.$output) { _ in
             checkForToast()
         }
+        .navigationTitle("도서검색")
+        .navigationBarTitleDisplayMode(.inline)
 
     }
     
@@ -107,14 +109,14 @@ struct SearchBarView: View {
                         .opacity(searchText.isEmpty ? 0.0 : 1.0)
                         .onTapGesture {
                             searchText = ""
+                            viewModel.output.bookList = []
                             UIApplication.shared.endEditing()
                         }
                     , alignment: .trailing
                 )
                 .onSubmit {
-                    print($searchText.wrappedValue)
-                    viewModel.action(.searchOnSubmit(search: $searchText.wrappedValue))
                     viewModel.output.isLoading = true
+                    viewModel.action(.searchOnSubmit(search: $searchText.wrappedValue))
                 }
         }
         .font(.headline)
@@ -128,8 +130,6 @@ struct SearchBarView: View {
                 )
         )
         .padding(.horizontal)
-        .navigationTitle("도서검색")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
