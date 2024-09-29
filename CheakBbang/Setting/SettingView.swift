@@ -22,7 +22,7 @@ struct SettingView: View {
                                 .font(.custom("BinggraeII", size: 16))
                                 .multilineTextAlignment(.center)
                                 .lineLimit(3)
-                                .frame(maxWidth: UIScreen.main.bounds.width * 0.70)
+                                .frame(maxWidth: UIScreen.main.bounds.width * 0.60)
                                 .frame(height: 100, alignment: .center)
                                 .padding(.top, 4)
                             GIFView(gifName: ImageName.cat01, width: UIScreen.main.bounds.width * 0.57)
@@ -58,15 +58,11 @@ struct SettingView: View {
                         .padding(.vertical, 10)
                     
                     HStack {
-                        NavigationLink {
-                            
-                        } label: {
-                            ImageWrapper(name: ImageName.configMail)
-                                .frame(width: 20)
-                            Text("문의하기")
-                                .foregroundStyle(.gray)
-                            Spacer()
-                        }
+                        ImageWrapper(name: ImageName.configMail)
+                            .frame(width: 20)
+                        Text("문의하기")
+                            .foregroundStyle(.gray)
+                        Spacer()
                     }
                     Divider()
                         .padding(.vertical, 10)
@@ -97,9 +93,6 @@ struct SettingView: View {
         .sheet(isPresented: $showEditName) {
             EditNicknameView(isPresented: $showEditName, nickName: $nickName)
                 .presentationDetents([.fraction(0.3)])
-        }
-        .onAppear{
-            print("\(UserDefaultsManager.nickName)")
         }
         .navigationTitle("마이페이지")
         .navigationBarTitleDisplayMode(.inline)
