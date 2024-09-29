@@ -9,7 +9,7 @@ import Foundation
 
 enum LibraryTab: String, CaseIterable {
     case all = "All"
-    case currenltyReading = "읽고 있는 책"
     case done = "읽은 책"
+    case currenltyReading = "읽고 있는 책"
     case wantToRead = "읽고 싶은 책"
 }
