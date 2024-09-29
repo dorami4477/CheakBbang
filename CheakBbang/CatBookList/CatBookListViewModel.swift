@@ -43,7 +43,7 @@ extension CatBookListViewModel {
                 print(completion)
             }, receiveValue: { [weak self] books in
                 guard let self = self else { return }
-                self.output.bookList = books
+                self.output.bookList = books.filter({ $0.status == .finished })
                 self.updateOutput()
             })
             .store(in: &cancellables)

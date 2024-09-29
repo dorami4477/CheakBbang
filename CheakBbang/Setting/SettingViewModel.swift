@@ -37,9 +37,9 @@ extension SettingViewModel {
     }
     
     func transform() {
-        let totalPage = realmBookList.reduce(0) { $0 + $1.page }
+        let totalPage = realmBookList.filter({ $0.status == .finished }).reduce(0) { $0 + $1.page }
         output.totalPage = totalPage.formatted()
-        output.bookCount = realmBookList.count
+        output.bookCount = realmBookList.filter({ $0.status == .finished }).count
         output.MemoCount = realmMemoList.count
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.00"
         output.version = "\(appVersion) (\(shouldUpdate() ? "업데이트 필요" :"최신 버전"))"
