@@ -63,16 +63,17 @@ struct AllLibraryView: View {
             .padding(.horizontal)
             
             ScrollView(.horizontal) {
-                LazyHStack(spacing: 20) {
+                LazyHStack(spacing: 0) {
                     ForEach(dateBytype(type), id: \.id) { book in
                         NavigationLink {
                             NavigationLazyView(BookDetailView(viewModel: BookDetailViewModel(), item: book))
                         } label: {
                             BookCover(coverUrl: book.cover, size: CGSize(width: 118, height: 146))
+                                .padding(10)
                         }
                     }
                 }
-                .padding(.leading, 30)
+                .padding(.leading, 20)
             }
         }
         
