@@ -10,7 +10,8 @@ import SwiftUI
 struct AddBookView: View {
     var isbn13: String
     @StateObject var viewModel: AddBookViewModel
-    @State private var isSaved = false
+    @EnvironmentObject var appState: AppState
+    //@State private var isSaved = false
     
     var body: some View {
         VStack {
@@ -71,7 +72,8 @@ struct AddBookView: View {
                 .asfullCapsuleButton(background: .accent)
                 .wrapToButton {
                     viewModel.action(.addButtonTap)
-                    isSaved = true
+                    appState.rootViewId = UUID()
+                    //isSaved = true
                 }
 
         }
@@ -79,9 +81,9 @@ struct AddBookView: View {
         .task {
             viewModel.action(.viewOnTask(isbn: isbn13))
         }
-        .fullScreenCover(isPresented: $isSaved, content: {
-            AddBookAniView()
-        })
+//        .fullScreenCover(isPresented: $isSaved, content: {
+//            AddBookAniView()
+//        })
     }
 }
 
