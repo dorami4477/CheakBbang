@@ -11,7 +11,7 @@ import RealmSwift
 enum ReadingState: String, CaseIterable, PersistableEnum {
     case finished = "읽은 책"
     case ongoing = "읽고 있는 책"
-    case upcoming = "읽을 책"
+    case upcoming = "읽고 싶은 책"
     
     var imageName: String {
         switch self {

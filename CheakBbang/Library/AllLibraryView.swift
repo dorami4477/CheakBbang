@@ -12,10 +12,10 @@ struct AllLibraryView: View {
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 30) {
-                sectionWrap(.done, color: .orange)
-                sectionWrap(.currenltyReading, color: .purple)
-                sectionWrap(.wantToRead, color: .green)
+            VStack(spacing: 20) {
+                sectionWrap(.done, color: .finished)
+                sectionWrap(.currenltyReading, color: .ongoing)
+                sectionWrap(.wantToRead, color: .upcoming)
             }
         }
     }
@@ -50,7 +50,7 @@ struct AllLibraryView: View {
     
     func sectionView(_ type: LibraryTab, color: Color) -> some View {
         VStack(spacing: 0) {
-            HStack(spacing: 5) {
+            HStack(spacing: 0) {
                 Circle()
                     .fill(color)
                     .frame(width: 10, height: 10)

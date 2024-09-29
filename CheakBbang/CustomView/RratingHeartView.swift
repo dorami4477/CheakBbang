@@ -8,7 +8,6 @@
 import SwiftUI
 import Cosmos
 
-// A SwiftUI wrapper for Cosmos view
 struct RratingHeartView: UIViewRepresentable {
     @Binding var rating: Double
     var isEditable = true
