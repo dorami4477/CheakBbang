@@ -104,6 +104,9 @@ struct SettingView: View {
         }
         .navigationTitle("마이페이지")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            viewModel.action(.viewOnAppear)
+        }
         
     }
 

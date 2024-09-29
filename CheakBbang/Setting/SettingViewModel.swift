@@ -24,7 +24,7 @@ final class SettingViewModel: ViewModelType {
 // MARK: - Input / Output
 extension SettingViewModel {
     struct Input {
-
+        let viewOnAppear = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
@@ -37,6 +37,14 @@ extension SettingViewModel {
     }
     
     func transform() {
+        input.viewOnAppear
+            .sink { [weak self] _ in
+                self?.updateOutput()
+            }
+            .store(in: &cancellables)
+    }
+    
+    func updateOutput() {
         let totalPage = realmBookList.filter({ $0.status == .finished }).reduce(0) { $0 + $1.page }
         output.totalPage = totalPage.formatted()
         output.bookCount = realmBookList.filter({ $0.status == .finished }).count
@@ -97,9 +105,13 @@ extension SettingViewModel {
 // MARK: - Action
 extension SettingViewModel {
     enum Action {
+        case viewOnAppear
     }
     
     func action(_ action: Action) {
-
+        switch action {
+        case .viewOnAppear:
+            input.viewOnAppear.send(())
+        }
     }
 }
