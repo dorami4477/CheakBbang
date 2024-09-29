@@ -27,9 +27,18 @@ extension BookDetailViewModel {
     }
     
     struct Output {
+         var book: MyBook = MyBook()
     }
     
     func transform() {
+        input.viewOnAppear
+            .sink { [weak self] book in
+                if let bookData = self?.repository?.fetchSingleItem(book.id) {
+                    self?.output.book = bookData
+                }
+            }
+            .store(in: &cancellables)
+        
         input.deleteButtonTap
             .combineLatest(input.viewOnAppear)
             .map { _, item in

@@ -24,7 +24,7 @@ struct BookDetailView: View {
                     .padding(.vertical)
                 
                 VStack(spacing: 16) {
-                    ReadingStatusView(item: $item)
+                    ReadingStatusView(item: $viewModel.output.book)
                     
                     MemoList(bookID: "\(item.id)", isBookDetailView: true)
                         .padding(.horizontal, -16)
@@ -65,7 +65,7 @@ struct BookDetailView: View {
                     .alert("정말 삭제 하시겠습니까? \n책 삭제시 책의 메모도 모두 삭제됩니다:)", isPresented: $showAlert) {
                         Button("삭제") {
                             viewModel.action(.deleteButtonTap)
-                            self.item = MyBook()
+                            item = MyBook()
                             dismiss()
                         }
                         Button("취소", role: .cancel) {}
@@ -76,6 +76,9 @@ struct BookDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear{
             viewModel.action(.viewOnAppear(item: item))
+        }
+        .onDisappear{
+            print("BookDetailView disappear")
         }
     }
     
