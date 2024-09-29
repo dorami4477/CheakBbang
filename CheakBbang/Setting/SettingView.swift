@@ -58,11 +58,13 @@ struct SettingView: View {
                         .padding(.vertical, 10)
                     
                     HStack {
-                        ImageWrapper(name: ImageName.configMail)
-                            .frame(width: 20)
-                        Text("문의하기")
-                            .foregroundStyle(.gray)
-                        Spacer()
+                        Link(destination: URL(string: "https://forms.gle/iz1SvJXuc7tg9wPj9")!) {
+                            ImageWrapper(name: ImageName.configMail)
+                                .frame(width: 20)
+                            Text("의견 전달하기")
+                                .foregroundStyle(.gray)
+                            Spacer()
+                        }
                     }
                     Divider()
                         .padding(.vertical, 10)
@@ -73,6 +75,10 @@ struct SettingView: View {
                         Text("만든이")
                             .foregroundStyle(.gray)
                         Spacer()
+                        Text("Copyright 2024. \nDahyun Park All rights reserved.")
+                            .font(.system(size: 13))
+                            .foregroundStyle(.gray)
+                            .multilineTextAlignment(.trailing)
                     }
                     Divider()
                         .padding(.vertical, 10)
@@ -84,6 +90,8 @@ struct SettingView: View {
                             .foregroundStyle(.gray)
                         Spacer()
                         Text("\(viewModel.output.version)")
+                            .font(.system(size: 13))
+                            .foregroundStyle(.gray)
                         
                     }
                 }
