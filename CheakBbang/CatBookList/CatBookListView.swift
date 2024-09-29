@@ -12,6 +12,7 @@ struct CatBookListView: View {
     @StateObject var viewModel: CatBookListViewModel
     @State private var showBubble = false
     @State private var txtBubble: TextBubble = .phrase1
+    @State private var timer: DispatchWorkItem? = nil
     
     var body: some View {
         GeometryReader { geometry in
@@ -85,7 +86,16 @@ struct CatBookListView: View {
                             showBubble = true
                             txtBubble = TextBubble.allCases.randomElement()!
                         }
-                        print(showBubble)
+                        timer?.cancel()
+                        timer = DispatchWorkItem {
+                            withAnimation {
+                                showBubble = false
+                            }
+                        }
+
+                        if let timer = timer {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: timer)
+                        }
                     }
             }
             
@@ -130,9 +140,9 @@ struct CatBookListView: View {
                     .font(.subheadline)
                 Text("\(viewModel.output.bookCount)")
                     .bold()
-                    .font(.title2)
+                    .font(.system(size: 17))
             }
-            .padding(10)
+            .padding(8)
             .background {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(.white).opacity(0.7)
@@ -143,6 +153,7 @@ struct CatBookListView: View {
                 VStack {
                     Text(txtBubble.rawValue)
                         .font(.system(size: 15))
+                        .lineLimit(2)
                         .bold()
                         .padding(10)
                         .background(
@@ -184,9 +195,9 @@ struct CatBookListView: View {
                     .font(.subheadline)
                 Text("\(viewModel.output.totalPage)")
                     .bold()
-                    .font(.title2)
+                    .font(.system(size: 17))
             }
-            .padding(10)
+            .padding(8)
             .background {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(.white).opacity(0.7)
