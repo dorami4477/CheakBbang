@@ -12,7 +12,7 @@ struct AllLibraryView: View {
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 20) {
+            VStack(spacing: 25) {
                 sectionWrap(.done, color: .finished)
                 sectionWrap(.currenltyReading, color: .ongoing)
                 sectionWrap(.wantToRead, color: .upcoming)
@@ -50,7 +50,7 @@ struct AllLibraryView: View {
     
     func sectionView(_ type: LibraryTab, color: Color) -> some View {
         VStack(spacing: 0) {
-            HStack(spacing: 0) {
+            HStack(spacing: 5) {
                 Circle()
                     .fill(color)
                     .frame(width: 10, height: 10)
@@ -61,10 +61,10 @@ struct AllLibraryView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             .padding(.horizontal)
+            
             ScrollView(.horizontal) {
-                LazyHStack(spacing: 45) {
+                LazyHStack(spacing: 20) {
                     ForEach(dateBytype(type), id: \.id) { book in
-
                         NavigationLink {
                             NavigationLazyView(BookDetailView(viewModel: BookDetailViewModel(), item: book))
                         } label: {

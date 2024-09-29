@@ -38,3 +38,28 @@ struct RratingHeartView: UIViewRepresentable {
     }
 }
 
+struct RratingHeartUneditableView: UIViewRepresentable {
+    var rating: Double
+    var isEditable = true
+    var size = 30.0
+
+    func makeUIView(context: Context) -> CosmosView {
+        CosmosView()
+    }
+
+    func updateUIView(_ uiView: CosmosView, context: Context) {
+        uiView.rating = rating
+        
+        uiView.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        uiView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+
+        uiView.settings.starSize = size
+        uiView.settings.fillMode = .precise
+        uiView.settings.filledImage = UIImage(named: ImageName.ratingHeartFill)
+        uiView.settings.emptyImage = UIImage(named: ImageName.ratingHeart)
+        
+        if !isEditable {
+            uiView.settings.updateOnTouch = false
+        }
+    }
+}

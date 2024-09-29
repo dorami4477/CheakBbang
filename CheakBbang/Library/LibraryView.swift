@@ -9,14 +9,14 @@ import SwiftUI
 import RealmSwift
 
 struct LibraryView: View {
-    @ObservedResults(MyBook.self) var realmBookList
+    @StateObject var viewModel: LibraryViewModel
     var status: ReadingState
     
     var body: some View {
-        if realmBookList.filter({ $0.status == status }).count != 0 {
+        if viewModel.output.bookList.filter({ $0.status == status }).count != 0 {
             ScrollView {
                 LazyVStack(spacing: 20) {
-                    ForEach(realmBookList.filter{ $0.status == status }, id: \.id) { book in
+                    ForEach(viewModel.output.bookList.filter{ $0.status == status }, id: \.id) { book in
                         NavigationLink {
                             NavigationLazyView(BookDetailView(viewModel: BookDetailViewModel(), item: book))
                         } label: {
@@ -32,7 +32,7 @@ struct LibraryView: View {
     }
 }
     struct bookListRow: View {
-        @ObservedRealmObject var book: MyBook
+        var book: MyBook
         
         var body: some View {
             HStack(alignment: .top, spacing: 15) {
@@ -48,7 +48,7 @@ struct LibraryView: View {
                         .resizable()
                         .frame(width:84.5, height:17.5)
                     
-                    RratingHeartView(rating: $book.rate, isEditable: false, size: 20)
+                    RratingHeartUneditableView(rating: book.rate, isEditable: false, size: 20)
                     
                     if book.status != .upcoming {
                         HStack(spacing: 0) {
