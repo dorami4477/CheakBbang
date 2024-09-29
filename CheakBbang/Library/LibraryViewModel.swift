@@ -23,7 +23,6 @@ final class LibraryViewModel: ViewModelType {
 // MARK: - Input / Output
 extension LibraryViewModel {
     struct Input {
-
     }
     
     struct Output {
@@ -59,6 +58,21 @@ extension LibraryViewModel {
         return savedDateString
     }
     
+    func dataBytype(_ type: LibraryTab) -> [MyBook] {
+        var list: [MyBook] = []
+        switch type {
+        case .all:
+            list = output.bookList
+        case .currenltyReading:
+            list = output.bookList.filter{ $0.status == .ongoing }
+        case .done:
+            list = output.bookList.filter{ $0.status == .finished }
+        case .wantToRead:
+            list = output.bookList.filter{ $0.status == .upcoming }
+        }
+        return list
+    }
+    
 }
 
 // MARK: - Action
@@ -67,6 +81,5 @@ extension LibraryViewModel {
     }
     
     func action(_ action: Action) {
-
     }
 }

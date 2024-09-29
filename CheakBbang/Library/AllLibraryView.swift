@@ -13,41 +13,14 @@ struct AllLibraryView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 25) {
-                sectionWrap(.done, color: .finished)
-                sectionWrap(.currenltyReading, color: .ongoing)
-                sectionWrap(.wantToRead, color: .upcoming)
+                sectionView(.done, color: .finished)
+                sectionView(.currenltyReading, color: .ongoing)
+                sectionView(.wantToRead, color: .upcoming)
             }
         }
     }
-    
-    @ViewBuilder
-    func sectionWrap(_ type: LibraryTab, color: Color) -> some View {
-        if dateBytype(type).count != 0 {
-            sectionView(type, color: color)
-        } else {
-            VStack(spacing: 0) {
-                HStack(spacing: 5) {
-                    Circle()
-                        .fill(color)
-                        .frame(width: 10, height: 10)
-                    
-                    Text(type.rawValue)
-                        .font(.subheadline)
-                        .bold()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                .padding(.horizontal)
-                .padding(.bottom, 12)
-                HStack {
-                    ImageWrapper(name: ImageName.emptySelf)
-                        .frame(width: 118, height: 146)
-                        .padding(.leading, 30)
-                    Spacer()
-                }
-            }
-        }
-    }
-    
+
+        
     func sectionView(_ type: LibraryTab, color: Color) -> some View {
         VStack(spacing: 0) {
             HStack(spacing: 5) {
@@ -64,7 +37,7 @@ struct AllLibraryView: View {
             
             ScrollView(.horizontal) {
                 LazyHStack(spacing: 0) {
-                    ForEach(dateBytype(type), id: \.id) { book in
+                    ForEach(viewModel.dataBytype(type), id: \.id) { book in
                         NavigationLink {
                             NavigationLazyView(BookDetailView(viewModel: BookDetailViewModel(), item: book))
                         } label: {
@@ -75,27 +48,21 @@ struct AllLibraryView: View {
                 }
                 .padding(.leading, 20)
             }
+            if viewModel.dataBytype(type).count == 0 {
+                emptySelf(type, color: color)
+            }
         }
         
     }
-    
-    func dateBytype(_ type: LibraryTab) -> [MyBook] {
-        var list: [MyBook] = []
-        switch type {
-        case .all:
-            list = viewModel.output.bookList.filter{ $0.status == .ongoing }
-        case .currenltyReading:
-            list = viewModel.output.bookList.filter{ $0.status == .ongoing }
-        case .done:
-            list = viewModel.output.bookList.filter{ $0.status == .finished }
-        case .wantToRead:
-            list = viewModel.output.bookList.filter{ $0.status == .upcoming }
-        }
-        return list
+
+    func emptySelf(_ type: LibraryTab, color: Color) -> some View {
+            HStack {
+                ImageWrapper(name: ImageName.emptySelf)
+                    .frame(width: 118, height: 146)
+                    .padding(.top, 10)
+                    .padding(.leading, 30)
+                Spacer()
+            }
     }
     
-}
-
-#Preview {
-    AllLibraryView(viewModel: LibraryViewModel())
 }
