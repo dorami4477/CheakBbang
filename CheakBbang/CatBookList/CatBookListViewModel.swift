@@ -50,12 +50,24 @@ extension CatBookListViewModel {
     }
     
     private func updateOutput() {
-        let totalPage = output.bookList.reduce(0) { $0 + $1.page }
-        self.output.totalPage = totalPage.formatted()
+        self.output.totalPage = getTotalPage()
         self.output.bookCount = output.bookList.count
         self.output.groupBottomPadding = groupBottomPadding()
         self.output.totalBookHeight = getTotalBookHeight()
         self.output.shelfHeight = getShelfHeight()
+    }
+    
+    func getTotalPage() -> String {
+        let number = output.bookList.reduce(0) { $0 + $1.page }
+        if number >= 1_000_000 {
+            let formattedNumber = Double(number) / 1_000_000
+            return String(format: "%.1fM", formattedNumber)
+        } else if number >= 10_000 {
+            let formattedNumber = Double(number) / 1_000
+            return String(format: "%.1fK", formattedNumber)
+        } else {
+            return number.formatted()
+        }
     }
     
     func dataString(date: Date) -> String {
@@ -119,7 +131,7 @@ extension CatBookListViewModel {
     }
     
     func groupBottomPadding() -> CGFloat{
-        let padding = (output.bookList.count / 5 ) * 50 + ( output.bookCount % 5 > 0 ? 50 : 0 ) - (output.bookCount > 0 ? 50 : 0) 
+        let padding = (output.bookList.count / 5 ) * 35 + ( output.bookCount % 5 > 0 ? 35 : 0 ) - (output.bookCount > 0 ? 35 : 0) 
         return CGFloat(padding)
     }
     

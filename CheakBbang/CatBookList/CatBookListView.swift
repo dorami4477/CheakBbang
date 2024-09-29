@@ -21,23 +21,26 @@ struct CatBookListView: View {
                     .scaledToFill()
                     .frame(width: geometry.size.width, height: geometry.size.height)
                 VStack(spacing: 5) {
-                    infoView()
-                        .frame(height: 52)
-                    
                     ZStack {
                         VStack{
                             ScrollView(.vertical) {
-                                let infoHeight: CGFloat = 52
-                                let itemHeight = (geometry.size.width * 0.86 + infoHeight + viewModel.output.totalBookHeight) + viewModel.output.shelfHeight - (viewModel.output.groupBottomPadding + CGFloat(viewModel.output.bookCount * 20))
+                                let itemHeight = (geometry.size.width * 0.86 + viewModel.output.totalBookHeight + viewModel.output.shelfHeight) - (viewModel.output.groupBottomPadding + CGFloat(viewModel.output.bookCount * 15))
                                 let space = (geometry.size.height - itemHeight)
                                 if 0 < space {
                                     Spacer(minLength: space)
                                 }
                                 bookListView()
+                                    .padding(.top, space < 70 ? 70 - (0 < space ? space : 0) : 0)
+
                                 Image(ImageName.bottom)
                                     .resizable()
                                     .frame(width: geometry.size.width, height: geometry.size.width * 0.86)
                             }
+                        }
+                        VStack{
+                            infoView()
+                                .padding(.top)
+                            Spacer()
                         }
                         VStack{
                             floatingButton()
@@ -129,6 +132,11 @@ struct CatBookListView: View {
                     .bold()
                     .font(.title2)
             }
+            .padding(10)
+            .background {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(.white).opacity(0.7)
+            }
             
             Spacer()
             if showBubble {
@@ -177,6 +185,11 @@ struct CatBookListView: View {
                 Text("\(viewModel.output.totalPage)")
                     .bold()
                     .font(.title2)
+            }
+            .padding(10)
+            .background {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(.white).opacity(0.7)
             }
         }
         .padding(.horizontal, 30)
