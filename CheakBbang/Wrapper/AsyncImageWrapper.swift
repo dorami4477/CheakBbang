@@ -20,6 +20,9 @@ struct AsyncImageWrapper: View {
                 
             } else if phase.error != nil {
                 Image(ImageName.emptyBook)
+                    .resizable()
+                    .aspectRatio(contentMode: contentMode)
+                
             } else {
                 ProgressView()
             }
