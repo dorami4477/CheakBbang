@@ -24,7 +24,7 @@ struct CatBookListView: View {
                     ZStack {
                         VStack{
                             ScrollView(.vertical) {
-                                let itemHeight = (geometry.size.width * 0.86 + viewModel.output.totalBookHeight + viewModel.output.shelfHeight) - (viewModel.output.groupBottomPadding + CGFloat(viewModel.output.bookCount * 15))
+                                let itemHeight = geometry.size.width * 0.86 + viewModel.output.itemHeight
                                 let space = (geometry.size.height - itemHeight)
                                 if 0 < space {
                                     Spacer(minLength: space)
