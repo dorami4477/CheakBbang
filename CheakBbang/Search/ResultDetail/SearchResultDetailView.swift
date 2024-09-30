@@ -9,7 +9,8 @@ import SwiftUI
 
 struct SearchResultDetailView: View {
     @StateObject var viewModel: SearchResultDetailViewModel
-    var itemId: String
+    //var itemId: String
+    var item: Item
     
     var body: some View {
         ScrollView {
@@ -28,7 +29,7 @@ struct SearchResultDetailView: View {
         .navigationTitle("도서 상세 정보")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear{
-            viewModel.action(.viewOnTask(isbn: itemId))
+            viewModel.action(.viewOnTask(item: item))
         }
     }
     

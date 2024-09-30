@@ -42,7 +42,7 @@ struct SearchView: View {
                         LazyVStack {
                             ForEach(viewModel.output.bookList, id: \.itemID) { item in
                                 NavigationLink {
-                                    NavigationLazyView(SearchResultDetailView(viewModel: SearchResultDetailViewModel(), itemId: item.isbn13))
+                                    NavigationLazyView(SearchResultDetailView(viewModel: SearchResultDetailViewModel(), item: item))
                                 } label: {
                                     BookListRow(item: item)
                                         .onAppear {

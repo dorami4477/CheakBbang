@@ -22,33 +22,36 @@ final class SearchResultDetailViewModel: ViewModelType {
 // MARK: - Input / Output
 extension SearchResultDetailViewModel {
     struct Input {
-        let viewOnTask = PassthroughSubject<String, Never>()
+        let viewOnTask = PassthroughSubject<Item, Never>()
     }
     
     struct Output {
         var book: Item = Item(title: "", link: "", author: "", pubDate: "", description: "", isbn: "", isbn13: "", itemID: 0, cover: "", categoryID: 0, categoryName: "", publisher: "", adult: true, customerReviewRank: 0, subInfo: SubInfo(subTitle: nil, originalTitle: nil, itemPage: nil))
-        var notFoundItem = false
     }
     
- 
+
     func transform() {
         input.viewOnTask
             .flatMap { value in
-                NetworkManager.shared.fetchSingleBookItem(value)
+                return NetworkManager.shared.fetchSingleBookItem(value.isbn13)
+                    .catch { error -> Just<Item> in
+                        return Just(value)
+                    }
+                    .eraseToAnyPublisher()
             }
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] completion in
+            .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
                     break
                 case .failure(let error):
-                    self?.output.notFoundItem = true
-                    print("Error fetching book item: \(error)")
+                    print("Unexpected error: \(error)")
                 }
             }, receiveValue: { [weak self] item in
-                    self?.output.book = item
+                self?.output.book = item
             })
             .store(in: &cancellables)
+
         
     }
 
@@ -57,13 +60,13 @@ extension SearchResultDetailViewModel {
 // MARK: - Action
 extension SearchResultDetailViewModel {
     enum Action {
-        case viewOnTask(isbn: String)
+        case viewOnTask(item: Item)
     }
     
     func action(_ action: Action) {
         switch action {
-        case .viewOnTask(let isbn):
-            input.viewOnTask.send(isbn)
+        case .viewOnTask(let item):
+            input.viewOnTask.send(item)
         }
     }
 }

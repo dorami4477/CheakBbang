@@ -28,7 +28,7 @@ extension AddBookViewModel {
         var endDate: Date = Date()
         var readingState: ReadingState = .finished
         var rating = 3.0
-        let viewOnTask = PassthroughSubject<String, Never>()
+        let viewOnTask = PassthroughSubject<Item, Never>()
         let addButtonTap = PassthroughSubject<Void, Never>()
     }
     
@@ -38,8 +38,12 @@ extension AddBookViewModel {
     
     func transform() {
         input.viewOnTask
-            .flatMap { value in
-                NetworkManager.shared.fetchSingleBookItem(value)
+            .flatMap{ value in
+                NetworkManager.shared.fetchSingleBookItem(value.isbn13)
+                    .catch { error -> Just<Item> in
+                        return Just(value)
+                    }
+                    .eraseToAnyPublisher()
             }
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
@@ -54,6 +58,8 @@ extension AddBookViewModel {
 
             })
             .store(in: &cancellables)
+
+
         
         input
             .addButtonTap
@@ -83,14 +89,14 @@ extension AddBookViewModel {
 // MARK: - Action
 extension AddBookViewModel {
     enum Action {
-        case viewOnTask(isbn: String)
+        case viewOnTask(item: Item)
         case addButtonTap
     }
     
     func action(_ action: Action) {
         switch action {
-        case .viewOnTask(let isbn):
-            input.viewOnTask.send(isbn)
+        case .viewOnTask(let item):
+            input.viewOnTask.send(item)
         case .addButtonTap:
             input.addButtonTap.send(())
         }

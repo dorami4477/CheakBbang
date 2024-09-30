@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct AddBookView: View {
-    var isbn13: String
+    //var isbn13: String
+    var item: Item
     @StateObject var viewModel: AddBookViewModel
     @EnvironmentObject var appState: AppState
     //@State private var isSaved = false
+    
     
     var body: some View {
         VStack {
@@ -79,11 +81,9 @@ struct AddBookView: View {
         }
         .padding()
         .task {
-            viewModel.action(.viewOnTask(isbn: isbn13))
+            viewModel.action(.viewOnTask(item: item))
         }
-//        .fullScreenCover(isPresented: $isSaved, content: {
-//            AddBookAniView()
-//        })
+
     }
 }
 
