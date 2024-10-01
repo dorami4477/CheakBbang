@@ -35,6 +35,7 @@ extension LibraryViewModel {
     func transform() {
         realmBookList.collectionPublisher
             .map { Array($0) }
+            .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 print(completion)
             }, receiveValue: { [weak self] books in
