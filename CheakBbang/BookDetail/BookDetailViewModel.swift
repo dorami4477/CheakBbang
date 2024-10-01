@@ -17,12 +17,16 @@ final class BookDetailViewModel: ViewModelType {
     init() {
         transform()
     }
+    deinit {
+        print("BookDetailViewModel Deinit")
+    }
 }
 
 // MARK: - Input / Output
 extension BookDetailViewModel {
     struct Input {
         let viewOnAppear = PassthroughSubject<MyBook, Never>()
+        let modified = PassthroughSubject<MyBook, Never>()
         let deleteButtonTap = PassthroughSubject<Void, Never>()
     }
     
@@ -31,13 +35,14 @@ extension BookDetailViewModel {
     }
     
     func transform() {
-        input.viewOnAppear
+        input.modified
             .sink { [weak self] book in
                 if let bookData = self?.repository?.fetchSingleItem(book.id) {
                     self?.output.book = bookData
                 }
             }
             .store(in: &cancellables)
+        
         
         input.deleteButtonTap
             .combineLatest(input.viewOnAppear)
@@ -60,6 +65,7 @@ extension BookDetailViewModel {
 extension BookDetailViewModel {
     enum Action {
         case viewOnAppear(item: MyBook)
+        case modified(item: MyBook)
         case deleteButtonTap
     }
     
@@ -67,6 +73,9 @@ extension BookDetailViewModel {
         switch action {
         case .viewOnAppear(let item):
             input.viewOnAppear.send(item)
+            
+        case .modified(let item):
+            input.modified.send(item)
             
         case .deleteButtonTap:
             input.deleteButtonTap.send(())

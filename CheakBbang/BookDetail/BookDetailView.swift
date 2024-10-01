@@ -12,7 +12,8 @@ struct BookDetailView: View {
     @StateObject var viewModel: BookDetailViewModel
     @State private var showAlert = false
     @Environment(\.dismiss) private var dismiss
-
+    @State private var isEditted = false
+    
     @State var item: MyBook
     
     var body: some View {
@@ -24,7 +25,7 @@ struct BookDetailView: View {
                     .padding(.vertical)
                 
                 VStack(spacing: 16) {
-                    ReadingStatusView(item: $viewModel.output.book)
+                    ReadingStatusView(item: viewModel.output.book.title == "" ? item : viewModel.output.book)
                     
                     MemoList(bookID: "\(item.id)", isBookDetailView: true)
                         .padding(.horizontal, -16)
@@ -50,7 +51,7 @@ struct BookDetailView: View {
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 NavigationLink {
-                    EditBookView(viewModel: EditBookViewModel(), book: item)
+                    EditBookView(viewModel: EditBookViewModel(), isEditted: $isEditted, book: item)
                 } label: {
                     Image(ImageName.edit)
                         .resizable()
@@ -65,6 +66,7 @@ struct BookDetailView: View {
                     .alert("정말 삭제 하시겠습니까? \n책 삭제시 책의 메모도 모두 삭제됩니다:)", isPresented: $showAlert) {
                         Button("삭제") {
                             viewModel.action(.deleteButtonTap)
+                            viewModel.output.book = MyBook()
                             item = MyBook()
                             dismiss()
                         }
@@ -76,9 +78,9 @@ struct BookDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear{
             viewModel.action(.viewOnAppear(item: item))
-        }
-        .onDisappear{
-            print("BookDetailView disappear")
+            if isEditted {
+                viewModel.action(.modified(item: item))
+            }
         }
     }
     
@@ -121,14 +123,14 @@ struct BookCoverInfoView: View {
 }
 
 struct ReadingStatusView: View {
-    @Binding var item: MyBook
+    var item: MyBook
     
     var body: some View {
         VStack(spacing: 8) {
             ImageWrapper(name: item.status.imageName)
                 .frame(width: 100, height: 23.3)
             
-            RratingHeartView(rating: $item.rate, isEditable: false)
+            RratingHeartUneditableView(rating: item.rate, isEditable: false)
                 .padding(.bottom, 15)
             
             if item.status == .finished {

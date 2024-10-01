@@ -10,6 +10,7 @@ import SwiftUI
 struct EditBookView: View {
     @StateObject var viewModel: EditBookViewModel
     @Environment(\.dismiss) private var dismiss
+    @Binding var isEditted: Bool
     
     var book: MyBook
     
@@ -72,6 +73,7 @@ struct EditBookView: View {
                 .asfullCapsuleButton(background: .accent)
                 .wrapToButton {
                     viewModel.action(.addButtonTap(item: book))
+                    isEditted = true
                     dismiss()
                 }
 
