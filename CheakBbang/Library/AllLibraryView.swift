@@ -31,7 +31,15 @@ struct AllLibraryView: View {
                 Text(type.rawValue)
                     .font(.subheadline)
                     .bold()
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                if type == .done {
+                    Text("북타워에 쌓여요!")
+                        .font(.system(size: 13))
+                        .foregroundStyle(.gray)
+                        .padding(.leading, 10)
+                }
+                
+                Spacer()
             }
             .padding(.horizontal)
             

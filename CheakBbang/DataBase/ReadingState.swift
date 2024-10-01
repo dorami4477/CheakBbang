@@ -25,5 +25,18 @@ enum ReadingState: String, CaseIterable, PersistableEnum {
             "icon_progress_upcoming"
         }
     }
+    
+    var explanation: String {
+        switch self {
+        case .finished:
+            "북타워에 쌓여요!"
+            
+        case .ongoing:
+            "내서재에 보여요!"
+            
+        case .upcoming:
+            "내서재에 보여요!"
+        }
+    }
 }
 

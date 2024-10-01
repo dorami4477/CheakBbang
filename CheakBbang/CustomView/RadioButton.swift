@@ -9,6 +9,7 @@ import SwiftUI
 
 struct radioButton: View {
     let title: String
+    let explan: String
     let imageName: String
     let isSelected: Bool
     let selectedColor: Color
@@ -23,7 +24,12 @@ struct radioButton: View {
                     .resizable()
                     .frame(width: 112.6, height: 23.3)
                 Text(LocalizedStringKey(title))
+                    .bold()
                     .font(.system(size: 15))
+                    .padding(.bottom, 1)
+                Text(explan)
+                    .font(.system(size: 13))
+                    .foregroundStyle(.gray)
                 
                 ZStack(alignment: .center) {
                     Circle()
@@ -63,7 +69,7 @@ struct radioSectionGroup: View {
     
     private func getContent() -> some View {
         ForEach(Array(ReadingState.allCases.enumerated()), id: \.offset) { index, item in
-            radioButton(title: item.rawValue, imageName: item.imageName, isSelected: selectedItem == item, selectedColor: selectedColor) {
+            radioButton(title: item.rawValue, explan: item.explanation, imageName: item.imageName, isSelected: selectedItem == item, selectedColor: selectedColor) {
                 self.selectedItem = item
                 action?(index, selectedItem)
                 vibration()
