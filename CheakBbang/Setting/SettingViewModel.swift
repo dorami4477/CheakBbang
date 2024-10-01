@@ -45,14 +45,26 @@ extension SettingViewModel {
     }
     
     func updateOutput() {
-        let totalPage = realmBookList.filter({ $0.status == .finished }).reduce(0) { $0 + $1.page }
-        output.totalPage = totalPage.formatted()
+        output.totalPage = getTotalPage()
         output.bookCount = realmBookList.filter({ $0.status == .finished }).count
         output.MemoCount = realmMemoList.count
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.00"
         output.version = "\(appVersion) (\(shouldUpdate() ? "업데이트 필요" :"최신 버전"))"
         output.nickName = UserDefaults.standard.string(forKey: "nickName") ?? "냥이 이름을 설정해주세요!"
         output.memoPharse = realmMemoList.randomElement()?.contents ?? "메모를 등록해주세요:)"
+    }
+    
+    func getTotalPage() -> String {
+        let number = realmBookList.filter({ $0.status == .finished }).reduce(0) { $0 + $1.page }
+        if number >= 1_000_000 {
+            let formattedNumber = Double(number) / 1_000_000
+            return String(format: "%.1fM", formattedNumber)
+        } else if number >= 10_000 {
+            let formattedNumber = Double(number) / 1_000
+            return String(format: "%.1fK", formattedNumber)
+        } else {
+            return number.formatted()
+        }
     }
     
     func latestVersion(completion: @escaping (String?) -> Void) {
