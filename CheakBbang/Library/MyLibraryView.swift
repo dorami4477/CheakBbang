@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MyLibraryView: View {
     @State private var activeTab: LibraryTab = .all
+    @StateObject private var sharedViewModel = LibraryViewModel()
 
     var body: some View {
         VStack(spacing: 15) {
@@ -16,16 +17,16 @@ struct MyLibraryView: View {
                 .padding([.horizontal, .top], 15)
 
             TabView(selection: $activeTab) {
-                AllLibraryView(viewModel: LibraryViewModel())
+                AllLibraryView(viewModel: sharedViewModel)
                     .tag(LibraryTab.all)
                 
-                NavigationLazyView(LibraryView(viewModel: LibraryViewModel(), status: .finished))
+                NavigationLazyView(LibraryView(viewModel: sharedViewModel, status: .finished))
                     .tag(LibraryTab.done)
                 
-                NavigationLazyView(LibraryView(viewModel: LibraryViewModel(), status: .ongoing))
+                NavigationLazyView(LibraryView(viewModel: sharedViewModel, status: .ongoing))
                     .tag(LibraryTab.currenltyReading)
                 
-                NavigationLazyView(LibraryView(viewModel: LibraryViewModel(), status: .upcoming))
+                NavigationLazyView(LibraryView(viewModel: sharedViewModel, status: .upcoming))
                     .tag(LibraryTab.wantToRead)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
