@@ -49,13 +49,13 @@ struct AllLibraryView: View {
                 .padding(.leading, 20)
             }
             if viewModel.dataBytype(type).count == 0 {
-                emptySelf(type, color: color)
+                emptySelf()
             }
         }
         
     }
 
-    func emptySelf(_ type: LibraryTab, color: Color) -> some View {
+    func emptySelf() -> some View {
             HStack {
                 ImageWrapper(name: ImageName.emptySelf)
                     .frame(width: 118, height: 146)
