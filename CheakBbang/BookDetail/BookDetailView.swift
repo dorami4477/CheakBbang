@@ -65,9 +65,10 @@ struct BookDetailView: View {
                     }
                     .alert("정말 삭제 하시겠습니까? \n책 삭제시 책의 메모도 모두 삭제됩니다:)", isPresented: $showAlert) {
                         Button("삭제") {
-                            viewModel.action(.deleteButtonTap)
-                            viewModel.output.book = MyBook()
                             item = MyBook()
+                            viewModel.output.book = MyBook()
+                            viewModel.action(.deleteButtonTap)
+                            NotificationCenter.default.post(name: .BookDetailViewDeleted, object: nil)
                             dismiss()
                         }
                         Button("취소", role: .cancel) {}
@@ -77,10 +78,18 @@ struct BookDetailView: View {
         .navigationTitle("도서 상세 정보")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear{
+            NotificationCenter.default.addObserver(forName: .BookDetailViewDeleted, object: nil, queue: .main) { _ in
+                item = MyBook()
+                viewModel.output.book = MyBook()
+                dismiss()
+            }
             viewModel.action(.viewOnAppear(item: item))
             if isEditted {
                 viewModel.action(.modified(item: item))
             }
+        }
+        .onDisappear {
+            NotificationCenter.default.removeObserver(self, name: .BookDetailViewDeleted, object: nil)
         }
     }
     
@@ -177,3 +186,6 @@ struct BiblioRowView: View {
 
 
 
+extension Notification.Name {
+    static let BookDetailViewDeleted = Notification.Name("BookDetailViewDeleted")
+}
