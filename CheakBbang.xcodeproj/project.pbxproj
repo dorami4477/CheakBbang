@@ -21,6 +21,7 @@
 		483976042CA85347004C495A /* ToastModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483976032CA85347004C495A /* ToastModifier.swift */; };
 		483976062CA8536F004C495A /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483976052CA8536F004C495A /* ToastView.swift */; };
 		483976082CA85390004C495A /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483976072CA85390004C495A /* Toast.swift */; };
+		483BAE932CAC569E007DABFA /* NotificationPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BAE922CAC569E007DABFA /* NotificationPublisher.swift */; };
 		483DBBCB2C90376C00C775BF /* CheakBbangApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */; };
 		483DBBCF2C90376E00C775BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBCE2C90376E00C775BF /* Assets.xcassets */; };
 		483DBBD22C90376E00C775BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBD12C90376E00C775BF /* Preview Assets.xcassets */; };
@@ -117,6 +118,7 @@
 		483976032CA85347004C495A /* ToastModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastModifier.swift; sourceTree = "<group>"; };
 		483976052CA8536F004C495A /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		483976072CA85390004C495A /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		483BAE922CAC569E007DABFA /* NotificationPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPublisher.swift; sourceTree = "<group>"; };
 		483DBBC72C90376C00C775BF /* CheakBbang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheakBbang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheakBbangApp.swift; sourceTree = "<group>"; };
 		483DBBCE2C90376E00C775BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 				48D09A182C968163000328E3 /* DesignSystem.swift */,
 				48D09A692C9FB885000328E3 /* TextBubble.swift */,
 				483975FF2CA801CF004C495A /* UserDefaultManager.swift */,
+				483BAE922CAC569E007DABFA /* NotificationPublisher.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -637,6 +640,7 @@
 				483DBC032C916CC200C775BF /* SearchView.swift in Sources */,
 				483975FC2CA7BF9D004C495A /* SettingViewModel.swift in Sources */,
 				483DBC062C916EC400C775BF /* NavigationLazyView.swift in Sources */,
+				483BAE932CAC569E007DABFA /* NotificationPublisher.swift in Sources */,
 				48D09A5A2C9E6399000328E3 /* Image+.swift in Sources */,
 				483DBC402C955CEF00C775BF /* LibraryViewModel.swift in Sources */,
 				48D09A332C9AF071000328E3 /* SearchResultDetailViewModel.swift in Sources */,
@@ -805,7 +809,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"CheakBbang/Preview Content\"";
 				DEVELOPMENT_TEAM = U4HJYQP2ZD;
 				ENABLE_PREVIEWS = YES;
@@ -823,7 +827,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dahyun.CheakBbang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -842,7 +846,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"CheakBbang/Preview Content\"";
 				DEVELOPMENT_TEAM = U4HJYQP2ZD;
 				ENABLE_PREVIEWS = YES;
@@ -860,7 +864,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dahyun.CheakBbang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

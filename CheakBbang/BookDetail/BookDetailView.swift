@@ -7,12 +7,14 @@
 
 import SwiftUI
 import RealmSwift
+import Combine
 
 struct BookDetailView: View {
     @StateObject var viewModel: BookDetailViewModel
     @State private var showAlert = false
     @Environment(\.dismiss) private var dismiss
     @State private var isEditted = false
+    @State private var cancellables = Set<AnyCancellable>()
     
     @State var item: MyBook
     
@@ -68,7 +70,7 @@ struct BookDetailView: View {
                             item = MyBook()
                             viewModel.output.book = MyBook()
                             viewModel.action(.deleteButtonTap)
-                            NotificationCenter.default.post(name: .BookDetailViewDeleted, object: nil)
+                            NotificationPublisher.shared.send()
                             dismiss()
                         }
                         Button("취소", role: .cancel) {}
@@ -78,18 +80,18 @@ struct BookDetailView: View {
         .navigationTitle("도서 상세 정보")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear{
-            NotificationCenter.default.addObserver(forName: .BookDetailViewDeleted, object: nil, queue: .main) { _ in
-                item = MyBook()
-                viewModel.output.book = MyBook()
-                dismiss()
-            }
+            NotificationPublisher.shared.publisher
+                .sink {
+                    item = MyBook()
+                    viewModel.output.book = MyBook()
+                    dismiss()
+                }
+                .store(in: &cancellables)
+ 
             viewModel.action(.viewOnAppear(item: item))
             if isEditted {
                 viewModel.action(.modified(item: item))
             }
-        }
-        .onDisappear {
-            NotificationCenter.default.removeObserver(self, name: .BookDetailViewDeleted, object: nil)
         }
     }
     

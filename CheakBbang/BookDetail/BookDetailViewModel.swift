@@ -51,6 +51,8 @@ extension BookDetailViewModel {
             }
             .eraseToAnyPublisher()
             .sink { [weak self] item in
+                self?.input = Input()
+                self?.output.book = MyBook()
                 item.memo.forEach({ memo in
                     PhotoFileManager.shared.removeImageFromDocument(filename: "\(memo.id)")
                 })
