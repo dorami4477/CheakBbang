@@ -63,7 +63,7 @@ struct EditBookView: View {
                 Text("독서 종료일")
                     .foregroundStyle(.gray)
                     .font(.system(size: 14))
-                DatePicker(selection: $viewModel.input.endDate, displayedComponents: .date) {}
+                DatePicker(selection: $viewModel.input.endDate, in: viewModel.input.startDate..., displayedComponents: .date) {}
                     .labelsHidden()
             }
             
