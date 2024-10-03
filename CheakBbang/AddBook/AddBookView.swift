@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct AddBookView: View {
-    //var isbn13: String
-    var item: Item
+    @Environment(\.dismiss) private var dismiss
     @StateObject var viewModel: AddBookViewModel
-    @EnvironmentObject var appState: AppState
+    //@EnvironmentObject var appState: AppState
     //@State private var isSaved = false
+    var item: Item
+    @Binding var addNew: Bool
     
     
     var body: some View {
@@ -74,7 +75,8 @@ struct AddBookView: View {
                 .asfullCapsuleButton(background: .accent)
                 .wrapToButton {
                     viewModel.action(.addButtonTap)
-                    appState.rootViewId = UUID()
+                    addNew = true
+                    dismiss()
                     //isSaved = true
                 }
 

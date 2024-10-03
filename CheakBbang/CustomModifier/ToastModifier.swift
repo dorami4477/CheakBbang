@@ -18,7 +18,7 @@ struct ToastModifier: ViewModifier {
       .overlay(
         ZStack {
           mainToastView()
-                .offset(y: UIScreen.main.bounds.height / 2)
+                .offset(y: UIScreen.main.bounds.height / 2 - 50)
         }.animation(.spring(), value: toast)
       )
       .onChange(of: toast) { value in

@@ -9,7 +9,8 @@ import SwiftUI
 
 struct BookListRow: View {
     let item: Item
-
+    @Binding var addNew: Bool
+    
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
             BookCover(coverUrl: item.cover, size: CGSize(width: 118, height: 146))
@@ -35,7 +36,7 @@ struct BookListRow: View {
                     }
                     
                     NavigationLink {
-                        NavigationLazyView(AddBookView(item: item, viewModel: AddBookViewModel()))
+                        NavigationLazyView(AddBookView(viewModel: AddBookViewModel(), item: item, addNew: $addNew))
                     } label: {
                         Text("내 서재에 저장")
                             .asCaplusButton(color: .accentColor)

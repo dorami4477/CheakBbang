@@ -12,6 +12,7 @@ struct SearchView: View {
     @StateObject var viewModel: SearchViewModel
     @FocusState private var focusField: Bool
     @State var isAnimating: Bool = false
+    @State private var addNew = false
     @State private var toast: Toast? = nil
 
     var body: some View {
@@ -44,7 +45,7 @@ struct SearchView: View {
                                 NavigationLink {
                                     NavigationLazyView(SearchResultDetailView(viewModel: SearchResultDetailViewModel(), item: item))
                                 } label: {
-                                    BookListRow(item: item)
+                                    BookListRow(item: item, addNew: $addNew)
                                         .onAppear {
                                             viewModel.action(.loadMoreItems(item: item))
                                         }
@@ -72,6 +73,14 @@ struct SearchView: View {
         }
         .navigationTitle("도서검색")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            if addNew {
+                toast = Toast(style: .success, message: "책이 추가되었습니다. :)")
+                addNew = false
+            } else {
+                toast = nil
+            }
+        }
 
     }
     
