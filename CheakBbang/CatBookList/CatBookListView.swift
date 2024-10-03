@@ -53,7 +53,7 @@ struct CatBookListView: View {
     }
     
     func bookListView() -> some View {
-        LazyVStack {
+        VStack {
             ForEach(Array(zip(viewModel.output.bookList.indices, viewModel.output.bookList)), id: \.1.id) { index, item in
                 let alignment = viewModel.isLeadingAlignment(for: index) ? Alignment.leading : Alignment.trailing
                 let padding = viewModel.isLeadingAlignment(for: index) ? Edge.Set.leading : Edge.Set.trailing
