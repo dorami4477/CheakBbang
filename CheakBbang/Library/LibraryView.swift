@@ -34,7 +34,7 @@ struct LibraryView: View {
 }
 
 struct bookListRow: View {
-    var book: MyBook
+    var book: MyBookDTO
     
     var body: some View {
         HStack(alignment: .top, spacing: 15) {

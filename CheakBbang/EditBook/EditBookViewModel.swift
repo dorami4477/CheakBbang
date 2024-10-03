@@ -10,14 +10,13 @@ import Combine
 import RealmSwift
 
 final class EditBookViewModel: ViewModelType {
-    private var realm: Realm
+    private let repository = MyBookRepository()
     var cancellables = Set<AnyCancellable>()
     @Published var input = Input()
     @Published var output = Output()
 
     
     init() {
-        self.realm = try! Realm()
         transform()
     }
 }
@@ -30,8 +29,8 @@ extension EditBookViewModel {
         var endDate: Date = Date()
         var readingState: ReadingState = .finished
         var rating = 3.0
-        let viewOnTask = PassthroughSubject<MyBook, Never>()
-        let addButtonTap = PassthroughSubject<MyBook, Never>()
+        let viewOnTask = PassthroughSubject<MyBookDTO, Never>()
+        let addButtonTap = PassthroughSubject<MyBookDTO, Never>()
     }
     
     struct Output {
@@ -42,13 +41,7 @@ extension EditBookViewModel {
             .addButtonTap
             .sink { [weak self] value in
                 guard let self else { return }
-                let data = realm.object(ofType: MyBook.self, forPrimaryKey: value.id)!
-                try! self.realm.write {
-                    data.rate = self.input.rating
-                    data.status = self.input.readingState
-                    data.startDate = self.input.startDate
-                    data.endDate = self.input.endDate
-                }
+                repository?.editBook(value.id, rate: self.input.rating, status: self.input.readingState, startDate: self.input.startDate, endDate: self.input.endDate)
             }
             .store(in: &cancellables)
         
@@ -69,8 +62,8 @@ extension EditBookViewModel {
 // MARK: - Action
 extension EditBookViewModel {
     enum Action {
-        case viewOnTask(item: MyBook)
-        case addButtonTap(item: MyBook)
+        case viewOnTask(item: MyBookDTO)
+        case addButtonTap(item: MyBookDTO)
     }
     
     func action(_ action: Action) {

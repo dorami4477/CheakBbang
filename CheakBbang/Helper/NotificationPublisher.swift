@@ -11,11 +11,11 @@ import Combine
 class NotificationPublisher {
     static let shared = NotificationPublisher()
     
-    let publisher = PassthroughSubject<Void, Never>()
+    let publisher = PassthroughSubject<String, Never>()
     
     private init() {}
     
-    func send() {
-        publisher.send()
+    func send(_ id: String) {
+        publisher.send(id)
     }
 }

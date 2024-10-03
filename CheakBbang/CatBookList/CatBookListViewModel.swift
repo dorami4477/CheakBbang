@@ -18,6 +18,7 @@ final class CatBookListViewModel: ViewModelType {
     
     init() {
         transform()
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
     }
 }
 

@@ -8,6 +8,10 @@
 import Foundation
 import RealmSwift
 
+// MyBookModel = Presentation Model
+// Repository -> MyBook -> MyBookModel
+// MyBookModel -> CRUD -> MyBook 로직
+
 final class MyBook: Object, ObjectKeyIdentifiable {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var itemId: Int
@@ -44,6 +48,10 @@ final class MyBook: Object, ObjectKeyIdentifiable {
         self.startDate = startDate
         self.endDate = endDate
     }
+    
+    func toMyBookDTO() -> MyBookDTO {
+        .init(id: id, itemId: itemId, title: title, originalTitle: originalTitle, author: author, publisher: publisher, pubDate: pubDate, explanation: explanation, cover: cover, isbn13: isbn13, rate: rate, memo: Array(_immutableCocoaArray: memo), page: page, status: status, startDate: startDate, endDate: endDate)
+    }
 }
 
 final class Memo: Object, ObjectKeyIdentifiable {
@@ -64,6 +72,10 @@ final class Memo: Object, ObjectKeyIdentifiable {
         self.contents2 = content2
         self.date = date
     }
+    
+    func toMemoDTO() -> MemoDTO {
+        .init(id: id, bookId: bookId, page: page, contents: contents, contents2: contents2, date: date)
+    }
 }
 
 final class User: Object, ObjectKeyIdentifiable {
@@ -83,5 +95,9 @@ final class User: Object, ObjectKeyIdentifiable {
         self.pagesOfBooks = pagesOfBooks
         self.character01 = character01
         self.character02 = character02
+    }
+    
+    func toUserDTO() -> UserDTO {
+        .init(id: id, nickname: nickname, level: level, numberOfBooks: numberOfBooks, pagesOfBooks: pagesOfBooks, character01: character01, character02: character02)
     }
 }

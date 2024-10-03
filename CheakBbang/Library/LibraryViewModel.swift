@@ -10,7 +10,7 @@ import Combine
 import RealmSwift
 
 final class LibraryViewModel: ViewModelType {
-    @ObservedResults(MyBook.self) var realmBookList
+    let repository = MyBookRepository()
     var cancellables = Set<AnyCancellable>()
     var input = Input()
     @Published var output = Output()
@@ -20,6 +20,61 @@ final class LibraryViewModel: ViewModelType {
     }
 }
 
+// MARK: - Input / Output
+extension LibraryViewModel {
+    struct Input {
+        let viewOnAppear = PassthroughSubject<Void, Never>()
+    }
+    
+    struct Output {
+        var bookList: [MyBookDTO] = []
+        var totalPage: String = ""
+        var bookCount: Int = 0
+        var readState: String = ""
+    }
+    
+    func transform() {
+        input.viewOnAppear
+            .sink { [weak self] _ in
+                guard let self, let repository = self.repository else { return }
+                self.output.bookList = repository.fetchBooks()
+                self.updateOutput()
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func updateOutput() {
+        let totalPage = output.bookList.reduce(0) { $0 + $1.page }
+        self.output.totalPage = totalPage.formatted()
+        self.output.bookCount = output.bookList.count
+    }
+    
+    func dataString(date: Date) -> String {
+        let myFormatter = DateFormatter()
+        myFormatter.dateFormat = "yyyyMMddHHmmss"
+        let savedDateString = myFormatter.string(from: date)
+        return savedDateString
+    }
+    
+    func dataBytype(_ type: LibraryTab) -> [MyBookDTO] {
+        var list: [MyBookDTO] = []
+        switch type {
+        case .all:
+            list = output.bookList
+        case .currenltyReading:
+            list = output.bookList.filter{ $0.status == .ongoing }
+        case .done:
+            list = output.bookList.filter{ $0.status == .finished }
+        case .wantToRead:
+            list = output.bookList.filter{ $0.status == .upcoming }
+        }
+        return list
+    }
+    
+}
+
+
+/*
 // MARK: - Input / Output
 extension LibraryViewModel {
     struct Input {
@@ -75,12 +130,18 @@ extension LibraryViewModel {
     }
     
 }
+*/
 
 // MARK: - Action
 extension LibraryViewModel {
     enum Action {
+        case viewOnAppear
     }
     
     func action(_ action: Action) {
+        switch action {
+        case .viewOnAppear:
+            input.viewOnAppear.send(())
+        }
     }
 }

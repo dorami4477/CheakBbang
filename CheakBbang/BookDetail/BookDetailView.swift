@@ -16,7 +16,7 @@ struct BookDetailView: View {
     @State private var isEditted = false
     @State private var cancellables = Set<AnyCancellable>()
     
-    @State var item: MyBook
+    @State var item: MyBookDTO
     
     var body: some View {
         ScrollView {
@@ -67,10 +67,8 @@ struct BookDetailView: View {
                     }
                     .alert("정말 삭제 하시겠습니까? \n책 삭제시 책의 메모도 모두 삭제됩니다:)", isPresented: $showAlert) {
                         Button("삭제") {
-                            item = MyBook()
-                            viewModel.output.book = MyBook()
                             viewModel.action(.deleteButtonTap)
-                            NotificationPublisher.shared.send()
+                            NotificationPublisher.shared.send("\(item.id)")
                             dismiss()
                         }
                         Button("취소", role: .cancel) {}
@@ -81,10 +79,10 @@ struct BookDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear{
             NotificationPublisher.shared.publisher
-                .sink {
-                    item = MyBook()
-                    viewModel.output.book = MyBook()
-                    dismiss()
+                .sink { id in
+                    if id == "\(item.id)" {
+                        dismiss()
+                    }
                 }
                 .store(in: &cancellables)
  
@@ -93,9 +91,12 @@ struct BookDetailView: View {
                 viewModel.action(.modified(item: item))
             }
         }
+//        .onDisappear {
+//            cancellables.removeAll()
+//        }
     }
     
-    func BiblioInfoView(_ item: MyBook) -> some View {
+    func BiblioInfoView(_ item: MyBookDTO) -> some View {
             VStack(alignment: .leading, spacing: 8) {
                 BiblioRowView(title: "작가", content: item.author)
                 BiblioRowView(title: "출판사", content: item.publisher)
@@ -134,7 +135,7 @@ struct BookCoverInfoView: View {
 }
 
 struct ReadingStatusView: View {
-    var item: MyBook
+    var item: MyBookDTO
     
     var body: some View {
         VStack(spacing: 8) {

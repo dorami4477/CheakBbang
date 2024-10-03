@@ -25,19 +25,19 @@ final class BookDetailViewModel: ViewModelType {
 // MARK: - Input / Output
 extension BookDetailViewModel {
     struct Input {
-        let viewOnAppear = PassthroughSubject<MyBook, Never>()
-        let modified = PassthroughSubject<MyBook, Never>()
+        let viewOnAppear = PassthroughSubject<MyBookDTO, Never>()
+        let modified = PassthroughSubject<MyBookDTO, Never>()
         let deleteButtonTap = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
-         var book: MyBook = MyBook()
+        var book: MyBookDTO = MyBook().toMyBookDTO()
     }
     
     func transform() {
         input.modified
             .sink { [weak self] book in
-                if let bookData = self?.repository?.fetchSingleItem(book.id) {
+                if let bookData = self?.repository?.fetchSingleBookModel(book.id) {
                     self?.output.book = bookData
                 }
             }
@@ -51,8 +51,6 @@ extension BookDetailViewModel {
             }
             .eraseToAnyPublisher()
             .sink { [weak self] item in
-                self?.input = Input()
-                self?.output.book = MyBook()
                 item.memo.forEach({ memo in
                     PhotoFileManager.shared.removeImageFromDocument(filename: "\(memo.id)")
                 })
@@ -66,8 +64,8 @@ extension BookDetailViewModel {
 // MARK: - Action
 extension BookDetailViewModel {
     enum Action {
-        case viewOnAppear(item: MyBook)
-        case modified(item: MyBook)
+        case viewOnAppear(item: MyBookDTO)
+        case modified(item: MyBookDTO)
         case deleteButtonTap
     }
     

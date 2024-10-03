@@ -20,7 +20,7 @@ struct AddMemoView: View {
     @State private var image: UIImage? = nil
     @State private var pickerImage: UIImage? = nil
     
-    @State var item: MyBook
+    @State var item: MyBookDTO
     @State var memo: Memo?
     
     @State private var page: String = ""

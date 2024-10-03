@@ -18,6 +18,9 @@ struct AllLibraryView: View {
                 sectionView(.wantToRead, color: .upcoming)
             }
         }
+        .onAppear {
+            viewModel.action(.viewOnAppear)
+        }
     }
 
         

@@ -15,6 +15,7 @@ final class AddMemoViewModel: ViewModelType {
     @ObservedRealmObject var item: MyBook = MyBook()
     @ObservedRealmObject var memo: Memo = Memo()
     
+    private let repository = MyBookRepository()
     var cancellables = Set<AnyCancellable>()
     var input = Input()
     @Published var output = Output()
@@ -27,7 +28,7 @@ final class AddMemoViewModel: ViewModelType {
 // MARK: - Input / Output
 extension AddMemoViewModel {
     struct Input {
-        let viewOnAppear = PassthroughSubject<MyBook, Never>()
+        let viewOnAppear = PassthroughSubject<MyBookDTO, Never>()
         let viewOnAppearMemo = PassthroughSubject<Memo, Never>()
         let addButtonTap = PassthroughSubject<(Memo, UIImage?), Never>()
         let editButtonTap = PassthroughSubject<(Memo, UIImage?), Never>()
@@ -40,8 +41,9 @@ extension AddMemoViewModel {
     func transform() {
         input.viewOnAppear
             .sink { [weak self] book in
-                guard let self else { return }
-                item = book
+                guard let self,
+                      let newBook = repository?.fetchSingleItem(book.id) else { return }
+                item = newBook
             }
             .store(in: &cancellables)
         
@@ -88,7 +90,7 @@ extension AddMemoViewModel {
 // MARK: - Action
 extension AddMemoViewModel {
     enum Action {
-        case viewOnAppear(item: MyBook, memo:Memo)
+        case viewOnAppear(item: MyBookDTO, memo:Memo)
         case addButtonTap(memo : Memo, image: UIImage?)
         case editButtonTap(memo : Memo, image: UIImage?)
         case deleteButtonTap
