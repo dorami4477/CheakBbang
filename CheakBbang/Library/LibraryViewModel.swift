@@ -60,13 +60,13 @@ extension LibraryViewModel {
         var list: [MyBookDTO] = []
         switch type {
         case .all:
-            list = output.bookList
+            list = output.bookList.reversed()
         case .currenltyReading:
-            list = output.bookList.filter{ $0.status == .ongoing }
+            list = output.bookList.filter{ $0.status == .ongoing }.reversed()
         case .done:
-            list = output.bookList.filter{ $0.status == .finished }
+            list = output.bookList.filter{ $0.status == .finished }.reversed()
         case .wantToRead:
-            list = output.bookList.filter{ $0.status == .upcoming }
+            list = output.bookList.filter{ $0.status == .upcoming }.reversed()
         }
         return list
     }

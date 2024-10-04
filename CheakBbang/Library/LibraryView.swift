@@ -11,6 +11,7 @@ import RealmSwift
 struct LibraryView: View {
     @StateObject var viewModel: LibraryViewModel
     var status: ReadingState
+    @State private var filter = true //등록순
     
     var body: some View {
         VStack {
@@ -18,9 +19,39 @@ struct LibraryView: View {
                 Text("\(status.rawValue)을 등록해주세요:)")
                     .padding()
             } else {
+                HStack {
+                    Spacer()
+                    HStack(spacing: 2) {
+                        ImageWrapper(name: ImageName.filter01)
+                            .foregroundStyle(filter ? .accent : .gray)
+                            .frame(width: 18)
+                        
+                        Text("등록순")
+                            .font(.system(size: 15))
+                            .foregroundStyle(filter ? .accent : .gray)
+                    }
+                    .wrapToButton {
+                        filter.toggle()
+                    }
+                    .padding(.trailing, 5)
+                    HStack(spacing: 2) {
+                        ImageWrapper(name: ImageName.filter02)
+                            .foregroundStyle(filter ? .gray : .accent)
+                            .frame(width: 18)
+                        
+                        Text("제목순")
+                            .font(.system(size: 15))
+                            .foregroundStyle(filter ? .gray : .accent)
+                    }
+                    .wrapToButton {
+                        filter.toggle()
+                    }
+                }
+                .padding(.horizontal)
+                
                 ScrollView {
                     LazyVStack(spacing: 20) {
-                        ForEach(viewModel.output.bookList.filter{ $0.status == status }, id: \.id) { book in
+                        ForEach(filteredList(filter), id: \.id) { book in
                             NavigationLink {
                                 NavigationLazyView(BookDetailView(viewModel: BookDetailViewModel(), item: book))
                             } label: {
@@ -35,7 +66,14 @@ struct LibraryView: View {
         .onAppear {
             viewModel.action(.viewOnAppear)
         }
-
+    }
+    
+    func filteredList(_ order: Bool) -> [MyBookDTO] {
+        if order {
+            return viewModel.output.bookList.filter{ $0.status == status }.reversed()
+        } else {
+            return viewModel.output.bookList.filter{ $0.status == status }.sorted { $0.title < $1.title }
+        }
     }
 }
 

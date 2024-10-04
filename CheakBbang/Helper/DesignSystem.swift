@@ -43,6 +43,8 @@ enum ImageName {
     static let configBG = "image_configBG"
     static let emptyBook = "image_emptybook"
     static let emptySelf = "image_emptyshelf"
+    static let filter01 = "icon_sort_date"
+    static let filter02 = "icon_sort_alphabet"
 }
 
 enum TabbarImageName {
