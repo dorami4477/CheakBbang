@@ -31,7 +31,7 @@ struct LibraryView: View {
                             .foregroundStyle(filter ? .accent : .gray)
                     }
                     .wrapToButton {
-                        filter.toggle()
+                        filter = true
                     }
                     .padding(.trailing, 5)
                     HStack(spacing: 2) {
@@ -44,7 +44,7 @@ struct LibraryView: View {
                             .foregroundStyle(filter ? .gray : .accent)
                     }
                     .wrapToButton {
-                        filter.toggle()
+                        filter = false
                     }
                 }
                 .padding(.horizontal)
