@@ -50,7 +50,7 @@ extension SettingViewModel {
         output.MemoCount = realmMemoList.count
         output.version = "\(AppVersionManager.shared.version) (\(AppVersionManager.shared.shouldUpdate() ? "업데이트 필요" :"최신 버전"))"
         output.nickName = UserDefaults.standard.string(forKey: "nickName") ?? "냥이 이름을 설정해주세요!"
-        output.memoPharse = realmMemoList.randomElement()?.contents ?? "메모를 등록해주세요:)"
+        output.memoPharse = realmMemoList.randomElement()?.contents ?? "메모를 등록해주세요. \n랜덤으로 등록된 메모가 보여요!"
     }
     
     func getTotalPage() -> String {
