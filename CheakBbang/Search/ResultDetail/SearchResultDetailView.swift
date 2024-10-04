@@ -9,8 +9,9 @@ import SwiftUI
 
 struct SearchResultDetailView: View {
     @StateObject var viewModel: SearchResultDetailViewModel
-    //var itemId: String
     var item: Item
+    @State private var addNew = false
+    @State private var toast: Toast? = nil
     
     var body: some View {
         ScrollView {
@@ -22,14 +23,29 @@ struct SearchResultDetailView: View {
                 
                 BookDetailBottomView(viewModel.output.book)
                 
+                NavigationLink {
+                    AddBookView(viewModel: AddBookViewModel(), item: item, addNew: $addNew)
+                } label: {
+                    Text("내 서재에 저장")
+                        .asfullCapsuleButton(background: .accent)
+                        .padding(.vertical)
+                }
+
                 Spacer()
             }
             .padding()
         }
+        .toastView(toast: $toast)
         .navigationTitle("도서 상세 정보")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear{
             viewModel.action(.viewOnTask(item: item))
+            if addNew {
+                toast = Toast(style: .success, message: "책이 추가되었습니다. :)")
+                addNew = false
+            } else {
+                toast = nil
+            }
         }
     }
     
