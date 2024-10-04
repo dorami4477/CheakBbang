@@ -13,24 +13,29 @@ struct LibraryView: View {
     var status: ReadingState
     
     var body: some View {
-        ScrollView {
-            LazyVStack(spacing: 20) {
-                ForEach(viewModel.output.bookList.filter{ $0.status == status }, id: \.id) { book in
-                    NavigationLink {
-                        NavigationLazyView(BookDetailView(viewModel: BookDetailViewModel(), item: book))
-                    } label: {
-                        bookListRow(book: book)
+        VStack {
+            if viewModel.output.bookList.filter({ $0.status == status }).count == 0 {
+                Text("\(status.rawValue)을 등록해주세요:)")
+                    .padding()
+            } else {
+                ScrollView {
+                    LazyVStack(spacing: 20) {
+                        ForEach(viewModel.output.bookList.filter{ $0.status == status }, id: \.id) { book in
+                            NavigationLink {
+                                NavigationLazyView(BookDetailView(viewModel: BookDetailViewModel(), item: book))
+                            } label: {
+                                bookListRow(book: book)
+                            }
+                        }
                     }
+                    .padding()
                 }
             }
-            .padding()
         }
         .onAppear {
             viewModel.action(.viewOnAppear)
         }
-        if viewModel.output.bookList.filter({ $0.status == status }).count == 0 {
-            Text("\(status.rawValue)을 등록해주세요:)")
-        }
+
     }
 }
 

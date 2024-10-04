@@ -819,6 +819,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CheakBbang/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "책빵";
 				INFOPLIST_KEY_NSCameraUsageDescription = "메모에 사진 등록을 위해서 카메라 이용을 허용해주세요.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "메모의 사진 등록을 위해서 갤러리의 사진을 허용해주세요.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -856,6 +857,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CheakBbang/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "책빵";
 				INFOPLIST_KEY_NSCameraUsageDescription = "메모에 사진 등록을 위해서 카메라 이용을 허용해주세요.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "메모의 사진 등록을 위해서 갤러리의 사진을 허용해주세요.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
