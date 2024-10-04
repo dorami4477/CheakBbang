@@ -13,6 +13,7 @@ struct CatBookListView: View {
     @State private var showBubble = false
     @State private var txtBubble: TextBubble = .phrase1
     @State private var timer: DispatchWorkItem? = nil
+    @State private var shouldUpdate = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -50,8 +51,29 @@ struct CatBookListView: View {
                 }
             }
         }
+        .alert("새로운 업데이트가 있어요! 앱을 업데이트 해주세요. \n감사합니다.", isPresented: $shouldUpdate) {
+            Button("업데이트 하러가기") {
+                openAppStore(appId: "6730113913")
+            }
+        }
+        .onAppear {
+            if AppVersionManager.shared.shouldUpdate() {
+                shouldUpdate = true
+            }
+        }
     }
     
+    func openAppStore(appId: String) {
+        let url = "itms-apps://itunes.apple.com/app/" + appId
+        if let url = URL(string: url), UIApplication.shared.canOpenURL(url) {
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        }
+    }
+
     func bookListView() -> some View {
         VStack {
             ForEach(Array(zip(viewModel.output.bookList.indices, viewModel.output.bookList)), id: \.1.id) { index, item in

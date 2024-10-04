@@ -23,6 +23,7 @@
 		483976082CA85390004C495A /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483976072CA85390004C495A /* Toast.swift */; };
 		483BAE932CAC569E007DABFA /* NotificationPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BAE922CAC569E007DABFA /* NotificationPublisher.swift */; };
 		483BAE952CAD5FB3007DABFA /* MyBookDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BAE942CAD5FB3007DABFA /* MyBookDTO.swift */; };
+		483BAE972CAFC0B3007DABFA /* AppVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BAE962CAFC0B3007DABFA /* AppVersionManager.swift */; };
 		483DBBCB2C90376C00C775BF /* CheakBbangApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */; };
 		483DBBCF2C90376E00C775BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBCE2C90376E00C775BF /* Assets.xcassets */; };
 		483DBBD22C90376E00C775BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBD12C90376E00C775BF /* Preview Assets.xcassets */; };
@@ -121,6 +122,7 @@
 		483976072CA85390004C495A /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		483BAE922CAC569E007DABFA /* NotificationPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPublisher.swift; sourceTree = "<group>"; };
 		483BAE942CAD5FB3007DABFA /* MyBookDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBookDTO.swift; sourceTree = "<group>"; };
+		483BAE962CAFC0B3007DABFA /* AppVersionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionManager.swift; sourceTree = "<group>"; };
 		483DBBC72C90376C00C775BF /* CheakBbang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheakBbang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheakBbangApp.swift; sourceTree = "<group>"; };
 		483DBBCE2C90376E00C775BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 				48D09A692C9FB885000328E3 /* TextBubble.swift */,
 				483975FF2CA801CF004C495A /* UserDefaultManager.swift */,
 				483BAE922CAC569E007DABFA /* NotificationPublisher.swift */,
+				483BAE962CAFC0B3007DABFA /* AppVersionManager.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -679,6 +682,7 @@
 				483975DC2CA570FA004C495A /* MemoListWrapper.swift in Sources */,
 				483DBBE92C903D1200C775BF /* BookRouter.swift in Sources */,
 				48D09A202C98243C000328E3 /* BookListRow.swift in Sources */,
+				483BAE972CAFC0B3007DABFA /* AppVersionManager.swift in Sources */,
 				48D09A882CA3DF0E000328E3 /* URL+.swift in Sources */,
 				483976082CA85390004C495A /* Toast.swift in Sources */,
 				48D09A3D2C9BFF64000328E3 /* EditBookViewModel.swift in Sources */,
