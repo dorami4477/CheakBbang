@@ -53,6 +53,9 @@ struct OnboardingView: View {
                 .disabled(nickName.isEmpty ? true : false)
         }
         .padding()
+        .onTapGesture(perform: {
+            UIApplication.shared.endEditing()
+        })
     }
 }
 
