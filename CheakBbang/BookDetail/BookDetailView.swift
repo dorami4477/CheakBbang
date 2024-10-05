@@ -14,7 +14,6 @@ struct BookDetailView: View {
     @State private var showAlert = false
     @Environment(\.dismiss) private var dismiss
     @State private var isEditted = false
-    @State private var cancellables = Set<AnyCancellable>()
     
     @State var item: MyBookDTO
     
@@ -69,6 +68,7 @@ struct BookDetailView: View {
                         Button("삭제") {
                             viewModel.action(.deleteButtonTap)
                             NotificationPublisher.shared.send("\(item.id)")
+                            viewModel.cancellables.removeAll()
                             dismiss()
                         }
                         Button("취소", role: .cancel) {}
@@ -81,10 +81,11 @@ struct BookDetailView: View {
             NotificationPublisher.shared.publisher
                 .sink { id in
                     if id == "\(item.id)" {
+                        viewModel.cancellables.removeAll()
                         dismiss()
                     }
                 }
-                .store(in: &cancellables)
+                .store(in: &viewModel.cancellables)
  
             viewModel.action(.viewOnAppear(item: item))
             if isEditted {
