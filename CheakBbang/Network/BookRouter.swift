@@ -38,7 +38,7 @@ extension BookRouter: TargetType {
             return [
                 URLQueryItem(name: "ttbkey", value: APIKeys.key),
                 URLQueryItem(name: "query", value: query),
-                URLQueryItem(name: "MaxResults", value: "20"),
+                URLQueryItem(name: "MaxResults", value: "35"),
                 URLQueryItem(name: "Cover", value: "MidBig"),
                 URLQueryItem(name: "start", value: "\(index)"),
                 URLQueryItem(name: "SearchTarget", value: "Book"),

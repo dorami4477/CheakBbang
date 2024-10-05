@@ -17,7 +17,7 @@ struct SearchView: View {
 
     var body: some View {
         VStack{
-            SearchBarView(searchText: $searchTerm, viewModel: viewModel, focus: _focusField)
+            SearchBarView(searchText: $searchTerm, viewModel: viewModel, focus: _focusField, toast: $toast)
                 .background {
                     GeometryReader { geometry in
                         if viewModel.output.bookList.count == 0 {
@@ -87,8 +87,8 @@ struct SearchView: View {
     private func checkForToast() {
         if viewModel.output.bookListZero {
             toast = Toast(style: .info, message: "검색하신 책이 없습니다. \n다른 검색어를 입력해주세요 :)")
-        } else if viewModel.output.searchFailure {
-            toast = Toast(style: .error, message: "네트워크 오류가 발생했습니다:( \n잠시후 시도해주세요!")
+        } else if viewModel.output.searchFailure != "" {
+            toast = Toast(style: .error, message: viewModel.output.searchFailure)
         } else {
             toast = nil
         }
@@ -99,6 +99,7 @@ struct SearchBarView: View {
     @Binding var searchText: String
     @StateObject var viewModel: SearchViewModel
     @FocusState var focus: Bool
+    @Binding var toast: Toast?
     
     var body: some View {
         HStack {
@@ -119,13 +120,22 @@ struct SearchBarView: View {
                         .onTapGesture {
                             searchText = ""
                             viewModel.output.bookList = []
+                            viewModel.output.isLoading = false
+                            viewModel.output.bookListZero = false
+                            viewModel.output.searchFailure = ""
                             UIApplication.shared.endEditing()
                         }
                     , alignment: .trailing
                 )
                 .onSubmit {
-                    viewModel.output.isLoading = true
-                    viewModel.action(.searchOnSubmit(search: $searchText.wrappedValue))
+                    if searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                        toast = Toast(style: .warning, message: "검색어를 입력해주세요.")
+                    } else {
+                        toast = nil
+                        viewModel.output.isLoading = true
+                        viewModel.action(.searchOnSubmit(search: $searchText.wrappedValue))
+                    }
+
                 }
         }
         .font(.headline)

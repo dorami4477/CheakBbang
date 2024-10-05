@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+//import Alamofire
 
 final class SearchViewModel: ViewModelType {
     var cancellables = Set<AnyCancellable>()
@@ -31,7 +32,8 @@ extension SearchViewModel {
     
     struct Output {
         var bookList: [Item] = []
-        var searchFailure: Bool = false
+        //var searchFailure: Bool = false
+        var searchFailure: String = ""
         var bookListZero: Bool = false
         var isLoading: Bool = false
     }
@@ -39,40 +41,45 @@ extension SearchViewModel {
     func transform() {
         
         input.searchOnSubmit
-            .flatMap { [weak self] value in
-                guard let self else {
-                    return Empty<Book, Error>().eraseToAnyPublisher()
-                }
-                return NetworkManager.shared.fetchBookList(value, index: self.itemCount + 1)
+            .flatMap { value in
+                return NetworkManager.shared.fetchBookList(value, index: 1)
             }
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(let error):
-                    self?.output.searchFailure = true
-                    print("Error fetching book item: \(error)")
-                }
-            }, receiveValue: { [weak self] value in
+            .sink(receiveValue: { [weak self] result in
                 guard let self else { return }
-                searchResult = value
-                output.isLoading = false
-                
-                if value.item.isEmpty {
-                    output.bookListZero = true
-                }
-                
-                self.itemCount += value.itemsPerPage
+                switch result {
+                case .success(let value):
+                    self.searchResult = value
+                    self.output.isLoading = false
+                    
+                    if value.item.isEmpty {
+                        self.output.bookListZero = true
+                    }
+                    
+                    self.itemCount += value.itemsPerPage
 
-                if value.startIndex == 1 {
-                    self.output.bookList = value.item
-                } else {
-                    self.output.bookList.append(contentsOf: value.item)
+                    if value.startIndex == 1 {
+                        self.output.bookList = value.item
+                    } else {
+                        self.output.bookList.append(contentsOf: value.item)
+                    }
+                case .failure(let error):
+                    self.output.isLoading = false
+                    switch error {
+                    case .notConnectedToInternet:
+                        self.output.searchFailure = "오프라인 상태입니다. 인터넷 연결을 확인하세요."
+                    case .timedOut:
+                        self.output.searchFailure = "요청 시간이 초과되었습니다. 다시 시도해주세요."
+                    case .networkConnectionLost:
+                        self.output.searchFailure = "네트워크 연결이 끊어졌습니다. 네트워크를 확인해주세요."
+                    case .cannotFindHost, .unknownError:
+                        self.output.searchFailure = "알수 없는 네트워크 오류입니다. 잠시 후 다시 시도해주세요."
+                    }
+                    self.output = self.output
                 }
-
             })
             .store(in: &cancellables)
+        
         
         input
             .loadMoreItems
@@ -101,7 +108,7 @@ extension SearchViewModel {
         switch action {
         case .searchOnSubmit(let search):
             output.bookListZero = false
-            output.searchFailure = false
+            output.searchFailure = ""
             input.searchOnSubmit.send(search)
         case .loadMoreItems(let item):
             input.loadMoreItems.send(item)
