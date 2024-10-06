@@ -82,7 +82,12 @@ struct bookListRow: View {
     
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
-            BookCover(coverUrl: book.cover, size: CGSize(width: 118, height: 146))
+            if let fileUrl = PhotoFileManager.shared.loadFileURL(filename: "\(book.itemId)") {
+                BookCover(coverUrl: fileUrl, size: CGSize(width: 118, height: 146))
+                
+            } else {
+                BookCover(coverUrl: URL(string: book.cover), size: CGSize(width: 118, height: 146))
+            }
             
             VStack(alignment: .leading, spacing: 5) {
                 Text(book.title)

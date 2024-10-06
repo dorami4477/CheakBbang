@@ -16,7 +16,7 @@ struct SearchResultDetailView: View {
     var body: some View {
         ScrollView {
             VStack {
-                BookCoverInfoView(coverUrl: viewModel.output.book.cover, title: viewModel.output.book.title, ogTitle: viewModel.output.book.subInfo.originalTitle ?? "")
+                BookCoverInfoView(bookId: "\(item.itemID)", coverUrl: viewModel.output.book.cover, title: viewModel.output.book.title, ogTitle: viewModel.output.book.subInfo.originalTitle ?? "")
                 
                 Divider()
                     .padding(.vertical)

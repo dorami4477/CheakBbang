@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct BookCover: View {
-    var coverUrl: String
+    var coverUrl: URL?
     var size: CGSize
     
     var body: some View {
-        AsyncImageWrapper(url: URL(string: coverUrl))
+       // AsyncImageWrapper(url: URL(string: coverUrl))
+        AsyncImageWrapper(url: coverUrl)
             .frame(width: size.width * 0.77, height: size.width * 1.15)
             .clipped()
             .overlay(alignment: .top) {

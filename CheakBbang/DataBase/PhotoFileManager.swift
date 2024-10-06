@@ -35,10 +35,29 @@ final class PhotoFileManager{
             }
             
             try imageData.write(to: fileURL, options: .atomic)
-            print("Image saved successfully at: \(fileURL)")
+
         } catch {
             print("Failed to save image: \(error)")
         }
+    }
+    
+    func saveStringImageToDocument(imageURL: String, filename: String) {
+        guard let url = URL(string: imageURL) else { return }
+        
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            if let error = error {
+                print("Failed to download image: \(error)")
+                return
+            }
+            
+            guard let data = data, let image = UIImage(data: data) else {
+                print("Failed to create image from data")
+                return
+            }
+            
+            self?.saveImageToDocument(image: image, filename: filename)
+        }
+        task.resume()
     }
 
     //get FileURL
