@@ -20,7 +20,7 @@ struct BookDetailView: View {
     var body: some View {
         ScrollView {
             VStack {
-                BookCoverInfoView(bookId: "\(item.itemId)", coverUrl: item.cover, title: item.title, ogTitle: item.originalTitle)
+                BookCoverInfoView(bookId: "\(item.id)", coverUrl: item.cover, title: item.title, ogTitle: item.originalTitle)
                 
                 Divider()
                     .padding(.vertical)
@@ -110,14 +110,14 @@ struct BookDetailView: View {
 }
 
 struct BookCoverInfoView: View {
-    let bookId: String
+    let bookId: String?
     let coverUrl: String
     let title: String
     let ogTitle: String
     
     var body: some View {
         VStack {
-            if let fileUrl = PhotoFileManager.shared.loadFileURL(filename: bookId) {
+            if let bookId, let fileUrl = PhotoFileManager.shared.loadFileURL(filename: bookId) {
                 BookCover(coverUrl: fileUrl, size: CGSize(width: 170, height: 209.1))
                     .padding(.bottom, 20)
                 

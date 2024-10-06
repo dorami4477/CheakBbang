@@ -83,7 +83,7 @@ extension AddBookViewModel {
                 self.$bookList.append(newItem)
                 
                 PhotoFileManager.shared.saveStringImageToDocument(imageURL: self.output.bookItem.cover, 
-                                                                  filename: "\(self.output.bookItem.itemID)")
+                                                                  filename: "\(newItem.id)")
             }
             .store(in: &cancellables)
     }

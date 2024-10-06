@@ -52,7 +52,7 @@ struct AllLibraryView: View {
                         NavigationLink {
                             NavigationLazyView(BookDetailView(viewModel: BookDetailViewModel(), item: book))
                         } label: {
-                            if let fileUrl = PhotoFileManager.shared.loadFileURL(filename: "\(book.itemId)") {
+                            if let fileUrl = PhotoFileManager.shared.loadFileURL(filename: "\(book.id)") {
                                 BookCover(coverUrl: fileUrl, size: CGSize(width: 118, height: 146))
                                     .padding(10)
                                 

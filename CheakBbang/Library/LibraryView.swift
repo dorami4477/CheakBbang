@@ -82,7 +82,7 @@ struct bookListRow: View {
     
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
-            if let fileUrl = PhotoFileManager.shared.loadFileURL(filename: "\(book.itemId)") {
+            if let fileUrl = PhotoFileManager.shared.loadFileURL(filename: "\(book.id)") {
                 BookCover(coverUrl: fileUrl, size: CGSize(width: 118, height: 146))
                 
             } else {

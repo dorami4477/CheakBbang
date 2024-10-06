@@ -54,6 +54,7 @@ extension BookDetailViewModel {
                 item.memo.forEach({ memo in
                     PhotoFileManager.shared.removeImageFromDocument(filename: "\(memo.id)")
                 })
+                PhotoFileManager.shared.removeImageFromDocument(filename: "\(item.id)")
                 self?.repository?.deleteSingleBook(item)
             }
             .store(in: &cancellables)
