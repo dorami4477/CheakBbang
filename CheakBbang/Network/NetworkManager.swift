@@ -96,6 +96,8 @@ extension NetworkManager {
                                     promise(.failure(.unknownError))
                                 }
                             }
+                        } else {
+                            promise(.failure(.unknownError))
                         }
                         
                     } else {
