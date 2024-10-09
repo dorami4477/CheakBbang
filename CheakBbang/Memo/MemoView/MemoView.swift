@@ -22,7 +22,8 @@ struct MemoView: View {
                 
                 Text(viewModel.output.memo.contents)
                     .bold()
-                    .font(.custom("BinggraeII", size: 26.3))
+                    .font(.custom("BinggraeII", size: 23))
+                    .padding(.horizontal, 22)
                 
                 ImageWrapper(name: ImageName.memoViewMiddle)
                 
