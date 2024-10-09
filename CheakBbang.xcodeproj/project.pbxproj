@@ -246,6 +246,25 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
+		483BAEC22CB3C52B007DABFA /* Book */ = {
+			isa = PBXGroup;
+			children = (
+				48D09A1A2C96D69A000328E3 /* BookDetail */,
+				483DBC0B2C91787D00C775BF /* AddBook */,
+				48D09A392C9BEF5A000328E3 /* EditBook */,
+			);
+			path = Book;
+			sourceTree = "<group>";
+		};
+		483BAEC32CB3C5B7007DABFA /* String */ = {
+			isa = PBXGroup;
+			children = (
+				48D09A182C968163000328E3 /* DesignSystem.swift */,
+				48D09A692C9FB885000328E3 /* TextBubble.swift */,
+			);
+			path = String;
+			sourceTree = "<group>";
+		};
 		483DBBBE2C90376C00C775BF = {
 			isa = PBXGroup;
 			children = (
@@ -278,9 +297,7 @@
 				483975F82CA7AF15004C495A /* Setting */,
 				483975DD2CA59253004C495A /* Memo */,
 				483DBC3C2C955A8B00C775BF /* Library */,
-				48D09A392C9BEF5A000328E3 /* EditBook */,
-				483DBC0B2C91787D00C775BF /* AddBook */,
-				48D09A1A2C96D69A000328E3 /* BookDetail */,
+				483BAEC22CB3C52B007DABFA /* Book */,
 				483DBC012C916CB100C775BF /* Search */,
 				483DBBDE2C903A9500C775BF /* CatBookList */,
 				483975F12CA6B266004C495A /* Onboarding */,
@@ -303,6 +320,7 @@
 		483DBBD82C90378800C775BF /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				483BAEC32CB3C5B7007DABFA /* String */,
 				483975E52CA68F6A004C495A /* Video */,
 				483975E02CA5AE49004C495A /* Font */,
 				483DBBCE2C90376E00C775BF /* Assets.xcassets */,
@@ -371,8 +389,6 @@
 			isa = PBXGroup;
 			children = (
 				483DBC092C91723D00C775BF /* ViewModelType.swift */,
-				48D09A182C968163000328E3 /* DesignSystem.swift */,
-				48D09A692C9FB885000328E3 /* TextBubble.swift */,
 				483975FF2CA801CF004C495A /* UserDefaultManager.swift */,
 				483BAE922CAC569E007DABFA /* NotificationPublisher.swift */,
 				483BAE962CAFC0B3007DABFA /* AppVersionManager.swift */,
@@ -836,7 +852,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dahyun.CheakBbang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -874,7 +890,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dahyun.CheakBbang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
