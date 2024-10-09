@@ -57,8 +57,8 @@ struct CatBookListView: View {
             }
         }
         .onAppear {
-            if AppVersionManager.shared.shouldUpdate() {
-                shouldUpdate = true
+            AppVersionManager.shared.shouldUpdate { needUpdate in
+                shouldUpdate = needUpdate
             }
         }
     }

@@ -35,27 +35,24 @@ final class AppVersionManager {
         }.resume()
     }
 
-    func shouldUpdate() -> Bool {
-        var storeVersion: String? = nil
-        latestVersion { version in
-            storeVersion = version
+    func shouldUpdate(completion: @escaping (Bool) -> Void) {
+        latestVersion { storeVersion in
+            guard
+                let nowVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
+                let storeVersion = storeVersion
+            else {
+                completion(false)
+                return
+            }
+            
+            let nowVersionArr = nowVersion.split(separator: ".").map { Int($0) ?? 0 }
+            let storeVersionArr = storeVersion.split(separator: ".").map { Int($0) ?? 0 }
+
+            if nowVersionArr[0] < storeVersionArr[0] || (nowVersionArr[0] == storeVersionArr[0] && nowVersionArr[1] < storeVersionArr[1]) {
+                completion(true)
+            } else {
+                completion(false)
+            }
         }
-        
-        guard
-            let nowVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
-            let storeVersion = storeVersion
-        else { return false }
-        
-        let nowVersionArr = nowVersion.split(separator: ".").map { $0 }
-        let storeVersionArr = storeVersion.split(separator: ".").map { $0 }
-        
-        print(nowVersionArr)
-        print(storeVersionArr)
-        
-        if nowVersionArr[0] < storeVersionArr[0] || nowVersionArr[1] < storeVersionArr[1] {
-            return true
-        }
-        
-        return false
     }
 }
