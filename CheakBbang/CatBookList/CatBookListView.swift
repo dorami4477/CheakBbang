@@ -53,7 +53,7 @@ struct CatBookListView: View {
         }
         .alert("새로운 업데이트가 있어요! 앱을 업데이트 해주세요. \n감사합니다.", isPresented: $shouldUpdate) {
             Button("업데이트 하러가기") {
-                openAppStore(appId: "6730113913")
+                openAppStore(appId: APIKeys.appID)
             }
         }
         .onAppear {
