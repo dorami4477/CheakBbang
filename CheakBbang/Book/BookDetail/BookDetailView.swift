@@ -11,8 +11,11 @@ import Combine
 
 struct BookDetailView: View {
     @StateObject var viewModel: BookDetailViewModel
-    @State private var showAlert = false
+    
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.presentationMode) var presentationMode
+    
+    @State private var showAlert = false
     @State private var isEditted = false
     
     @State var item: MyBookDTO
@@ -92,9 +95,11 @@ struct BookDetailView: View {
                 viewModel.action(.modified(item: item))
             }
         }
-//        .onDisappear {
-//            cancellables.removeAll()
-//        }
+        .onDisappear {
+            if !presentationMode.wrappedValue.isPresented {
+                viewModel.cancellables.removeAll()
+            }
+        }
     }
     
     func BiblioInfoView(_ item: MyBookDTO) -> some View {
