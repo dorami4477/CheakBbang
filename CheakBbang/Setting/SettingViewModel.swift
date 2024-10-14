@@ -10,9 +10,12 @@ import Combine
 import RealmSwift
 
 final class SettingViewModel: ViewModelType {
-    @ObservedResults(MyBook.self) var realmBookList
-    @ObservedResults(Memo.self) var realmMemoList
+    let repository = MyBookRepository()
     var cancellables = Set<AnyCancellable>()
+    
+    private var bookList: [MyBookDTO] = []
+    private var memoList: [MemoDTO] = []
+    
     var input = Input()
     @Published var output = Output()
     
@@ -38,25 +41,31 @@ extension SettingViewModel {
     
     func transform() {
         input.viewOnAppear
-            .sink { [weak self] _ in
+            .sink { [weak self] book in
+                guard let bookList = self?.repository?.fetchBooks() else { return }
+                guard let memoList = self?.repository?.fetchMemos() else { return }
+                self?.bookList = bookList
+                self?.memoList = memoList
                 self?.updateOutput()
             }
             .store(in: &cancellables)
     }
     
-    func updateOutput() {
+     func updateOutput() {
         output.totalPage = getTotalPage()
-        output.bookCount = realmBookList.filter({ $0.status == .finished }).count
-        output.MemoCount = realmMemoList.count
+        output.bookCount = bookList.filter({ $0.status == .finished }).count
+        output.MemoCount = bookList.count
         output.nickName = UserDefaults.standard.string(forKey: "nickName") ?? "냥이 이름을 설정해주세요!"
-        output.memoPharse = realmMemoList.randomElement()?.contents ?? "메모를 등록해주세요. \n랜덤으로 등록된 메모가 보여요!"
+        output.memoPharse = memoList.randomElement()?.contents ?? "메모를 등록해주세요. \n랜덤으로 등록된 메모가 보여요!"
         AppVersionManager.shared.shouldUpdate { [weak self] needUpdate in
-            self?.output.version = "\(AppVersionManager.shared.version) (\(needUpdate ? "업데이트 필요" :"최신 버전"))"
+            DispatchQueue.main.async {
+                self?.output.version = "\(AppVersionManager.shared.version) (\(needUpdate ? "업데이트 필요" :"최신 버전"))"
+            }
         }
     }
     
-    func getTotalPage() -> String {
-        let number = realmBookList.filter({ $0.status == .finished }).reduce(0) { $0 + $1.page }
+    private func getTotalPage() -> String {
+        let number = bookList.filter({ $0.status == .finished }).reduce(0) { $0 + $1.page }
         if number >= 1_000_000 {
             let formattedNumber = Double(number) / 1_000_000
             return String(format: "%.1fM", formattedNumber)

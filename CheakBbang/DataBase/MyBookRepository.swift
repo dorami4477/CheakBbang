@@ -39,6 +39,11 @@ final class MyBookRepository {
         return items.map { $0.toMyBookDTO() }
     }
     
+    func fetchMemos() -> [MemoDTO] {
+        let items = realm.objects(Memo.self)
+        return items.map { $0.toMemoDTO() }
+    }
+    
     func fetchSingleBookModel(_ id: ObjectId) -> MyBookDTO? {
         let specificItem = realm.object(ofType: MyBook.self, forPrimaryKey: id)
         return specificItem?.toMyBookDTO()
