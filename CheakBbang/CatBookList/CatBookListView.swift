@@ -57,6 +57,8 @@ struct CatBookListView: View {
             }
         }
         .onAppear {
+            viewModel.action(.viewOnAppear)
+            
             AppVersionManager.shared.shouldUpdate { needUpdate in
                 shouldUpdate = needUpdate
             }
@@ -95,7 +97,7 @@ struct CatBookListView: View {
         .scaleEffect(y: -1)
     }
     
-    func bookRowView(item: MyBook, align: Alignment, padding: Edge.Set, isFirst: Bool, isLast: Bool) -> some View {
+    func bookRowView(item: MyBookDTO, align: Alignment, padding: Edge.Set, isFirst: Bool, isLast: Bool) -> some View {
         VStack{
             if isLast {
                 GIFView(gifName: ImageName.cat01, width: 110)
@@ -122,7 +124,7 @@ struct CatBookListView: View {
             }
             
             NavigationLink {
-                NavigationLazyView(BookDetailView(viewModel: BookDetailViewModel(), item: item.toMyBookDTO()))
+                NavigationLazyView(BookDetailView(viewModel: BookDetailViewModel(), item: item))
             } label: {
                 ZStack {
                     Image(viewModel.bookImage(item.page))
