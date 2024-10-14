@@ -90,6 +90,8 @@
 		48D09A862CA3CB7D000328E3 /* MemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A852CA3CB7D000328E3 /* MemoViewModel.swift */; };
 		48D09A882CA3DF0E000328E3 /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A872CA3DF0E000328E3 /* URL+.swift */; };
 		48FB73CA2CBD692E00A701E3 /* MyBookDTO+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FB73C92CBD692E00A701E3 /* MyBookDTO+.swift */; };
+		48FB73CC2CBD6B0300A701E3 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FB73CB2CBD6B0300A701E3 /* FloatingButton.swift */; };
+		48FB73CE2CBD6DA600A701E3 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FB73CD2CBD6DA600A701E3 /* InfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -188,6 +190,8 @@
 		48D09A852CA3CB7D000328E3 /* MemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoViewModel.swift; sourceTree = "<group>"; };
 		48D09A872CA3DF0E000328E3 /* URL+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+.swift"; sourceTree = "<group>"; };
 		48FB73C92CBD692E00A701E3 /* MyBookDTO+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyBookDTO+.swift"; sourceTree = "<group>"; };
+		48FB73CB2CBD6B0300A701E3 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
+		48FB73CD2CBD6DA600A701E3 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -344,6 +348,8 @@
 			children = (
 				483DBBDF2C903AD200C775BF /* CatBookListView.swift */,
 				483DBC3A2C94301300C775BF /* CatBookListViewModel.swift */,
+				48FB73CB2CBD6B0300A701E3 /* FloatingButton.swift */,
+				48FB73CD2CBD6DA600A701E3 /* InfoView.swift */,
 			);
 			path = CatBookList;
 			sourceTree = "<group>";
@@ -640,6 +646,7 @@
 				483975FA2CA7AF3B004C495A /* SettingView.swift in Sources */,
 				483DBC0A2C91723D00C775BF /* ViewModelType.swift in Sources */,
 				48D09A3B2C9BEF88000328E3 /* EditBookView.swift in Sources */,
+				48FB73CC2CBD6B0300A701E3 /* FloatingButton.swift in Sources */,
 				483DBC202C92AD5200C775BF /* MyBookRepository.swift in Sources */,
 				483DBC392C94281100C775BF /* ContentView.swift in Sources */,
 				48D09A682C9F16D1000328E3 /* MyCanvas.swift in Sources */,
@@ -705,6 +712,7 @@
 				483BAE972CAFC0B3007DABFA /* AppVersionManager.swift in Sources */,
 				48D09A882CA3DF0E000328E3 /* URL+.swift in Sources */,
 				483976082CA85390004C495A /* Toast.swift in Sources */,
+				48FB73CE2CBD6DA600A701E3 /* InfoView.swift in Sources */,
 				48D09A3D2C9BFF64000328E3 /* EditBookViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
