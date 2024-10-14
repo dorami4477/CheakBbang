@@ -10,7 +10,7 @@ import Combine
 import RealmSwift
 
 final class SettingViewModel: ViewModelType {
-    let repository = MyBookRepository()
+    private let repository = MyBookRepository()
     var cancellables = Set<AnyCancellable>()
     
     private var bookList: [MyBookDTO] = []
@@ -51,8 +51,8 @@ extension SettingViewModel {
             .store(in: &cancellables)
     }
     
-     func updateOutput() {
-        output.totalPage = getTotalPage()
+    private func updateOutput() {
+        output.totalPage = bookList.filter({ $0.status == .finished }).getTotalPage()
         output.bookCount = bookList.filter({ $0.status == .finished }).count
         output.MemoCount = bookList.count
         output.nickName = UserDefaults.standard.string(forKey: "nickName") ?? "냥이 이름을 설정해주세요!"
@@ -61,19 +61,6 @@ extension SettingViewModel {
             DispatchQueue.main.async {
                 self?.output.version = "\(AppVersionManager.shared.version) (\(needUpdate ? "업데이트 필요" :"최신 버전"))"
             }
-        }
-    }
-    
-    private func getTotalPage() -> String {
-        let number = bookList.filter({ $0.status == .finished }).reduce(0) { $0 + $1.page }
-        if number >= 1_000_000 {
-            let formattedNumber = Double(number) / 1_000_000
-            return String(format: "%.1fM", formattedNumber)
-        } else if number >= 10_000 {
-            let formattedNumber = Double(number) / 1_000
-            return String(format: "%.1fK", formattedNumber)
-        } else {
-            return number.formatted()
         }
     }
     

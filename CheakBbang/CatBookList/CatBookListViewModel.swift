@@ -10,9 +10,9 @@ import Combine
 import RealmSwift
 
 final class CatBookListViewModel: ViewModelType {
-    @ObservedResults(MyBook.self) var realmBookList
-    
+    private let repository = MyBookRepository()
     var cancellables = Set<AnyCancellable>()
+    
     var input = Input()
     @Published var output = Output()
     
@@ -25,11 +25,11 @@ final class CatBookListViewModel: ViewModelType {
 // MARK: - Input / Output
 extension CatBookListViewModel {
     struct Input {
-
+        let viewOnAppear = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
-        var bookList: [MyBook] = []
+        var bookList: [MyBookDTO] = []
         var totalPage: String = "0"
         var bookCount: Int = 0
         var groupBottomPadding: CGFloat = 0
@@ -38,42 +38,23 @@ extension CatBookListViewModel {
         var itemHeight: CGFloat = 0
     }
     
-    func transform() {    
-        realmBookList.collectionPublisher
-            .map { Array($0) }
-            .sink(receiveCompletion: { completion in
-                print(completion)
-            }, receiveValue: { [weak self] books in
-                guard let self = self else { return }
-                self.output.bookList = books.filter({ $0.status == .finished })
-                self.updateOutput()
-            })
+    func transform() {
+        input.viewOnAppear
+            .sink { [weak self] book in
+                guard let bookList = self?.repository?.fetchBooks() else { return }
+                self?.output.bookList = bookList.filter({ $0.status == .finished })
+                self?.updateOutput()
+            }
             .store(in: &cancellables)
     }
     
     private func updateOutput() {
-        output.totalPage = getTotalPage()
+        output.totalPage = output.bookList.getTotalPage()
         output.bookCount = output.bookList.count
         output.groupBottomPadding = groupBottomPadding()
         output.totalBookHeight = getTotalBookHeight()
         output.shelfHeight = getShelfHeight()
         output.itemHeight = (output.totalBookHeight + output.shelfHeight) - (output.groupBottomPadding + CGFloat(output.bookCount * 15))
-    }
-    
-    private func getTotalPage() -> String {
-        let number = output.bookList.reduce(0) { $0 + $1.page }
-        
-        if number >= 1_000_000 {
-            let formattedNumber = Double(number) / 1_000_000
-            return String(format: "%.1fM", formattedNumber)
-            
-        } else if number >= 10_000 {
-            let formattedNumber = Double(number) / 1_000
-            return String(format: "%.1fK", formattedNumber)
-            
-        } else {
-            return number.formatted()
-        }
     }
     
     private func getTotalBookHeight() -> CGFloat {
@@ -144,9 +125,13 @@ extension CatBookListViewModel {
 // MARK: - Action
 extension CatBookListViewModel {
     enum Action {
+        case viewOnAppear
     }
     
     func action(_ action: Action) {
-
+        switch action {
+        case .viewOnAppear:
+            input.viewOnAppear.send(())
+        }
     }
 }
