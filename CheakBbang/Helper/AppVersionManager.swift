@@ -44,11 +44,13 @@ final class AppVersionManager {
                 completion(false)
                 return
             }
-            
+
             let nowVersionArr = nowVersion.split(separator: ".").map { Int($0) ?? 0 }
             let storeVersionArr = storeVersion.split(separator: ".").map { Int($0) ?? 0 }
 
-            if nowVersionArr[0] < storeVersionArr[0] || (nowVersionArr[0] == storeVersionArr[0] && nowVersionArr[1] < storeVersionArr[1]) {
+            if nowVersionArr[0] < storeVersionArr[0] ||
+               (nowVersionArr[0] == storeVersionArr[0] && nowVersionArr[1] < storeVersionArr[1]) ||
+               (nowVersionArr[0] == storeVersionArr[0] && nowVersionArr[1] == storeVersionArr[1] && nowVersionArr[2] < storeVersionArr[2]) {
                 completion(true)
             } else {
                 completion(false)

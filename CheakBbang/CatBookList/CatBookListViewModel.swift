@@ -60,24 +60,42 @@ extension CatBookListViewModel {
         output.itemHeight = (output.totalBookHeight + output.shelfHeight) - (output.groupBottomPadding + CGFloat(output.bookCount * 15))
     }
     
-    func getTotalPage() -> String {
+    private func getTotalPage() -> String {
         let number = output.bookList.reduce(0) { $0 + $1.page }
+        
         if number >= 1_000_000 {
             let formattedNumber = Double(number) / 1_000_000
             return String(format: "%.1fM", formattedNumber)
+            
         } else if number >= 10_000 {
             let formattedNumber = Double(number) / 1_000
             return String(format: "%.1fK", formattedNumber)
+            
         } else {
             return number.formatted()
         }
     }
     
-    func dataString(date: Date) -> String {
-        let myFormatter = DateFormatter()
-        myFormatter.dateFormat = "yyyyMMddHHmmss"
-        let savedDateString = myFormatter.string(from: date)
-        return savedDateString
+    private func getTotalBookHeight() -> CGFloat {
+        var height: CGFloat = 0
+        output.bookList.forEach {
+            height += bookImageHeight($0.page)
+        }
+        if output.bookList.count > 0 {
+            //고양이 높이
+            height += 53
+        }
+        return height
+    }
+    
+    private func groupBottomPadding() -> CGFloat{
+        let padding = (output.bookList.count / 5 ) * 35 + ( output.bookCount % 5 > 0 ? 35 : 0 ) - (output.bookCount > 0 ? 35 : 0)
+        return CGFloat(padding)
+    }
+    
+    private func getShelfHeight() -> CGFloat{
+        let height = (output.bookList.count / 5 ) * 31 + (output.bookCount > 0 && output.bookCount < 5 ? 31 : 0)
+        return CGFloat(height)
     }
     
     func isLeadingAlignment(for index: Int) -> Bool {
@@ -102,18 +120,6 @@ extension CatBookListViewModel {
         }
     }
     
-    func getTotalBookHeight() -> CGFloat {
-        var height: CGFloat = 0
-        output.bookList.forEach {
-            height += bookImageHeight($0.page)
-        }
-        if output.bookList.count > 0 {
-            //고양이 높이
-            height += 53
-        }
-        return height
-    }
-    
     func bookImage(_ page: Int) -> String {
         let randomColor = Int.random(in: 1...4)
         
@@ -133,15 +139,6 @@ extension CatBookListViewModel {
         }
     }
     
-    func groupBottomPadding() -> CGFloat{
-        let padding = (output.bookList.count / 5 ) * 35 + ( output.bookCount % 5 > 0 ? 35 : 0 ) - (output.bookCount > 0 ? 35 : 0) 
-        return CGFloat(padding)
-    }
-    
-    func getShelfHeight() -> CGFloat{
-        let height = (output.bookList.count / 5 ) * 31 + (output.bookCount > 0 && output.bookCount < 5 ? 31 : 0)
-        return CGFloat(height)
-    }
 }
 
 // MARK: - Action
