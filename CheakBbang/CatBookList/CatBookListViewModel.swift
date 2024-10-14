@@ -32,9 +32,6 @@ extension CatBookListViewModel {
         var bookList: [MyBookDTO] = []
         var totalPage: String = "0"
         var bookCount: Int = 0
-        var groupBottomPadding: CGFloat = 0
-        var totalBookHeight: CGFloat = 0
-        var shelfHeight: CGFloat = 0
         var itemHeight: CGFloat = 0
     }
     
@@ -51,10 +48,7 @@ extension CatBookListViewModel {
     private func updateOutput() {
         output.totalPage = output.bookList.getTotalPage()
         output.bookCount = output.bookList.count
-        output.groupBottomPadding = groupBottomPadding()
-        output.totalBookHeight = getTotalBookHeight()
-        output.shelfHeight = getShelfHeight()
-        output.itemHeight = (output.totalBookHeight + output.shelfHeight) - (output.groupBottomPadding + CGFloat(output.bookCount * 15))
+        output.itemHeight = (getTotalBookHeight() + getShelfHeight()) - (groupBottomPadding() + CGFloat(output.bookCount * 15))
     }
     
     private func getTotalBookHeight() -> CGFloat {
