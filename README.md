@@ -1,6 +1,9 @@
-# 책빵 - 식빵냥이와 함께하는 독서 기록
+# 책빵 - 식빵냥이와 함께하는 독서 기록 <img herf="https://apps.apple.com/kr/app/%EC%B1%85%EB%B9%B5-%EC%8B%9D%EB%B9%B5%EB%83%A5%EC%9D%B4%EC%99%80-%ED%95%A8%EA%BB%98%ED%95%98%EB%8A%94-%EB%8F%85%EC%84%9C-%EA%B8%B0%EB%A1%9D/id6730113913" src="https://github.com/user-attachments/assets/1781358b-e9b9-4bc5-b8f4-5c26c281573d" alt="Image 1" width="120px"/>
 
 ## 1. 프로젝트 소개
+
+> 귀여운 고양이와 함께하는 독서 기록 앱, 책을 쌓을수록 고양이와 북타워가 함께 성장합니다.
+
 <div>
   <img src="https://github.com/user-attachments/assets/04f091c7-af36-45f9-aeac-01b2f1218c0d" alt="Image 1" width="19%"/>
   <img src="https://github.com/user-attachments/assets/04eb3d10-3014-4454-b700-fd95c446c707" alt="Image 1" width="19%"/>
@@ -8,8 +11,6 @@
   <img src="https://github.com/user-attachments/assets/9a5c5473-36ea-492b-ba9f-703da14677be" alt="Image 1" width="19%"/>
   <img src="https://github.com/user-attachments/assets/b233cd57-d471-427b-bc28-379f0490c8e0" alt="Image 1" width="19%"/>
 </div>
-
-> 귀여운 고양이와 함께하는 독서 기록 앱, 책을 쌓을수록 고양이와 북타워가 함께 성장합니다.
 
 ### 1-1. 개발 환경
 
@@ -35,7 +36,7 @@ ETC : PencilKit, PhotosUI
 
 ## 2. 아키텍쳐
 
-![Untitled from FigJam (20)](https://github.com/user-attachments/assets/31a0a0d8-eec8-4e71-8deb-01dbad6bb586)
+![architecture](https://github.com/user-attachments/assets/31a0a0d8-eec8-4e71-8deb-01dbad6bb586)
 
 - **MVVM Input/Output/Action 패턴 사용하여 로직의 분리**:<br>
 MVVM 패턴을 사용하고 UI와 로직을 분리하고, viewModel은 Input / Output / Action 패턴을 사용하여, 명확한 트리거와 반응체계를 만들려고 하였습니다.
@@ -48,7 +49,7 @@ ViewModel에 의존성 주입(DI)을 적용하여 의존성을 보다 효율적�
 
 ### 💥3-1. 동일 데이터를 가진 두 개의 뷰에서 발생하는 데이터 삭제 이슈
 
-![Untitled from FigJam (21)](https://github.com/user-attachments/assets/12345b9d-6d1b-4cb3-8aef-d0edde404e0f)
+![troubleshooting01](https://github.com/user-attachments/assets/12345b9d-6d1b-4cb3-8aef-d0edde404e0f)
 
 동일한 데이터를 참조하는 두 개의 뷰가 각각 다른 탭에서 동시에 열리는 상황이 발생했습니다. 이 경우, 한 뷰에서 데이터를 삭제하면 다른 뷰가 해당 데이터를 계속 참조하려고 시도하면서 런타임 이슈가 발생했습니다.
 
@@ -101,7 +102,7 @@ Realm 객체와 직접적으로 상호작용하지 않고, 데이터를 DTO로 �
 
 ### 💥3-2. 네트워크가 실패했을때 스트림이 종료되어 다시 이벤트를 받지 못하는 이슈
 
-![Untitled from FigJam (22)](https://github.com/user-attachments/assets/0aba856a-6b52-47a6-b3b8-093bb254327c)
+![troubleshooting02](https://github.com/user-attachments/assets/0aba856a-6b52-47a6-b3b8-093bb254327c)
 
 네트워크가 일시적으로 끊기면 에러를 반환하여 이벤트 스트림이 중단되고, 네트워크가 다시 복구되어도 새로운 데이터를 받지 못하는 문제가 발생했습니다. 
 
