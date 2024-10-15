@@ -78,20 +78,6 @@ ViewModel에 의존성 주입(DI)을 적용하여 View와 ViewModel의 의존성
     }
     ```
     
-    ```swift
-    Button("삭제") {
-        NotificationPublisher.shared.send("\(item.id)")
-    }
-    ...
-    .onAppear{
-        NotificationPublisher.shared.publisher
-        .sink { id in
-          ...
-        }
-        .store(in: &viewModel.cancellables)
-    }
-    ```
-    
 2. **Realm 모델을 DTO(Data Transfer Object)로 변환하여 데이터 분리:**<br>
 Realm 객체와 직접적으로 상호작용하지 않고, 데이터를 DTO로 변환한 후에 비즈니스 로직이나 UI에 전달하여 사용하는 것이 더 궁극적으로 데이터 관리하는 게 좋은 방법으로 판단되었습니다.  이 방법을 통해 Realm 객체의 라이프사이클에 의존하지 않고, 안전하게 데이터를 관리할 수 있게 되었습니다.
     
@@ -155,6 +141,55 @@ Realm 객체와 직접적으로 상호작용하지 않고, 데이터를 DTO로 �
       })
       .store(in: &cancellables)
     ```
+---    
+### 💥3-3. **데이터 관찰자 패턴를 사용했을 때 View와 ViewModel이 메모리 해제가 되지 않는 이슈**
+
+동일한 구조체 내에서 이벤트 송수신을 관찰하는 패턴을 적용했으나, viewModel의 deinit이 호출되지 않는 문제가 발생했습니다. 첫 번째 원인은 구독을 저장하는 cancellables를 구조체 내에서 @State로 관리하고 있었기 때문입니다. 두 번째로, cancellables가 뷰의 생명 주기와 제대로 연계되지 않으면 구독이 유지되어 메모리에서 해제되지 않습니다. 또한, 이벤트 수신을 위해서는 cancellables가 해제되지 않고 유지되어야 한다는 문제도 있었습니다.
+
+**해결방법**
+
+1. **이벤트를 수신하는 시점과  pop이 이루어는 시점에만 cancellables 제거:**<br>
+onDisappear시점에 cancellables를 제거할 경우, 다른 뷰로 이동했을 때 구독이 사라져 이벤트를 받을 수 없게 되는 상황이 되기 때문에, 이벤트를 수신하는 시점에만 cancellables를 제거하였습니다. 또한, 이벤트 송신이 이루어지지 않을때는 onDisappear의  pop이 이루어는 시점에만 cancellables 제거하였습니다. 
+2. **cancellables를 View가 아니라 ViewModel이 관리:**<br>
+View에서 cancellables를 사용할 경우 @State 프로퍼티를 사용해야하는 문제점을 없앴습니다.
+
+    ```swift
+    import Combine
+    
+    class NotificationPublisher {
+        static let shared = NotificationPublisher()
+        private init() {}
+        
+        let publisher = PassthroughSubject<String, Never>()
+        
+        func send(_ id: String) {
+            publisher.send(id)
+        }
+    }
+    ```
+    
+    ```swift
+    Button("삭제") {
+        NotificationPublisher.shared.send("\(item.id)")
+        dismiss()
+    }
+    ...
+    .onAppear{
+        NotificationPublisher.shared.publisher
+        .sink { id in
+          if id == "\(item.id)" {
+            viewModel.cancellables.removeAll()
+            dismiss()
+          }
+        }
+        .store(in: &viewModel.cancellables)
+    }
+    .onDisappear {
+        if !presentationMode.wrappedValue.isPresented {
+          viewModel.cancellables.removeAll()
+        }
+    }
+    ```    
 ## 4. 회고
 
 1. 검색 결과를 보여줄 때 페이지네이션을 구현하여 성능의 최적화를 하고 사용자 경험 개선하고 싶었지만, API에서 다른 요청에도 같은 결과값을 전달해주어 페이지네이션을 구현하지 못하였습니다. 차선택으로 한번에 많은 결과물을 보여주는 방법을 택하여 아쉬움이 남습니다. RestAPI의 특성상 결과 값은 개발자가 변화 시킬 수 없는 부분이기 때문에, 어떻게 하면 이 부분을 개발적으로 커버할 수 있을까 고민보아야 할 것 같습니다. 
