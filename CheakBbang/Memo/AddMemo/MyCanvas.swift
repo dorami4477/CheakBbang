@@ -7,7 +7,6 @@
 
 import SwiftUI
 import PencilKit
-import PhotosUI
 
 struct MyCanvas: UIViewRepresentable {
     @Binding var canvasView: PKCanvasView
