@@ -36,11 +36,11 @@ ETC : PencilKit, PhotosUI
 
 ## 2. 아키텍쳐 및 개발 포인트
 
-![architecture](https://github.com/user-attachments/assets/31a0a0d8-eec8-4e71-8deb-01dbad6bb586)
+![Untitled from FigJam (24)](https://github.com/user-attachments/assets/578e1449-a672-4e37-998b-496595017676)
 
 ### 아키텍처
 
-- **SwiftUI, MVVM 패턴, Combine Reactive Framework, Realm Database**
+- **MVVM 패턴, Combine Reactive Framework, Realm Database**
     - MVVM의 Input/Output/Action 패턴을 사용하여 데이터 흐름을 명확히 정의
     - Realm의 DTO를 활용하여 데이터의 안정성과 유지보수성을 향상
     - 구현체의 의존성을 줄이고 테스트 용이성을 높이기 위해 데이터베이스 Repository에 DIP(Dependency Inversion Principle)를 적용
@@ -159,7 +159,7 @@ ETC : PencilKit, PhotosUI
       .store(in: &cancellables)
     ```
 ---    
-### 💥3-3. **데이터 관찰자 패턴를 사용했을 때 View와 ViewModel이 메모리 해제가 되지 않는 이슈**
+### 💥3-3. **데이터 관찰자 패턴를 사용했을 때 View와 ViewModel이 메모리 해제 되지 않는 이슈**
 
 동일한 구조체 내에서 이벤트 송수신을 관찰하는 패턴을 적용했으나, viewModel의 deinit이 호출되지 않는 문제가 발생했습니다. 첫 번째 원인은 구독을 저장하는 cancellables를 구조체 내에서 @State로 관리하고 있었기 때문입니다. 두 번째로, cancellables가 뷰의 생명 주기와 제대로 연계되지 않으면 구독이 유지되어 메모리에서 해제되지 않습니다. 또한, 이벤트 수신을 위해서는 cancellables가 해제되지 않고 유지되어야 한다는 문제도 있었습니다.
 
