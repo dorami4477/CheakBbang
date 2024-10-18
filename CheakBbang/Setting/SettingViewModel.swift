@@ -10,7 +10,7 @@ import Combine
 import RealmSwift
 
 final class SettingViewModel: ViewModelType {
-    private let repository = MyBookRepository()
+    private let repository: BookRepositoryProtocol?
     var cancellables = Set<AnyCancellable>()
     
     private var bookList: [MyBookDTO] = []
@@ -19,7 +19,8 @@ final class SettingViewModel: ViewModelType {
     var input = Input()
     @Published var output = Output()
     
-    init() {
+    init(repository: BookRepositoryProtocol?) {
+        self.repository = repository
         transform()
     }
 }

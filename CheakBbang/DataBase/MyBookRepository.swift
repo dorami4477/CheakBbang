@@ -8,7 +8,16 @@
 import Foundation
 import RealmSwift
 
-final class MyBookRepository {
+protocol BookRepositoryProtocol {
+    func deleteSingleBook(_ book: MyBookDTO)
+    func fetchBooks() -> [MyBookDTO]
+    func fetchMemos() -> [MemoDTO]
+    func fetchSingleBookModel(_ id: ObjectId) -> MyBookDTO?
+    func fetchSingleItem(_ id: ObjectId) -> MyBook?
+    func editBook(_ id: ObjectId, rate: Double, status: ReadingState, startDate: Date, endDate: Date)
+}
+
+final class MyBookRepository: BookRepositoryProtocol {
     
     private let realm: Realm
     

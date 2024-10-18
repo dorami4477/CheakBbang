@@ -44,7 +44,7 @@ struct ContentView: View {
             .tag(2)
             
             NavigationStack {
-                NavigationLazyView(SettingView(viewModel: SettingViewModel()))
+                NavigationLazyView(SettingView(viewModel: SettingViewModel(repository: MyBookRepository())))
             }
             .tabItem {
                 Image(TabbarImageName.tag04)
@@ -57,7 +57,4 @@ struct ContentView: View {
 }
 
 
-#Preview {
-    ContentView()
-}
 
