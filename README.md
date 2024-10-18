@@ -1,6 +1,6 @@
-# 책빵 - 식빵냥이와 함께하는 독서 기록🐈 <img herf="https://apps.apple.com/kr/app/%EC%B1%85%EB%B9%B5-%EC%8B%9D%EB%B9%B5%EB%83%A5%EC%9D%B4%EC%99%80-%ED%95%A8%EA%BB%98%ED%95%98%EB%8A%94-%EB%8F%85%EC%84%9C-%EA%B8%B0%EB%A1%9D/id6730113913" src="https://github.com/user-attachments/assets/1781358b-e9b9-4bc5-b8f4-5c26c281573d" alt="Image 1" width="120px"/>
+# 책빵 - 식빵냥이와 함께하는 독서 기록 🐈 <img herf="https://apps.apple.com/kr/app/%EC%B1%85%EB%B9%B5-%EC%8B%9D%EB%B9%B5%EB%83%A5%EC%9D%B4%EC%99%80-%ED%95%A8%EA%BB%98%ED%95%98%EB%8A%94-%EB%8F%85%EC%84%9C-%EA%B8%B0%EB%A1%9D/id6730113913" src="https://github.com/user-attachments/assets/1781358b-e9b9-4bc5-b8f4-5c26c281573d" alt="Image 1" width="120px"/>
 
-## 1. 프로젝트 소개
+
 
 > 귀여운 고양이와 함께하는 독서 기록 앱, 책을 쌓을수록 고양이와 북타워가 함께 성장합니다.
 
@@ -12,19 +12,21 @@
   <img src="https://github.com/user-attachments/assets/b233cd57-d471-427b-bc28-379f0490c8e0" alt="Image 1" width="19%"/>
 </div>
 
+## 1. 프로젝트 개요
+
 ### 1-1. 개발 환경
 
 개발기간: 2024.9.14 - 2024.10.2 ( 약 3주 )<br>
 개발인원: 1명<br>
-환경설정 : 최소버전 iPhone iOS16 이상, 라이트모드, 세로형 Portrait 전용
+환경설정: 최소버전 iPhone iOS16 이상, 라이트모드, 세로형 Portrait 전용
 
 ### 1-2. 기술스택 및 라이브러리
 
 UI: SwiftUI, Cosmos, AVFoundation<br>
 Rective: Combine<br>
-Network : Alamofire<br>
-DataBase : Realm<br>
-ETC : PencilKit, PhotosUI
+Network: Alamofire<br>
+DataBase: Realm<br>
+ETC: PencilKit, PhotosUI
 
 ### 1-3. 핵심적인 기능
 
@@ -36,7 +38,7 @@ ETC : PencilKit, PhotosUI
 
 ## 2. 아키텍쳐 및 개발 포인트
 
-![Untitled from FigJam (24)](https://github.com/user-attachments/assets/578e1449-a672-4e37-998b-496595017676)
+![Untitled from FigJam (24)](https://github.com/user-attachments/assets/bc45e2b6-42cd-4d4d-8283-0081c82b56fd)
 
 ### 아키텍처
 
@@ -68,7 +70,8 @@ ETC : PencilKit, PhotosUI
 
 ### 💥3-1. 동일 데이터를 가진 두 개의 뷰에서 발생하는 데이터 삭제 이슈
 
-![troubleshooting01](https://github.com/user-attachments/assets/12345b9d-6d1b-4cb3-8aef-d0edde404e0f)
+![Untitled from FigJam (21)](https://github.com/user-attachments/assets/fe81b305-d43e-4fa8-b770-a08e0ad49217)
+
 
 동일한 데이터를 참조하는 두 개의 뷰가 각각 다른 탭에서 동시에 열려 있을 때, 한 뷰에서 데이터를 삭제하는 경우 해당 데이터를 참조하고 있던 다른 뷰에서 런타임 이슈가 발생합니다.
 
@@ -109,7 +112,7 @@ ETC : PencilKit, PhotosUI
 ---
 ### 💥3-2. 네트워크가 실패했을때 스트림이 종료되어 다시 이벤트를 받지 못하는 이슈
 
-![troubleshooting02](https://github.com/user-attachments/assets/0aba856a-6b52-47a6-b3b8-093bb254327c)
+![Untitled from FigJam (22)](https://github.com/user-attachments/assets/42e03f71-dbd2-4b21-be55-01cea36b017d)
 
 네트워크가 일시적으로 끊기면 에러를 반환하여 이벤트 스트림이 중단되고, 네트워크가 다시 복구되어도 새로운 데이터를 받지 못하는 문제가 발생했습니다. 
 
