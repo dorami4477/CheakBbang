@@ -52,6 +52,7 @@ extension MemoViewModel {
         input.deleteButtonTap
             .sink { [weak self] value in
                 guard let self else { return }
+                PhotoFileManager.shared.removeImageFromDocument(filename: "\(value.id)")
                 $memoList.remove(value)
             }
             .store(in: &cancellables)
