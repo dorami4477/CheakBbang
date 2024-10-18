@@ -214,6 +214,6 @@ ETC : PencilKit, PhotosUI
     ```    
 ## 4. 회고
 
-![Untitled (1)](https://github.com/user-attachments/assets/a9578773-1d5f-471c-b3ca-41a3bce06d73)
+![Untitled (1)](https://github.com/user-attachments/assets/5c278415-6a89-47ac-a419-885e4d4acf25)
 
 1. 검색 결과를 보여줄 때 페이지네이션을 구현하여 성능 최적화를 하고 사용자 경험을 개선하고 싶었지만, 각각 다른 값이 입력된 요청에도 API에서는 같은 결과값만을 전달해주어 페이지네이션을 구현하지 못하였습니다. 차선택으로 한번에 많은 결과값을 보여주는 방법을 택하여 아쉬움이 남습니다. RestAPI의 특성상 결과 값은 개발자가 변화 시킬 수 없는 부분이기 때문에, 어떻게 하면 이 부분을 개발적으로 보완할 수 있을까 고민해 보아야 할 것 같습니다. 
