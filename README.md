@@ -28,7 +28,7 @@ ETC : PencilKit, PhotosUI
 
 ### 1-3. 핵심적인 기능
 
-- **북타워 쌓기**: 책을 등록시, 페이지 수의 따른 다른 두께의 책이 쌓이고 고양이가 위로 이동함
+- **북타워 쌓기**: 책을 등록시, 페이지 수의 따라 다른 두께의 책이 쌓이고 고양이가 위로 이동함
 - **편리한 도서 관리**: ‘읽은 책’, ‘읽고 있는 책’, ‘읽고 싶은 책’으로 도서 분류, 평점과 읽은 기간을 기록
 - **독서 기록 관리**: 책에 대한 소감과 좋아하는 글귀를 사진과 함께 기록하며, 사진에 하이라이트를 추가 가능
 - **도서 현황 확인**: 읽은 책 수, 메모 수 등 나의 독서 현황을 쉽게 확인 가능
@@ -38,12 +38,14 @@ ETC : PencilKit, PhotosUI
 
 ![architecture](https://github.com/user-attachments/assets/31a0a0d8-eec8-4e71-8deb-01dbad6bb586)
 
-- **MVVM Input/Output/Action 패턴 사용하여 로직의 분리**:<br>
-MVVM 패턴을 사용하고 UI와 로직을 분리하고, viewModel은 Input / Output / Action 패턴을 사용하여, 명확한 트리거와 반응체계를 만들었습니다..
-- **Realm의 DTO 사용하여 안정성과 데이터의 일관성을 높임:**<br>
-DTO를 사용함으로써 Realm의 라이프 사이클에 의존하지 않고, 안전하게 데이터를 사용할 수 있도록 하였습니다. 또한 비즈니즈 로직과 Realm 모델을 분리하여 코드의 유연성과 유지보수성을 향샹 시켰습니다.
-- **ViewModel의 의존성 주입 적용으로 테스트 가능성을 높임:**<br>
-ViewModel에 의존성 주입(DI)을 적용하여 의존성을 보다 효율적으로 관리하고, 테스트 가능성을 높였습니다.
+- **MVVM Input/Output/Action 패턴의 사용으로 로직의 분리**:<br>
+MVVM의 In-Output 패턴으로 View와 ViewModel의 데이터를 흐름을 명확히 했으며, Action 패턴을 통해 이벤트 처리 로직을 관리하였습니다.
+
+- **Realm의 DTO 사용하여 데이터의 안정성을 높이고 유지보수를 용이하게 함:**<br>
+DTO를 통해 데이터베이스와 UI 간의 데이터를 분리하여 코드 가독성을 향상시키고, 데이터 안정성을 높였습니다.
+
+- **NSURLErrorDomain을 사용하여 네트워크 에러 세분화 처리:**<br>
+인터넷 연결 오류, 서버 응답 오류, 타임아웃 등 오류코드를 세분화하여 정확한 오류 메시지를 통해 사용성을 개선하였습니다.
 
 ## 3. 트러블 슈팅
 
@@ -51,12 +53,13 @@ ViewModel에 의존성 주입(DI)을 적용하여 의존성을 보다 효율적�
 
 ![troubleshooting01](https://github.com/user-attachments/assets/12345b9d-6d1b-4cb3-8aef-d0edde404e0f)
 
-동일한 데이터를 참조하는 두 개의 뷰가 각각 다른 탭에서 동시에 열리는 상황이 발생했습니다. 이 경우, 한 뷰에서 데이터를 삭제하면 다른 뷰가 해당 데이터를 계속 참조하려고 시도하면서 런타임 이슈가 발생했습니다.
+동일한 데이터를 참조하는 두 개의 뷰가 각각 다른 탭에서 동시에 열려 있을 때, 한 뷰에서 데이터를 삭제하는 경우 해당 데이터를 참조하고 있던 다른 뷰에서 런타임 이슈가 발생합니다.
 
 **해결방법**
 
-1. **데이터 관찰자 패턴(Observer Pattern) 적용하여 변경 사항을 전달:**<br>
-각 탭의 뷰는 같은 데이터를 참조하고 있지만, 이 데이터가 삭제 되었을 때 이를 즉시 감지하지 못하고, 삭제된 데이터를 계속 사용하려 하기 때문에 런타임 이슈가 생겼습니다. Combine를 이용하여 데이터의 변경 사항을 실시간으로 반영할 수도록 데이터 관찰자 모델(NotificationPublisher)를 적용하였습니다. 하나의 뷰에서 데이터를 삭제하면 다른 뷰에서도 해당 데이터를 즉시 감지하여 화면이 사라지도록 처리하였습니다.
+1. **데이터 관찰자 패턴(Observer Pattern)을 적용하여 삭제이벤트 전달:**
+
+    각 탭의 뷰는 같은 데이터를 참조하고 있지만, 이 데이터가 삭제 되었음에도 동일한 데이터를 계속 사용하려 하기 때문에 런타임 이슈가 생겼습니다. Combine을 이용하여 데이터의 변경 사항을 실시간으로 반영할 수 있도록 데이터 관찰자 모델(NotificationPublisher)을 적용하였습니다. 하나의 뷰에서 데이터를 삭제하면 다른 뷰에서도 해당 데이터를 즉시 감지하여 화면이 사라지도록 처리하였습니다.
     
     ```swift
     import Combine
@@ -73,22 +76,9 @@ ViewModel에 의존성 주입(DI)을 적용하여 의존성을 보다 효율적�
     }
     ```
     
-    ```swift
-    Button("삭제") {
-        NotificationPublisher.shared.send("\(item.id)")
-    }
-    ...
-    .onAppear{
-        NotificationPublisher.shared.publisher
-        .sink { id in
-          ...
-        }
-        .store(in: &viewModel.cancellables)
-    }
-    ```
-    
-2. **Realm 모델을 DTO(Data Transfer Object)로 변환하여 데이터 분리:**<br>
-Realm 객체와 직접적으로 상호작용하지 않고, 데이터를 DTO로 변환한 후에 비즈니스 로직이나 UI에 전달하여 사용하는 것이 더 궁극적으로 데이터 관리하는 게 좋은 방법으로 판단되었습니다.  이 방법을 통해 Realm 객체의 라이프사이클에 의존하지 않고, 안전하게 데이터를 관리할 수 있게 되었습니다.
+2. **Realm 모델을 DTO(Data Transfer Object)로 변환하여 데이터 분리:**
+
+    Realm의 데이터를 DTO로 변환하여 사용함으로써, 여러 곳에서 동일한 데이터가 같은 주소값을 참조하는 형태가 아닌 값이 복사되는 형태로 변경 할 수 있었습니다. 그로 인해, Realm 데이터에 직접적인 영향이 미치지 않게 되어 데이터의 안정성을 확보하는 동시에 런타임 이슈를 해결 할 수 있었습니다.
     
     ```swift
     final class MyBook: Object, ObjectKeyIdentifiable {
@@ -99,7 +89,7 @@ Realm 객체와 직접적으로 상호작용하지 않고, 데이터를 DTO로 �
     }
     ```
     
-
+---
 ### 💥3-2. 네트워크가 실패했을때 스트림이 종료되어 다시 이벤트를 받지 못하는 이슈
 
 ![troubleshooting02](https://github.com/user-attachments/assets/0aba856a-6b52-47a6-b3b8-093bb254327c)
@@ -108,8 +98,9 @@ Realm 객체와 직접적으로 상호작용하지 않고, 데이터를 DTO로 �
 
 **해결 방법**
 
-1. **네트워크 통신 시  `Result` 타입으로 응답을 맵핑하여 반환하도록 변경:**<br>
-네트워크 통신 시 `Result` 타입으로 응답을 감싸서 반환하는 방식으로 문제를 해결했습니다. 이렇게 하여 **성공**과 **실패** 케이스 모두를 `Result` 타입으로 처리할 수 있고, promise의 반환값은 무조건 성공을 반환하기 때문에 스트림이 종료되지 않도록 만들 수 있었습니다. 이로 인해, 스트림은 네트워크 요청의 성공 여부와 상관없이 계속 유지되며, 실패한 경우에도 종료되지 않고 새로운 이벤트를 받을 수 있게 되었습니다.
+1. **네트워크 통신 시  `Result` 타입으로 응답을 래핑하여 반환하도록 변경:**
+   
+    네트워크 통신 시 Result 타입으로 응답을 감싸서 반환하는 방식으로 문제를 해결했습니다. 이렇게 하여 성공과 실패 케이스 모두를 Result 타입으로 처리할 수 있고, promise의 반환값은 성공을 보장하기 때문에 스트림이 종료되지 않도록 만들 수 있었습니다. 이로 인해, 스트림은 네트워크 요청의 성공 여부와 상관없이 계속 유지되며, 실패한 경우에도 종료되지 않고 새로운 이벤트를 받을 수 있게 되었습니다.
 
     ```swift
     func fetchBookList(_ search: String) -> AnyPublisher<Result<Book, BookNetworkError>, Never> {
@@ -150,7 +141,57 @@ Realm 객체와 직접적으로 상호작용하지 않고, 데이터를 DTO로 �
       })
       .store(in: &cancellables)
     ```
+---    
+### 💥3-3. **데이터 관찰자 패턴를 사용했을 때 View와 ViewModel이 메모리 해제가 되지 않는 이슈**
+
+동일한 구조체 내에서 이벤트 송수신을 관찰하는 패턴을 적용했으나, viewModel의 deinit이 호출되지 않는 문제가 발생했습니다. 첫 번째 원인은 구독을 저장하는 cancellables를 구조체 내에서 @State로 관리하고 있었기 때문입니다. 두 번째로, cancellables가 뷰의 생명 주기와 제대로 연계되지 않으면 구독이 유지되어 메모리에서 해제되지 않습니다. 또한, 이벤트 수신을 위해서는 cancellables가 해제되지 않고 유지되어야 한다는 문제도 있었습니다.
+
+**해결방법**
+
+1. **이벤트를 수신하는 시점과 pop 동작 시점에만 cancellables 제거:**
+
+    onDisappear시점에 cancellables를 제거할 경우, 다른 뷰로 이동했을 때 구독이 사라져 이벤트를 받을 수 없게 되는 상황이 되기 때문에, 이벤트를 수신하는 시점에만 cancellables를 제거하도록 구현하였습니다. 또한, 이벤트 송신이 이루어지지 않을 때는 onDisappear의 pop이 발생할 때만 cancellables를 제거하여, 안정적인 이벤트 처리를 보장했습니다.
+2. **cancellables를 View가 아니라 ViewModel이 관리:**
+   
+    ViewModel에서 cancellables를 관리함으로써, View에서 cancellables를 사용할 경우 @State 프로퍼티를 사용해야하는 문제를 없앴습니다.
+
+    ```swift
+    import Combine
+    
+    class NotificationPublisher {
+        static let shared = NotificationPublisher()
+        private init() {}
+        
+        let publisher = PassthroughSubject<String, Never>()
+        
+        func send(_ id: String) {
+            publisher.send(id)
+        }
+    }
+    ```
+    
+    ```swift
+    Button("삭제") {
+        NotificationPublisher.shared.send("\(item.id)")
+        dismiss()
+    }
+    ...
+    .onAppear{
+        NotificationPublisher.shared.publisher
+        .sink { id in
+          if id == "\(item.id)" {
+            viewModel.cancellables.removeAll()
+            dismiss()
+          }
+        }
+        .store(in: &viewModel.cancellables)
+    }
+    .onDisappear {
+        if !presentationMode.wrappedValue.isPresented {
+          viewModel.cancellables.removeAll()
+        }
+    }
+    ```    
 ## 4. 회고
 
-1. 검색 결과를 보여줄 때 페이지네이션을 구현하고 싶었으나, API에서 다른 요청에도 같은 결과값을 전달해주어 페이지네이션을 구현하지 못하였습니다. 차선택으로 한번에 많은 결과물을 보여주는 방법을 택하여 아쉬움이 남습니다. RestAPI의 특성상 결과 값은 개발자가 변화 시킬 수 없는 부분이 이기 때문에, 어떻게 하면 이 부분을 개발적으로 커버할 수 있을까 고민해 보아야 할 것 같습니다. 
-2. 네트워크 에러 처리 시 API가 에러처리(응답코드) 가이드를 주지 않아 NSError를 통해 통신 에러처리를 하긴 했지만 그 외에 에러처리는 어떻게 하면 좋을 지 고민해보고 리팩토링이 필요가 있을 것 같습니다.
+1. 검색 결과를 보여줄 때 페이지네이션을 구현하여 성능 최적화를 하고 사용자 경험을 개선하고 싶었지만, 각각 다른 값이 입력된 요청에도 API에서는 같은 결과값만을 전달해주어 페이지네이션을 구현하지 못하였습니다. 차선택으로 한번에 많은 결과값을 보여주는 방법을 택하여 아쉬움이 남습니다. RestAPI의 특성상 결과 값은 개발자가 변화 시킬 수 없는 부분이기 때문에, 어떻게 하면 이 부분을 개발적으로 보완할 수 있을까 고민해 보아야 할 것 같습니다. 
