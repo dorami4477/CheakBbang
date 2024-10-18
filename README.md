@@ -1,4 +1,4 @@
-# 책빵 - 식빵냥이와 함께하는 독서 기록 <img herf="https://apps.apple.com/kr/app/%EC%B1%85%EB%B9%B5-%EC%8B%9D%EB%B9%B5%EB%83%A5%EC%9D%B4%EC%99%80-%ED%95%A8%EA%BB%98%ED%95%98%EB%8A%94-%EB%8F%85%EC%84%9C-%EA%B8%B0%EB%A1%9D/id6730113913" src="https://github.com/user-attachments/assets/1781358b-e9b9-4bc5-b8f4-5c26c281573d" alt="Image 1" width="120px"/>
+# 책빵 - 식빵냥이와 함께하는 독서 기록🐈 <img herf="https://apps.apple.com/kr/app/%EC%B1%85%EB%B9%B5-%EC%8B%9D%EB%B9%B5%EB%83%A5%EC%9D%B4%EC%99%80-%ED%95%A8%EA%BB%98%ED%95%98%EB%8A%94-%EB%8F%85%EC%84%9C-%EA%B8%B0%EB%A1%9D/id6730113913" src="https://github.com/user-attachments/assets/1781358b-e9b9-4bc5-b8f4-5c26c281573d" alt="Image 1" width="120px"/>
 
 ## 1. 프로젝트 소개
 
@@ -34,18 +34,35 @@ ETC : PencilKit, PhotosUI
 - **도서 현황 확인**: 읽은 책 수, 메모 수 등 나의 독서 현황을 쉽게 확인 가능
 
 
-## 2. 아키텍쳐
+## 2. 아키텍쳐 및 개발 포인트
 
 ![architecture](https://github.com/user-attachments/assets/31a0a0d8-eec8-4e71-8deb-01dbad6bb586)
 
-- **MVVM Input/Output/Action 패턴의 사용으로 로직의 분리**:<br>
-MVVM의 In-Output 패턴으로 View와 ViewModel의 데이터를 흐름을 명확히 했으며, Action 패턴을 통해 이벤트 처리 로직을 관리하였습니다.
+### 아키텍처
 
-- **Realm의 DTO 사용하여 데이터의 안정성을 높이고 유지보수를 용이하게 함:**<br>
-DTO를 통해 데이터베이스와 UI 간의 데이터를 분리하여 코드 가독성을 향상시키고, 데이터 안정성을 높였습니다.
+- **SwiftUI, MVVM 패턴, Combine Reactive Framework, Realm Database**
+    - MVVM의 Input/Output/Action 패턴을 사용하여 데이터 흐름을 명확히 정의
+    - Realm의 DTO를 활용하여 데이터의 안정성과 유지보수성을 향상
+    - 구현체의 의존성을 줄이고 테스트 용이성을 높이기 위해 데이터베이스 Repository에 DIP(Dependency Inversion Principle)를 적용
+    - 화면 전환 시 성능 최적화를 위해 초기화 지연 뷰(NavigationLazyView)를 활용
+    - 파일 매니저를 통해 이미지 관리의 효율성을 향상
+    - 메모리 효율성을 높이기 위해 온보딩 화면에서 분기 처리 및 사용된 메모리를 해제
+    - 사용자 사용성 향상을 위해 앱버전 관리 매니저를 만들고 앱 버전 업데이트를 안내함
 
-- **NSURLErrorDomain을 사용하여 네트워크 에러 세분화 처리:**<br>
-인터넷 연결 오류, 서버 응답 오류, 타임아웃 등 오류코드를 세분화하여 정확한 오류 메시지를 통해 사용성을 개선하였습니다.
+### 네트워크
+
+- **Alamofire**
+    - NSURLErrorDomain을 사용하여 네트워크 에러 코드를 세분화하여 정확한 오류 메시지를 전달
+    - 네트워크 요청 함수에 제네릭 타입을 적용하여 재사용성을 높이고, `async/await`를 통해 가독성을 향상
+    - API의 Router에 URLRequestConvertible의 TargetType을 적용하여 네트워크 요청 구성을 일관되게 유지하고 유지보수를 용이성을 높임
+    - 로딩 프로세스 바, 응답 데이터가 비어 있을 때 토스트 메시지 사용, 데이터 로드 실패 시 임시 데이터 처리 등을 통해 사용자 경험을 향상
+
+### UI
+
+- 아래에서 위로 쌓이는 책 리스트를 구현하기 위해, 위에서 아래로 표시되는 리스트를 역전시킴. 각 책 이미지의 높이에 맞춰 여백을 계산하여, 데이터가 자연스럽게 아래에서 위로 올라오는 UI 구현
+- **AVFoundation, PhotosUI, PencilKit**
+    - PencilKit을 활용하여 하이라이트 기능을 구현하기 위해 이미지와 캔버스를 병합하여 최종 이미지를 저장
+    - AVFoundation를 이용하여 사용자의 카메라로 촬영하고, 촬영된 이미지에 펜 터치를 오버랩 함
 
 ## 3. 트러블 슈팅
 
@@ -172,6 +189,7 @@ DTO를 통해 데이터베이스와 UI 간의 데이터를 분리하여 코드 �
     
     ```swift
     Button("삭제") {
+        //삭제 이벤트 전달
         NotificationPublisher.shared.send("\(item.id)")
         dismiss()
     }
@@ -180,6 +198,7 @@ DTO를 통해 데이터베이스와 UI 간의 데이터를 분리하여 코드 �
         NotificationPublisher.shared.publisher
         .sink { id in
           if id == "\(item.id)" {
+            //삭제 이벤트 수신
             viewModel.cancellables.removeAll()
             dismiss()
           }
@@ -187,11 +206,14 @@ DTO를 통해 데이터베이스와 UI 간의 데이터를 분리하여 코드 �
         .store(in: &viewModel.cancellables)
     }
     .onDisappear {
+        //삭제 이벤트 없이 Pop동작될때
         if !presentationMode.wrappedValue.isPresented {
           viewModel.cancellables.removeAll()
         }
     }
     ```    
 ## 4. 회고
+
+![Untitled (1)](https://github.com/user-attachments/assets/a9578773-1d5f-471c-b3ca-41a3bce06d73)
 
 1. 검색 결과를 보여줄 때 페이지네이션을 구현하여 성능 최적화를 하고 사용자 경험을 개선하고 싶었지만, 각각 다른 값이 입력된 요청에도 API에서는 같은 결과값만을 전달해주어 페이지네이션을 구현하지 못하였습니다. 차선택으로 한번에 많은 결과값을 보여주는 방법을 택하여 아쉬움이 남습니다. RestAPI의 특성상 결과 값은 개발자가 변화 시킬 수 없는 부분이기 때문에, 어떻게 하면 이 부분을 개발적으로 보완할 수 있을까 고민해 보아야 할 것 같습니다. 
