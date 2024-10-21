@@ -12,13 +12,13 @@ import UIKit
 
 
 final class MemoViewModel: ViewModelType {
-    @ObservedResults(Memo.self) var memoList
-    let repsoitory = MyBookRepository()
+    private let repository: MemoRepositoryProtocol?
     var cancellables = Set<AnyCancellable>()
     var input = Input()
     @Published var output = Output()
     
-    init() {
+    init(repository: MemoRepositoryProtocol?) {
+        self.repository = repository
         transform()
     }
 }
@@ -26,24 +26,24 @@ final class MemoViewModel: ViewModelType {
 // MARK: - Input / Output
 extension MemoViewModel {
     struct Input {
-        let viewOnAppear = PassthroughSubject<Memo, Never>()
-        let deleteButtonTap = PassthroughSubject<Memo, Never>()
+        let viewOnAppear = PassthroughSubject<MemoDTO, Never>()
+        let deleteButtonTap = PassthroughSubject<MemoDTO, Never>()
     }
     
     struct Output {
-        var memo: Memo = Memo()
+        var memo: MemoDTO = Memo().toMemoDTO()
         var imageUrl: URL?
-        var myBook: MyBook = MyBook()
+        var myBook: MyBookDTO = MyBook().toMyBookDTO()
     }
     
     func transform() {
         input.viewOnAppear
             .sink { [weak self] value in
                 guard let self else { return }
-                self.output.memo = value
+                guard let memo = self.repository?.fetchSingleMemo(value.id) else { return }
+                self.output.memo = memo
                 self.output.imageUrl = PhotoFileManager.shared.loadFileURL(filename: "\(value.id)")
-                
-                if let book = repsoitory?.fetchSingleItem(self.output.memo.bookId) {
+                if let book = self.repository?.fetchSingleBook(self.output.memo.bookId) {
                     self.output.myBook = book
                 }
             }
@@ -53,7 +53,7 @@ extension MemoViewModel {
             .sink { [weak self] value in
                 guard let self else { return }
                 PhotoFileManager.shared.removeImageFromDocument(filename: "\(value.id)")
-                $memoList.remove(value)
+                self.repository?.deleteSingleMemo(value)
             }
             .store(in: &cancellables)
     
@@ -64,8 +64,8 @@ extension MemoViewModel {
 // MARK: - Action
 extension MemoViewModel {
     enum Action {
-        case viewOnAppear(memo:Memo)
-        case deleteButtonTap(memo:Memo)
+        case viewOnAppear(memo:MemoDTO)
+        case deleteButtonTap(memo:MemoDTO)
     }
     
     func action(_ action: Action) {

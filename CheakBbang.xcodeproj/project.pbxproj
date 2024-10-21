@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4815F8802CC6319E009FC599 /* MemoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4815F87F2CC6319E009FC599 /* MemoListViewModel.swift */; };
+		4815F8822CC641B8009FC599 /* MyMemoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4815F8812CC641B8009FC599 /* MyMemoRepository.swift */; };
 		483975DC2CA570FA004C495A /* MemoListWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975DB2CA570FA004C495A /* MemoListWrapper.swift */; };
 		483975DF2CA5A7A7004C495A /* FontWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975DE2CA5A7A7004C495A /* FontWrapper.swift */; };
 		483975E22CA5AE6B004C495A /* BinggraeII.otf in Resources */ = {isa = PBXBuildFile; fileRef = 483975E12CA5AE6B004C495A /* BinggraeII.otf */; };
@@ -109,6 +111,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4815F87F2CC6319E009FC599 /* MemoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListViewModel.swift; sourceTree = "<group>"; };
+		4815F8812CC641B8009FC599 /* MyMemoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMemoRepository.swift; sourceTree = "<group>"; };
 		483975DB2CA570FA004C495A /* MemoListWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListWrapper.swift; sourceTree = "<group>"; };
 		483975DE2CA5A7A7004C495A /* FontWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWrapper.swift; sourceTree = "<group>"; };
 		483975E12CA5AE6B004C495A /* BinggraeII.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BinggraeII.otf; sourceTree = "<group>"; };
@@ -419,6 +423,7 @@
 			children = (
 				483DBC1D2C92A2A900C775BF /* MyBook.swift */,
 				483DBC1F2C92AD5200C775BF /* MyBookRepository.swift */,
+				4815F8812CC641B8009FC599 /* MyMemoRepository.swift */,
 				483DBC292C92B6EA00C775BF /* PhotoFileManager.swift */,
 				48D09A2B2C997CA8000328E3 /* ReadingState.swift */,
 				483BAE942CAD5FB3007DABFA /* MyBookDTO.swift */,
@@ -540,6 +545,7 @@
 			children = (
 				48D09A742CA15EA4000328E3 /* MemoList.swift */,
 				483975DB2CA570FA004C495A /* MemoListWrapper.swift */,
+				4815F87F2CC6319E009FC599 /* MemoListViewModel.swift */,
 			);
 			path = MemoList;
 			sourceTree = "<group>";
@@ -687,6 +693,7 @@
 				483DBC2A2C92B6EA00C775BF /* PhotoFileManager.swift in Sources */,
 				483976042CA85347004C495A /* ToastModifier.swift in Sources */,
 				48D09A622C9EE11D000328E3 /* CameraService.swift in Sources */,
+				4815F8802CC6319E009FC599 /* MemoListViewModel.swift in Sources */,
 				483DBC1E2C92A2A900C775BF /* MyBook.swift in Sources */,
 				48D09A222C9825D9000328E3 /* BookCover.swift in Sources */,
 				483DBC332C93276A00C775BF /* AsyncImageWrapper.swift in Sources */,
@@ -712,6 +719,7 @@
 				483BAE972CAFC0B3007DABFA /* AppVersionManager.swift in Sources */,
 				48D09A882CA3DF0E000328E3 /* URL+.swift in Sources */,
 				483976082CA85390004C495A /* Toast.swift in Sources */,
+				4815F8822CC641B8009FC599 /* MyMemoRepository.swift in Sources */,
 				48FB73CE2CBD6DA600A701E3 /* InfoView.swift in Sources */,
 				48D09A3D2C9BFF64000328E3 /* EditBookViewModel.swift in Sources */,
 			);

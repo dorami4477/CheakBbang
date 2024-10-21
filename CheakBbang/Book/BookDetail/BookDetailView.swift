@@ -31,11 +31,11 @@ struct BookDetailView: View {
                 VStack(spacing: 16) {
                     ReadingStatusView(item: viewModel.output.book.title == "" ? item : viewModel.output.book)
                     
-                    MemoList(bookID: "\(item.id)", isBookDetailView: true)
+                    MemoList(viewModel: MemoListViewModel(repository: MyMemoRepository()), bookID: "\(item.id)", isBookDetailView: true)
                         .padding(.horizontal, -16)
 
                     NavigationLink {
-                        NavigationLazyView(AddMemoView(viewModel: AddMemoViewModel(), item: item, memo: nil))
+                        NavigationLazyView(AddMemoView(viewModel: AddMemoViewModel(repository: MyMemoRepository()), item: item, memo: nil))
                     } label: {
                         Text("글귀 추가하기")
                             .asfullCapsuleButton(background: .accent)

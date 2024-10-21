@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MemoListWrapper: View {
     var body: some View {
-        MemoList()
+        MemoList(viewModel: MemoListViewModel(repository: MyMemoRepository()))
             .navigationTitle("메모 서랍")
             .navigationBarTitleDisplayMode(.inline)
     }

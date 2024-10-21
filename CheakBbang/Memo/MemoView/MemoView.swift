@@ -12,8 +12,9 @@ struct MemoView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var showAlert = false
     @StateObject var viewModel: MemoViewModel
-    @ObservedRealmObject var memo: Memo
-
+    //@ObservedRealmObject var memo: Memo
+    var memo: MemoDTO
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -58,7 +59,7 @@ struct MemoView: View {
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 NavigationLink {
-                    NavigationLazyView(AddMemoView(viewModel: AddMemoViewModel(), item: MyBook().toMyBookDTO(), memo: memo))
+                    NavigationLazyView(AddMemoView(viewModel: AddMemoViewModel(repository: MyMemoRepository()), item: MyBook().toMyBookDTO(), memo: memo))
                 } label: {
                     ImageWrapper(name: ImageName.edit)
                         .frame(width: 24, height: 24)

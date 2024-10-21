@@ -55,7 +55,7 @@ extension SettingViewModel {
     private func updateOutput() {
         output.totalPage = bookList.filter({ $0.status == .finished }).getTotalPage()
         output.bookCount = bookList.filter({ $0.status == .finished }).count
-        output.MemoCount = bookList.count
+        output.MemoCount = memoList.count
         output.nickName = UserDefaults.standard.string(forKey: "nickName") ?? "냥이 이름을 설정해주세요!"
         output.memoPharse = memoList.randomElement()?.contents ?? "메모를 등록해주세요. \n랜덤으로 등록된 메모가 보여요!"
         AppVersionManager.shared.shouldUpdate { [weak self] needUpdate in

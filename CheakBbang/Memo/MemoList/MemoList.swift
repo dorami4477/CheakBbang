@@ -9,7 +9,7 @@ import SwiftUI
 import RealmSwift
 
 struct MemoList: View {
-    @ObservedResults(Memo.self) var realmMemoList
+    @StateObject var viewModel: MemoListViewModel
     var bookID: String? = nil
     var isBookDetailView = false
     
@@ -19,7 +19,7 @@ struct MemoList: View {
                 ImageWrapper(name: ImageName.memoCoverTop)
                     .padding(.horizontal, 8)
                 
-                let filteredMemos = realmMemoList.filter { memo in
+                let filteredMemos = viewModel.output.memoList.filter { memo in
                     if let bookID = self.bookID {
                         return "\(memo.bookId)" == bookID
                     } else {
@@ -29,7 +29,7 @@ struct MemoList: View {
                 
                 ForEach(filteredMemos, id:\.id) { memo in
                     NavigationLink {
-                        NavigationLazyView(MemoView(viewModel: MemoViewModel(), memo: memo))
+                        NavigationLazyView(MemoView(viewModel: MemoViewModel(repository: MyMemoRepository()), memo: memo))
                     } label: {
                         listRow(memo)
                     }
@@ -40,9 +40,12 @@ struct MemoList: View {
             }
         }
         .toolbar(.visible, for: .tabBar)
+        .onAppear{
+            viewModel.action(.viewOnAppear)
+        }
     }
     
-    func listRow(_ memo: Memo) -> some View {
+    func listRow(_ memo: MemoDTO) -> some View {
             HStack(alignment: .top) {
                 VStack(alignment: .leading) {
                     Text(memo.contents)
