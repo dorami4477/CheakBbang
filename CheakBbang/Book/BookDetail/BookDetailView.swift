@@ -55,7 +55,7 @@ struct BookDetailView: View {
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 NavigationLink {
-                    EditBookView(viewModel: EditBookViewModel(), isEditted: $isEditted, book: item)
+                    EditBookView(viewModel: EditBookViewModel(repository: MyBookRepository()), isEditted: $isEditted, book: item)
                 } label: {
                     Image(ImageName.edit)
                         .resizable()

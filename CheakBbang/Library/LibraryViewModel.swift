@@ -10,12 +10,13 @@ import Combine
 import RealmSwift
 
 final class LibraryViewModel: ViewModelType {
-    let repository = MyBookRepository()
+    let repository: BookRepositoryProtocol?
     var cancellables = Set<AnyCancellable>()
     var input = Input()
     @Published var output = Output()
     
-    init() {
+    init(repository: BookRepositoryProtocol?) {
+        self.repository = repository
         transform()
     }
 }

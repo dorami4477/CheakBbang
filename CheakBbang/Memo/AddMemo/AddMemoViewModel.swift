@@ -12,8 +12,6 @@ import UIKit
 
 
 final class AddMemoViewModel: ViewModelType {
-    //@ObservedRealmObject var item: MyBook = MyBook()
-   // @ObservedRealmObject var memo: Memo = Memo()
     var item: MyBookDTO = MyBook().toMyBookDTO()
     var memo: MemoDTO = Memo().toMemoDTO()
     
@@ -44,8 +42,6 @@ extension AddMemoViewModel {
     func transform() {
         input.viewOnAppear
             .sink { [weak self] book in
-//                guard let self,
-//                      let newBook = repository?.fetchSingleItem(book.id) else { return }
                 self?.item = book
             }
             .store(in: &cancellables)
@@ -58,7 +54,6 @@ extension AddMemoViewModel {
         
         input.addButtonTap
             .sink { [weak self] (memo, image) in
-                //self?.$item.memo.append(memo)
                 self?.repository?.addMemo(memo)
                 guard let image else { return }
                 PhotoFileManager.shared.saveImageToDocument(image: image, filename: "\(memo.id)")
@@ -68,8 +63,6 @@ extension AddMemoViewModel {
         input.editButtonTap
             .sink { [weak self] (newMemo, image) in
                 guard let self else { return }
-//                self.$memo.page.wrappedValue = memo.page
-//                self.$memo.contents.wrappedValue = memo.contents
                 self.repository?.editMemo(id: self.memo.id, newMemo: newMemo)
 
                 guard let image else { return }
@@ -84,7 +77,6 @@ extension AddMemoViewModel {
                 if let _ = self.item.memo.firstIndex(where: { $0.id == self.memo.id }) {
                     PhotoFileManager.shared.removeImageFromDocument(filename: "\(self.memo.id)")
                     self.repository?.deleteSingleMemo(self.memo)
-                    //$item.memo.remove(at: index)
                 }
             }
             .store(in: &cancellables)

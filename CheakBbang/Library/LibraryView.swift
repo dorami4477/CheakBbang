@@ -53,7 +53,7 @@ struct LibraryView: View {
                     LazyVStack(spacing: 20) {
                         ForEach(filteredList(filter), id: \.id) { book in
                             NavigationLink {
-                                NavigationLazyView(BookDetailView(viewModel: BookDetailViewModel(), item: book))
+                                NavigationLazyView(BookDetailView(viewModel: BookDetailViewModel(repository: MyBookRepository()), item: book))
                             } label: {
                                 bookListRow(book: book)
                             }

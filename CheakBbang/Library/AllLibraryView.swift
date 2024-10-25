@@ -50,7 +50,7 @@ struct AllLibraryView: View {
                 LazyHStack(spacing: 0) {
                     ForEach(viewModel.dataBytype(type), id: \.id) { book in
                         NavigationLink {
-                            NavigationLazyView(BookDetailView(viewModel: BookDetailViewModel(), item: book))
+                            NavigationLazyView(BookDetailView(viewModel: BookDetailViewModel(repository: MyBookRepository()), item: book))
                         } label: {
                             if let fileUrl = PhotoFileManager.shared.loadFileURL(filename: "\(book.id)") {
                                 BookCover(coverUrl: fileUrl, size: CGSize(width: 118, height: 146))

@@ -114,7 +114,7 @@ struct CatBookListView: View {
             }
             
             NavigationLink {
-                NavigationLazyView(BookDetailView(viewModel: BookDetailViewModel(), item: item))
+                NavigationLazyView(BookDetailView(viewModel: BookDetailViewModel(repository: MyBookRepository()), item: item))
             } label: {
                 ZStack {
                     Image(viewModel.bookImage(item.page))

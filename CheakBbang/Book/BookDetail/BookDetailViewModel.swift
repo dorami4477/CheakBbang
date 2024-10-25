@@ -9,14 +9,16 @@ import Foundation
 import Combine
 
 final class BookDetailViewModel: ViewModelType {
-    let repository = MyBookRepository()
+    let repository: BookRepositoryProtocol?
     var cancellables = Set<AnyCancellable>()
     var input = Input()
     @Published var output = Output()
 
-    init() {
+    init(repository: BookRepositoryProtocol?) {
+        self.repository = repository
         transform()
     }
+    
     deinit {
         print("BookDetailViewModel Deinit")
     }
@@ -35,9 +37,11 @@ extension BookDetailViewModel {
     }
     
     func transform() {
+        
         input.modified
             .sink { [weak self] book in
                 if let bookData = self?.repository?.fetchSingleBookModel(book.id) {
+                    print("eee")
                     self?.output.book = bookData
                 }
             }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MyLibraryView: View {
     @State private var activeTab: LibraryTab = .all
-    @StateObject private var sharedViewModel = LibraryViewModel()
+    @StateObject private var sharedViewModel = LibraryViewModel(repository: MyBookRepository())
 
     var body: some View {
         VStack(spacing: 15) {
@@ -84,6 +84,3 @@ struct TabBarView: View {
 }
 
 
-#Preview {
-    MyLibraryView()
-}
