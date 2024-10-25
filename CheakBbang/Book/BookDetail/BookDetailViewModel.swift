@@ -27,7 +27,7 @@ final class BookDetailViewModel: ViewModelType {
 // MARK: - Input / Output
 extension BookDetailViewModel {
     struct Input {
-        let viewOnAppear = PassthroughSubject<MyBookDTO, Never>()
+        let viewOnAppear = PassthroughSubject<(MyBookDTO, Bool), Never>()
         let modified = PassthroughSubject<MyBookDTO, Never>()
         let deleteButtonTap = PassthroughSubject<Void, Never>()
     }
@@ -37,6 +37,15 @@ extension BookDetailViewModel {
     }
     
     func transform() {
+        input.viewOnAppear
+            .sink { [weak self] (book, isModified) in
+                //print("eeeett\(isModified)")
+                if let bookData = self?.repository?.fetchSingleBookModel(book.id) {
+                    //print("ㅇㅇㅇ", bookData)
+                    self?.output.book = bookData
+                }
+            }
+            .store(in: &cancellables)
         
         input.modified
             .sink { [weak self] book in
@@ -50,8 +59,9 @@ extension BookDetailViewModel {
         
         input.deleteButtonTap
             .combineLatest(input.viewOnAppear)
-            .map { _, item in
-                item
+            .map { _, value in
+                let (item, _) = value
+                return item
             }
             .eraseToAnyPublisher()
             .sink { [weak self] item in
@@ -69,7 +79,7 @@ extension BookDetailViewModel {
 // MARK: - Action
 extension BookDetailViewModel {
     enum Action {
-        case viewOnAppear(item: MyBookDTO)
+        case viewOnAppear(item: (MyBookDTO, Bool))
         case modified(item: MyBookDTO)
         case deleteButtonTap
     }
@@ -77,7 +87,8 @@ extension BookDetailViewModel {
     func action(_ action: Action) {
         switch action {
         case .viewOnAppear(let item):
-            input.viewOnAppear.send(item)
+            print("dpadre")
+            input.viewOnAppear.send((item))
             
         case .modified(let item):
             input.modified.send(item)

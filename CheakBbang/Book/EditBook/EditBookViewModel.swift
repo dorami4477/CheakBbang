@@ -50,10 +50,12 @@ extension EditBookViewModel {
         input.viewOnTask
             .sink { [weak self] value in
                 guard let self else { return }
-                self.input.rating = value.rate
-                self.input.readingState = value.status
-                self.input.startDate = value.startDate
-                self.input.endDate = value.endDate
+                if let bookData = self.repository?.fetchSingleBookModel(value.id) {
+                    self.input.rating = bookData.rate
+                    self.input.readingState = bookData.status
+                    self.input.startDate = bookData.startDate
+                    self.input.endDate = bookData.endDate
+                }
             }
             .store(in: &cancellables)
     }

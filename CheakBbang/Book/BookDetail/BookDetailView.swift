@@ -29,7 +29,8 @@ struct BookDetailView: View {
                     .padding(.vertical)
                 
                 VStack(spacing: 16) {
-                    ReadingStatusView(item: viewModel.output.book.title == "" ? item : viewModel.output.book)
+                    //ReadingStatusView(item: viewModel.output.book.title == "" ? item : viewModel.output.book)
+                    ReadingStatusView(item: viewModel.output.book)
                     
                     MemoList(viewModel: MemoListViewModel(repository: MyMemoRepository()), bookID: "\(item.id)", isBookDetailView: true)
                         .padding(.horizontal, -16)
@@ -81,6 +82,8 @@ struct BookDetailView: View {
         .navigationTitle("도서 상세 정보")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear{
+            viewModel.action(.viewOnAppear(item: (item, isEditted)))
+           print(isEditted)
             NotificationPublisher.shared.publisher
                 .sink { id in
                     if id == "\(item.id)" {
@@ -90,15 +93,14 @@ struct BookDetailView: View {
                 }
                 .store(in: &viewModel.cancellables)
  
-            viewModel.action(.viewOnAppear(item: item))
-            if isEditted {
-                viewModel.action(.modified(item: item))
-            }
+//            if isEditted {
+//                viewModel.action(.modified(item: item))
+//            }
         }
         .onDisappear {
-            if !presentationMode.wrappedValue.isPresented {
-                viewModel.cancellables.removeAll()
-            }
+//            if !presentationMode.wrappedValue.isPresented {
+//                viewModel.cancellables.removeAll()
+//            }
         }
     }
     
