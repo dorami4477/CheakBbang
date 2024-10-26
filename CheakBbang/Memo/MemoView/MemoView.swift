@@ -59,7 +59,7 @@ struct MemoView: View {
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 NavigationLink {
-                    NavigationLazyView(AddMemoView(viewModel: AddMemoViewModel(repository: MyMemoRepository()), item: MyBook().toMyBookDTO(), memo: memo))
+                    NavigationLazyView(AddMemoView(viewModel: AddMemoViewModel(repository: MyMemoRepository()), item: MyBook().toMyBookDTO(), memo: viewModel.output.memo))
                 } label: {
                     ImageWrapper(name: ImageName.edit)
                         .frame(width: 24, height: 24)
