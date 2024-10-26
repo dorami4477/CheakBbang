@@ -14,6 +14,7 @@ struct BookDetailView: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.presentationMode) var presentationMode
+    @State var cancellables = Set<AnyCancellable>()
     
     @State private var showAlert = false
     @State private var isEditted = false
@@ -72,7 +73,7 @@ struct BookDetailView: View {
                         Button("삭제") {
                             viewModel.action(.deleteButtonTap)
                             NotificationPublisher.shared.send("\(item.id)")
-                            viewModel.cancellables.removeAll()
+                            cancellables.removeAll()
                             dismiss()
                         }
                         Button("취소", role: .cancel) {}
@@ -83,24 +84,23 @@ struct BookDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear{
             viewModel.action(.viewOnAppear(item: (item, isEditted)))
-           print(isEditted)
             NotificationPublisher.shared.publisher
                 .sink { id in
                     if id == "\(item.id)" {
-                        viewModel.cancellables.removeAll()
+                        cancellables.removeAll()
                         dismiss()
                     }
                 }
-                .store(in: &viewModel.cancellables)
+                .store(in: &cancellables)
  
 //            if isEditted {
 //                viewModel.action(.modified(item: item))
 //            }
         }
         .onDisappear {
-//            if !presentationMode.wrappedValue.isPresented {
-//                viewModel.cancellables.removeAll()
-//            }
+            if !presentationMode.wrappedValue.isPresented {
+                cancellables.removeAll()
+            }
         }
     }
     
