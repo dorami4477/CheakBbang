@@ -59,7 +59,7 @@ struct radioButton: View {
 struct radioSectionGroup: View {
     
     let sectionTitle: String
-    @State var selectedItem: ReadingState = .finished
+    @Binding var selectedItem: ReadingState
     let selectedColor: Color
     let action: ((Int, ReadingState) -> Void)?
     

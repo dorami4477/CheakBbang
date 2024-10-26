@@ -35,7 +35,7 @@ struct AddBookView: View {
                 .foregroundStyle(.gray)
                 .font(.system(size: 14))
             HStack {
-                radioSectionGroup(sectionTitle: "readingState", selectedItem: .finished, selectedColor: .accent) { index, state in
+                radioSectionGroup(sectionTitle: "readingState", selectedItem: $viewModel.input.readingState, selectedColor: .accent) { index, state in
                     viewModel.input.readingState = state
                 }
             }
