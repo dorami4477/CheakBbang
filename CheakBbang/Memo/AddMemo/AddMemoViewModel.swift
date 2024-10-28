@@ -70,16 +70,16 @@ extension AddMemoViewModel {
             }
             .store(in: &cancellables)
         
-        input.deleteButtonTap
-            .sink { [weak self] _ in
-                guard let self else { return }
-            
-                if let _ = self.item.memo.firstIndex(where: { $0.id == self.memo.id }) {
-                    PhotoFileManager.shared.removeImageFromDocument(filename: "\(self.memo.id)")
-                    self.repository?.deleteSingleMemo(self.memo)
-                }
-            }
-            .store(in: &cancellables)
+//        input.deleteButtonTap
+//            .sink { [weak self] _ in
+//                guard let self else { return }
+//            
+//                if let _ = self.item.memo.firstIndex(where: { $0.id == self.memo.id }) {
+//                    PhotoFileManager.shared.removeImageFromDocument(filename: "\(self.memo.id)")
+//                    self.repository?.deleteSingleMemo(self.memo)
+//                }
+//            }
+//            .store(in: &cancellables)
     
     }
 

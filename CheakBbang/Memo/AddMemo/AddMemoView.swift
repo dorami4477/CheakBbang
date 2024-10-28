@@ -174,25 +174,25 @@ struct AddMemoView: View {
             .onAppear{
                 viewModel.action(.viewOnAppear(item: item, memo: memo ?? Memo().toMemoDTO()))
             }
-            .toolbar {
-                if isEditing {
-                    ToolbarItemGroup(placement: .topBarTrailing) {
-                        Image(ImageName.trash)
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                            .wrapToButton {
-                                showAlert = true
-                            }
-                            .alert("정말 삭제 하시겠습니까?", isPresented: $showAlert) {
-                                Button("삭제") {
-                                    viewModel.action(.deleteButtonTap)
-                                    dismiss()
-                                }
-                                Button("취소", role: .cancel) {}
-                            }
-                    }
-                }
-            }
+//            .toolbar {
+//                if isEditing {
+//                    ToolbarItemGroup(placement: .topBarTrailing) {
+//                        Image(ImageName.trash)
+//                            .resizable()
+//                            .frame(width: 24, height: 24)
+//                            .wrapToButton {
+//                                showAlert = true
+//                            }
+//                            .alert("정말 삭제 하시겠습니까?", isPresented: $showAlert) {
+//                                Button("삭제") {
+//                                    viewModel.action(.deleteButtonTap)
+//                                    dismiss()
+//                                }
+//                                Button("취소", role: .cancel) {}
+//                            }
+//                    }
+//                }
+//            }
     }
     
     
