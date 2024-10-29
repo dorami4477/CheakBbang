@@ -45,15 +45,6 @@ extension BookDetailViewModel {
             }
             .store(in: &cancellables)
         
-//        input.modified
-//            .sink { [weak self] book in
-//                if let bookData = self?.repository?.fetchSingleBookModel(book.id) {
-//                    print("eee")
-//                    self?.output.book = bookData
-//                }
-//            }
-//            .store(in: &cancellables)
-        
         
         input.deleteButtonTap
             .combineLatest(input.viewOnAppear)

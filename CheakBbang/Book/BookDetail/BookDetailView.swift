@@ -30,7 +30,6 @@ struct BookDetailView: View {
                     .padding(.vertical)
                 
                 VStack(spacing: 16) {
-                    //ReadingStatusView(item: viewModel.output.book.title == "" ? item : viewModel.output.book)
                     ReadingStatusView(item: viewModel.output.book)
                     
                     MemoList(viewModel: MemoListViewModel(repository: MyMemoRepository()), bookID: "\(item.id)", isBookDetailView: true)
@@ -92,10 +91,6 @@ struct BookDetailView: View {
                     }
                 }
                 .store(in: &cancellables)
- 
-//            if isEditted {
-//                viewModel.action(.modified(item: item))
-//            }
         }
         .onDisappear {
             if !presentationMode.wrappedValue.isPresented {
