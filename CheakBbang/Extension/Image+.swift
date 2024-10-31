@@ -8,12 +8,10 @@
 import SwiftUI
 
 extension Image {
-    
     func asUIImage() -> UIImage? {
         let controller = UIHostingController(rootView: self)
         let view = controller.view
         
-        //let targetSize = UIScreen.main.bounds.size
         let targetSize = CGSize(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.width - 40)
         view?.bounds = CGRect(origin: .zero, size: targetSize)
         view?.backgroundColor = .clear

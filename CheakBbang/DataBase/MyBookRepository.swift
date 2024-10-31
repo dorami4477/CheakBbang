@@ -26,7 +26,6 @@ protocol BookRepositoryProtocol {
 }
 
 final class MyBookRepository: BookRepositoryProtocol {
-    
     private let realm: Realm
     
     init?() {

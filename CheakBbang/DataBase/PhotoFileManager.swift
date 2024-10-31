@@ -8,7 +8,6 @@
 import SwiftUI
 
 final class PhotoFileManager{
-    
     static let shared = PhotoFileManager()
     private init() {}
     

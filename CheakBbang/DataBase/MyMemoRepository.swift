@@ -9,14 +9,12 @@ import Foundation
 import RealmSwift
 
 protocol MemoRepositoryProtocol {
-    
     func addMemo(_ memo: Memo)
     func deleteSingleMemo(_ meme: MemoDTO)
     func fetchMemos() -> [MemoDTO]
     func fetchSingleBook(_ id: ObjectId) -> MyBookDTO?
     func fetchSingleMemo(_ id: ObjectId) -> MemoDTO?
     func editMemo(id: ObjectId, newMemo: Memo)
-    
 }
 
 final class MyMemoRepository: MemoRepositoryProtocol {
