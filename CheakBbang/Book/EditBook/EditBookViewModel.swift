@@ -30,8 +30,8 @@ extension EditBookViewModel {
         var endDate: Date = Date()
         var readingState: ReadingState = .finished
         var rating = 3.0
-        let viewOnTask = PassthroughSubject<MyBookDTO, Never>()
-        let addButtonTap = PassthroughSubject<MyBookDTO, Never>()
+        let viewOnTask = PassthroughSubject<MyBookModel, Never>()
+        let addButtonTap = PassthroughSubject<MyBookModel, Never>()
     }
     
     struct Output {
@@ -65,8 +65,8 @@ extension EditBookViewModel {
 // MARK: - Action
 extension EditBookViewModel {
     enum Action {
-        case viewOnTask(item: MyBookDTO)
-        case addButtonTap(item: MyBookDTO)
+        case viewOnTask(item: MyBookModel)
+        case addButtonTap(item: MyBookModel)
     }
     
     func action(_ action: Action) {

@@ -29,7 +29,7 @@ extension CatBookListViewModel {
     }
     
     struct Output {
-        var bookList: [MyBookDTO] = []
+        var bookList: [MyBookModel] = []
         var totalPage: String = "0"
         var bookCount: Int = 0
         var itemHeight: CGFloat = 0

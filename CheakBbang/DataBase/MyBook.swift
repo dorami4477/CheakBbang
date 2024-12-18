@@ -49,7 +49,7 @@ final class MyBook: Object, ObjectKeyIdentifiable {
         self.endDate = endDate
     }
     
-    func toMyBookDTO() -> MyBookDTO {
+    func toMyBookModel() -> MyBookModel {
         .init(id: id, itemId: itemId, title: title, originalTitle: originalTitle, author: author, publisher: publisher, pubDate: pubDate, explanation: explanation, cover: cover, isbn13: isbn13, rate: rate, memo: Array(_immutableCocoaArray: memo), page: page, status: status, startDate: startDate, endDate: endDate)
     }
 }
@@ -73,7 +73,7 @@ final class Memo: Object, ObjectKeyIdentifiable {
         self.date = date
     }
     
-    func toMemoDTO() -> MemoDTO {
+    func toMemoModel() -> MemoModel {
         .init(id: id, bookId: bookId, page: page, contents: contents, contents2: contents2, date: date)
     }
 }
@@ -97,7 +97,7 @@ final class User: Object, ObjectKeyIdentifiable {
         self.character02 = character02
     }
     
-    func toUserDTO() -> UserDTO {
+    func toUserModel() -> UserModel {
         .init(id: id, nickname: nickname, level: level, numberOfBooks: numberOfBooks, pagesOfBooks: pagesOfBooks, character01: character01, character02: character02)
     }
 }

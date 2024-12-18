@@ -13,8 +13,8 @@ final class SettingViewModel: ViewModelType {
     private let repository: BookRepositoryProtocol?
     var cancellables = Set<AnyCancellable>()
     
-    private var bookList: [MyBookDTO] = []
-    private var memoList: [MemoDTO] = []
+    private var bookList: [MyBookModel] = []
+    private var memoList: [MemoModel] = []
     
     var input = Input()
     @Published var output = Output()

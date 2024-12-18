@@ -26,14 +26,14 @@ final class MemoViewModel: ViewModelType {
 // MARK: - Input / Output
 extension MemoViewModel {
     struct Input {
-        let viewOnAppear = PassthroughSubject<MemoDTO, Never>()
-        let deleteButtonTap = PassthroughSubject<MemoDTO, Never>()
+        let viewOnAppear = PassthroughSubject<MemoModel, Never>()
+        let deleteButtonTap = PassthroughSubject<MemoModel, Never>()
     }
     
     struct Output {
-        var memo: MemoDTO = Memo().toMemoDTO()
+        var memo: MemoModel = Memo().toMemoModel()
         var imageUrl: URL?
-        var myBook: MyBookDTO = MyBook().toMyBookDTO()
+        var myBook: MyBookModel = MyBook().toMyBookModel()
     }
     
     func transform() {
@@ -64,8 +64,8 @@ extension MemoViewModel {
 // MARK: - Action
 extension MemoViewModel {
     enum Action {
-        case viewOnAppear(memo:MemoDTO)
-        case deleteButtonTap(memo:MemoDTO)
+        case viewOnAppear(memo:MemoModel)
+        case deleteButtonTap(memo:MemoModel)
     }
     
     func action(_ action: Action) {

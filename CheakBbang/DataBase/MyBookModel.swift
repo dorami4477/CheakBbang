@@ -8,8 +8,7 @@
 import Foundation
 import RealmSwift
 
-// DTO = Data Transfer Model
-struct MyBookDTO {
+struct MyBookModel {
     let id: ObjectId
     let itemId: Int
     let title: String
@@ -21,14 +20,14 @@ struct MyBookDTO {
     let cover: String
     let isbn13: String
     let rate: Double
-    let memo: [MemoDTO]
+    let memo: [MemoModel]
     let page: Int
     let status: ReadingState
     let startDate: Date
     let endDate: Date
 }
 
-struct MemoDTO {
+struct MemoModel {
     let id: ObjectId
     let bookId: ObjectId
     let page: String
@@ -37,7 +36,7 @@ struct MemoDTO {
     let date: Date
 }
 
-struct UserDTO {
+struct UserModel {
     let id: ObjectId
     let nickname: String
     let level: Int

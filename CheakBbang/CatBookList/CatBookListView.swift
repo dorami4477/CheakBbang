@@ -87,7 +87,7 @@ struct CatBookListView: View {
         .scaleEffect(y: -1)
     }
     
-    private func bookRowView(item: MyBookDTO, align: Alignment, padding: Edge.Set, isFirst: Bool, isLast: Bool) -> some View {
+    private func bookRowView(item: MyBookModel, align: Alignment, padding: Edge.Set, isFirst: Bool, isLast: Bool) -> some View {
         VStack{
             if isLast {
                 GIFView(gifName: ImageName.cat01, width: 110)

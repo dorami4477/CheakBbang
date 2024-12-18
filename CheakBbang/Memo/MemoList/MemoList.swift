@@ -45,7 +45,7 @@ struct MemoList: View {
         }
     }
     
-    func listRow(_ memo: MemoDTO) -> some View {
+    func listRow(_ memo: MemoModel) -> some View {
             HStack(alignment: .top) {
                 VStack(alignment: .leading) {
                     Text(memo.contents)

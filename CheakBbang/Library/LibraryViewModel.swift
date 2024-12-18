@@ -28,7 +28,7 @@ extension LibraryViewModel {
     }
     
     struct Output {
-        var bookList: [MyBookDTO] = []
+        var bookList: [MyBookModel] = []
         var totalPage: String = ""
         var bookCount: Int = 0
         var readState: String = ""
@@ -57,8 +57,8 @@ extension LibraryViewModel {
         return savedDateString
     }
     
-    func dataBytype(_ type: LibraryTab) -> [MyBookDTO] {
-        var list: [MyBookDTO] = []
+    func dataBytype(_ type: LibraryTab) -> [MyBookModel] {
+        var list: [MyBookModel] = []
         switch type {
         case .all:
             list = output.bookList.reversed()

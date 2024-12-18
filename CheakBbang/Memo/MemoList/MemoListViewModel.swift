@@ -29,7 +29,7 @@ extension MemoListViewModel {
     }
     
     struct Output {
-        var memoList: [MemoDTO] = []
+        var memoList: [MemoModel] = []
     }
     
     func transform() {

@@ -24,7 +24,7 @@
 		483976062CA8536F004C495A /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483976052CA8536F004C495A /* ToastView.swift */; };
 		483976082CA85390004C495A /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483976072CA85390004C495A /* Toast.swift */; };
 		483BAE932CAC569E007DABFA /* NotificationPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BAE922CAC569E007DABFA /* NotificationPublisher.swift */; };
-		483BAE952CAD5FB3007DABFA /* MyBookDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BAE942CAD5FB3007DABFA /* MyBookDTO.swift */; };
+		483BAE952CAD5FB3007DABFA /* MyBookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BAE942CAD5FB3007DABFA /* MyBookModel.swift */; };
 		483BAE972CAFC0B3007DABFA /* AppVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BAE962CAFC0B3007DABFA /* AppVersionManager.swift */; };
 		483DBBCB2C90376C00C775BF /* CheakBbangApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */; };
 		483DBBCF2C90376E00C775BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483DBBCE2C90376E00C775BF /* Assets.xcassets */; };
@@ -91,7 +91,7 @@
 		48D09A832CA2F766000328E3 /* MemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A822CA2F766000328E3 /* MemoView.swift */; };
 		48D09A862CA3CB7D000328E3 /* MemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A852CA3CB7D000328E3 /* MemoViewModel.swift */; };
 		48D09A882CA3DF0E000328E3 /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A872CA3DF0E000328E3 /* URL+.swift */; };
-		48FB73CA2CBD692E00A701E3 /* MyBookDTO+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FB73C92CBD692E00A701E3 /* MyBookDTO+.swift */; };
+		48FB73CA2CBD692E00A701E3 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FB73C92CBD692E00A701E3 /* Array+.swift */; };
 		48FB73CC2CBD6B0300A701E3 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FB73CB2CBD6B0300A701E3 /* FloatingButton.swift */; };
 		48FB73CE2CBD6DA600A701E3 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FB73CD2CBD6DA600A701E3 /* InfoView.swift */; };
 /* End PBXBuildFile section */
@@ -128,7 +128,7 @@
 		483976052CA8536F004C495A /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		483976072CA85390004C495A /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		483BAE922CAC569E007DABFA /* NotificationPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPublisher.swift; sourceTree = "<group>"; };
-		483BAE942CAD5FB3007DABFA /* MyBookDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBookDTO.swift; sourceTree = "<group>"; };
+		483BAE942CAD5FB3007DABFA /* MyBookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBookModel.swift; sourceTree = "<group>"; };
 		483BAE962CAFC0B3007DABFA /* AppVersionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionManager.swift; sourceTree = "<group>"; };
 		483DBBC72C90376C00C775BF /* CheakBbang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheakBbang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		483DBBCA2C90376C00C775BF /* CheakBbangApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheakBbangApp.swift; sourceTree = "<group>"; };
@@ -193,7 +193,7 @@
 		48D09A822CA2F766000328E3 /* MemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoView.swift; sourceTree = "<group>"; };
 		48D09A852CA3CB7D000328E3 /* MemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoViewModel.swift; sourceTree = "<group>"; };
 		48D09A872CA3DF0E000328E3 /* URL+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+.swift"; sourceTree = "<group>"; };
-		48FB73C92CBD692E00A701E3 /* MyBookDTO+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyBookDTO+.swift"; sourceTree = "<group>"; };
+		48FB73C92CBD692E00A701E3 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		48FB73CB2CBD6B0300A701E3 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		48FB73CD2CBD6DA600A701E3 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -426,7 +426,7 @@
 				4815F8812CC641B8009FC599 /* MyMemoRepository.swift */,
 				483DBC292C92B6EA00C775BF /* PhotoFileManager.swift */,
 				48D09A2B2C997CA8000328E3 /* ReadingState.swift */,
-				483BAE942CAD5FB3007DABFA /* MyBookDTO.swift */,
+				483BAE942CAD5FB3007DABFA /* MyBookModel.swift */,
 			);
 			path = DataBase;
 			sourceTree = "<group>";
@@ -440,7 +440,7 @@
 				48D09A762CA27EDC000328E3 /* View+.swift */,
 				48D09A782CA29D08000328E3 /* UIApplication+.swift */,
 				48D09A872CA3DF0E000328E3 /* URL+.swift */,
-				48FB73C92CBD692E00A701E3 /* MyBookDTO+.swift */,
+				48FB73C92CBD692E00A701E3 /* Array+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -673,7 +673,7 @@
 				48D09A422C9C2AD0000328E3 /* AddMemoView.swift in Sources */,
 				48D09A132C95D209000328E3 /* LibraryTab.swift in Sources */,
 				48D09A6A2C9FB885000328E3 /* TextBubble.swift in Sources */,
-				48FB73CA2CBD692E00A701E3 /* MyBookDTO+.swift in Sources */,
+				48FB73CA2CBD692E00A701E3 /* Array+.swift in Sources */,
 				483DBBF72C9154C500C775BF /* NetworkManager.swift in Sources */,
 				483975F52CA6D42E004C495A /* ContentViewModel.swift in Sources */,
 				483DBC032C916CC200C775BF /* SearchView.swift in Sources */,
@@ -701,7 +701,7 @@
 				48D09A2E2C9AE905000328E3 /* SearchResultDetailView.swift in Sources */,
 				483DBC352C932A1A00C775BF /* ButtonWrapper.swift in Sources */,
 				48D09A702CA053D3000328E3 /* DrawingView.swift in Sources */,
-				483BAE952CAD5FB3007DABFA /* MyBookDTO.swift in Sources */,
+				483BAE952CAD5FB3007DABFA /* MyBookModel.swift in Sources */,
 				48D09A722CA05FB8000328E3 /* FullCapsuleButton.swift in Sources */,
 				48D09A282C991E1A000328E3 /* CaplusButton.swift in Sources */,
 				483DBC2F2C92E32D00C775BF /* String+.swift in Sources */,

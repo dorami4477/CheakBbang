@@ -68,7 +68,7 @@ struct LibraryView: View {
         }
     }
     
-    func filteredList(_ order: Bool) -> [MyBookDTO] {
+    func filteredList(_ order: Bool) -> [MyBookModel] {
         if order {
             return viewModel.output.bookList.filter{ $0.status == status }.reversed()
         } else {
@@ -78,7 +78,7 @@ struct LibraryView: View {
 }
 
 struct bookListRow: View {
-    var book: MyBookDTO
+    var book: MyBookModel
     
     var body: some View {
         HStack(alignment: .top, spacing: 15) {

@@ -12,7 +12,7 @@ struct EditBookView: View {
     @Environment(\.dismiss) private var dismiss
     @Binding var isEditted: Bool
     
-    var book: MyBookDTO
+    var book: MyBookModel
     
     var body: some View {
         VStack {

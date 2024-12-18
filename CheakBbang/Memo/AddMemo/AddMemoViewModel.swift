@@ -12,8 +12,8 @@ import UIKit
 
 
 final class AddMemoViewModel: ViewModelType {
-    var item: MyBookDTO = MyBook().toMyBookDTO()
-    var memo: MemoDTO = Memo().toMemoDTO()
+    var item: MyBookModel = MyBook().toMyBookModel()
+    var memo: MemoModel = Memo().toMemoModel()
     
     private let repository: MemoRepositoryProtocol?
     var cancellables = Set<AnyCancellable>()
@@ -29,8 +29,8 @@ final class AddMemoViewModel: ViewModelType {
 // MARK: - Input / Output
 extension AddMemoViewModel {
     struct Input {
-        let viewOnAppear = PassthroughSubject<MyBookDTO, Never>()
-        let viewOnAppearMemo = PassthroughSubject<MemoDTO, Never>()
+        let viewOnAppear = PassthroughSubject<MyBookModel, Never>()
+        let viewOnAppearMemo = PassthroughSubject<MemoModel, Never>()
         let addButtonTap = PassthroughSubject<(Memo, UIImage?), Never>()
         let editButtonTap = PassthroughSubject<(Memo, UIImage?), Never>()
         let deleteButtonTap = PassthroughSubject<Void, Never>()
@@ -88,7 +88,7 @@ extension AddMemoViewModel {
 // MARK: - Action
 extension AddMemoViewModel {
     enum Action {
-        case viewOnAppear(item: MyBookDTO, memo:MemoDTO )
+        case viewOnAppear(item: MyBookModel, memo:MemoModel )
         case addButtonTap(memo : Memo, image: UIImage?)
         case editButtonTap(memo : Memo, image: UIImage?)
         case deleteButtonTap

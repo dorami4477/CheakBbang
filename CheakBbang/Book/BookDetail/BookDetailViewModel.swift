@@ -27,13 +27,13 @@ final class BookDetailViewModel: ViewModelType {
 // MARK: - Input / Output
 extension BookDetailViewModel {
     struct Input {
-        let viewOnAppear = PassthroughSubject<(MyBookDTO, Bool), Never>()
-        let modified = PassthroughSubject<MyBookDTO, Never>()
+        let viewOnAppear = PassthroughSubject<(MyBookModel, Bool), Never>()
+        let modified = PassthroughSubject<MyBookModel, Never>()
         let deleteButtonTap = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
-        var book: MyBookDTO = MyBook().toMyBookDTO()
+        var book: MyBookModel = MyBook().toMyBookModel()
     }
     
     func transform() {
@@ -68,8 +68,8 @@ extension BookDetailViewModel {
 // MARK: - Action
 extension BookDetailViewModel {
     enum Action {
-        case viewOnAppear(item: (MyBookDTO, Bool))
-        case modified(item: MyBookDTO)
+        case viewOnAppear(item: (MyBookModel, Bool))
+        case modified(item: MyBookModel)
         case deleteButtonTap
     }
     

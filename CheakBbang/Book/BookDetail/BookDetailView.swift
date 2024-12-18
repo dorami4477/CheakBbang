@@ -19,7 +19,7 @@ struct BookDetailView: View {
     @State private var showAlert = false
     @State private var isEditted = false
     
-    @State var item: MyBookDTO
+    @State var item: MyBookModel
     
     var body: some View {
         ScrollView {
@@ -99,7 +99,7 @@ struct BookDetailView: View {
         }
     }
     
-    func BiblioInfoView(_ item: MyBookDTO) -> some View {
+    func BiblioInfoView(_ item: MyBookModel) -> some View {
             VStack(alignment: .leading, spacing: 8) {
                 BiblioRowView(title: "작가", content: item.author)
                 BiblioRowView(title: "출판사", content: item.publisher)
@@ -144,7 +144,7 @@ struct BookCoverInfoView: View {
 }
 
 struct ReadingStatusView: View {
-    var item: MyBookDTO
+    var item: MyBookModel
     
     var body: some View {
         VStack(spacing: 8) {

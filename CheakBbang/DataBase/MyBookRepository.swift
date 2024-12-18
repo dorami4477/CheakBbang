@@ -11,15 +11,15 @@ import RealmSwift
 protocol BookRepositoryProtocol {
     func addMemo(_ memo: Memo)
     
-    func deleteSingleBook(_ book: MyBookDTO)
-    func deleteSingleMemo(_ meme: MemoDTO)
+    func deleteSingleBook(_ book: MyBookModel)
+    func deleteSingleMemo(_ meme: MemoModel)
     
-    func fetchBooks() -> [MyBookDTO]
-    func fetchMemos() -> [MemoDTO]
+    func fetchBooks() -> [MyBookModel]
+    func fetchMemos() -> [MemoModel]
     
-    func fetchSingleBookModel(_ id: ObjectId) -> MyBookDTO?
+    func fetchSingleBookModel(_ id: ObjectId) -> MyBookModel?
     func fetchSingleItem(_ id: ObjectId) -> MyBook?
-    func fetchSingleMemo(_ id: ObjectId) -> MemoDTO?
+    func fetchSingleMemo(_ id: ObjectId) -> MemoModel?
     
     func editMemo(id: ObjectId, newMemo: Memo)
     func editBook(_ id: ObjectId, rate: Double, status: ReadingState, startDate: Date, endDate: Date)
@@ -37,7 +37,7 @@ final class MyBookRepository: BookRepositoryProtocol {
         }
     }
     
-    func deleteSingleBook(_ book: MyBookDTO) {
+    func deleteSingleBook(_ book: MyBookModel) {
         do {
             try realm.write {
                 guard let book = realm.object(ofType: MyBook.self, forPrimaryKey: book.id) else { return }
@@ -50,24 +50,24 @@ final class MyBookRepository: BookRepositoryProtocol {
         }
     }
     
-    func fetchBooks() -> [MyBookDTO] {
+    func fetchBooks() -> [MyBookModel] {
         let items = realm.objects(MyBook.self)
-        return items.map { $0.toMyBookDTO() }
+        return items.map { $0.toMyBookModel() }
     }
     
-    func fetchMemos() -> [MemoDTO] {
+    func fetchMemos() -> [MemoModel] {
         let items = realm.objects(Memo.self)
-        return items.map { $0.toMemoDTO() }
+        return items.map { $0.toMemoModel() }
     }
     
-    func fetchSingleBookModel(_ id: ObjectId) -> MyBookDTO? {
+    func fetchSingleBookModel(_ id: ObjectId) -> MyBookModel? {
         let specificItem = realm.object(ofType: MyBook.self, forPrimaryKey: id)
-        return specificItem?.toMyBookDTO()
+        return specificItem?.toMyBookModel()
     }
     
-    func fetchSingleMemo(_ id: ObjectId) -> MemoDTO? {
+    func fetchSingleMemo(_ id: ObjectId) -> MemoModel? {
         let specificItem = realm.object(ofType: Memo.self, forPrimaryKey: id)
-        return specificItem?.toMemoDTO()
+        return specificItem?.toMemoModel()
     }
     
     func fetchSingleItem(_ id: ObjectId) -> MyBook? {
@@ -75,7 +75,7 @@ final class MyBookRepository: BookRepositoryProtocol {
         return specificItem
     }
     
-    func deleteSingleMemo(_ memo: MemoDTO) {
+    func deleteSingleMemo(_ memo: MemoModel) {
         do {
             try realm.write {
                 guard let memo = realm.object(ofType: Memo.self, forPrimaryKey: memo.id) else { return }

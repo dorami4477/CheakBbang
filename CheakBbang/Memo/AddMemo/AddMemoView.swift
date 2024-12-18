@@ -20,8 +20,8 @@ struct AddMemoView: View {
     @State private var image: UIImage? = nil
     @State private var pickerImage: UIImage? = nil
     
-    @State var item: MyBookDTO
-    @State var memo: MemoDTO?
+    @State var item: MyBookModel
+    @State var memo: MemoModel?
     
     @State private var page: String = ""
     @State private var content: String = ""
@@ -172,7 +172,7 @@ struct AddMemoView: View {
             .navigationTitle("메모")
             .navigationBarTitleDisplayMode(.inline)
             .onAppear{
-                viewModel.action(.viewOnAppear(item: item, memo: memo ?? Memo().toMemoDTO()))
+                viewModel.action(.viewOnAppear(item: item, memo: memo ?? Memo().toMemoModel()))
             }
 //            .toolbar {
 //                if isEditing {

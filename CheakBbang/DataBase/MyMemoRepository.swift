@@ -10,10 +10,10 @@ import RealmSwift
 
 protocol MemoRepositoryProtocol {
     func addMemo(_ memo: Memo)
-    func deleteSingleMemo(_ meme: MemoDTO)
-    func fetchMemos() -> [MemoDTO]
-    func fetchSingleBook(_ id: ObjectId) -> MyBookDTO?
-    func fetchSingleMemo(_ id: ObjectId) -> MemoDTO?
+    func deleteSingleMemo(_ meme: MemoModel)
+    func fetchMemos() -> [MemoModel]
+    func fetchSingleBook(_ id: ObjectId) -> MyBookModel?
+    func fetchSingleMemo(_ id: ObjectId) -> MemoModel?
     func editMemo(id: ObjectId, newMemo: Memo)
 }
 
@@ -41,19 +41,19 @@ final class MyMemoRepository: MemoRepositoryProtocol {
         }
     }
     
-    func fetchMemos() -> [MemoDTO] {
+    func fetchMemos() -> [MemoModel] {
         let items = realm.objects(Memo.self)
-        return items.map { $0.toMemoDTO() }
+        return items.map { $0.toMemoModel() }
     }
     
-    func fetchSingleBook(_ id: ObjectId) -> MyBookDTO? {
+    func fetchSingleBook(_ id: ObjectId) -> MyBookModel? {
         let specificItem = realm.object(ofType: MyBook.self, forPrimaryKey: id)
-        return specificItem?.toMyBookDTO()
+        return specificItem?.toMyBookModel()
     }
     
-    func fetchSingleMemo(_ id: ObjectId) -> MemoDTO? {
+    func fetchSingleMemo(_ id: ObjectId) -> MemoModel? {
         let specificItem = realm.object(ofType: Memo.self, forPrimaryKey: id)
-        return specificItem?.toMemoDTO()
+        return specificItem?.toMemoModel()
     }
  
     func editMemo(id: ObjectId, newMemo: Memo) {
@@ -68,7 +68,7 @@ final class MyMemoRepository: MemoRepositoryProtocol {
         }
     }
     
-    func deleteSingleMemo(_ memo: MemoDTO) {
+    func deleteSingleMemo(_ memo: MemoModel) {
         do {
             try realm.write {
                 guard let memo = realm.object(ofType: Memo.self, forPrimaryKey: memo.id) else { return }

@@ -1,5 +1,5 @@
 //
-//  MyBookDTO+.swift
+//  Array+.swift
 //  CheakBbang
 //
 //  Created by 박다현 on 10/14/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Array where Element == MyBookDTO {
+extension Array where Element == MyBookModel {
     func getTotalPage() -> String {
         let number = self.reduce(0) { $0 + $1.page }
         
