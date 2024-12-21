@@ -76,7 +76,6 @@ extension BookDetailViewModel {
     func action(_ action: Action) {
         switch action {
         case .viewOnAppear(let item):
-            print("dpadre")
             input.viewOnAppear.send((item))
             
         case .modified(let item):
