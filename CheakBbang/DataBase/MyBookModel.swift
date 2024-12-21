@@ -12,6 +12,7 @@ struct MyBookModel {
     let id: ObjectId
     let itemId: Int
     let title: String
+    let isCustomBook: Bool
     let originalTitle: String
     let author: String
     let publisher: String

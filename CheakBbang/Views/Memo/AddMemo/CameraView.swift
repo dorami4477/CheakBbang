@@ -17,6 +17,7 @@ struct CustomCameraView : View {
     
     @Environment(\.undoManager) private var undoManager
     @State private var canvasView = PKCanvasView()
+    let cameraSize: CGFloat = UIScreen.main.bounds.width - 40
     
     var body: some View{
         VStack{
@@ -69,7 +70,7 @@ struct CustomCameraView : View {
                         .padding()
                 }
             } else {
-                CameraView(cameraService: cameraService) { result in
+                CameraView(cameraService: cameraService, cameraSize: (cameraSize, cameraSize)) { result in
                     switch result{
                     case .success(let photo):
                         if let data = photo.fileDataRepresentation(){
@@ -129,6 +130,7 @@ struct CameraView : UIViewControllerRepresentable {
     // 카메라 보기 외부에서 캡처 사진에 엑세스하기를 원하기 때문에 카메라 서비스를 초기화해줘야함
     // 그래야 버튼등을 내가 원하는대로 커스텀할 수 있다.
     let cameraService : CameraService
+    let cameraSize: (CGFloat, CGFloat)
     
     // 결과값이 오류가 나올 수도 있기에 이렇게 설정
     let didFinishProcessingPhoto: (Result<AVCapturePhoto, Error>) -> ()
@@ -142,14 +144,12 @@ struct CameraView : UIViewControllerRepresentable {
             }
         }
         
-        // ViewController 선언
         let viewController = UIViewController()
         
         viewController.view.backgroundColor = .black
         viewController.view.layer.addSublayer(cameraService.previewLayer)
-        // 이전에 클래스에 선언해둔 previewLayer
-        //cameraService.previewLayer.frame = viewController.view.bounds
-        cameraService.previewLayer.frame = CGRect(x: 0, y: 0, width: viewController.view.bounds.width - 40, height: viewController.view.bounds.width - 40)
+        
+        cameraService.previewLayer.frame = CGRect(x: 0, y: 0, width: cameraSize.0, height: cameraSize.1)
         return viewController
     }
     

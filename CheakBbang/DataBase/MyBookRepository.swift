@@ -29,8 +29,11 @@ final class MyBookRepository: BookRepositoryProtocol {
     private let realm: Realm
     
     init?() {
+        MyBookRepository.migrationVer01()
+        
         do {
             self.realm = try Realm()
+            print(realm.configuration.fileURL!)
         } catch {
             print("faild to initialze Realm")
             return nil
@@ -120,4 +123,22 @@ final class MyBookRepository: BookRepositoryProtocol {
         }
     }
 
+}
+
+// MARK: - Migration
+extension MyBookRepository {
+    static func migrationVer01() {
+        let config = Realm.Configuration(
+            schemaVersion: 2,
+            migrationBlock: { migration, oldSchemaVersion in
+                if oldSchemaVersion < 2 {
+                    migration.enumerateObjects(ofType: MyBook.className()) { oldObject, newObject in
+                        newObject!["isCustomBook"] = false
+                    }
+                }
+            }
+        )
+
+        Realm.Configuration.defaultConfiguration = config
+    }
 }

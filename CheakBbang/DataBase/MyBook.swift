@@ -8,13 +8,10 @@
 import Foundation
 import RealmSwift
 
-// MyBookModel = Presentation Model
-// Repository -> MyBook -> MyBookModel
-// MyBookModel -> CRUD -> MyBook 로직
-
 final class MyBook: Object, ObjectKeyIdentifiable {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var itemId: Int
+    @Persisted var isCustomBook: Bool
     @Persisted(indexed: true) var title: String
     @Persisted var originalTitle: String
     @Persisted var author: String
@@ -30,9 +27,10 @@ final class MyBook: Object, ObjectKeyIdentifiable {
     @Persisted var startDate: Date
     @Persisted var endDate: Date
     
-    convenience init(itemId: Int, title: String, originalTitle: String, author: String, publisher: String, pubDate: String, explanation: String, cover: String, isbn13: String, rate: Double, memo: List<Memo> = List<Memo>(), page: Int = 0, status: ReadingState, startDate: Date, endDate: Date) {
+    convenience init(itemId: Int, isCustomBook: Bool = false, title: String, originalTitle: String, author: String, publisher: String, pubDate: String, explanation: String, cover: String, isbn13: String, rate: Double, memo: List<Memo> = List<Memo>(), page: Int = 0, status: ReadingState, startDate: Date, endDate: Date) {
         self.init()
         self.itemId = itemId
+        self.isCustomBook = isCustomBook
         self.title = title
         self.originalTitle = originalTitle
         self.author = author
@@ -50,7 +48,7 @@ final class MyBook: Object, ObjectKeyIdentifiable {
     }
     
     func toMyBookModel() -> MyBookModel {
-        .init(id: id, itemId: itemId, title: title, originalTitle: originalTitle, author: author, publisher: publisher, pubDate: pubDate, explanation: explanation, cover: cover, isbn13: isbn13, rate: rate, memo: Array(_immutableCocoaArray: memo), page: page, status: status, startDate: startDate, endDate: endDate)
+        .init(id: id, itemId: itemId, title: title, isCustomBook: isCustomBook, originalTitle: originalTitle, author: author, publisher: publisher, pubDate: pubDate, explanation: explanation, cover: cover, isbn13: isbn13, rate: rate, memo: Array(_immutableCocoaArray: memo), page: page, status: status, startDate: startDate, endDate: endDate)
     }
 }
 

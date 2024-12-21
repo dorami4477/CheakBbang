@@ -102,53 +102,61 @@ struct SearchBarView: View {
     @Binding var toast: Toast?
     
     var body: some View {
-        HStack {
-            Image(systemName: ImageName.search)
-                .foregroundColor(
-                    searchText.isEmpty ?
-                    Color.gray : Color.black)
-            TextField("책 제목 또는 작가를 검색해보세요!", text: $searchText)
-                .autocorrectionDisabled(true)
-                .foregroundColor(Color.black)
-                .focused($focus, equals: true)
-                .overlay(
-                    Image(systemName: ImageName.searchCancel)
-                        .padding()
-                        .offset(x: 10)
-                        .foregroundColor(Color.black)
-                        .opacity(searchText.isEmpty ? 0.0 : 1.0)
-                        .onTapGesture {
-                            searchText = ""
-                            viewModel.output.bookList = []
-                            viewModel.output.isLoading = false
-                            viewModel.output.bookListZero = false
-                            viewModel.output.searchFailure = ""
-                            UIApplication.shared.endEditing()
+        VStack {
+            HStack {
+                Image(systemName: ImageName.search)
+                    .foregroundColor(
+                        searchText.isEmpty ?
+                        Color.gray : Color.black)
+                TextField("책 제목 또는 작가를 검색해보세요!", text: $searchText)
+                    .autocorrectionDisabled(true)
+                    .foregroundColor(Color.black)
+                    .focused($focus, equals: true)
+                    .overlay(
+                        Image(systemName: ImageName.searchCancel)
+                            .padding()
+                            .offset(x: 10)
+                            .foregroundColor(Color.black)
+                            .opacity(searchText.isEmpty ? 0.0 : 1.0)
+                            .onTapGesture {
+                                searchText = ""
+                                viewModel.output.bookList = []
+                                viewModel.output.isLoading = false
+                                viewModel.output.bookListZero = false
+                                viewModel.output.searchFailure = ""
+                                UIApplication.shared.endEditing()
+                            }
+                        , alignment: .trailing
+                    )
+                    .onSubmit {
+                        if searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                            toast = Toast(style: .warning, message: "검색어를 입력해주세요.")
+                        } else {
+                            toast = nil
+                            viewModel.output.isLoading = true
+                            viewModel.action(.searchOnSubmit(search: $searchText.wrappedValue))
                         }
-                    , alignment: .trailing
-                )
-                .onSubmit {
-                    if searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                        toast = Toast(style: .warning, message: "검색어를 입력해주세요.")
-                    } else {
-                        toast = nil
-                        viewModel.output.isLoading = true
-                        viewModel.action(.searchOnSubmit(search: $searchText.wrappedValue))
+                        
                     }
-
-                }
+            }
+            .font(.headline)
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 25)
+                    .fill(.white)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 25)
+                            .stroke(Color.black, lineWidth: 4)
+                    )
+            )
+            .padding(.horizontal)
+            
+            NavigationLink {
+                NavigationLazyView(RegisterBookView(viewModel: RegisterBookViewModel(repository: MyBookRepository())))
+            } label: {
+                Text("책 직접 등록하기")
+            }
         }
-        .font(.headline)
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 25)
-                .fill(.white)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 25)
-                        .stroke(Color.black, lineWidth: 4)
-                )
-        )
-        .padding(.horizontal)
     }
 }
 

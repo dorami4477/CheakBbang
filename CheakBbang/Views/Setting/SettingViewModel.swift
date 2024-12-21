@@ -33,7 +33,7 @@ extension SettingViewModel {
     
     struct Output {
         var nickName: String = ""
-        var totalPage: String = ""
+        var totalPage: String = "0"
         var MemoCount: Int = 0
         var bookCount: Int = 0
         var version: String = ""

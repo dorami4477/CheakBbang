@@ -35,7 +35,7 @@ class CameraService {
             
         case .notDetermined:
             // 권한을 요청함
-            AVCaptureDevice.requestAccess(for: .video){ [weak self] granted in // 백그라운드 스레드 내부에 있기에 weak self 추가
+            AVCaptureDevice.requestAccess(for: .video){ [weak self] granted in
                 guard granted else { return }
                 // 권한설정이 true면 아래의 코드 실행
                 DispatchQueue.main.async {
