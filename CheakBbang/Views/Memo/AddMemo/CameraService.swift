@@ -24,20 +24,15 @@ class CameraService {
     
     // 실행시켰을떄 권한을 확인하기 위함
     func start(delegate: AVCapturePhotoCaptureDelegate, completion: @escaping(Error?) -> ()){
-        self.delegate = delegate // 권한을 확인하려고함
+        self.delegate = delegate
         checkPermission(completion: completion)
     }
     
     private func checkPermission(completion: @escaping(Error?)->()){
-        
-        // 비디오에 대한 승인 상태를 확인
         switch AVCaptureDevice.authorizationStatus(for: .video){
-            
         case .notDetermined:
-            // 권한을 요청함
             AVCaptureDevice.requestAccess(for: .video){ [weak self] granted in
                 guard granted else { return }
-                // 권한설정이 true면 아래의 코드 실행
                 DispatchQueue.main.async {
                     self?.setupCamera(completion: completion)
                 }
@@ -47,7 +42,6 @@ class CameraService {
         case .denied:
             break
         case .authorized:
-            // 승인된 상태일때 카메라 시작
             setupCamera(completion: completion)
         @unknown default:
             break
