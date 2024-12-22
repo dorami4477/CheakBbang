@@ -14,6 +14,7 @@ struct BookCameraView : View {
     @State private var cameraService = CameraService()
     
     private let cameraSizeWidth: CGFloat = UIScreen.main.bounds.width - 40
+    private let cameraSizeHeight: CGFloat = (UIScreen.main.bounds.width - 40) * 1.5
     
     var body: some View {
         VStack{
@@ -28,7 +29,7 @@ struct BookCameraView : View {
                         .scaledToFill()
                     
                 }
-                .frame(width: cameraSizeWidth, height: cameraSizeWidth * 1.6)
+                .frame(width: cameraSizeWidth, height: cameraSizeHeight)
                 .clipped()
                 
                 Text("다시 찍기")
@@ -40,12 +41,13 @@ struct BookCameraView : View {
                 Text("저장")
                     .asfullCapsuleButton(background: .accent)
                     .wrapToButton {
+                        savePhoto(image: image)
                         presentationMode.wrappedValue.dismiss()
                     }
                     .padding()
                 
             } else {
-                CameraView(cameraService: cameraService, cameraSize: (cameraSizeWidth, cameraSizeWidth * 1.6)) { result in
+                CameraView(cameraService: cameraService, cameraSize: (cameraSizeWidth, cameraSizeHeight)) { result in
                     switch result{
                     case .success(let photo):
                         if let data = photo.fileDataRepresentation(){
@@ -58,7 +60,7 @@ struct BookCameraView : View {
                         print(err.localizedDescription)
                     }
                 }
-                .frame(width: cameraSizeWidth, height: cameraSizeWidth * 1.6)
+                .frame(width: cameraSizeWidth, height: cameraSizeHeight)
                 
                 Button(action: {
                     cameraService.capturePhoto()
@@ -72,9 +74,9 @@ struct BookCameraView : View {
         }
     }
     
-    private func savePhoto() {
+    private func savePhoto(image: UIImage) {
         let targetSize = CGSize(width: cameraSizeWidth, height: cameraSizeWidth * 1.6)
-        if let capturedImage, let resizedImage = resizeImage(image: capturedImage, targetSize: targetSize) {
+        if let resizedImage = resizeImage(image: image, targetSize: targetSize) {
             self.capturedImage = resizedImage
         }
         
