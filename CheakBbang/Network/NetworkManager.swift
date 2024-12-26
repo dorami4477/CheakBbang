@@ -40,12 +40,12 @@ final class NetworkManager {
 
 extension NetworkManager {
     
-    func fetchBookList(_ search: String, index: Int) -> AnyPublisher<Result<Book, BookNetworkError>, Never> {
+    func fetchBookList(_ search: String, index: Int) -> AnyPublisher<Result<BookDTO, BookNetworkError>, Never> {
         Future { promise in
             Task { [weak self] in
                 do {
                     guard let self else { return }
-                    let value = try await self.callRequest(api: .list(query: search, index: index), model: Book.self)
+                    let value = try await self.callRequest(api: .list(query: search, index: index), model: BookDTO.self)
                     promise(.success(.success(value)))
                     
                 } catch {
@@ -60,11 +60,11 @@ extension NetworkManager {
     }
     
     
-    func fetchSingleBookItem(_ isbn: String) -> AnyPublisher<Item, BookNetworkError> {
+    func fetchSingleBookItem(_ isbn: String) -> AnyPublisher<ItemDTO, BookNetworkError> {
         Future { promise in
             Task { [weak self] in
                 do {
-                    let value = try await self?.callRequest(api: .item(id: isbn), model: Book.self)
+                    let value = try await self?.callRequest(api: .item(id: isbn), model: BookDTO.self)
                     if let item = value?.item.first {
                         promise(.success(item))
                     } else {

@@ -13,7 +13,7 @@ final class SearchViewModel: ViewModelType {
     var cancellables = Set<AnyCancellable>()
     var input = Input()
     @Published var output = Output()
-    var searchResult: Book? = nil
+    var searchResult: BookDTO? = nil
     var searchTerm = ""
     var itemCount = 0
     
@@ -27,11 +27,11 @@ final class SearchViewModel: ViewModelType {
 extension SearchViewModel {
     struct Input {
         let searchOnSubmit = PassthroughSubject<String, Never>()
-        let loadMoreItems = PassthroughSubject<Item, Never>()
+        let loadMoreItems = PassthroughSubject<ItemDTO, Never>()
     }
     
     struct Output {
-        var bookList: [Item] = []
+        var bookList: [ItemDTO] = []
         //var searchFailure: Bool = false
         var searchFailure: String = ""
         var bookListZero: Bool = false
@@ -101,7 +101,7 @@ extension SearchViewModel {
 extension SearchViewModel {
     enum Action {
         case searchOnSubmit(search: String)
-        case loadMoreItems(item: Item)
+        case loadMoreItems(item: ItemDTO)
     }
     
     func action(_ action: Action) {

@@ -22,11 +22,11 @@ final class SearchResultDetailViewModel: ViewModelType {
 // MARK: - Input / Output
 extension SearchResultDetailViewModel {
     struct Input {
-        let viewOnTask = PassthroughSubject<Item, Never>()
+        let viewOnTask = PassthroughSubject<ItemDTO, Never>()
     }
     
     struct Output {
-        var book: Item = Item(title: "", link: "", author: "", pubDate: "", description: "", isbn: "", isbn13: "", itemID: 0, cover: "", categoryID: 0, categoryName: "", publisher: "", adult: true, customerReviewRank: 0, subInfo: SubInfo(subTitle: nil, originalTitle: nil, itemPage: nil))
+        var book: ItemDTO = ItemDTO(title: "", link: "", author: "", pubDate: "", description: "", isbn: "", isbn13: "", itemID: 0, cover: "", categoryID: 0, categoryName: "", publisher: "", adult: true, customerReviewRank: 0, subInfo: SubInfoDTO(subTitle: nil, originalTitle: nil, itemPage: nil))
     }
     
 
@@ -34,7 +34,7 @@ extension SearchResultDetailViewModel {
         input.viewOnTask
             .flatMap { value in
                 return NetworkManager.shared.fetchSingleBookItem(value.isbn13)
-                    .catch { error -> Just<Item> in
+                    .catch { error -> Just<ItemDTO> in
                         return Just(value)
                     }
                     .eraseToAnyPublisher()
@@ -60,7 +60,7 @@ extension SearchResultDetailViewModel {
 // MARK: - Action
 extension SearchResultDetailViewModel {
     enum Action {
-        case viewOnTask(item: Item)
+        case viewOnTask(item: ItemDTO)
     }
     
     func action(_ action: Action) {

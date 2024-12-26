@@ -29,19 +29,19 @@ extension AddBookViewModel {
         var endDate: Date = Date()
         var readingState: ReadingState = .finished
         var rating = 3.0
-        let viewOnTask = PassthroughSubject<Item, Never>()
+        let viewOnTask = PassthroughSubject<ItemDTO, Never>()
         let addButtonTap = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
-        var bookItem: Item = Item(title: "", link: "", author: "", pubDate: "", description: "", isbn: "", isbn13: "", itemID: 0, cover: "", categoryID: 0, categoryName: "", publisher: "", adult: true, customerReviewRank: 0, subInfo: SubInfo(subTitle: nil, originalTitle: nil, itemPage: nil))
+        var bookItem: ItemDTO = ItemDTO(title: "", link: "", author: "", pubDate: "", description: "", isbn: "", isbn13: "", itemID: 0, cover: "", categoryID: 0, categoryName: "", publisher: "", adult: true, customerReviewRank: 0, subInfo: SubInfoDTO(subTitle: nil, originalTitle: nil, itemPage: nil))
     }
     
     func transform() {
         input.viewOnTask
             .flatMap{ value in
                 NetworkManager.shared.fetchSingleBookItem(value.isbn13)
-                    .catch { error -> Just<Item> in
+                    .catch { error -> Just<ItemDTO> in
                         return Just(value)
                     }
                     .eraseToAnyPublisher()
@@ -94,7 +94,7 @@ extension AddBookViewModel {
 // MARK: - Action
 extension AddBookViewModel {
     enum Action {
-        case viewOnTask(item: Item)
+        case viewOnTask(item: ItemDTO)
         case addButtonTap
     }
     

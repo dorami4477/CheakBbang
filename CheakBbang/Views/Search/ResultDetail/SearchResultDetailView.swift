@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchResultDetailView: View {
     @StateObject var viewModel: SearchResultDetailViewModel
-    var item: Item
+    var item: ItemDTO
     @State private var addNew = false
     @State private var toast: Toast? = nil
     
@@ -49,7 +49,7 @@ struct SearchResultDetailView: View {
         }
     }
     
-    func BookDetailBottomView(_ item: Item) -> some View {
+    func BookDetailBottomView(_ item: ItemDTO) -> some View {
             VStack(alignment: .leading, spacing: 8) {
                 BiblioRowView(title: "작가", content: item.author)
                 BiblioRowView(title: "출판사", content: item.publisher)
