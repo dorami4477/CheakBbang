@@ -5,7 +5,7 @@
 //  Created by 박다현 on 12/21/24.
 //
 
-import Foundation
+import SwiftUI
 import Combine
 
 final class RegisterBookViewModel: ViewModelType {
@@ -23,9 +23,8 @@ final class RegisterBookViewModel: ViewModelType {
 // MARK: - Input / Output
 extension RegisterBookViewModel {
     struct Input {
-        let viewOnAppear = PassthroughSubject<(MyBookModel, Bool), Never>()
-        let modified = PassthroughSubject<MyBookModel, Never>()
-        let deleteButtonTap = PassthroughSubject<Void, Never>()
+        let bookCover = PassthroughSubject<Image, Never>()
+        let createBook = PassthroughSubject<MyBook, Never>()
     }
     
     struct Output {
@@ -33,28 +32,14 @@ extension RegisterBookViewModel {
     }
     
     func transform() {
-        input.viewOnAppear
-            .sink { [weak self] (book, isModified) in
-                if let bookData = self?.repository?.fetchSingleBookModel(book.id) {
-                    self?.output.book = bookData
+        input.createBook
+            .combineLatest(input.bookCover)
+            .sink { [weak self] book, cover in
+                guard let self else { return }
+                repository?.addBook(book: book)
+                if let uiImage = cover.asUIImage() {
+                    PhotoFileManager.shared.saveImageToDocument(image: uiImage, filename: "\(book.id)")
                 }
-            }
-            .store(in: &cancellables)
-        
-        
-        input.deleteButtonTap
-            .combineLatest(input.viewOnAppear)
-            .map { _, value in
-                let (item, _) = value
-                return item
-            }
-            .eraseToAnyPublisher()
-            .sink { [weak self] item in
-                item.memo.forEach({ memo in
-                    PhotoFileManager.shared.removeImageFromDocument(filename: "\(memo.id)")
-                })
-                PhotoFileManager.shared.removeImageFromDocument(filename: "\(item.id)")
-                self?.repository?.deleteSingleBook(item)
             }
             .store(in: &cancellables)
     }
@@ -64,21 +49,28 @@ extension RegisterBookViewModel {
 // MARK: - Action
 extension RegisterBookViewModel {
     enum Action {
-        case viewOnAppear(item: (MyBookModel, Bool))
-        case modified(item: MyBookModel)
-        case deleteButtonTap
+        case createBook(book: BookRegInputModel, review: ReviewRegInputModel, cover: Image)
     }
     
     func action(_ action: Action) {
         switch action {
-        case .viewOnAppear(let item):
-            input.viewOnAppear.send((item))
-            
-        case .modified(let item):
-            input.modified.send(item)
-            
-        case .deleteButtonTap:
-            input.deleteButtonTap.send(())
+        case .createBook(let book, let review, let cover):
+            let newItem = MyBook(itemId: Int(book.isbn13)!,
+                                 title: book.title,
+                                 originalTitle: "",
+                                 author: book.author,
+                                 publisher: book.publisher,
+                                 pubDate: "",
+                                 explanation: "",
+                                 cover: "",
+                                 isbn13: book.isbn13,
+                                 rate: review.rating,
+                                 page: Int(book.page)!,
+                                 status: review.readingState,
+                                 startDate: review.startDate,
+                                 endDate: review.endDate)
+            input.createBook.send(newItem)
+            input.bookCover.send(cover)
         }
     }
 }

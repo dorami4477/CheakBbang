@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BookListRow: View {
-    let item: Item
+    let item: ItemDTO
     @Binding var addNew: Bool
     
     var body: some View {

@@ -10,6 +10,7 @@ import RealmSwift
 
 protocol BookRepositoryProtocol {
     func addMemo(_ memo: Memo)
+    func addBook(book: MyBook)
     
     func deleteSingleBook(_ book: MyBookModel)
     func deleteSingleMemo(_ meme: MemoModel)
@@ -123,6 +124,15 @@ final class MyBookRepository: BookRepositoryProtocol {
         }
     }
 
+    func addBook(book: MyBook) {
+        do {
+            try realm.write {
+                realm.add(book)
+            }
+        } catch {
+            print("Error create Book: \(error)")
+        }
+    }
 }
 
 // MARK: - Migration

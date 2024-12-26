@@ -73,6 +73,24 @@ struct SearchView: View {
         }
         .navigationTitle("도서검색")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                NavigationLink {
+                    NavigationLazyView(RegisterBookView(viewModel: RegisterBookViewModel(repository: MyBookRepository())))
+                } label: {
+                    HStack {
+                        Image(ImageName.register)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                        
+                        Text("수동등록")
+                            .foregroundStyle(.gray)
+                            .fontWeight(.semibold)
+                    }
+                }
+            }
+        }
         .onAppear {
             if addNew {
                 toast = Toast(style: .success, message: "책이 추가되었습니다. :)")
@@ -150,12 +168,6 @@ struct SearchBarView: View {
                     )
             )
             .padding(.horizontal)
-            
-            NavigationLink {
-                NavigationLazyView(RegisterBookView(viewModel: RegisterBookViewModel(repository: MyBookRepository())))
-            } label: {
-                Text("책 직접 등록하기")
-            }
         }
     }
 }
