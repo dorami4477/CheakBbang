@@ -103,7 +103,7 @@ ETC: PencilKit, PhotosUI
     ```swift
     final class MyBook: Object, ObjectKeyIdentifiable {
       ...
-      func toMyBookDTO() -> MyBookDTO {
+      func toMyBookModel() -> MyBookModel {
         .init(id: id, itemId: itemId, ... )
       }
     }
