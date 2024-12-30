@@ -151,9 +151,9 @@ final class MyBookRepository: BookRepositoryProtocol {
 extension MyBookRepository {
     static func migrationVer01() {
         let config = Realm.Configuration(
-            schemaVersion: 2,
+            schemaVersion: 1,
             migrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion < 2 {
+                if oldSchemaVersion < 1 {
                     migration.enumerateObjects(ofType: MyBook.className()) { oldObject, newObject in
                         newObject!["isCustomBook"] = false
                     }
