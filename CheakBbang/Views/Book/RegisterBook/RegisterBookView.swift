@@ -6,48 +6,178 @@
 //
 
 import SwiftUI
-import Combine
 import PhotosUI
 
 struct RegisterBookView: View {
+    @Environment(\.dismiss) private var dismiss
     @StateObject var viewModel: RegisterBookViewModel
-    @State var cancellables = Set<AnyCancellable>()
-    @State private var isCustomCameraViewPresented: Bool = false
-    @State private var bookCover: UIImage? = nil
-    @State private var selectedItem: PhotosPickerItem?
-    @State private var book: BookRegInputModel = BookRegInputModel()
-    @State private var review: ReviewRegInputModel = ReviewRegInputModel()
 
-    @State private var isBookInfoExpanded = false
-    @State private var isMyReviewExpanded = false
+    @State private var bookCover: UIImage? = nil
     @State private var isFormValid = false
+    @State private var isReivewValid = true
+    @State private var toast: Toast? = nil
     
     var body: some View {
-        Group {
+        VStack {
             ScrollView {
-                bookCoverSection()
-                
-                SectionWrap(title: "책정보", content: bookInfoRow(book: $book, onValidityChange: { isValid in
+                SectionWrap(title: "도서등록", content: bookInfoSection(book: $viewModel.output.book, bookCover: $bookCover, onValidityChange: { isValid in
                     isFormValid = isValid
-                }), isExpanded: $isBookInfoExpanded, isValid: isFormValid)
+                }), isValid: isFormValid)
                 
-                SectionWrap(title: "책리뷰", content: MyReviewRow(review: $review), isExpanded: $isMyReviewExpanded, isValid: true)
-                
+                if viewModel.output.bookId == nil {
+                    Divider()
+                        .padding(.vertical)
+                    
+                    SectionWrap(title: "리뷰", content: MyReviewSection(review: $viewModel.output.review), isValid: isReivewValid)
+                }
             }
+            .scrollIndicators(.hidden)
             
-            Text("추가")
-                .asfullCapsuleButton(background: .accent)
+            Text("저장")
+                .asfullCapsuleButton(background: isFormValid && isReivewValid ? .accent : .gray)
                 .wrapToButton {
+                    if isFormValid && isReivewValid, let bookCover {
+                        viewModel.action(.createBook(book: viewModel.output.book, review: viewModel.output.review, cover: bookCover))
+                        dismiss()
+                        
+                    } else {
+                        toast = Toast(style: .info, message: "필수 정보를 입력해주세요. :)")
+                    }
                 }
         }
         .padding()
+        .toastView(toast: $toast)
+        .onTapGesture(perform: {
+            UIApplication.shared.endEditing()
+        })
+        .onAppear {
+            if !viewModel.output.book.cover.isEmpty, let image = PhotoFileManager.shared.loadFileImage(filename: viewModel.output.book.cover) {
+                bookCover = image
+            }
+        }
+    }
+}
+
+struct SectionWrap<Content: View>: View {
+    var title: String
+    var content: Content
+    var isValid: Bool
+    
+    var body: some View {
+        VStack {
+            HStack {
+                Text(title)
+                    .foregroundStyle(.black)
+                    .asFontWrapper(size: 22, weight: .bold)
+                
+                if isValid {
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundColor(.cyan)
+                }
+                
+                Spacer()
+                
+            }
+            content
+        }
+        .padding(.vertical)
+    }
+}
+
+struct bookInfoSection: View {
+    @Binding var book: BookRegInputModel
+    @Binding var bookCover: UIImage?
+    @State private var isValid = false
+    @FocusState private var focusedField: Field?
+    
+    enum Field: Hashable {
+        case title, author, publisher, pubDate, page, isbn, explain
     }
     
-    func bookCoverSection() -> some View {
-        HStack {
-            Text("책커버")
+    var onValidityChange: (Bool) -> Void
+    
+    var body: some View {
+        VStack {
+            bookCoverRow(bookCover: $bookCover)
+            bookInfoRow(title: "제목", keyboardType: .default, isRequired: true, content: $book.title)
+                .focused($focusedField, equals: .title)
+                .onSubmit {
+                    focusedField = .author
+                }
             
-        Spacer()
+            bookInfoRow(title: "작가", keyboardType: .default, isRequired: true, content: $book.author)
+                .focused($focusedField, equals: .author)
+                .onSubmit {
+                    focusedField = .publisher
+                }
+            
+            bookInfoRow(title: "출판사", keyboardType: .default, content: $book.publisher)
+                .focused($focusedField, equals: .publisher)
+                .onSubmit {
+                    focusedField = .pubDate
+                }
+            
+            bookInfoRow(title: "출판일", keyboardType: .numbersAndPunctuation, content: $book.pubDate)
+                .focused($focusedField, equals: .pubDate)
+                .onSubmit {
+                    focusedField = .page
+                }
+            
+            bookInfoRow(title: "페이지수", keyboardType: .numberPad, isRequired: true, content: $book.page)
+                .focused($focusedField, equals: .page)
+                .onSubmit {
+                    focusedField = .isbn
+                }
+            
+            bookInfoRow(title: "ISBN13", keyboardType: .numberPad, content: $book.isbn13)
+                .focused($focusedField, equals: .isbn)
+                .onSubmit {
+                    focusedField = .explain
+                }
+            
+            bookInfoRow(title: "설명글", keyboardType: .default, content: $book.explain)
+                .focused($focusedField, equals: .explain)
+                .onSubmit {
+                    focusedField = nil
+                }
+        }
+        .onChange(of: bookCover) { _ in
+            checkFormValidity()
+        }
+        .onChange(of: book.title) { _ in
+            checkFormValidity()
+        }        
+        .onChange(of: book.author) { _ in
+            checkFormValidity()
+        }
+        .onChange(of: book.page) { _ in
+            checkFormValidity()
+        }
+    }
+    
+    func checkFormValidity() {
+        let isValid = bookCover != nil && !book.title.isEmpty && !book.author.isEmpty && !book.page.isEmpty
+        self.isValid = isValid
+        onValidityChange(isValid)
+    }
+}
+
+struct bookCoverRow: View {
+    @State private var isCustomCameraViewPresented: Bool = false
+    @Binding var bookCover: UIImage?
+    @State private var selectedItem: PhotosPickerItem?
+    
+    var body: some View {
+        HStack {
+            HStack {
+                Text("표지")
+                    .fontWeight(.medium)
+                    .foregroundStyle(.gray)
+                
+                Text("*")
+                    .foregroundStyle(.accent)
+            }
+            .frame(maxWidth: 75, alignment: .topLeading)
             
             if let bookCover {
                 Image(uiImage: bookCover)
@@ -83,8 +213,8 @@ struct RegisterBookView: View {
                 Task {
                     guard let newItem = newItem else { return }
                     do {
-                        if let imageData = try await newItem.loadTransferable(type: Data.self) {
-                            bookCover = UIImage(data: imageData)!.cropToAspectRatio(aspectRatio: 1.0/1.5)
+                        if let imageData = try await newItem.loadTransferable(type: Data.self), let uiImage = UIImage(data: imageData) {
+                            bookCover = uiImage
                         }
                     } catch {
                         print("Error loading image: \(error)")
@@ -92,110 +222,51 @@ struct RegisterBookView: View {
                 }
             }
         }
-    }
-}
-
-struct SectionWrap<Content: View>: View {
-    var title: String
-    var content: Content
-    var isExpanded: Binding<Bool>
-    var isValid: Bool
-    
-    var body: some View {
-        VStack {
-            Button(action: {
-                withAnimation {
-                    isExpanded.wrappedValue.toggle()
-                }
-            }, label: {
-                HStack {
-                    Text(title)
-                        .foregroundStyle(.black)
-                    
-                    Spacer()
-                    
-                    if isValid {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundColor(.green)
-                    }
-                    
-                    (isExpanded.wrappedValue ? Image(systemName: "chevron.up") : Image(systemName: "chevron.down"))
-                }
-            })
-            
-            if isExpanded.wrappedValue {
-                content
-            }
-        }
-        .padding(.vertical)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
 struct bookInfoRow: View {
-    @Binding var book: BookRegInputModel
-    @State private var isValid = false
+    let title: String
+    let keyboardType: UIKeyboardType
+    var isRequired: Bool = false
     
-    var onValidityChange: (Bool) -> Void
+    @Binding var content: String
+    @FocusState var isFocused: Bool
     
     var body: some View {
-        VStack {
+        HStack {
             HStack {
-                Text("제목")
-                    .frame(width: 75, alignment: .leading)
+                Text(title)
+                    .fontWeight(.medium)
+                    .foregroundStyle(.gray)
                 
-                TextField("제목을 입력하세요.*", text: $book.title)
-                    .textFieldStyle(.roundedBorder)
+                if isRequired {
+                    Text("*")
+                        .foregroundStyle(.accent)
+                }
             }
-            HStack {
-                Text("작가")
-                    .frame(width: 75, alignment: .leading)
-                
-                TextField("작가를 입력하세요.", text: $book.author)
-                    .textFieldStyle(.roundedBorder)
-            }
+            .frame(maxWidth: 75, alignment: .topLeading)
             
-            HStack {
-                Text("출판사")
-                    .frame(width: 75, alignment: .leading)
-                
-                TextField("출판사를 입력하세요.", text: $book.publisher)
-                    .textFieldStyle(.roundedBorder)
-            }
-            
-            HStack {
-                Text("페이지수")
-                    .frame(width: 75, alignment: .leading)
-                
-                TextField("페이지수를 입력하세요.*", text: $book.page)
-                    .keyboardType(.numberPad)
-                    .textFieldStyle(.roundedBorder)
-            }
-            
-            HStack {
-                Text("ISBN")
-                    .frame(width: 75, alignment: .leading)
-                
-                TextField("ISBN을 입력하세요.", text: $book.isbn13)
-                    .keyboardType(.numberPad)
-                    .textFieldStyle(.roundedBorder)
-            }
+            TextField("\(title)", text: $content)
+                .keyboardType(keyboardType)
+                .focused($isFocused)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 8)
+                .background(Color.white)
+                .cornerRadius(8)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.gray.opacity(0.5), lineWidth: 1)
+                )
+                .onSubmit {
+                    isFocused = false
+                }
         }
-        .onChange(of: book.title) { _ in
-            checkFormValidity()
-        }
-        .onChange(of: book.page) { _ in
-            checkFormValidity()
-        }
-    }
-    
-    func checkFormValidity() {
-        let isValid = !book.title.isEmpty && !book.page.isEmpty
-        self.isValid = isValid
-        onValidityChange(isValid)
     }
 }
 
-struct MyReviewRow: View {
+struct MyReviewSection: View {
     @Binding var review: ReviewRegInputModel
     @State private var isValid = true
     

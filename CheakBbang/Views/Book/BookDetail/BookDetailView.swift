@@ -19,13 +19,14 @@ struct BookDetailView: View {
     @State private var showAlert = false
     @State private var isEditted = false
     
+    @State var bookCover: UIImage? = nil
     @State var item: MyBookModel
     
     var body: some View {
         ScrollView {
             VStack {
-                BookCoverInfoView(bookId: "\(item.id)", coverUrl: item.cover, title: item.title, ogTitle: item.originalTitle)
-                
+                BookCoverInfoView(bookId: "\(item.id)", coverUrl: item.cover, title: item.title, ogTitle: item.originalTitle, bookCover: bookCover)
+
                 Divider()
                     .padding(.vertical)
                 
@@ -34,7 +35,7 @@ struct BookDetailView: View {
                     
                     MemoList(viewModel: MemoListViewModel(repository: MyMemoRepository()), bookID: "\(item.id)", isBookDetailView: true)
                         .padding(.horizontal, -16)
-
+                    
                     NavigationLink {
                         NavigationLazyView(AddMemoView(viewModel: AddMemoViewModel(repository: MyMemoRepository()), item: item, memo: nil))
                     } label: {
@@ -49,6 +50,8 @@ struct BookDetailView: View {
                 
                 BiblioInfoView(item)
                 
+                editBiblioInfo(isCustom: item.isCustomBook)
+                
                 Spacer()
             }
             .padding()
@@ -62,7 +65,7 @@ struct BookDetailView: View {
                         .resizable()
                         .frame(width: 24, height: 24)
                 }
-
+                
                 ImageWrapper(name: ImageName.trash)
                     .frame(width: 24, height: 24)
                     .wrapToButton {
@@ -100,14 +103,35 @@ struct BookDetailView: View {
     }
     
     func BiblioInfoView(_ item: MyBookModel) -> some View {
-            VStack(alignment: .leading, spacing: 8) {
-                BiblioRowView(title: "작가", content: item.author)
-                BiblioRowView(title: "출판사", content: item.publisher)
-                BiblioRowView(title: "출판일", content: item.pubDate)
-                BiblioRowView(title: "페이지수", content: "\(item.page)")
-                BiblioRowView(title: "설명글", content: item.explanation)
+        VStack(alignment: .leading, spacing: 8) {
+            BiblioRowView(title: "작가", content: item.author)
+            BiblioRowView(title: "출판사", content: item.publisher)
+            BiblioRowView(title: "출판일", content: item.pubDate)
+            BiblioRowView(title: "페이지수", content: "\(item.page)")
+            BiblioRowView(title: "설명글", content: item.explanation)
+        }
+        .font(.body)
+    }
+    
+    func editBiblioInfo(isCustom: Bool) -> some View {
+        VStack {
+            if isCustom {
+                NavigationLink {
+                    let bookInput = BookRegInputModel(title: item.title, author: item.author, isbn13: item.isbn13, cover: item.cover, publisher: item.publisher, pubDate: item.pubDate, page: String(item.page), explain: item.explanation)
+                    let reivewInput = ReviewRegInputModel(startDate: item.startDate, endDate: item.endDate, readingState: item.status, rating: item.rate)
+                    
+                    NavigationLazyView(RegisterBookView(viewModel: RegisterBookViewModel(repository: MyBookRepository(), bookId: "\(item.id)", book: bookInput, review: reivewInput) { (newItem, cover) in
+                        item = newItem
+                        bookCover = cover
+                    }))
+                } label: {
+                    Text("도서정보 수정하기")
+                        .underline()
+                        .foregroundStyle(.accent)
+                }
+                .padding()
             }
-            .font(.body)
+        }
     }
 }
 
@@ -116,16 +140,19 @@ struct BookCoverInfoView: View {
     let coverUrl: String
     let title: String
     let ogTitle: String
+    let bookCover: UIImage?
+    let coverSize = CGSize(width: 170, height: 209.1)
     
     var body: some View {
         VStack {
-            if let bookId, let fileUrl = PhotoFileManager.shared.loadFileURL(filename: bookId) {
-                BookCover(coverUrl: fileUrl, size: CGSize(width: 170, height: 209.1))
-                    .padding(.bottom, 20)
+            if let bookCover {
+                BookCover(content: Image(uiImage: bookCover).resizable().scaledToFill(), size: coverSize)
+                
+            } else if let bookId, let fileUrl = PhotoFileManager.shared.loadFileURL(filename: bookId) {
+                BookCover(content: AsyncImageWrapper(url: fileUrl), size: coverSize)
                 
             } else {
-                BookCover(coverUrl: URL(string: coverUrl), size: CGSize(width: 170, height: 209.1))
-                    .padding(.bottom, 20)
+                BookCover(content: AsyncImageWrapper(url: URL(string: coverUrl)), size: coverSize)
             }
             
             Text(title)
@@ -133,6 +160,7 @@ struct BookCoverInfoView: View {
                 .bold()
                 .font(.system(size: 21))
                 .multilineTextAlignment(.center)
+                .padding(.top, 20)
             
             Text(ogTitle)
                 .bold()
@@ -193,6 +221,7 @@ struct BiblioRowView: View {
             Text(content)
                 .lineLimit(nil)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 

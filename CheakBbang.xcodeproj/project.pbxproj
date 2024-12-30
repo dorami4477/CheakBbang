@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4815F8802CC6319E009FC599 /* MemoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4815F87F2CC6319E009FC599 /* MemoListViewModel.swift */; };
 		4815F8822CC641B8009FC599 /* MyMemoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4815F8812CC641B8009FC599 /* MyMemoRepository.swift */; };
+		483753E82D1ED82A0060F40D /* BookMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483753E72D1ED82A0060F40D /* BookMapper.swift */; };
 		483975DC2CA570FA004C495A /* MemoListWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975DB2CA570FA004C495A /* MemoListWrapper.swift */; };
 		483975DF2CA5A7A7004C495A /* FontWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975DE2CA5A7A7004C495A /* FontWrapper.swift */; };
 		483975E22CA5AE6B004C495A /* BinggraeII.otf in Resources */ = {isa = PBXBuildFile; fileRef = 483975E12CA5AE6B004C495A /* BinggraeII.otf */; };
@@ -119,6 +120,7 @@
 /* Begin PBXFileReference section */
 		4815F87F2CC6319E009FC599 /* MemoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListViewModel.swift; sourceTree = "<group>"; };
 		4815F8812CC641B8009FC599 /* MyMemoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMemoRepository.swift; sourceTree = "<group>"; };
+		483753E72D1ED82A0060F40D /* BookMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMapper.swift; sourceTree = "<group>"; };
 		483975DB2CA570FA004C495A /* MemoListWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListWrapper.swift; sourceTree = "<group>"; };
 		483975DE2CA5A7A7004C495A /* FontWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWrapper.swift; sourceTree = "<group>"; };
 		483975E12CA5AE6B004C495A /* BinggraeII.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BinggraeII.otf; sourceTree = "<group>"; };
@@ -412,6 +414,7 @@
 				483975FF2CA801CF004C495A /* UserDefaultManager.swift */,
 				483BAE922CAC569E007DABFA /* NotificationPublisher.swift */,
 				483BAE962CAFC0B3007DABFA /* AppVersionManager.swift */,
+				483753E72D1ED82A0060F40D /* BookMapper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -738,6 +741,7 @@
 				48D09A792CA29D08000328E3 /* UIApplication+.swift in Sources */,
 				483DBC2A2C92B6EA00C775BF /* PhotoFileManager.swift in Sources */,
 				483976042CA85347004C495A /* ToastModifier.swift in Sources */,
+				483753E82D1ED82A0060F40D /* BookMapper.swift in Sources */,
 				48D09A622C9EE11D000328E3 /* CameraService.swift in Sources */,
 				4815F8802CC6319E009FC599 /* MemoListViewModel.swift in Sources */,
 				483DBC1E2C92A2A900C775BF /* MyBook.swift in Sources */,

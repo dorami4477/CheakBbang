@@ -74,6 +74,20 @@ final class PhotoFileManager{
             }
     }
     
+    func loadFileImage(filename: String) -> UIImage? {
+        guard let documentDirectory = FileManager.default.urls(
+            for: .documentDirectory,
+            in: .userDomainMask).first else { return nil }
+        
+        let fileURL = documentDirectory.appendingPathComponent("\(filename).jpg")
+        
+        if FileManager.default.fileExists(atPath: fileURL.path) {
+            if let data = try? Data(contentsOf: fileURL) {
+                return UIImage(data: data)
+            }
+        }
+        return nil
+    }
     
     
     //Delete

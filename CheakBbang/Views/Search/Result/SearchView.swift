@@ -76,7 +76,7 @@ struct SearchView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 NavigationLink {
-                    NavigationLazyView(RegisterBookView(viewModel: RegisterBookViewModel(repository: MyBookRepository())))
+                    NavigationLazyView(RegisterBookView(viewModel: RegisterBookViewModel(repository: MyBookRepository()){ _,_  in }))
                 } label: {
                     HStack {
                         Image(ImageName.register)
@@ -99,7 +99,6 @@ struct SearchView: View {
                 toast = nil
             }
         }
-
     }
     
     private func checkForToast() {

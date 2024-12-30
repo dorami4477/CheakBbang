@@ -42,7 +42,7 @@ extension EditBookViewModel {
             .addButtonTap
             .sink { [weak self] value in
                 guard let self else { return }
-                repository?.editBook(value.id, rate: self.input.rating, status: self.input.readingState, startDate: self.input.startDate, endDate: self.input.endDate)
+                repository?.editBookReview(value.id, rate: self.input.rating, status: self.input.readingState, startDate: self.input.startDate, endDate: self.input.endDate)
             }
             .store(in: &cancellables)
         

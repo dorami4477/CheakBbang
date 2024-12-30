@@ -13,7 +13,8 @@ struct BookListRow: View {
     
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
-            BookCover(coverUrl: URL(string: item.cover), size: CGSize(width: 118, height: 146))
+            BookCover(content: AsyncImageWrapper(url: URL(string: item.cover)), size: CGSize(width: 118, height: 146))
+            
             VStack(alignment: .leading, spacing: 5) {
                 Text(item.title)
                     .font(.headline)

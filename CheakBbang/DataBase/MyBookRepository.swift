@@ -10,7 +10,7 @@ import RealmSwift
 
 protocol BookRepositoryProtocol {
     func addMemo(_ memo: Memo)
-    func addBook(book: MyBook)
+    func addBook(id:String?, book: MyBook) -> MyBook?
     
     func deleteSingleBook(_ book: MyBookModel)
     func deleteSingleMemo(_ meme: MemoModel)
@@ -23,7 +23,7 @@ protocol BookRepositoryProtocol {
     func fetchSingleMemo(_ id: ObjectId) -> MemoModel?
     
     func editMemo(id: ObjectId, newMemo: Memo)
-    func editBook(_ id: ObjectId, rate: Double, status: ReadingState, startDate: Date, endDate: Date)
+    func editBookReview(_ id: ObjectId, rate: Double, status: ReadingState, startDate: Date, endDate: Date)
 }
 
 final class MyBookRepository: BookRepositoryProtocol {
@@ -114,7 +114,7 @@ final class MyBookRepository: BookRepositoryProtocol {
         }
     }
     
-    func editBook(_ id: ObjectId, rate: Double, status: ReadingState, startDate: Date, endDate: Date) {
+    func editBookReview(_ id: ObjectId, rate: Double, status: ReadingState, startDate: Date, endDate: Date) {
         guard let data = realm.object(ofType: MyBook.self, forPrimaryKey: id) else { return }
         try! self.realm.write {
             data.rate = rate
@@ -124,13 +124,25 @@ final class MyBookRepository: BookRepositoryProtocol {
         }
     }
 
-    func addBook(book: MyBook) {
-        do {
-            try realm.write {
+    func addBook(id: String?, book: MyBook) -> MyBook? {
+        try? realm.write {
+            if let id, let objectId = try? ObjectId(string: id),
+               let existingBook = realm.object(ofType: MyBook.self, forPrimaryKey: objectId) {
+                existingBook.title = book.title
+                existingBook.author = book.author
+                existingBook.publisher = book.publisher
+                existingBook.pubDate = book.pubDate
+                existingBook.explanation = book.explanation
+                existingBook.isbn13 = book.isbn13
+                existingBook.page = book.page
+                
+                print("Updated existing book:", existingBook)
+                return existingBook
+            } else {
                 realm.add(book)
+                print("Added new book:", book)
+                return book
             }
-        } catch {
-            print("Error create Book: \(error)")
         }
     }
 }
