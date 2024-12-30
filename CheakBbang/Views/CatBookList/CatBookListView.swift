@@ -116,30 +116,30 @@ struct CatBookListView: View {
             NavigationLink {
                 NavigationLazyView(BookDetailView(viewModel: BookDetailViewModel(repository: MyBookRepository()), item: item))
             } label: {
-                ZStack {
-                    Image(viewModel.bookImage(item.page))
-                        .resizable()
-                    Text(item.title.truncate(length: 11))
-                        .bold()
-                        .font(.caption)
-                        .foregroundStyle(.white)
-                        .transformEffect(CGAffineTransform(1.0, 0.069, 0, 1, 0, 0))
-                        .padding(.leading, 6)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                VStack {
+                    ZStack {
+                        Image(viewModel.bookImage(item.page))
+                            .resizable()
+                        Text(item.title.truncate(length: 11))
+                            .bold()
+                            .font(.caption)
+                            .foregroundStyle(.white)
+                            .transformEffect(CGAffineTransform(1.0, 0.069, 0, 1, 0, 0))
+                            .padding(.leading, 6)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .frame(width: 161, height: viewModel.bookImageHeight(item.page))
+                    .padding(.bottom, isFirst ? -15 : 0)
+                    .zIndex(2)
+                    
+                    if isFirst {
+                        Image(ImageName.shelf)
+                            .resizable()
+                            .frame(width: 169, height: 31.5)
+                            .zIndex(1)
+                    }
                 }
-                .frame(width: 161, height: viewModel.bookImageHeight(item.page))
-                .padding(.bottom, isFirst ? -15 : 0)
             }
-            .zIndex(2)
-            
-            
-            if isFirst {
-                Image(ImageName.shelf)
-                    .resizable()
-                    .frame(width: 169, height: 31.5)
-                    .zIndex(1)
-            }
-            
         }
         .padding(padding, 53)
         .frame(width: 169)
