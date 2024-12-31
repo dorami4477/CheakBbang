@@ -18,55 +18,59 @@ struct DrawingView: View {
     @State private var canvasView = PKCanvasView()
     
     var body: some View{
-        VStack{
-            if let image = pickerImage {
-                Text("마음에 드는 글귀에 밑줄을 그어주세요.")
-                    .foregroundStyle(.gray)
-                    .font(.system(size: 14))
-                
-                ZStack {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFill()
-                
-                    MyCanvas(canvasView: $canvasView, backgroundImage: pickerImage)
-
-                }
-                .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.width - 40)
-                .clipped()
-            }
+        ZStack {
+            Color.white.edgesIgnoringSafeArea(.all)
             
-            VStack{
-                HStack(spacing: 10) {
-                    Image(ImageName.dwMarker)
-                        .resizable()
-                        .frame(width: 40, height: 60)
-                    Image(ImageName.dwClear)
-                        .resizable()
-                        .frame(width: 40, height: 60)
-                        .wrapToButton {
-                            canvasView.drawing = PKDrawing()
-                        }
-                    Image(ImageName.dwUndo)
-                        .resizable()
-                        .frame(width: 40, height: 60)
-                        .wrapToButton {
-                            undoManager?.undo()
-                        }
-                    Image(ImageName.dwRedo)
-                        .resizable()
-                        .frame(width: 40, height: 60)
-                        .wrapToButton {
-                            undoManager?.redo()
-                        }
-                }
-                Text("저장")
-                    .asfullCapsuleButton(background: .accent)
-                    .wrapToButton {
-                        saveDrawing()
-                        presentationMode.wrappedValue.dismiss()
+            VStack {
+                if let image = pickerImage {
+                    Text("마음에 드는 글귀에 밑줄을 그어주세요.")
+                        .foregroundStyle(.gray)
+                        .font(.system(size: 14))
+                    
+                    ZStack {
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFill()
+                        
+                        MyCanvas(canvasView: $canvasView, backgroundImage: pickerImage)
+                        
                     }
-                    .padding()
+                    .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.width - 40)
+                    .clipped()
+                }
+                
+                VStack{
+                    HStack(spacing: 10) {
+                        Image(ImageName.dwMarker)
+                            .resizable()
+                            .frame(width: 40, height: 60)
+                        Image(ImageName.dwClear)
+                            .resizable()
+                            .frame(width: 40, height: 60)
+                            .wrapToButton {
+                                canvasView.drawing = PKDrawing()
+                            }
+                        Image(ImageName.dwUndo)
+                            .resizable()
+                            .frame(width: 40, height: 60)
+                            .wrapToButton {
+                                undoManager?.undo()
+                            }
+                        Image(ImageName.dwRedo)
+                            .resizable()
+                            .frame(width: 40, height: 60)
+                            .wrapToButton {
+                                undoManager?.redo()
+                            }
+                    }
+                    Text("저장")
+                        .asfullCapsuleButton(background: .accent)
+                        .wrapToButton {
+                            saveDrawing()
+                            presentationMode.wrappedValue.dismiss()
+                        }
+                        .padding()
+                }
             }
         }
         .onAppear{
