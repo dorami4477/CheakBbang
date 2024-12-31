@@ -13,15 +13,17 @@ final class PhotoFileManager{
     
     //Create
     func saveImageToDocument(image: UIImage, filename: String) {
-        
         guard let documentDirectory = FileManager.default.urls(
             for: .documentDirectory,
             in: .userDomainMask).first else {
             print("Failed to get document directory")
             return
         }
+
+        let timestamp = Int(Date().timeIntervalSince1970)
+        let fileNameWithTimestamp = "\(filename)_\(timestamp).jpg"
         
-        let fileURL = documentDirectory.appendingPathComponent("\(filename).jpg")
+        let fileURL = documentDirectory.appendingPathComponent(fileNameWithTimestamp)
         
         guard let imageData = image.jpegData(compressionQuality: 0.5) else {
             print("Failed to convert image to JPEG data")
@@ -29,16 +31,22 @@ final class PhotoFileManager{
         }
         
         do {
-            if FileManager.default.fileExists(atPath: fileURL.path) {
-                try FileManager.default.removeItem(at: fileURL)
+            let fileManager = FileManager.default
+            let files = try fileManager.contentsOfDirectory(at: documentDirectory, includingPropertiesForKeys: nil)
+
+            for file in files {
+                if file.lastPathComponent.hasPrefix(filename) {
+                    try fileManager.removeItem(at: file)
+                    break
+                }
             }
             
             try imageData.write(to: fileURL, options: .atomic)
-
         } catch {
             print("Failed to save image: \(error)")
         }
     }
+
     
     func saveStringImageToDocument(imageURL: String, filename: String) {
         guard let url = URL(string: imageURL) else { return }
@@ -64,32 +72,46 @@ final class PhotoFileManager{
         guard let documentDirectory = FileManager.default.urls(
             for: .documentDirectory,
             in: .userDomainMask).first else { return nil }
-        
-        let fileURL = documentDirectory.appendingPathComponent("\(filename).jpg")
-        
-        if FileManager.default.fileExists(atPath: fileURL.path) {
-                return fileURL
-            } else {
-                return nil
+
+        do {
+            let files = try FileManager.default.contentsOfDirectory(at: documentDirectory, includingPropertiesForKeys: nil)
+            let matchedFiles = files.filter { $0.lastPathComponent.hasPrefix(filename) }
+    
+            if let latestFile = matchedFiles.sorted(by: { $0.lastPathComponent.compare($1.lastPathComponent, options: .numeric) == .orderedDescending }).first {
+                return latestFile
             }
+        } catch {
+            print("Failed to get file list: \(error)")
+        }
+        
+        return nil
     }
     
     func loadFileImage(filename: String) -> UIImage? {
         guard let documentDirectory = FileManager.default.urls(
             for: .documentDirectory,
-            in: .userDomainMask).first else { return nil }
-        
-        let fileURL = documentDirectory.appendingPathComponent("\(filename).jpg")
-        
-        if FileManager.default.fileExists(atPath: fileURL.path) {
-            if let data = try? Data(contentsOf: fileURL) {
-                return UIImage(data: data)
-            }
+            in: .userDomainMask).first else {
+            print("Failed to get document directory")
+            return nil
         }
+
+        let fileManager = FileManager.default
+        do {
+            let files = try fileManager.contentsOfDirectory(at: documentDirectory, includingPropertiesForKeys: nil)
+            for file in files {
+                if file.lastPathComponent.hasPrefix(filename) {
+                    if let image = UIImage(contentsOfFile: file.path) {
+                        return image
+                    }
+                }
+            }
+        } catch {
+            print("Failed to load image: \(error)")
+        }
+        
         return nil
     }
-    
-    
+
     //Delete
     func removeImageFromDocument(filename: String) {
         DispatchQueue.global().async {

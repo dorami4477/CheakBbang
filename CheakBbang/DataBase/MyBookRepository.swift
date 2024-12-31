@@ -136,11 +136,9 @@ final class MyBookRepository: BookRepositoryProtocol {
                 existingBook.isbn13 = book.isbn13
                 existingBook.page = book.page
                 
-                print("Updated existing book:", existingBook)
                 return existingBook
             } else {
                 realm.add(book)
-                print("Added new book:", book)
                 return book
             }
         }

@@ -13,8 +13,6 @@ struct OCRView: View {
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var image: Image? = nil
     @State var recognizedText = ""
-    
-   // @State private var capturedImage : UIImage? = nil
     @State private var isCustomCameraViewPresented = false
     
     var body: some View {

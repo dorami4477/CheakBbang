@@ -36,7 +36,6 @@ extension MemoListViewModel {
         input.viewOnAppear
             .sink { [weak self] book in
                 guard let memoList = self?.repository?.fetchMemos() else { return }
-                print(memoList)
                 self?.output.memoList = memoList
             }
             .store(in: &cancellables)

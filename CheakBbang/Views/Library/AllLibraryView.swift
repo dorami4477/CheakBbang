@@ -68,7 +68,6 @@ struct AllLibraryView: View {
                 emptySelf()
             }
         }
-        
     }
 
     func emptySelf() -> some View {
@@ -80,5 +79,4 @@ struct AllLibraryView: View {
                 Spacer()
             }
     }
-    
 }
