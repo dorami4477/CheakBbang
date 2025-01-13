@@ -38,7 +38,7 @@ ETC: PencilKit, PhotosUI
 
 ## 2. 아키텍쳐 및 개발 포인트
 
-![Untitled from FigJam (24)](https://github.com/user-attachments/assets/bc45e2b6-42cd-4d4d-8283-0081c82b56fd)
+![FigJam Untitled](https://github.com/user-attachments/assets/595b3e77-d76a-42eb-8346-d7bb473eb649)
 
 ### 아키텍처
 
