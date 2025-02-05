@@ -10,7 +10,7 @@ import Foundation
 @propertyWrapper
 struct UserDefault<T>{
     
-    let key:String
+    let key: String
     let defaultValue: T
     
     var wrappedValue: T{
@@ -27,7 +27,10 @@ struct UserDefault<T>{
 enum UserDefaultsManager{
     
     @UserDefault(key: "nickName", defaultValue: "")
-    static var nickName:String
+    static var nickName: String
+    
+    @UserDefault(key: "level", defaultValue: 1)
+    static var level: Int
     
     static func deleteAllData() {
         for key in UserDefaults.standard.dictionaryRepresentation().keys {
