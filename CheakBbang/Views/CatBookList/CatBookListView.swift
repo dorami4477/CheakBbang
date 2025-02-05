@@ -59,7 +59,6 @@ struct CatBookListView: View {
         }
         .onAppear {
             viewModel.action(.viewOnAppear)
-            
             AppVersionManager.shared.shouldUpdate { needUpdate in
                 shouldUpdate = needUpdate
             }
@@ -71,30 +70,30 @@ struct CatBookListView: View {
             ForEach(Array(zip(viewModel.output.bookList.indices, viewModel.output.bookList)), id: \.1.id) { index, item in
                 let alignment = viewModel.isLeadingAlignment(for: index) ? Alignment.leading : Alignment.trailing
                 let padding = viewModel.isLeadingAlignment(for: index) ? Edge.Set.leading : Edge.Set.trailing
-                
-                if viewModel.output.bookCount - 1 == index {
-                    bookRowView(item: item, align: alignment, padding: padding, isFirst: index % 5 == 0, isLast: true)
-                        .padding(.bottom, index != 0 && index % 5 == 0 ? -50 : 0)
-                    
-                } else {
-                    bookRowView(item: item, align: alignment, padding: padding, isFirst: index % 5 == 0, isLast: false)
-                        .padding(.bottom, index != 0 && index % 5 == 0 ? -50 : 0)
-                }
-                
+                let input = BookRowInput(item: item,
+                                         align: alignment,
+                                         padding: padding,
+                                         isFirst: index % 5 == 0,
+                                         isLast: viewModel.output.bookCount - 1 == index,
+                                         isToy: index % 5 == 4,
+                                         level: index / 5 + 1)
+
+                bookRowView(input: input)
+                    .padding(.bottom, index != 0 && index % 5 == 0 ? -50 : 0)
             }
             .scaleEffect(y: -1)
         }
         .scaleEffect(y: -1)
     }
     
-    private func bookRowView(item: MyBookModel, align: Alignment, padding: Edge.Set, isFirst: Bool, isLast: Bool) -> some View {
+    private func bookRowView(input: BookRowInput) -> some View {
         VStack{
-            if isLast {
+            if input.isLast {
                 GIFView(gifName: ImageName.cat01, width: 110)
                     .frame(width: 110, height: 73)
                     .clipped()
                     .zIndex(3)
-                    .padding(.bottom, isLast ? -20 : 0)
+                    .padding(.bottom, -20)
                     .onTapGesture {
                         withAnimation(.bouncy) {
                             showBubble = true
@@ -113,14 +112,30 @@ struct CatBookListView: View {
                     }
             }
             
+            if input.isToy && !input.isLast {
+                if let itemImage = PhotoFileManager.shared.loadFileImage(filename: "toy_\(input.level)") {
+                    Image(uiImage: itemImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 169)
+                        .zIndex(3)
+                        .padding(.bottom, -20)
+                } else {
+                    AsyncImageWrapper(url: URL(string: "\(APIKeys.itemBaseUrl)/toy_\(input.level).png"), contentMode: .fit)
+                        .frame(width: 169)
+                        .zIndex(3)
+                        .padding(.bottom, -20)
+                }
+            }
+            
             NavigationLink {
-                NavigationLazyView(BookDetailView(viewModel: BookDetailViewModel(repository: MyBookRepository()), item: item))
+                NavigationLazyView(BookDetailView(viewModel: BookDetailViewModel(repository: MyBookRepository()), item: input.item))
             } label: {
                 VStack {
                     ZStack {
-                        Image(viewModel.bookImage(item.page))
+                        Image(viewModel.bookImage(input.item.page))
                             .resizable()
-                        Text(item.title.truncate(length: 11))
+                        Text(input.item.title.truncate(length: 11))
                             .bold()
                             .font(.caption)
                             .foregroundStyle(.white)
@@ -128,11 +143,11 @@ struct CatBookListView: View {
                             .padding(.leading, 6)
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                    .frame(width: 161, height: viewModel.bookImageHeight(item.page))
-                    .padding(.bottom, isFirst ? -15 : 0)
+                    .frame(width: 161, height: viewModel.bookImageHeight(input.item.page))
+                    .padding(.bottom, input.isFirst ? -15 : 0)
                     .zIndex(2)
                     
-                    if isFirst {
+                    if input.isFirst {
                         Image(ImageName.shelf)
                             .resizable()
                             .frame(width: 169, height: 31.5)
@@ -140,10 +155,11 @@ struct CatBookListView: View {
                     }
                 }
             }
+            
         }
-        .padding(padding, 53)
+        .padding(input.padding, 53)
         .frame(width: 169)
-        .frame(maxWidth: .infinity, alignment: align)
+        .frame(maxWidth: .infinity, alignment: input.align)
         .padding(.bottom, -20)
     }
     
@@ -157,11 +173,4 @@ struct CatBookListView: View {
             }
         }
     }
-    
 }
-
-
-
-
-
-

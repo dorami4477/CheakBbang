@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4815F8802CC6319E009FC599 /* MemoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4815F87F2CC6319E009FC599 /* MemoListViewModel.swift */; };
 		4815F8822CC641B8009FC599 /* MyMemoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4815F8812CC641B8009FC599 /* MyMemoRepository.swift */; };
+		4819FE972D532C8600B8310E /* LevelDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4819FE962D532C7500B8310E /* LevelDTO.swift */; };
+		4819FE992D535CB300B8310E /* BookRowInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4819FE982D535CAB00B8310E /* BookRowInput.swift */; };
 		483753E82D1ED82A0060F40D /* BookMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483753E72D1ED82A0060F40D /* BookMapper.swift */; };
 		483975DC2CA570FA004C495A /* MemoListWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975DB2CA570FA004C495A /* MemoListWrapper.swift */; };
 		483975DF2CA5A7A7004C495A /* FontWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975DE2CA5A7A7004C495A /* FontWrapper.swift */; };
@@ -120,6 +122,8 @@
 /* Begin PBXFileReference section */
 		4815F87F2CC6319E009FC599 /* MemoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListViewModel.swift; sourceTree = "<group>"; };
 		4815F8812CC641B8009FC599 /* MyMemoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMemoRepository.swift; sourceTree = "<group>"; };
+		4819FE962D532C7500B8310E /* LevelDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDTO.swift; sourceTree = "<group>"; };
+		4819FE982D535CAB00B8310E /* BookRowInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRowInput.swift; sourceTree = "<group>"; };
 		483753E72D1ED82A0060F40D /* BookMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMapper.swift; sourceTree = "<group>"; };
 		483975DB2CA570FA004C495A /* MemoListWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListWrapper.swift; sourceTree = "<group>"; };
 		483975DE2CA5A7A7004C495A /* FontWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWrapper.swift; sourceTree = "<group>"; };
@@ -390,10 +394,12 @@
 		483DBBF82C915A7C00C775BF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4819FE962D532C7500B8310E /* LevelDTO.swift */,
 				483DBBF92C915A9400C775BF /* BookDTO.swift */,
 				48D09A122C95D209000328E3 /* LibraryTab.swift */,
 				483976072CA85390004C495A /* Toast.swift */,
 				489EEA8E2D1D356800BC458C /* BookModel.swift */,
+				4819FE982D535CAB00B8310E /* BookRowInput.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -714,6 +720,7 @@
 				489EEA8F2D1D356800BC458C /* BookModel.swift in Sources */,
 				48D09A152C95D316000328E3 /* MyLibraryView.swift in Sources */,
 				483975DF2CA5A7A7004C495A /* FontWrapper.swift in Sources */,
+				4819FE992D535CB300B8310E /* BookRowInput.swift in Sources */,
 				489EEA912D1D3A8000BC458C /* BookRegInputModel.swift in Sources */,
 				489EEA7C2D1686DA00BC458C /* RegisterBookView.swift in Sources */,
 				483DBBFA2C915A9400C775BF /* BookDTO.swift in Sources */,
@@ -772,6 +779,7 @@
 				48D09A882CA3DF0E000328E3 /* URL+.swift in Sources */,
 				483976082CA85390004C495A /* Toast.swift in Sources */,
 				4815F8822CC641B8009FC599 /* MyMemoRepository.swift in Sources */,
+				4819FE972D532C8600B8310E /* LevelDTO.swift in Sources */,
 				48FB73CE2CBD6DA600A701E3 /* InfoView.swift in Sources */,
 				48D09A3D2C9BFF64000328E3 /* EditBookViewModel.swift in Sources */,
 			);

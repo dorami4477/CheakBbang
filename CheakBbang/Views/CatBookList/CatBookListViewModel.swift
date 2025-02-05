@@ -37,16 +37,22 @@ extension CatBookListViewModel {
     func transform() {
         input.viewOnAppear
             .sink { [weak self] book in
-                guard let bookList = self?.repository?.fetchBooks() else { return }
-                self?.output.bookList = bookList.filter({ $0.status == .finished })
-                self?.updateOutput()
+                guard let self else { return }
+                guard let bookList = self.repository?.fetchBooks() else { return }
+                self.output.bookList = bookList.filter({ $0.status == .finished })
+                self.updateOutput()
+                Task {
+                    await self.fetchToys()
+                }
             }
             .store(in: &cancellables)
+
     }
     
     private func updateOutput() {
         output.totalPage = output.bookList.getTotalPage()
         output.bookCount = output.bookList.count
+        UserDefaultsManager.level = output.bookCount % 5 > 0 ? output.bookCount / 5 + 1 : output.bookCount / 5
         output.itemHeight = (getTotalBookHeight() + getShelfHeight()) - (groupBottomPadding() + CGFloat(output.bookCount * 15))
     }
     
@@ -111,6 +117,11 @@ extension CatBookListViewModel {
         default:
             return "book_\(randomColor)_01"
         }
+    }
+    
+    func fetchToys() async {
+        let level = UserDefaultsManager.level
+        await NetworkManager.shared.loadImages(for: level)
     }
     
 }
