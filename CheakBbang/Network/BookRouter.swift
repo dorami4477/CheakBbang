@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 import Alamofire
 
 enum BookRouter {
@@ -15,7 +16,6 @@ enum BookRouter {
 }
 
 extension BookRouter: TargetType {
-
     var baseURL: String {
         switch self {
         case .level:

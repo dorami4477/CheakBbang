@@ -1,13 +1,14 @@
 //
-//  NetworkManager.swift
+//  BookNetworkManager.swift
 //  CheakBbang
 //
 //  Created by 박다현 on 9/11/24.
 //
 
-import Foundation
-import Alamofire
 import Combine
+import Foundation
+
+import Alamofire
 
 enum BookNetworkError: Error {
     case notConnectedToInternet
@@ -17,28 +18,9 @@ enum BookNetworkError: Error {
     case unknownError
 }
 
-final class NetworkManager {
-    static let shared = NetworkManager()
-    private init() {}
+final class BookNetworkManager: NetworkRequestConvertible {
+    typealias api = BookRouter
     
-    func callRequest<T: Decodable>(api:BookRouter, model:T.Type) async throws -> T {
-        
-        let request = try api.asURLRequest()
-        return try await withCheckedThrowingContinuation { continuation in
-            AF.request(request).responseDecodable(of: model) { response in
-                switch response.result {
-                case let .success(data):
-                    continuation.resume(returning: data)
-                    
-                case let .failure(error):
-                    continuation.resume(throwing: error)
-                }
-            }
-        }
-    }
-}
-
-extension NetworkManager {
     func fetchLevel() -> AnyPublisher<Result<[LevelDTO], BookNetworkError>, Never> {
         Future { promise in
             Task { [weak self] in
@@ -146,7 +128,7 @@ extension NetworkManager {
                         return .cannotFindHost
                         
                     case NSURLErrorNetworkConnectionLost:
-                        return.networkConnectionLost
+                        return .networkConnectionLost
                         
                     default:
                         return .unknownError
@@ -158,55 +140,5 @@ extension NetworkManager {
             }
         }
         return .unknownError
-    }
-    
-    func downloadImageAsync(from urlString: String) async throws -> Data? {
-        guard let url = URL(string: urlString) else {
-            return nil
-        }
-
-        let data = try await withCheckedThrowingContinuation { continuation in
-            AF.request(url)
-                .validate()
-                .responseData { response in
-                    switch response.result {
-                    case .success(let data):
-                        continuation.resume(returning: data)
-                    case .failure(let error):
-                        continuation.resume(throwing: error)
-                    }
-                }
-        }
-
-        return data
-    }
-
-    func loadImages(for level: Int) async {
-        var results = [Data?](repeating: nil, count: level)
-        
-        await withTaskGroup(of: (Int, Data?).self) { group in
-            for i in 1...level {
-                let urlString = "\(APIKeys.itemBaseUrl)/toy_\(i).png"
-                
-                if PhotoFileManager.shared.loadFileURL(filename: "toy_\(i)") != nil {
-                    continue
-                }
-                
-                group.addTask {
-                    let imageData = try? await self.downloadImageAsync(from: urlString)
-                    return (i - 1, imageData)
-                }
-            }
-            
-            for await (index, result) in group {
-                results[index] = result
-            }
-        }
-        
-        for (index, image) in results.enumerated() {
-            if let image = image {
-                PhotoFileManager.shared.saveImageDataToDocument(data: image, filename: "toy_\(index + 1)")
-            }
-        }
     }
 }
