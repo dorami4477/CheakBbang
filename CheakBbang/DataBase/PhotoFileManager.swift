@@ -150,24 +150,21 @@ final class PhotoFileManager{
                 for: .documentDirectory,
                 in: .userDomainMask).first else { return }
 
-            let fileURL = documentDirectory.appendingPathComponent("\(filename).jpg")
-            
-            if FileManager.default.fileExists(atPath: fileURL.path) {
+            let fileManager = FileManager.default
+            do {
+                let files = try fileManager.contentsOfDirectory(at: documentDirectory, includingPropertiesForKeys: nil)
                 
-                do {
-                    try FileManager.default.removeItem(atPath: fileURL.path)
-
-                } catch {
-                    print("file remove error", error)
+                for file in files {
+                    if file.lastPathComponent.hasPrefix(filename) {
+                        try fileManager.removeItem(at: file)
+                        break
+                    }
                 }
-                
-            } else {
-                print("file no exist")
+            } catch {
+                print("Failed to remove image: \(error)")
             }
         }
     }
-    
-
     
     //Delete All
     func removeAllImagesFromDocument() {
