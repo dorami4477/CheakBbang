@@ -10,9 +10,12 @@ import Combine
 //import Alamofire
 
 final class SearchViewModel: ViewModelType {
+    private let networkManager = BookNetworkManager()
     var cancellables = Set<AnyCancellable>()
+    
     var input = Input()
     @Published var output = Output()
+    
     var searchResult: BookDTO? = nil
     var searchTerm = ""
     var itemCount = 0
@@ -39,10 +42,13 @@ extension SearchViewModel {
     }
     
     func transform() {
-        
         input.searchOnSubmit
-            .flatMap { value in
-                return NetworkManager.shared.fetchBookList(value, index: 1)
+            .flatMap { [weak self] value in
+                guard let self = self else {
+                    return Empty<Result<BookDTO, BookNetworkError>, Never>()
+                        .eraseToAnyPublisher()
+                }
+                return self.networkManager.fetchBookList(value, index: 1)
             }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in

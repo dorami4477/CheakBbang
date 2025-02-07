@@ -12,7 +12,9 @@ import UIKit
 
 final class AddBookViewModel: ViewModelType {
     @ObservedResults(MyBook.self) var bookList
+    private let networkManager = BookNetworkManager()
     var cancellables = Set<AnyCancellable>()
+    
     @Published var input = Input()
     @Published var output = Output()
     
@@ -39,8 +41,9 @@ extension AddBookViewModel {
     
     func transform() {
         input.viewOnTask
-            .flatMap{ value in
-                NetworkManager.shared.fetchSingleBookItem(value.isbn13)
+            .flatMap{ [weak self] value in
+                guard let self else { return Empty<ItemDTO, Never>().eraseToAnyPublisher() }
+                return self.networkManager.fetchSingleBookItem(value.isbn13)
                     .catch { error -> Just<ItemDTO> in
                         return Just(value)
                     }
