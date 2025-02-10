@@ -18,7 +18,7 @@
 
 개발기간: 2024.9.14 - 2024.10.2 ( 약 3주 )<br>
 개발인원: 1명<br>
-환경설정: 최소버전 iPhone iOS16 이상, 라이트모드, 세로형 Portrait 전용
+환경설정: 최소버전 iOS16 이상, 라이트모드, 세로형 Portrait 전용
 
 ### 1-2. 기술스택 및 라이브러리
 
@@ -38,7 +38,7 @@ ETC: PencilKit, PhotosUI
 
 ## 2. 아키텍쳐 및 개발 포인트
 
-![Untitled from FigJam (24)](https://github.com/user-attachments/assets/bc45e2b6-42cd-4d4d-8283-0081c82b56fd)
+![FigJam Untitled](https://github.com/user-attachments/assets/595b3e77-d76a-42eb-8346-d7bb473eb649)
 
 ### 아키텍처
 
