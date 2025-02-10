@@ -12,6 +12,8 @@ struct SettingView: View {
     @StateObject var viewModel: SettingViewModel
     @State private var showEditName: Bool = false
     @State private var nickName: String = UserDefaultsManager.nickName
+    @State private var toast: Toast? = nil
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -44,15 +46,81 @@ struct SettingView: View {
                         }
                 }
                 HStack {
-                    recordList(image: ImageName.configNum01, title: "읽은 페이지 수", data: "\(viewModel.output.totalPage)")
+                    recordList(image: ImageName.configNum01, title: "읽은 페이지", data: "\(viewModel.output.totalPage)")
                     Divider()
                         .padding(.horizontal)
-                    recordList(image: ImageName.configNum02, title: "읽은 책 수", data: "\(viewModel.output.bookCount)")
+                    recordList(image: ImageName.configNum02, title: "읽은 책", data: "\(viewModel.output.bookCount)")
                     Divider()
                         .padding(.horizontal)
-                    recordList(image: ImageName.configNum03, title: "모든 글귀 수", data: "\(viewModel.output.MemoCount)")
+                    recordList(image: ImageName.configNum03, title: "모든 글귀", data: "\(viewModel.output.MemoCount)")
+                    Divider()
+                        .padding(.horizontal)
+                    recordList(image: ImageName.configNum03, title: "레벨", data: "\(UserDefaultsManager.level)")
                 }
                 
+                //let level = UserDefaultsManager.level
+                let level = 3
+
+                VStack {
+                    Divider()
+                        .padding(.vertical, 10)
+                    
+                    HStack(spacing: 10) {
+                        Text("냥이 장난감")
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundStyle(.gray)
+                        
+                        Image("question")
+                            .resizable()
+                            .frame(width: 10, height: 10)
+                            .onTapGesture {
+                                toast = Toast(style: .info, message: "레벨에 따라 장난감을 획득할 수 있습니다!")
+                            }
+                        
+                        Spacer()
+                    }
+                    
+                    ForEach(0...(level / 3), id: \.self) { row in
+                        HStack {
+                            ForEach(0..<3, id: \.self) { column in
+                                let index = (row * 3) + column
+                                if index < level {
+                                    VStack {
+                                        if let itemImage = PhotoFileManager.shared.loadFileImage(filename: "toy_\(index + 1)") {
+                                            Image(uiImage: itemImage)
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: UIScreen.main.bounds.width * 0.3, height: UIScreen.main.bounds.width * 0.2)
+                                                .zIndex(3)
+                                                .padding(.bottom, -20)
+                                        } else {
+                                            AsyncImageWrapper(url: URL(string: "\(APIKeys.itemBaseUrl)/toy_\(index + 1).png"), contentMode: .fit)
+                                                .frame(width: UIScreen.main.bounds.width * 0.3)
+                                                .zIndex(3)
+                                                .padding(.bottom, -20)
+                                        }
+                                        
+                                        Text("Level \(index + 1)")
+                    
+                                    }
+                                    
+                                } else if index == level {
+                                    VStack {
+                                        Image("icon_heart_01")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: UIScreen.main.bounds.width * 0.3, height: UIScreen.main.bounds.width * 0.2)
+                                        
+                                        Text("Level \(level + 1)")
+                                            .foregroundStyle(.gray)
+                                    }
+                                }
+                            }
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                }
+
                 VStack {
                     Divider()
                         .padding(.vertical, 10)
@@ -104,6 +172,7 @@ struct SettingView: View {
         }
         .navigationTitle("마이페이지")
         .navigationBarTitleDisplayMode(.inline)
+        .toastView(toast: $toast)
         .onAppear {
             viewModel.action(.viewOnAppear)
         }
