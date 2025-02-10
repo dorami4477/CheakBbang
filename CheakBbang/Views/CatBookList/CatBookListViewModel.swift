@@ -54,6 +54,7 @@ extension CatBookListViewModel {
     private func updateOutput() {
         output.totalPage = output.bookList.getTotalPage()
         output.bookCount = output.bookList.count
+        UserDefaultsManager.bookCount = output.bookList.count
         UserDefaultsManager.level = output.bookCount % 5 > 0 ? output.bookCount / 5 + 1 : output.bookCount / 5
         output.itemHeight = (getTotalBookHeight() + getShelfHeight()) - CGFloat(output.bookCount * 20)
     }

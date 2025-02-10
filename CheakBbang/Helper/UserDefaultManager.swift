@@ -32,6 +32,9 @@ enum UserDefaultsManager{
     @UserDefault(key: "level", defaultValue: 1)
     static var level: Int
     
+    @UserDefault(key: "bookCount", defaultValue: 0)
+    static var bookCount: Int
+    
     static func deleteAllData() {
         for key in UserDefaults.standard.dictionaryRepresentation().keys {
             UserDefaults.standard.removeObject(forKey: key.description)

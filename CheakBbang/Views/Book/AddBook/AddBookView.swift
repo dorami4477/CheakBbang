@@ -41,6 +41,8 @@ struct AddBookView: View {
                 .asfullCapsuleButton(background: .accent)
                 .wrapToButton {
                     viewModel.action(.addButtonTap)
+                    UserDefaultsManager.bookCount += 1
+                    UserDefaultsManager.level = UserDefaultsManager.bookCount % 5 > 0 ? UserDefaultsManager.bookCount / 5 + 1 : UserDefaultsManager.bookCount / 5
                     addNew = true
                     dismiss()
                 }

@@ -13,6 +13,7 @@
 		4819FE992D535CB300B8310E /* BookRowInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4819FE982D535CAB00B8310E /* BookRowInput.swift */; };
 		4819FE9B2D53669300B8310E /* NetworkRequestConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4819FE9A2D53669100B8310E /* NetworkRequestConvertible.swift */; };
 		4819FE9D2D536BF600B8310E /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4819FE9C2D536BE500B8310E /* ImageDownloader.swift */; };
+		4819FEA52D59ECF000B8310E /* LevelUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4819FEA42D59ECF000B8310E /* LevelUpView.swift */; };
 		483753E82D1ED82A0060F40D /* BookMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483753E72D1ED82A0060F40D /* BookMapper.swift */; };
 		483975DC2CA570FA004C495A /* MemoListWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975DB2CA570FA004C495A /* MemoListWrapper.swift */; };
 		483975DF2CA5A7A7004C495A /* FontWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975DE2CA5A7A7004C495A /* FontWrapper.swift */; };
@@ -128,6 +129,7 @@
 		4819FE982D535CAB00B8310E /* BookRowInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRowInput.swift; sourceTree = "<group>"; };
 		4819FE9A2D53669100B8310E /* NetworkRequestConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestConvertible.swift; sourceTree = "<group>"; };
 		4819FE9C2D536BE500B8310E /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
+		4819FEA42D59ECF000B8310E /* LevelUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelUpView.swift; sourceTree = "<group>"; };
 		483753E72D1ED82A0060F40D /* BookMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMapper.swift; sourceTree = "<group>"; };
 		483975DB2CA570FA004C495A /* MemoListWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListWrapper.swift; sourceTree = "<group>"; };
 		483975DE2CA5A7A7004C495A /* FontWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWrapper.swift; sourceTree = "<group>"; };
@@ -565,6 +567,7 @@
 		48D09A312C9AEF95000328E3 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				4819FEA42D59ECF000B8310E /* LevelUpView.swift */,
 				48D09A212C9825D9000328E3 /* BookCover.swift */,
 				48D09A342C9B2123000328E3 /* RratingHeartView.swift */,
 				48D09A3E2C9C093F000328E3 /* RadioButton.swift */,
@@ -775,6 +778,7 @@
 				483DBBCB2C90376C00C775BF /* CheakBbangApp.swift in Sources */,
 				48D09A752CA15EA4000328E3 /* MemoList.swift in Sources */,
 				48D09A1E2C9732F7000328E3 /* BookDetailViewModel.swift in Sources */,
+				4819FEA52D59ECF000B8310E /* LevelUpView.swift in Sources */,
 				48D09A2A2C9965CE000328E3 /* Date+.swift in Sources */,
 				48D09A172C967D80000328E3 /* AllLibraryView.swift in Sources */,
 				489EEA7F2D16913200BC458C /* RegisterBookViewModel.swift in Sources */,

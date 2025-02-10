@@ -14,6 +14,7 @@ struct SearchView: View {
     @State var isAnimating: Bool = false
     @State private var addNew = false
     @State private var toast: Toast? = nil
+    @State private var showLevelUp = false
 
     var body: some View {
         VStack{
@@ -71,6 +72,16 @@ struct SearchView: View {
         .onReceive(viewModel.$output) { _ in
             checkForToast()
         }
+        .overlay(
+                   Group {
+                       if showLevelUp {
+                           LevelUpView(showLevelUp: $showLevelUp)
+                               .transition(.move(edge: .top))
+                               .zIndex(1)
+                       }
+                   }
+                   .animation(.easeInOut, value: showLevelUp)
+               )
         .navigationTitle("도서검색")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -93,8 +104,12 @@ struct SearchView: View {
         }
         .onAppear {
             if addNew {
-                toast = Toast(style: .success, message: "책이 추가되었습니다. :)")
-                addNew = false
+                if UserDefaultsManager.bookCount % 5 == 1 {
+                    showLevelUp = true
+                } else {
+                     toast = Toast(style: .success, message: "책이 추가되었습니다. :)")
+                     addNew = false
+                }
             } else {
                 toast = nil
             }

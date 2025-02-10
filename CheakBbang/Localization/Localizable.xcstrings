@@ -35,7 +35,16 @@
     "Books" : {
 
     },
+    "Close" : {
+
+    },
     "Copyright 2024. \nDahyun Park All rights reserved." : {
+
+    },
+    "Level %lld" : {
+
+    },
+    "Level Up! 새로운 장난감을 획득하셨습니다!" : {
 
     },
     "Pages" : {
@@ -66,6 +75,9 @@
 
     },
     "내용*" : {
+
+    },
+    "냥이 장난감" : {
 
     },
     "닉네임 수정" : {
