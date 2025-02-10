@@ -11,6 +11,8 @@ import RealmSwift
 
 final class CatBookListViewModel: ViewModelType {
     private let repository = MyBookRepository()
+    private let networkManager = BookNetworkManager()
+    private let imageDownloader = ImageDownloader()
     var cancellables = Set<AnyCancellable>()
     
     var input = Input()
@@ -53,7 +55,7 @@ extension CatBookListViewModel {
         output.totalPage = output.bookList.getTotalPage()
         output.bookCount = output.bookList.count
         UserDefaultsManager.level = output.bookCount % 5 > 0 ? output.bookCount / 5 + 1 : output.bookCount / 5
-        output.itemHeight = (getTotalBookHeight() + getShelfHeight()) - (groupBottomPadding() + CGFloat(output.bookCount * 15))
+        output.itemHeight = (getTotalBookHeight() + getShelfHeight()) - CGFloat(output.bookCount * 20)
     }
     
     private func getTotalBookHeight() -> CGFloat {
@@ -69,13 +71,14 @@ extension CatBookListViewModel {
     }
     
     private func groupBottomPadding() -> CGFloat{
-        let padding = (output.bookList.count / 5 ) * 35 + ( output.bookCount % 5 > 0 ? 35 : 0 ) - (output.bookCount > 0 ? 35 : 0)
+        let padding = (output.bookCount / 5 ) * 35 + ( output.bookCount % 5 > 0 ? 35 : 0 ) - (output.bookCount > 0 ? 35 : 0)
         return CGFloat(padding)
     }
     
     private func getShelfHeight() -> CGFloat{
-        let height = (output.bookList.count / 5 ) * 31 + (output.bookCount > 0 && output.bookCount < 5 ? 31 : 0)
-        return CGFloat(height)
+        let bookCount = CGFloat(output.bookCount)
+        let height = (bookCount / 5 ) * 31.5 + (bookCount > 0 && bookCount < 5 ? 31.5 : 0) + (output.bookCount % 5 > 0 ? 31.5 : 0)
+        return height
     }
     
     func isLeadingAlignment(for index: Int) -> Bool {
@@ -121,7 +124,7 @@ extension CatBookListViewModel {
     
     func fetchToys() async {
         let level = UserDefaultsManager.level
-        await NetworkManager.shared.loadImages(for: level)
+        await imageDownloader.loadImages(for: level)
     }
     
 }

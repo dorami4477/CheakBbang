@@ -28,11 +28,16 @@ struct CatBookListView: View {
                             ScrollView(.vertical) {
                                 let itemHeight = geometry.size.width * 0.86 + viewModel.output.itemHeight
                                 let space = (geometry.size.height - itemHeight)
-                                if 0 < space {
+                                let level = CGFloat(UserDefaultsManager.level - 1)
+
+                                if 0 < space &&  70 < space {
                                     Spacer(minLength: space)
+                                } else {
+                                    Spacer(minLength: 70)
                                 }
+                                
                                 bookListView()
-                                    .padding(.top, space < 70 ? 70 - (0 < space ? space : 0) : 0)
+                                    .padding(.top,  -(level * 80))
                                 
                                 Image(ImageName.bottom)
                                     .resizable()
@@ -79,7 +84,7 @@ struct CatBookListView: View {
                                          level: index / 5 + 1)
 
                 bookRowView(input: input)
-                    .padding(.bottom, index != 0 && index % 5 == 0 ? -50 : 0)
+                    .offset(y: CGFloat((index / 5) * 80))
             }
             .scaleEffect(y: -1)
         }
@@ -152,10 +157,11 @@ struct CatBookListView: View {
                             .resizable()
                             .frame(width: 169, height: 31.5)
                             .zIndex(1)
+                            
                     }
                 }
             }
-            
+
         }
         .padding(input.padding, 53)
         .frame(width: 169)

@@ -11,6 +11,8 @@
 		4815F8822CC641B8009FC599 /* MyMemoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4815F8812CC641B8009FC599 /* MyMemoRepository.swift */; };
 		4819FE972D532C8600B8310E /* LevelDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4819FE962D532C7500B8310E /* LevelDTO.swift */; };
 		4819FE992D535CB300B8310E /* BookRowInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4819FE982D535CAB00B8310E /* BookRowInput.swift */; };
+		4819FE9B2D53669300B8310E /* NetworkRequestConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4819FE9A2D53669100B8310E /* NetworkRequestConvertible.swift */; };
+		4819FE9D2D536BF600B8310E /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4819FE9C2D536BE500B8310E /* ImageDownloader.swift */; };
 		483753E82D1ED82A0060F40D /* BookMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483753E72D1ED82A0060F40D /* BookMapper.swift */; };
 		483975DC2CA570FA004C495A /* MemoListWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975DB2CA570FA004C495A /* MemoListWrapper.swift */; };
 		483975DF2CA5A7A7004C495A /* FontWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483975DE2CA5A7A7004C495A /* FontWrapper.swift */; };
@@ -36,7 +38,7 @@
 		483DBBE02C903AD200C775BF /* CatBookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBDF2C903AD200C775BF /* CatBookListView.swift */; };
 		483DBBE62C903C9300C775BF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 483DBBE52C903C9300C775BF /* Alamofire */; };
 		483DBBE92C903D1200C775BF /* BookRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBE82C903D1200C775BF /* BookRouter.swift */; };
-		483DBBF72C9154C500C775BF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBF62C9154C500C775BF /* NetworkManager.swift */; };
+		483DBBF72C9154C500C775BF /* BookNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBF62C9154C500C775BF /* BookNetworkManager.swift */; };
 		483DBBFA2C915A9400C775BF /* BookDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBF92C915A9400C775BF /* BookDTO.swift */; };
 		483DBBFE2C9160CF00C775BF /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBBFD2C9160CF00C775BF /* TargetType.swift */; };
 		483DBC032C916CC200C775BF /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483DBC022C916CC200C775BF /* SearchView.swift */; };
@@ -124,6 +126,8 @@
 		4815F8812CC641B8009FC599 /* MyMemoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMemoRepository.swift; sourceTree = "<group>"; };
 		4819FE962D532C7500B8310E /* LevelDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDTO.swift; sourceTree = "<group>"; };
 		4819FE982D535CAB00B8310E /* BookRowInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRowInput.swift; sourceTree = "<group>"; };
+		4819FE9A2D53669100B8310E /* NetworkRequestConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestConvertible.swift; sourceTree = "<group>"; };
+		4819FE9C2D536BE500B8310E /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		483753E72D1ED82A0060F40D /* BookMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMapper.swift; sourceTree = "<group>"; };
 		483975DB2CA570FA004C495A /* MemoListWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListWrapper.swift; sourceTree = "<group>"; };
 		483975DE2CA5A7A7004C495A /* FontWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWrapper.swift; sourceTree = "<group>"; };
@@ -149,7 +153,7 @@
 		483DBBDC2C903A7600C775BF /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		483DBBDF2C903AD200C775BF /* CatBookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBookListView.swift; sourceTree = "<group>"; };
 		483DBBE82C903D1200C775BF /* BookRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRouter.swift; sourceTree = "<group>"; };
-		483DBBF62C9154C500C775BF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		483DBBF62C9154C500C775BF /* BookNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookNetworkManager.swift; sourceTree = "<group>"; };
 		483DBBF92C915A9400C775BF /* BookDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDTO.swift; sourceTree = "<group>"; };
 		483DBBFD2C9160CF00C775BF /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
 		483DBC022C916CC200C775BF /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -384,8 +388,10 @@
 		483DBBE72C903CD100C775BF /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				4819FE9C2D536BE500B8310E /* ImageDownloader.swift */,
+				4819FE9A2D53669100B8310E /* NetworkRequestConvertible.swift */,
 				483DBBE82C903D1200C775BF /* BookRouter.swift */,
-				483DBBF62C9154C500C775BF /* NetworkManager.swift */,
+				483DBBF62C9154C500C775BF /* BookNetworkManager.swift */,
 				483DBBFD2C9160CF00C775BF /* TargetType.swift */,
 			);
 			path = Network;
@@ -729,8 +735,9 @@
 				48D09A132C95D209000328E3 /* LibraryTab.swift in Sources */,
 				48D09A6A2C9FB885000328E3 /* TextBubble.swift in Sources */,
 				48FB73CA2CBD692E00A701E3 /* Array+.swift in Sources */,
+				4819FE9B2D53669300B8310E /* NetworkRequestConvertible.swift in Sources */,
 				489EEA812D16D27200BC458C /* BookCameraView.swift in Sources */,
-				483DBBF72C9154C500C775BF /* NetworkManager.swift in Sources */,
+				483DBBF72C9154C500C775BF /* BookNetworkManager.swift in Sources */,
 				483975F52CA6D42E004C495A /* ContentViewModel.swift in Sources */,
 				483DBC032C916CC200C775BF /* SearchView.swift in Sources */,
 				483975FC2CA7BF9D004C495A /* SettingViewModel.swift in Sources */,
@@ -745,6 +752,7 @@
 				48D09A5C2C9E6E77000328E3 /* AddMemoViewModel.swift in Sources */,
 				483DBBFE2C9160CF00C775BF /* TargetType.swift in Sources */,
 				48D09A772CA27EDC000328E3 /* View+.swift in Sources */,
+				4819FE9D2D536BF600B8310E /* ImageDownloader.swift in Sources */,
 				48D09A792CA29D08000328E3 /* UIApplication+.swift in Sources */,
 				483DBC2A2C92B6EA00C775BF /* PhotoFileManager.swift in Sources */,
 				483976042CA85347004C495A /* ToastModifier.swift in Sources */,
