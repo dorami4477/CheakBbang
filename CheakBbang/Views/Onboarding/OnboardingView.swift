@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OnboardingView: View {
-    @ObservedObject var viewModel: ContentViewModel
+    @ObservedObject var viewModel: OnboardingViewModel
     
     @Environment(\.dismiss) private var dismiss
     @State var nickName: String = ""

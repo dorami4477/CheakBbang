@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selectedTab = 0
+    @StateObject var viewModel = ContentViewModel()
     
     init() {
         UITabBar.appearance().backgroundColor = .white
@@ -52,8 +53,15 @@ struct ContentView: View {
             }
             .tag(3)
         }
+        .overlay(
+            Group {
+                if viewModel.hasNews {
+                    NewsView(showPopup: $viewModel.hasNews, newNums: viewModel.newsNum, urlString: viewModel.newsUrl)
+                        .zIndex(1)
+                }
+            }
+        )
     }
-    
 }
 
 

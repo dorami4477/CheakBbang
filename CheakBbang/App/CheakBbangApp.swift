@@ -6,12 +6,18 @@
 //
 
 import SwiftUI
+
+import FirebaseCore
 import RealmSwift
 
 @main
 struct CheakBbangApp: App {
     @ObservedObject var appState = AppState()
-    @ObservedObject var viewModel = ContentViewModel()
+    @ObservedObject var viewModel = OnboardingViewModel()
+    
+    init() {
+      FirebaseApp.configure()
+    }
     
     var body: some Scene {
         WindowGroup {
