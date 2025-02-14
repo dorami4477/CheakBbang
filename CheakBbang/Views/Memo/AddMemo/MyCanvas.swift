@@ -5,8 +5,8 @@
 //  Created by 박다현 on 9/21/24.
 //
 
-import SwiftUI
 import PencilKit
+import SwiftUI
 
 struct MyCanvas: UIViewRepresentable {
     @Binding var canvasView: PKCanvasView

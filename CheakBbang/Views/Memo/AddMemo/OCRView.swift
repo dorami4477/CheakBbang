@@ -5,9 +5,9 @@
 //  Created by 박다현 on 9/20/24.
 //
 
+import PhotosUI
 import SwiftUI
 import Vision
-import PhotosUI
 
 struct OCRView: View {
     @State private var selectedPhoto: PhotosPickerItem?

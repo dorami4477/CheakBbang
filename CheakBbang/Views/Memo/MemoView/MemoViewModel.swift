@@ -5,11 +5,10 @@
 //  Created by 박다현 on 9/25/24.
 //
 
-import Foundation
-import RealmSwift
 import Combine
 import UIKit
 
+import RealmSwift
 
 final class MemoViewModel: ViewModelType {
     private let repository: MemoRepositoryProtocol?

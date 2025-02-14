@@ -307,7 +307,7 @@ struct MyReviewSection: View {
                 .foregroundStyle(.gray)
                 .font(.system(size: 14))
             
-            RratingHeartView(rating: $review.rating)
+            RatingHeartView(rating: $review.rating)
         }
     }
     

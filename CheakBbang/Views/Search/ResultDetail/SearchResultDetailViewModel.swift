@@ -5,8 +5,8 @@
 //  Created by 박다현 on 9/18/24.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 final class SearchResultDetailViewModel: ViewModelType {
     private let networkManager = BookNetworkManager()

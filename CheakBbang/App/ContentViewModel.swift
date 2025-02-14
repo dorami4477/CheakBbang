@@ -13,18 +13,17 @@ class ContentViewModel: ObservableObject {
     @Published var newsUrl: String = ""
     @Published var hasNews = false
     @Published var newsNum = 1
+    
      var remoteConfig = RemoteConfig.remoteConfig()
      var settings = RemoteConfigSettings()
      
      init() {
-       //self.newsUrl = newsUrl
        setupRemoteConfigListener()
        Task {
          await activateRemoteConfig()
        }
      }
     
-     // MARK: - RemoteConfig 리스너 설정
      func setupRemoteConfigListener() {
        self.settings.minimumFetchInterval = 0
        self.remoteConfig.configSettings = settings

@@ -5,8 +5,8 @@
 //  Created by 박다현 on 9/21/24.
 //
 
-import Foundation
 import AVFoundation
+import Foundation
 
 class CameraService {
     

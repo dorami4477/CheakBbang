@@ -73,7 +73,7 @@ extension CatBookListViewModel {
     }
     
     private func groupBottomPadding() -> CGFloat{
-        let padding = (output.bookCount / 5 ) * 35 + ( output.bookCount % 5 > 0 ? 35 : 0 ) - (output.bookCount > 0 ? 35 : 0)
+        let padding = (output.bookCount / 5 ) * 35 + (output.bookCount % 5 > 0 ? 35 : 0) - (output.bookCount > 0 ? 35 : 0)
         return CGFloat(padding)
     }
     

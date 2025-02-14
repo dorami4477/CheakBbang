@@ -14,7 +14,3 @@ struct MemoListWrapper: View {
             .navigationBarTitleDisplayMode(.inline)
     }
 }
-
-#Preview {
-    MemoListWrapper()
-}

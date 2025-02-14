@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import RealmSwift
 
 struct MemoList: View {
     @StateObject var viewModel: MemoListViewModel

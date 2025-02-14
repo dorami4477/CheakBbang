@@ -89,7 +89,7 @@ struct AddBookView: View {
                 .foregroundStyle(.gray)
                 .font(.system(size: 14))
             
-            RratingHeartView(rating: $viewModel.input.rating)
+            RatingHeartView(rating: $viewModel.input.rating)
         }
     }
     

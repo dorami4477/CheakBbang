@@ -5,8 +5,8 @@
 //  Created by 박다현 on 9/16/24.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 final class BookDetailViewModel: ViewModelType {
     let repository: BookRepositoryProtocol?

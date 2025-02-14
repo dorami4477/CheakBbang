@@ -86,7 +86,7 @@
 		48D09A2C2C997CA8000328E3 /* ReadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A2B2C997CA8000328E3 /* ReadingState.swift */; };
 		48D09A2E2C9AE905000328E3 /* SearchResultDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A2D2C9AE905000328E3 /* SearchResultDetailView.swift */; };
 		48D09A332C9AF071000328E3 /* SearchResultDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A322C9AF071000328E3 /* SearchResultDetailViewModel.swift */; };
-		48D09A352C9B2123000328E3 /* RratingHeartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A342C9B2123000328E3 /* RratingHeartView.swift */; };
+		48D09A352C9B2123000328E3 /* RatingHeartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A342C9B2123000328E3 /* RatingHeartView.swift */; };
 		48D09A382C9B222D000328E3 /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = 48D09A372C9B222D000328E3 /* Cosmos */; };
 		48D09A3B2C9BEF88000328E3 /* EditBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A3A2C9BEF88000328E3 /* EditBookView.swift */; };
 		48D09A3D2C9BFF64000328E3 /* EditBookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D09A3C2C9BFF64000328E3 /* EditBookViewModel.swift */; };
@@ -204,7 +204,7 @@
 		48D09A2B2C997CA8000328E3 /* ReadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingState.swift; sourceTree = "<group>"; };
 		48D09A2D2C9AE905000328E3 /* SearchResultDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDetailView.swift; sourceTree = "<group>"; };
 		48D09A322C9AF071000328E3 /* SearchResultDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDetailViewModel.swift; sourceTree = "<group>"; };
-		48D09A342C9B2123000328E3 /* RratingHeartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RratingHeartView.swift; sourceTree = "<group>"; };
+		48D09A342C9B2123000328E3 /* RatingHeartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingHeartView.swift; sourceTree = "<group>"; };
 		48D09A3A2C9BEF88000328E3 /* EditBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBookView.swift; sourceTree = "<group>"; };
 		48D09A3C2C9BFF64000328E3 /* EditBookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBookViewModel.swift; sourceTree = "<group>"; };
 		48D09A3E2C9C093F000328E3 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
@@ -584,7 +584,7 @@
 				4819FEB52D5C964B00B8310E /* NewsView.swift */,
 				4819FEA42D59ECF000B8310E /* LevelUpView.swift */,
 				48D09A212C9825D9000328E3 /* BookCover.swift */,
-				48D09A342C9B2123000328E3 /* RratingHeartView.swift */,
+				48D09A342C9B2123000328E3 /* RatingHeartView.swift */,
 				48D09A3E2C9C093F000328E3 /* RadioButton.swift */,
 				483975E32CA68DC8004C495A /* GIFView.swift */,
 				483976052CA8536F004C495A /* ToastView.swift */,
@@ -671,7 +671,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1530;
-				LastUpgradeCheck = 1530;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					483DBBC62C90376C00C775BF = {
 						CreatedOnToolsVersion = 15.3;
@@ -753,7 +753,7 @@
 				489EEA912D1D3A8000BC458C /* BookRegInputModel.swift in Sources */,
 				489EEA7C2D1686DA00BC458C /* RegisterBookView.swift in Sources */,
 				483DBBFA2C915A9400C775BF /* BookDTO.swift in Sources */,
-				48D09A352C9B2123000328E3 /* RratingHeartView.swift in Sources */,
+				48D09A352C9B2123000328E3 /* RatingHeartView.swift in Sources */,
 				48D09A422C9C2AD0000328E3 /* AddMemoView.swift in Sources */,
 				48D09A132C95D209000328E3 /* LibraryTab.swift in Sources */,
 				48D09A6A2C9FB885000328E3 /* TextBubble.swift in Sources */,
@@ -827,6 +827,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -890,6 +891,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

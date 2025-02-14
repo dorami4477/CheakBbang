@@ -5,8 +5,9 @@
 //  Created by 박다현 on 10/21/24.
 //
 
-import Foundation
 import Combine
+import Foundation
+
 import RealmSwift
 
 final class MemoListViewModel: ViewModelType {

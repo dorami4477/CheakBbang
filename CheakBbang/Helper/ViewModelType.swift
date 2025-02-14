@@ -5,8 +5,8 @@
 //  Created by 박다현 on 9/11/24.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 protocol ViewModelType: AnyObject, ObservableObject {
     associatedtype Input

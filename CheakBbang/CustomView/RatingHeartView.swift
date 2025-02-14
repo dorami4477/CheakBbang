@@ -9,7 +9,7 @@ import SwiftUI
 
 import Cosmos
 
-struct RratingHeartView: UIViewRepresentable {
+struct RatingHeartView: UIViewRepresentable {
     @Binding var rating: Double
     var isEditable = true
     var size = 30.0
