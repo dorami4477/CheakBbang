@@ -29,4 +29,37 @@ extension NetworkRequestConvertible {
             }
         }
     }
+    
+    func networkErrorHandling(error: Error) -> NetworkError {
+        if let afError = error as? Alamofire.AFError {
+            print("Alamofire 에러: \(afError.localizedDescription)")
+            
+            if case let .sessionTaskFailed(underlyingError) = afError {
+                let nsError = underlyingError as NSError
+                
+                if nsError.domain == NSURLErrorDomain {
+                    switch nsError.code {
+                    case NSURLErrorNotConnectedToInternet:
+                        return .notConnectedToInternet
+                        
+                    case NSURLErrorTimedOut:
+                        return .timedOut
+                        
+                    case NSURLErrorCannotFindHost:
+                        return .cannotFindHost
+                        
+                    case NSURLErrorNetworkConnectionLost:
+                        return .networkConnectionLost
+                        
+                    default:
+                        return .unknownError
+                    }
+                }
+                
+            } else {
+                return .unknownError
+            }
+        }
+        return .unknownError
+    }
 }

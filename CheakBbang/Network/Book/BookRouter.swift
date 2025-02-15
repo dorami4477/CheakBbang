@@ -12,17 +12,11 @@ import Alamofire
 enum BookRouter {
     case list(query: String, index:Int)
     case item(id: String)
-    case level
 }
 
 extension BookRouter: TargetType {
     var baseURL: String {
-        switch self {
-        case .level:
-            return APIKeys.itemBaseUrl
-        default:
-            return APIKeys.bookBaseUrl
-        }
+        return APIKeys.bookBaseUrl
     }
     
     var path: String {
@@ -31,8 +25,6 @@ extension BookRouter: TargetType {
             return "/ItemSearch.aspx"
         case .item:
             return "/ItemLookUp.aspx"
-        case .level:
-            return "/chaekbbang_01.json"
         }
     }
     
@@ -64,8 +56,6 @@ extension BookRouter: TargetType {
                 URLQueryItem(name: "Version", value: "20131101")
                 
             ]
-        case .level:
-            return []
         }
     }
     

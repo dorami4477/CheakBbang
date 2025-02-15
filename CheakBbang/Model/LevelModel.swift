@@ -1,11 +1,11 @@
 //
-//  LevelDTO.swift
+//  LevelModel.swift
 //  CheakBbang
 //
-//  Created by 박다현 on 2/5/25.
+//  Created by 박다현 on 2/14/25.
 //
 
-struct LevelDTO: Decodable {
+struct LevelModel: Decodable {
     let id: String
     let level: Int
     let name: String
