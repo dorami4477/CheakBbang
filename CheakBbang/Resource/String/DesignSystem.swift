@@ -36,16 +36,19 @@ enum ImageName {
     static let configAppver = "image_config_appver"
     static let configMail = "image_config_mail"
     static let configMember = "image_config_member"
+    static let configToy = "image_config_toy"
     static let configEdit = "image_config_nameedit"
     static let configNum01 = "image_config_num01"
     static let configNum02 = "image_config_num02"
     static let configNum03 = "image_config_num03"
+    static let configNum04 = "image_config_num04"
     static let configBG = "image_configBG"
     static let emptyBook = "image_emptybook"
     static let emptySelf = "image_emptyshelf"
     static let filter01 = "icon_sort_date"
     static let filter02 = "icon_sort_alphabet"
     static let register = "icon_book reg_manual"
+    static let toyListNext = "toy_list_next"
 }
 
 enum TabbarImageName {

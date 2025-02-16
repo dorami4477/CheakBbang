@@ -59,5 +59,36 @@ final class ImageDownloader {
             }
         }
     }
+    
+    func loadImages(for level: [LevelModel]) async -> [Data?] {
+        var results = [Data?](repeating: nil, count: level.count)
+        
+        await withTaskGroup(of: (Int, Data?).self) { group in
+            for i in 0..<level.count {
+                let urlString = level[i].cover
+                
+                if let img = PhotoFileManager.shared.loadFileData(filename: urlString.extractPathWithoutExtension()) {
+                    results[i] = img
+                    continue
+                }
+                
+                group.addTask {
+                    let imageData = try? await self.downloadImage(from: urlString)
+                    return (i, imageData)
+                }
+            }
+            
+            for await (index, result) in group {
+                if let imageData = result {
+                    results[index] = imageData
+                    
+                    let name = level[index].cover.extractPathWithoutExtension()
+                    PhotoFileManager.shared.saveImageDataToDocument(data: imageData, filename: name)
+                }
+            }
+        }
+
+        return results
+    }
 }
 

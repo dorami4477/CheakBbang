@@ -56,19 +56,18 @@ struct SettingView: View {
                     recordList(image: ImageName.configNum03, title: "모든 글귀", data: "\(viewModel.output.MemoCount)")
                     Divider()
                         .padding(.horizontal)
-                    recordList(image: ImageName.configNum03, title: "레벨", data: "\(UserDefaultsManager.level)")
+                    recordList(image: ImageName.configNum04, title: "나의 레벨", data: "\(UserDefaultsManager.level)")
                 }
                 
-                //let level = UserDefaultsManager.level
-                let level = 3
-
                 VStack {
                     Divider()
                         .padding(.vertical, 10)
                     
                     HStack(spacing: 10) {
-                        Text("냥이 장난감")
-                            .font(.system(size: 14, weight: .bold))
+                        ImageWrapper(name: ImageName.configToy)
+                            .frame(width: 20)
+                        
+                        Text("모은 장난감")
                             .foregroundStyle(.gray)
                         
                         Image("question")
@@ -80,46 +79,9 @@ struct SettingView: View {
                         
                         Spacer()
                     }
-                    
-                    ForEach(0...(level / 3), id: \.self) { row in
-                        HStack {
-                            ForEach(0..<3, id: \.self) { column in
-                                let index = (row * 3) + column
-                                if index < level {
-                                    VStack {
-                                        if let itemImage = PhotoFileManager.shared.loadFileImage(filename: "toy_\(index + 1)") {
-                                            Image(uiImage: itemImage)
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: UIScreen.main.bounds.width * 0.3, height: UIScreen.main.bounds.width * 0.2)
-                                                .zIndex(3)
-                                                .padding(.bottom, -20)
-                                        } else {
-                                            AsyncImageWrapper(url: URL(string: "\(APIKeys.itemBaseUrl)/toy_\(index + 1).png"), contentMode: .fit)
-                                                .frame(width: UIScreen.main.bounds.width * 0.3)
-                                                .zIndex(3)
-                                                .padding(.bottom, -20)
-                                        }
-                                        
-                                        Text("Level \(index + 1)")
-                    
-                                    }
-                                    
-                                } else if index == level {
-                                    VStack {
-                                        Image("icon_heart_01")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: UIScreen.main.bounds.width * 0.3, height: UIScreen.main.bounds.width * 0.2)
-                                        
-                                        Text("Level \(level + 1)")
-                                            .foregroundStyle(.gray)
-                                    }
-                                }
-                            }
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    }
+
+                    ToyListView(levelList: viewModel.output.levelList, toyImages: viewModel.output.levelToy)
+                        .padding(.top, 10)
                 }
 
                 VStack {

@@ -44,7 +44,7 @@ extension SearchViewModel {
         input.searchOnSubmit
             .flatMap { [weak self] value in
                 guard let self = self else {
-                    return Empty<Result<BookDTO, BookNetworkError>, Never>()
+                    return Empty<Result<BookDTO, NetworkError>, Never>()
                         .eraseToAnyPublisher()
                 }
                 return self.networkManager.fetchBookList(value, index: 1)

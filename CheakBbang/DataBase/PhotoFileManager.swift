@@ -142,6 +142,31 @@ final class PhotoFileManager{
         
         return nil
     }
+    
+    func loadFileData(filename: String) -> Data? {
+        guard let documentDirectory = FileManager.default.urls(
+            for: .documentDirectory,
+            in: .userDomainMask).first else {
+            print("Failed to get document directory")
+            return nil
+        }
+
+        let fileManager = FileManager.default
+        do {
+            let files = try fileManager.contentsOfDirectory(at: documentDirectory, includingPropertiesForKeys: nil)
+            for file in files {
+                if file.lastPathComponent.hasPrefix(filename) {
+                    if let image = UIImage(contentsOfFile: file.path) {
+                        return image.pngData()
+                    }
+                }
+            }
+        } catch {
+            print("Failed to load image: \(error)")
+        }
+        
+        return nil
+    }
 
     //Delete
     func removeImageFromDocument(filename: String) {

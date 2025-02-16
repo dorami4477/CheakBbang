@@ -12,11 +12,13 @@ import RealmSwift
 
 final class SettingViewModel: ViewModelType {
     private let repository: BookRepositoryProtocol?
+    private let networkManager = LevelNetworkManager()
+    private let imageloader = ImageDownloader()
     var cancellables = Set<AnyCancellable>()
     
     private var bookList: [MyBookModel] = []
     private var memoList: [MemoModel] = []
-    
+
     var input = Input()
     @Published var output = Output()
     
@@ -39,16 +41,23 @@ extension SettingViewModel {
         var bookCount: Int = 0
         var version: String = ""
         var memoPharse: String = ""
+        var levelList: [LevelModel] = []
+        var levelToy: [Data?] = []
     }
     
     func transform() {
         input.viewOnAppear
             .sink { [weak self] book in
-                guard let bookList = self?.repository?.fetchBooks() else { return }
-                guard let memoList = self?.repository?.fetchMemos() else { return }
-                self?.bookList = bookList
-                self?.memoList = memoList
-                self?.updateOutput()
+                guard let self else { return }
+                guard let bookList = repository?.fetchBooks() else { return }
+                guard let memoList = repository?.fetchMemos() else { return }
+                self.bookList = bookList
+                self.memoList = memoList
+                updateOutput()
+                
+                Task { [weak self] in
+                    await self?.fetchLevel()
+                }
             }
             .store(in: &cancellables)
     }
@@ -63,6 +72,20 @@ extension SettingViewModel {
             DispatchQueue.main.async {
                 self?.output.version = "\(AppVersionManager.shared.version) (\(needUpdate ? "업데이트 필요" :"최신 버전"))"
             }
+        }
+    }
+    
+    @MainActor
+    private func fetchLevel() async {
+        do {
+            let result = try await networkManager.fetchLevel()
+            output.levelList = result.prefix(UserDefaultsManager.level - 1).map { $0.toModel() }
+            print(result)
+            let loadedImages = await imageloader.loadImages(for: output.levelList)
+            output.levelToy = loadedImages
+            
+        } catch {
+            print("Error fetching level data: \(error)")
         }
     }
     

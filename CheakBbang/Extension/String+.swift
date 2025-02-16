@@ -12,5 +12,11 @@ extension String {
         return (self.count > length) ? self.prefix(length) + trailing : self
     }
     
-    
+    func extractPathWithoutExtension() -> String {
+        guard let urlComponents = URL(string: self) else { return "" }
+        let path = urlComponents.lastPathComponent
+        let fileName = (path as NSString).deletingPathExtension
+        
+        return fileName
+    }
 }
