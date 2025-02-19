@@ -13,4 +13,5 @@ enum NetworkError: Error {
     case cannotFindHost
     case networkConnectionLost
     case unknownError
+    case hasNotChanged
 }

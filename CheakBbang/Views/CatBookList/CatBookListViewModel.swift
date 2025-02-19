@@ -125,8 +125,11 @@ extension CatBookListViewModel {
     }
     
     func fetchToys() async {
-        let level = UserDefaultsManager.level
-        await imageDownloader.loadImages(for: level)
+        if UserDefaultsManager.level == 0 {
+            UserDefaultsManager.level = 1
+        }
+        
+        await imageDownloader.loadImages(for: UserDefaultsManager.level)
     }
     
 }

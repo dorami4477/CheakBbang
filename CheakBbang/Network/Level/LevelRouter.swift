@@ -19,7 +19,7 @@ extension LevelRouter: TargetType {
     }
     
     var path: String {
-        return "/toy_list.json"
+        return "/etag_JSON.php"
     }
     
     var method: Alamofire.HTTPMethod {
@@ -31,6 +31,8 @@ extension LevelRouter: TargetType {
     }
     
     var headers: [String : String]? {
-        return nil
+        let etag = UserDefaultsManager.toyEtag
+
+        return ["If-None-Match": etag]
     }
 }

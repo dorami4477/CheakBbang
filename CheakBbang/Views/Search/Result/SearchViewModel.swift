@@ -77,7 +77,7 @@ extension SearchViewModel {
                         self.output.searchFailure = "요청 시간이 초과되었습니다. 다시 시도해주세요."
                     case .networkConnectionLost:
                         self.output.searchFailure = "네트워크 연결이 끊어졌습니다. 네트워크를 확인해주세요."
-                    case .cannotFindHost, .unknownError:
+                    case .cannotFindHost, .unknownError, .hasNotChanged:
                         self.output.searchFailure = "알수 없는 네트워크 오류입니다. 잠시 후 다시 시도해주세요."
                     }
                     self.output = self.output

@@ -14,4 +14,8 @@ struct LevelDTO: Decodable {
     func toModel() -> LevelModel {
         .init(id: id, level: level, name: name, cover: cover)
     }
+    
+    func toEntity() -> LevelEntity {
+        .init(id: id, level: level, name: name, cover: cover)
+    }
 }

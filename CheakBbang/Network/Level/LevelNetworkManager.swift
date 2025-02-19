@@ -12,14 +12,28 @@ import Alamofire
 
 final class LevelNetworkManager: NetworkRequestConvertible {
     typealias api = LevelRouter
+    let repository = LevelRepository()
     
-    func fetchLevel() async throws -> [LevelDTO] {
+    @MainActor
+    func fetchLevel() async throws -> [LevelModel] {
         do {
             let value = try await self.callRequest(api: .level, model: [LevelDTO].self)
+            repository?.addLevelList(value.map{ $0.toEntity() })
             
-            return value
+            let result = value.prefix(UserDefaultsManager.level - 1).map { $0.toModel() }
+
+            return result
         } catch {
-            throw networkErrorHandling(error: error)
+            if let myError = error as? NetworkError, myError == .hasNotChanged {
+                if let value = repository?.fetchLevelList() {
+                   
+                    return Array(value.prefix(UserDefaultsManager.level - 1))
+                } else {
+                    return []
+                }
+            } else {
+                throw networkErrorHandling(error: error)
+            }
         }
     }
 }

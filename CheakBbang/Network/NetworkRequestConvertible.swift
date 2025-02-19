@@ -14,22 +14,34 @@ protocol NetworkRequestConvertible {
 }
 
 extension NetworkRequestConvertible {
-    func callRequest<Model: Decodable>(api: api, model:Model.Type) async throws -> Model {
-        let request = try api.asURLRequest()
+    func callRequest<Model: Decodable>(api: api, model: Model.Type) async throws -> Model {
+        let config = URLSessionConfiguration.default
+        config.requestCachePolicy = .reloadIgnoringLocalCacheData
         
+        let session = Session(configuration: config)
+        let request = try api.asURLRequest()
+
         return try await withCheckedThrowingContinuation { continuation in
-            AF.request(request).responseDecodable(of: model) { response in
+            session.request(request).responseDecodable(of: model) { response in
                 switch response.result {
                 case let .success(data):
+                    if let httpResponse = response.response,
+                       let etag = httpResponse.allHeaderFields["Etag"] as? String {
+                        UserDefaultsManager.toyEtag = etag
+                    }
                     continuation.resume(returning: data)
-                    
+
                 case let .failure(error):
-                    continuation.resume(throwing: error)
+                    if let statusCode = response.response?.statusCode, statusCode == 304 {
+                        continuation.resume(throwing: NetworkError.hasNotChanged)
+                    } else {
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
         }
     }
-    
+
     func networkErrorHandling(error: Error) -> NetworkError {
         if let afError = error as? Alamofire.AFError {
             print("Alamofire 에러: \(afError.localizedDescription)")

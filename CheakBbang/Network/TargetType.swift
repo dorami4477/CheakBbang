@@ -14,6 +14,7 @@ protocol TargetType: URLRequestConvertible {
     var method: HTTPMethod { get }
     var path: String { get }
     var queryItems: [URLQueryItem] { get }
+    var headers: [String : String]? { get }
 }
 
 extension TargetType {
@@ -21,6 +22,13 @@ extension TargetType {
         let url = try baseURL.asURL()
         var request = try URLRequest(url: url.appendingPathComponent(path), method: method)
         request.url?.append(queryItems: queryItems)
+
+        if let headers = self.headers {
+            for (key, value) in headers {
+                request.setValue(value, forHTTPHeaderField: key)
+            }
+        }
+        
         return request
     }
 }
