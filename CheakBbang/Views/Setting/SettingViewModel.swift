@@ -6,7 +6,7 @@
 //
 
 import Combine
-import Foundation
+import UIKit
 
 import RealmSwift
 
@@ -42,7 +42,7 @@ extension SettingViewModel {
         var version: String = ""
         var memoPharse: String = ""
         var levelList: [LevelModel] = []
-        var levelToy: [Data?] = []
+        var levelToy: [UIImage?] = []
     }
     
     func transform() {
@@ -78,9 +78,8 @@ extension SettingViewModel {
     @MainActor
     private func fetchLevel() async {
         do {
-            let result = try await networkManager.fetchLevel()
-            output.levelList = result.prefix(UserDefaultsManager.level - 1).map { $0.toModel() }
-            print(result)
+            output.levelList = try await networkManager.fetchLevel()
+
             let loadedImages = await imageloader.loadImages(for: output.levelList)
             output.levelToy = loadedImages
             

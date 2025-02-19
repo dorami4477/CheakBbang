@@ -10,7 +10,7 @@ import SwiftUI
 struct ToyListView: View {
     let levelList: [LevelModel]
     let level = UserDefaultsManager.level
-    let toyImages: [Data?]
+    let toyImages: [UIImage?]
     
     var body: some View {
         LazyVGrid(columns: [
@@ -23,7 +23,7 @@ struct ToyListView: View {
                         let data = levelList[index]
                         
                         VStack {
-                            if let toyData = toyImages[index], let toyImage = UIImage(data: toyData) {
+                            if let toyImage = toyImages[index] {
                                 Image(uiImage: toyImage)
                                     .resizable()
                                     .scaledToFit()

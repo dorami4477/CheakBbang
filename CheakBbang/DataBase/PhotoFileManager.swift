@@ -46,38 +46,6 @@ final class PhotoFileManager{
             print("Failed to save image: \(error)")
         }
     }
-
-    func saveImageDataToDocument(data: Data, filename: String) {
-        guard let documentDirectory = FileManager.default.urls(
-                for: .documentDirectory,
-                in: .userDomainMask).first else {
-            print("Failed to get document directory")
-            return
-        }
-
-        let timestamp = Int(Date().timeIntervalSince1970)
-        let fileNameWithTimestamp = "\(filename)_\(timestamp).png"
-
-        let fileURL = documentDirectory.appendingPathComponent(fileNameWithTimestamp)
-        
-        do {
-            let fileManager = FileManager.default
-            let files = try fileManager.contentsOfDirectory(at: documentDirectory, includingPropertiesForKeys: nil)
-
-            for file in files {
-                if file.lastPathComponent.hasPrefix(filename) {
-                    try fileManager.removeItem(at: file)
-                    break
-                }
-            }
-
-            try data.write(to: fileURL, options: .atomic)
-            print("Image saved to: \(fileURL.path)")
-            
-        } catch {
-            print("Failed to save image: \(error)")
-        }
-    }
     
     func saveStringImageToDocument(imageURL: String, filename: String) {
         guard let url = URL(string: imageURL) else { return }
@@ -133,31 +101,6 @@ final class PhotoFileManager{
                 if file.lastPathComponent.hasPrefix(filename) {
                     if let image = UIImage(contentsOfFile: file.path) {
                         return image
-                    }
-                }
-            }
-        } catch {
-            print("Failed to load image: \(error)")
-        }
-        
-        return nil
-    }
-    
-    func loadFileData(filename: String) -> Data? {
-        guard let documentDirectory = FileManager.default.urls(
-            for: .documentDirectory,
-            in: .userDomainMask).first else {
-            print("Failed to get document directory")
-            return nil
-        }
-
-        let fileManager = FileManager.default
-        do {
-            let files = try fileManager.contentsOfDirectory(at: documentDirectory, includingPropertiesForKeys: nil)
-            for file in files {
-                if file.lastPathComponent.hasPrefix(filename) {
-                    if let image = UIImage(contentsOfFile: file.path) {
-                        return image.pngData()
                     }
                 }
             }
