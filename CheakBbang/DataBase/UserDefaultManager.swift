@@ -41,8 +41,8 @@ enum UserDefaultsManager{
     @UserDefault(key: "newsNum", defaultValue: 1)
     static var newsNum: Int
     
-    @UserDefault(key: "toyEtag", defaultValue: "")
-    static var toyEtag: String
+    @UserDefault(key: "eTags", defaultValue: [String: String]())
+    static var eTags: [String: String]
     
     static func deleteAllData() {
         for key in UserDefaults.standard.dictionaryRepresentation().keys {

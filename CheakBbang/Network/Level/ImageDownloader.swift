@@ -7,43 +7,19 @@
 
 import UIKit
 
-import Alamofire
-
-final class ImageDownloader {
-    func downloadImage(from urlString: String) async throws -> Data? {
-        guard let url = URL(string: urlString) else {
-            return nil
-        }
-
-        let data = try await withCheckedThrowingContinuation { continuation in
-            AF.request(url)
-                .validate()
-                .responseData { response in
-                    print("이미지", response.response?.headers)
-                    switch response.result {
-                    case .success(let data):
-                        continuation.resume(returning: data)
-                    case .failure(let error):
-                        continuation.resume(throwing: error)
-                    }
-                }
-        }
-
-        return data
-    }
-
+final class ImageDownloader: NetworkRequestConvertible {
+    typealias api = LevelRouter
+    
     // MARK: - CatBookListView의 toy Image용
     func loadImages(for level: Int) async {
         await withTaskGroup(of: (Int, Data?).self) { group in
             for i in 1...level {
-                let urlString = "\(APIKeys.itemBaseUrl)/toy_\(i).png"
-                
                 if PhotoFileManager.shared.loadFileURL(filename: "toy_\(i)") != nil {
                     continue
                 }
                 
                 group.addTask {
-                    let imageData = try? await self.downloadImage(from: urlString)
+                    let imageData = try? await self.callRequest(api: .toyImage(filename: "toy_\(i).png"), etagKey: "toy_\(i)")
                     return (i - 1, imageData)
                 }
             }
@@ -63,14 +39,15 @@ final class ImageDownloader {
         await withTaskGroup(of: (Int, Data?).self) { group in
             for i in 0..<level.count {
                 let urlString = level[i].cover
+                let fileName = urlString.extractPathWithoutExtension()
                 
-                if let img = PhotoFileManager.shared.loadFileImage(filename: urlString.extractPathWithoutExtension()) {
+                if let img = PhotoFileManager.shared.loadFileImage(filename: fileName) {
                     results[i] = img
                     continue
                 }
                 
                 group.addTask {
-                    let imageData = try? await self.downloadImage(from: urlString)
+                    let imageData = try? await self.callRequest(api: .toyImage(filename: "\(fileName).png"), etagKey: fileName)
                     return (i, imageData)
                 }
             }

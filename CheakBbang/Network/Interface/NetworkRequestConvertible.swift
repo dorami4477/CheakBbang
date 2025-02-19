@@ -14,23 +14,25 @@ protocol NetworkRequestConvertible {
 }
 
 extension NetworkRequestConvertible {
-    func callRequest<Model: Decodable>(api: api, model: Model.Type) async throws -> Model {
+    func callRequest(api: api, etagKey: String? = nil) async throws -> Data {
         let config = URLSessionConfiguration.default
-        config.requestCachePolicy = .reloadIgnoringLocalCacheData
-        
+        if etagKey != nil {
+            config.requestCachePolicy = .reloadIgnoringLocalCacheData
+        }
         let session = Session(configuration: config)
         let request = try api.asURLRequest()
-
+        
         return try await withCheckedThrowingContinuation { continuation in
-            session.request(request).responseDecodable(of: model) { response in
+            session.request(request).responseData { response in
                 switch response.result {
                 case let .success(data):
                     if let httpResponse = response.response,
-                       let etag = httpResponse.allHeaderFields["Etag"] as? String {
-                        UserDefaultsManager.toyEtag = etag
+                       let etag = httpResponse.allHeaderFields["Etag"] as? String,
+                       let etagKey {
+                        UserDefaultsManager.eTags[etagKey] = etag
                     }
                     continuation.resume(returning: data)
-
+                    
                 case let .failure(error):
                     if let statusCode = response.response?.statusCode, statusCode == 304 {
                         continuation.resume(throwing: NetworkError.hasNotChanged)
@@ -41,7 +43,7 @@ extension NetworkRequestConvertible {
             }
         }
     }
-
+    
     func networkErrorHandling(error: Error) -> NetworkError {
         if let afError = error as? Alamofire.AFError {
             print("Alamofire 에러: \(afError.localizedDescription)")
@@ -64,14 +66,14 @@ extension NetworkRequestConvertible {
                         return .networkConnectionLost
                         
                     default:
-                        return .unknownError
+                        return .unknownError(error: nsError.localizedDescription)
                     }
                 }
                 
             } else {
-                return .unknownError
+                return .unknownError(error: afError.localizedDescription)
             }
         }
-        return .unknownError
+        return .unknownError(error: error.localizedDescription)
     }
 }

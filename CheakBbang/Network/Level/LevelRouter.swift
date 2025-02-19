@@ -11,6 +11,7 @@ import Alamofire
 
 enum LevelRouter {
     case level
+    case toyImage(filename: String)
 }
 
 extension LevelRouter: TargetType {
@@ -19,7 +20,12 @@ extension LevelRouter: TargetType {
     }
     
     var path: String {
-        return "/etag_JSON.php"
+        switch self {
+        case .level:
+            return "/etag_JSON.php"
+        case .toyImage(let filename):
+            return filename
+        }
     }
     
     var method: Alamofire.HTTPMethod {
@@ -31,8 +37,15 @@ extension LevelRouter: TargetType {
     }
     
     var headers: [String : String]? {
-        let etag = UserDefaultsManager.toyEtag
-
+        var etag = String()
+        
+        switch self {
+        case .level:
+            etag = UserDefaultsManager.eTags["levelEtag"] ?? ""
+        case .toyImage(let filename):
+            etag = UserDefaultsManager.eTags[filename] ?? ""
+        }
+        
         return ["If-None-Match": etag]
     }
 }
