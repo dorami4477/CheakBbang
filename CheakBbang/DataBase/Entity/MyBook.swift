@@ -53,50 +53,6 @@ final class MyBook: Object, ObjectKeyIdentifiable {
     }
 }
 
-final class Memo: Object, ObjectKeyIdentifiable {
-    @Persisted(primaryKey: true) var id: ObjectId
-    @Persisted var bookId: ObjectId
-    @Persisted var page: String
-    @Persisted var contents: String
-    @Persisted var contents2: String?
-    @Persisted var date: Date
-    
-    let myBook = LinkingObjects(fromType: MyBook.self, property: "memo")
-    
-    convenience init(bookId: ObjectId, page: String, contents: String, content2: String? = nil, date: Date) {
-        self.init()
-        self.bookId = bookId
-        self.page = page
-        self.contents = contents
-        self.contents2 = content2
-        self.date = date
-    }
-    
-    func toMemoModel() -> MemoModel {
-        .init(id: id, bookId: bookId, page: page, contents: contents, contents2: contents2, date: date)
-    }
-}
 
-final class User: Object, ObjectKeyIdentifiable {
-    @Persisted(primaryKey: true) var id: ObjectId
-    @Persisted var nickname: String
-    @Persisted var level: Int
-    @Persisted var numberOfBooks: Int
-    @Persisted var pagesOfBooks: Int
-    @Persisted var character01: Int
-    @Persisted var character02: Int
-    
-    convenience init(nickname: String, level: Int, numberOfBooks: Int, pagesOfBooks: Int, character01: Int, character02: Int) {
-        self.init()
-        self.nickname = nickname
-        self.level = level
-        self.numberOfBooks = numberOfBooks
-        self.pagesOfBooks = pagesOfBooks
-        self.character01 = character01
-        self.character02 = character02
-    }
-    
-    func toUserModel() -> UserModel {
-        .init(id: id, nickname: nickname, level: level, numberOfBooks: numberOfBooks, pagesOfBooks: pagesOfBooks, character01: character01, character02: character02)
-    }
-}
+
+
