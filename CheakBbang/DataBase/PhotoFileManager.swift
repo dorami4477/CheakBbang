@@ -12,21 +12,30 @@ final class PhotoFileManager{
     private init() {}
     
     //Create
-    func saveImageToDocument(image: UIImage, filename: String) {
+    func saveImageToDocument(image: UIImage, filename: String, isPNG: Bool = false) {
         guard let documentDirectory = FileManager.default.urls(
             for: .documentDirectory,
             in: .userDomainMask).first else {
-            print("Failed to get document directory")
-            return
+                print("Failed to get document directory")
+                return
         }
 
         let timestamp = Int(Date().timeIntervalSince1970)
-        let fileNameWithTimestamp = "\(filename)_\(timestamp).jpg"
+        let fileExtension = isPNG ? "png" : "jpg"
+        let fileNameWithTimestamp = "\(filename)_\(timestamp).\(fileExtension)"
         
         let fileURL = documentDirectory.appendingPathComponent(fileNameWithTimestamp)
         
-        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
-            print("Failed to convert image to JPEG data")
+        var imageData: Data?
+        
+        if isPNG {
+            imageData = image.pngData()
+        } else {
+            imageData = image.jpegData(compressionQuality: 0.5)
+        }
+        
+        guard let data = imageData else {
+            print("Failed to convert image to \(fileExtension.uppercased()) data")
             return
         }
         
@@ -40,12 +49,13 @@ final class PhotoFileManager{
                     break
                 }
             }
-            
-            try imageData.write(to: fileURL, options: .atomic)
+
+            try data.write(to: fileURL, options: .atomic)
         } catch {
             print("Failed to save image: \(error)")
         }
     }
+
     
     func saveStringImageToDocument(imageURL: String, filename: String) {
         guard let url = URL(string: imageURL) else { return }
