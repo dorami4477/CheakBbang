@@ -10,6 +10,7 @@ import SwiftUI
 struct AsyncImageWrapper: View {
     let url:URL?
     var contentMode:ContentMode = .fill
+    var placeholder = ImageName.emptyBook
     
     var body: some View {
         AsyncImage(url: url) { phase in
@@ -19,7 +20,7 @@ struct AsyncImageWrapper: View {
                     .aspectRatio(contentMode: contentMode)
                 
             } else if phase.error != nil {
-                Image(ImageName.emptyBook)
+                Image(placeholder)
                     .resizable()
                     .aspectRatio(contentMode: contentMode)
                 

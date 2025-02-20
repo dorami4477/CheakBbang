@@ -131,7 +131,6 @@ extension CatBookListViewModel {
         
         await imageDownloader.loadImages(for: UserDefaultsManager.level)
     }
-    
 }
 
 // MARK: - Action

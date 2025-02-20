@@ -11,6 +11,7 @@ import RealmSwift
 
 struct CatBookListView: View {
     @StateObject var viewModel: CatBookListViewModel
+    let imageDownloader = ImageDownloader()
     @State private var showBubble = false
     @State private var txtBubble: TextBubble = .phrase1
     @State private var timer: DispatchWorkItem? = nil
@@ -119,7 +120,7 @@ struct CatBookListView: View {
             }
             
             if input.isToy && !input.isLast {
-                if let itemImage = PhotoFileManager.shared.loadFileImage(filename: "toy_\(input.level)") {
+                if let itemImage = PhotoFileManager.shared.loadFileImage(filename: "toy_\(input.level + 1)") {
                     Image(uiImage: itemImage)
                         .resizable()
                         .scaledToFit()
@@ -127,7 +128,7 @@ struct CatBookListView: View {
                         .zIndex(3)
                         .padding(.bottom, -20)
                 } else {
-                    AsyncImageWrapper(url: URL(string: "\(APIKeys.itemBaseUrl)/toy_\(input.level).png"), contentMode: .fit)
+                    AsyncImageWrapper(url: URL(string: "\(APIKeys.itemBaseUrl)/toy_\(input.level + 1).png"), contentMode: .fit, placeholder: ImageName.toyListNext)
                         .frame(width: 169)
                         .zIndex(3)
                         .padding(.bottom, -20)
