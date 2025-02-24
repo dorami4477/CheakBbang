@@ -77,13 +77,15 @@ struct CatBookListView: View {
             ForEach(Array(zip(viewModel.output.bookList.indices, viewModel.output.bookList)), id: \.1.id) { index, item in
                 let alignment = viewModel.isLeadingAlignment(for: index) ? Alignment.leading : Alignment.trailing
                 let padding = viewModel.isLeadingAlignment(for: index) ? Edge.Set.leading : Edge.Set.trailing
+                let toyImage = viewModel.output.toys.count > index / 5 + 2 ? viewModel.output.toys[index / 5 + 2] : nil
                 let input = BookRowInput(item: item,
                                          align: alignment,
                                          padding: padding,
                                          isFirst: index % 5 == 0,
                                          isLast: viewModel.output.bookCount - 1 == index,
                                          isToy: index % 5 == 4,
-                                         level: index / 5 + 1)
+                                         level: index / 5 + 1,
+                                         toy: toyImage)
 
                 bookRowView(input: input)
                     .offset(y: CGFloat((index / 5) * 80))
@@ -120,15 +122,18 @@ struct CatBookListView: View {
             }
             
             if input.isToy && !input.isLast {
-                if let itemImage = PhotoFileManager.shared.loadFileImage(filename: "toy_\(input.level + 1)") {
-                    Image(uiImage: itemImage)
+                if let toyImage = input.toy {
+                    Image(uiImage: toyImage)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 169)
                         .zIndex(3)
                         .padding(.bottom, -20)
+                    
                 } else {
-                    AsyncImageWrapper(url: URL(string: "\(APIKeys.itemBaseUrl)/toy_\(input.level + 1).png"), contentMode: .fit, placeholder: ImageName.toyListNext)
+                    Image(ImageName.toyListNext)
+                        .resizable()
+                        .scaledToFit()
                         .frame(width: 169)
                         .zIndex(3)
                         .padding(.bottom, -20)

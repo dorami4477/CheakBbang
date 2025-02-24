@@ -14,4 +14,5 @@ struct BookRowInput {
     var isLast: Bool
     var isToy: Bool
     var level: Int
+    var toy: UIImage?
 }

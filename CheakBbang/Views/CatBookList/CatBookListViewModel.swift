@@ -6,7 +6,7 @@
 //
 
 import Combine
-import Foundation
+import UIKit
 
 import RealmSwift
 
@@ -35,6 +35,7 @@ extension CatBookListViewModel {
         var totalPage: String = "0"
         var bookCount: Int = 0
         var itemHeight: CGFloat = 0
+        var toys: [UIImage?] = []
     }
     
     func transform() {
@@ -124,12 +125,11 @@ extension CatBookListViewModel {
         }
     }
     
+    @MainActor
     func fetchToys() async {
-        if UserDefaultsManager.level == 0 {
-            UserDefaultsManager.level = 1
+        if UserDefaultsManager.level > 1 {
+            output.toys = await imageDownloader.loadImages(for: UserDefaultsManager.level)
         }
-        
-        await imageDownloader.loadImages(for: UserDefaultsManager.level)
     }
 }
 
