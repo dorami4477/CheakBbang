@@ -15,40 +15,49 @@ struct NewsView: View {
     var urlString: String
     
     var body: some View {
-        VStack {
-            AsyncImageWrapper(url: URL(string: urlString), contentMode: .fit)
-                .frame(width: 169)
-            Text("\(urlString)")
+        ZStack {
+            Color.black.opacity(0.4)
+                .edgesIgnoringSafeArea(.all)
             
-            HStack {
-                Image(systemName: isChecked ? "checkmark.square" : "square")
-                    .resizable()
-                    .frame(width: 30, height: 30)
-                    .foregroundColor(.blue)
+            VStack {
+                AsyncImageWrapper(url: URL(string: urlString), contentMode: .fit)
+                
+                HStack {
+                    HStack {
+                        Image(systemName: isChecked ? "checkmark.square.fill" : "square")
+                        
+                        Text("더이상 안보기")
+                    }
                     .onTapGesture {
                         isChecked.toggle()
                         UserDefaultsManager.hasSeenPopup = isChecked
                         UserDefaultsManager.newsNum = newNums
                     }
-                
-                Text("더이상 안보기")
-                
-                Button(action: {
-                    withAnimation {
-                        showPopup = false
+                    
+                    Divider()
+                        .frame(width: 2, height: 20)
+                        .background(Color.black)
+                        .padding(.horizontal, 16)
+                    
+                    Button(action: {
+                        withAnimation {
+                            showPopup = false
+                        }
+                    }) {
+                        Text("확인")
+                            .foregroundStyle(.black)
                     }
-                }) {
-                    Text("확인")
-                        .foregroundColor(.red)
-                        .padding(8)
-                        .background(Color.white)
-                        .cornerRadius(5)
-                        .shadow(radius: 5)
                 }
-                .padding(.top, 10)
+                .padding(.top, 12)
+                
+                
             }
-            
-
+            .padding(20)
+            .frame(width: 300)
+            .background(Color.white)
+            .cornerRadius(16)
+            .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.black, lineWidth: 3))
+            .shadow(radius: 10)
         }
     }
 }
